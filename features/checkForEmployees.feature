@@ -3,7 +3,7 @@ Feature: Creating a new project
   Description:
 
   Scenario: Project manager looks up who is available for a project
-    Given There is a project with name "Test" with start date "26/3-22" and end date "1/5-22" with a budget of "10"kr and id "22001"
+    Given There is a project with id "22001"
     And There is a project manager
     And There is a list of employees
     Then A list of available employees is made

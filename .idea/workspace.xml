@@ -4,22 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/features/addProject.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/features/checkForEmployees.feature" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/put_your_project_name_here.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/dtu/employees/checkForEmployeesTest.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/dtu/project/addProjectTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SoftwareDevelopment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SoftwareDevelopment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="Added Project and Availability check cucumber files">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/dtu/calculator/UpnCalculator.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/dtu/calculator/CucumberTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dtu/project/CucumberTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/dtu/calculator/ExampleSteps.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/dtu/calculator/TestJUnit4AndJUnit5.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dtu/project/TestJUnit4AndJUnit5.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/addProject.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/addProject.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/checkForEmployees.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/checkForEmployees.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/dtu/project/addProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dtu/project/addProjectTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -127,8 +116,16 @@
       <workItem from="1646666694537" duration="98000" />
       <workItem from="1647190963029" duration="1903000" />
       <workItem from="1647194687445" duration="4457000" />
-      <workItem from="1647251501786" duration="7129000" />
+      <workItem from="1647251501786" duration="7503000" />
     </task>
+    <task id="LOCAL-00001" summary="Added Project and Availability check cucumber files">
+      <created>1647267178829</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647267178829</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -144,5 +141,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Added Project and Availability check cucumber files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added Project and Availability check cucumber files" />
   </component>
 </project>
