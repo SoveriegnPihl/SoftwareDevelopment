@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/SoftwareDevelopment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SoftwareDevelopment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="Scenarier">
+      <change afterPath="$PROJECT_DIR$/features/createActivity.feature" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/features/registreTime.feature" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/example.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/example.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/example.feature" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +42,12 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/features" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/features" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -54,8 +59,17 @@
       <updated>1646666691263</updated>
       <workItem from="1646666694537" duration="98000" />
       <workItem from="1646740957667" duration="52000" />
-      <workItem from="1647195139626" duration="3209000" />
+      <workItem from="1647195139626" duration="5314000" />
+      <workItem from="1647761650667" duration="2141000" />
     </task>
+    <task id="LOCAL-00001" summary="Scenarier">
+      <created>1647262844484</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647262844485</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -71,5 +85,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Scenarier" />
+    <option name="LAST_COMMIT_MESSAGE" value="Scenarier" />
   </component>
 </project>
