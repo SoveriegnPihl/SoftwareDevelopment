@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="Added Project and Availability check cucumber files">
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/employees/Developer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/employees/Manager.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Activity.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Project.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Report.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/softwarehus/SoftwareHuset.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/addProject.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/addProject.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/checkForEmployees.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/checkForEmployees.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/dtu/project/addProjectTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/dtu/project/addProjectTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/put_your_project_name_here.iml" beforeDir="false" afterPath="$PROJECT_DIR$/put_your_project_name_here.iml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
