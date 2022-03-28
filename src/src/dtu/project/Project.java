@@ -1,7 +1,6 @@
 package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.employees.Manager;
+import dtu.employees.*;
 
 import java.util.ArrayList;
 
