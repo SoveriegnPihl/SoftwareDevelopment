@@ -1,7 +1,7 @@
 Feature: Check number of worked hours today
     Description: A developer can see how many hours have been reported today
     Actors: Developer
-
+## Author: Victor Larsen-Saldeen
 Scenario: Developer requests number of worked hours today
     Given that there is a developer with initials "ekki"
     And there is registered hours for the date "14-03-2022" / today
