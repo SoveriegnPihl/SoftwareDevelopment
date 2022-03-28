@@ -6,20 +6,27 @@ import dtu.employees.Manager;
 import java.util.ArrayList;
 
 public class Project {
+    static int nextId = 1;
+
     int startWeek;
     int endWeek;
     int budget;
+    String name;
     ArrayList<Developer> developers;
-    static int id;
+    int id;
     ArrayList<Activity> activities;
     Manager pm;
 
 
-    public Project(){
-
+    public Project(String n, int sW, int eW, int b){
+        startWeek = sW;
+        endWeek = eW;
+        budget = b;
+        name = n;
+        id = (Project.nextId++) + 22000;
     }
 
-    void listDevelopers(){
+    public void listDevelopers(){
 
     }
 
@@ -27,7 +34,11 @@ public class Project {
         return new Report();
     }
 
-    void addDeveloper(Developer dev){
+    public void addDeveloper(Developer dev){
         developers.add(dev);
+    }
+
+    public void printProject(){
+        System.out.println("Project name: " + name + " project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);
     }
 }

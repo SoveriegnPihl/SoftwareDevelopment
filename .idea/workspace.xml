@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="Added Project and Availability check cucumber files">
-      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/employees/Developer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/employees/Manager.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Activity.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Project.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Report.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/softwarehus/SoftwareHuset.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/src/java/dtu/softwarehus/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/put_your_project_name_here.iml" beforeDir="false" afterPath="$PROJECT_DIR$/put_your_project_name_here.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/java/dtu/employees/Developer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/java/dtu/employees/Developer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/java/dtu/employees/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/java/dtu/employees/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/java/dtu/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/java/dtu/project/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/java/dtu/softwarehus/SoftwareHuset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/java/dtu/softwarehus/SoftwareHuset.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -66,7 +64,20 @@
       <recent name="dtu.project" />
     </key>
   </component>
-  <component name="RunManager" selected="Cucumber Java.Scenario: Creating a project with a name, start and end date and a budget.">
+  <component name="RunManager" selected="Application.Main">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dtu.softwarehus.Main" />
+      <module name="put_your_project_name_here" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dtu.softwarehus.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="Scenario: Creating a project with a name, start and end date and a budget." type="CucumberJavaRunConfigurationType" factoryName="Cucumber java" temporary="true" nameIsGenerated="true">
       <option name="CUCUMBER_CORE_VERSION" value="5" />
       <option name="FILE_PATH" value="$PROJECT_DIR$/features/addProject.feature" />
@@ -104,6 +115,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main" />
         <item itemvalue="Cucumber Java.Scenario: Creating a project with a name, start and end date and a budget." />
         <item itemvalue="JUnit.CucumberTest" />
       </list>
@@ -148,6 +160,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added Project and Availability check cucumber files" />
-    <option name="LAST_COMMIT_MESSAGE" value="Added Project and Availability check cucumber files" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
 </project>
