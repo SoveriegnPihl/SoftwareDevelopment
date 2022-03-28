@@ -1,4 +1,8 @@
-Feature: Creating a new project
+
+/*
+* @author  Marcus Pihl
+*/
+Feature: Check for Developers
   Actor: Project manager
   Description:
 
@@ -8,5 +12,3 @@ Feature: Creating a new project
     And There is a list of employees
     Then A list of available employees is made
     And There is a list with available employees
-
-  Scenario:

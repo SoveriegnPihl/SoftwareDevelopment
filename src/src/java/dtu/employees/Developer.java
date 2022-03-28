@@ -8,19 +8,38 @@ public class Developer {
     Activity[] activities = new Activity[20];
     boolean isOccupied = false;
 
-    void requestDailyHours(){
+    public Developer(String ini){
+        initials = ini;
+    }
+
+    public void printDeveloper(){
+        System.out.println("Initials: " + initials + " is occupied?: " + isOccupied);
+    }
+
+    public void requestDailyHours(){
 
     }
 
-    void registerActivity(Project project, Activity activity, String time){
+    public void registerActivity(Project project, Activity activity, String time){
 
     }
 
-    void registerPersonalActivity(String time, String time2){
+    public void registerPersonalActivity(String time, String time2){
 
     }
 
-    void requestAssistance(Activity activity){
+    public void requestAssistance(Activity activity){
 
+    }
+
+    public void setOccupied(){
+        isOccupied = true;
+    }
+
+    public void setUnOccupied(){
+        isOccupied = false;
+    }
+    public boolean isOccupied(){
+        return isOccupied;
     }
 }
