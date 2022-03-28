@@ -1,7 +1,7 @@
 
-/*
-* @author  Marcus Pihl
-*/
+
+#Marcus Pihl
+
 Feature: Check for Developers
   Actor: Project manager
   Description:
