@@ -1,3 +1,7 @@
+/*
+* @author  Marcus Pihl
+*/
+
 Feature: Creating a new project
 
   Scenario: Creating a project with a name, start and end date and a budget.

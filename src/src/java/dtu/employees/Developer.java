@@ -8,11 +8,6 @@ public class Developer {
     Activity[] activities = new Activity[20];
     boolean isOccupied = false;
 
-
-    public Developer (String initials) {
-        this.initials=initials;
-    }
-
     void requestDailyHours(){
 
     }
@@ -28,9 +23,4 @@ public class Developer {
     void requestAssistance(Activity activity){
 
     }
-
-    public String getInitials() {
-        return initials;
-    }
-
 }
