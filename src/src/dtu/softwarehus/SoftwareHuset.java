@@ -1,6 +1,7 @@
 package dtu.softwarehus;
 
 import dtu.employees.Developer;
+import dtu.employees.Manager;
 import dtu.project.Project;
 import dtu.project.Report;
 
@@ -10,6 +11,7 @@ import java.util.Scanner;
 public class SoftwareHuset {
     ArrayList<Report> reports;
     ArrayList<Developer> developers;
+    ArrayList<Manager> projectManagers;
     ArrayList<Developer> availableDevelopers;
     ArrayList<Project> projects;
     static Scanner scanner = new Scanner(System.in);
@@ -19,9 +21,12 @@ public class SoftwareHuset {
         projects = new ArrayList<>();
         reports = new ArrayList<>();
         developers = new ArrayList<>();
+        projectManagers = new ArrayList<>();
         availableDevelopers = new ArrayList<>();
 
         System.out.println("What would you like to do?");
+        System.out.println("6: Assign project manager");
+        System.out.println("5: Add developer");
         System.out.println("4: List all available developers");
         System.out.println("3: List all developers");
         System.out.println("2: Create project");
@@ -29,7 +34,7 @@ public class SoftwareHuset {
         System.out.println("0: Exit");
         int input = scanner.nextInt();
 
-        while( input < 0 || input > 5){
+        while( input < 0 || input > 7){
             input = scanner.nextInt();
         }
 
@@ -51,11 +56,29 @@ public class SoftwareHuset {
                 whoIsAvailable();
                 listAvailableDevelopers();
             }
+            if(input == 5){
+
+                addDeveloper1();
+            }
+            if(input == 6){
+                addPm();
+            }
 
             input = scanner.nextInt();
         }
 
     }
+
+    private void addDeveloper1() {
+            System.out.println("Please input initials");
+            String name = scanner.next();
+            Developer newDeveloper = new Developer(name);
+            developers.add(newDeveloper);
+            if(developers.contains(newDeveloper)){
+                System.out.println("Success");
+            }
+        }
+
 
     public void createProject(){
 
@@ -116,6 +139,21 @@ public class SoftwareHuset {
                 availableDevelopers.add(var);
             }
         }
+    }
+
+    private void addPm() {
+        System.out.println("Please input initials");
+        String name = scanner.next();
+
+        for (Developer developer : developers) {
+            if (developer.getInitials().equals(name)) {
+                Manager PM = new Manager(name);
+                projectManagers.add(PM);
+                System.out.println("success");
+                return;
+            }
+        }
+        System.out.println("no developer found");
     }
 
 }
