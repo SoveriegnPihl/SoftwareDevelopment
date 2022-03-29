@@ -6,12 +6,13 @@ import dtu.project.Project;
 import dtu.project.Report;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class SoftwareHuset {
     ArrayList<Report> reports;
-    ArrayList<Developer> developers;
-    ArrayList<Manager> projectManagers;
+    HashMap<String, Developer> developers;
+    HashMap<String, Manager> projectManagers;
     ArrayList<Developer> availableDevelopers;
     ArrayList<Project> projects;
     static Scanner scanner = new Scanner(System.in);
@@ -20,8 +21,8 @@ public class SoftwareHuset {
 
         projects = new ArrayList<>();
         reports = new ArrayList<>();
-        developers = new ArrayList<>();
-        projectManagers = new ArrayList<>();
+        developers = new HashMap<>();
+        projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
 
         System.out.println("What would you like to do?");
@@ -73,8 +74,8 @@ public class SoftwareHuset {
             System.out.println("Please input initials");
             String name = scanner.next();
             Developer newDeveloper = new Developer(name);
-            developers.add(newDeveloper);
-            if(developers.contains(newDeveloper)){
+            developers.put(name,newDeveloper);
+            if(developers.containsKey(name)){
                 System.out.println("Success");
             }
         }
@@ -94,7 +95,8 @@ public class SoftwareHuset {
     }
 
     public void addDeveloper(Developer dev){
-        developers.add(dev);
+
+        developers.put(dev.getInitials(),dev);
     }
 
     public void listProjects(){
@@ -105,7 +107,7 @@ public class SoftwareHuset {
     }
 
     public void listDevelopers(){
-        for (Developer var : developers){
+        for (Developer var : developers.values()){
             var.printDeveloper();
         }
     }
@@ -134,7 +136,7 @@ public class SoftwareHuset {
     }
 
     public void whoIsAvailable(){
-        for (Developer var : developers){
+        for (Developer var : developers.values()){
             if(!var.isOccupied()){
                 availableDevelopers.add(var);
             }
@@ -145,15 +147,14 @@ public class SoftwareHuset {
         System.out.println("Please input initials");
         String name = scanner.next();
 
-        for (Developer developer : developers) {
-            if (developer.getInitials().equals(name)) {
+            if (developers.containsKey(name)) {
                 Manager PM = new Manager(name);
-                projectManagers.add(PM);
+                projectManagers.put(name,PM);
                 System.out.println("success");
-                return;
+            } else {
+                System.out.println("no developer found");
             }
-        }
-        System.out.println("no developer found");
+            }
+
     }
 
-}
