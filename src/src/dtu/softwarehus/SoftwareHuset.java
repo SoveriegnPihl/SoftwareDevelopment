@@ -32,11 +32,14 @@ public class SoftwareHuset {
         hoursWorked = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-       addDeveloper1("abc");
+        addDeveloper1("abc");
         addDeveloper1("def");
         addDeveloper1("ghi");
         addDeveloper1("jlm");
-
+        developers.get("abc").setOccupied();
+        developers.get("def").setOccupied();
+        developers.get("ghi").setOccupied();
+        developers.get("jlm").setUnOccupied();
 
     }
 
@@ -81,22 +84,7 @@ public class SoftwareHuset {
         return str.toString();
     }
 
-    public void fakeTest(){
-       /* Developer dev1 = new Developer("abc");
-        Developer dev2 = new Developer("def");
-        Developer dev3 = new Developer("ghi");
-        Developer dev4 = new Developer("jkl");
-*/
-        dev1.setOccupied();
-        dev2.setOccupied();
-        dev4.setOccupied();
-        dev4.setUnOccupied();
 
-        addDeveloper(dev1);
-        addDeveloper(dev2);
-        addDeveloper(dev3);
-        addDeveloper(dev4);
-    }
 
     public String listAvailableDevelopers(){
         StringBuilder str = new StringBuilder();
