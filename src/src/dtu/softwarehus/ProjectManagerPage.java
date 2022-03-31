@@ -33,6 +33,10 @@ public class ProjectManagerPage extends JFrame {
         newPanel.add(b4);
         newPanel.add(b5);
 
+
+
+
+
         add(newPanel, BorderLayout.CENTER);
 
         setDefaultCloseOperation(javax.swing.

@@ -16,9 +16,12 @@ class CreateLoginForm extends JFrame  {
     private JPanel panel1;
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
+    SoftwareHuset softwareHuset;
 
     //calling constructor
     CreateLoginForm() {
+        softwareHuset = new SoftwareHuset();
+        softwareHuset.startProgram();
 
         //create label for username
         userLabel = new JLabel();
@@ -63,7 +66,8 @@ class CreateLoginForm extends JFrame  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userValue = textField1.getText();        //get user entered username from the textField1
-                SoftwareHuset softwareHuset = new SoftwareHuset();
+
+
                 if(managerCheckBox && softwareHuset.isDeveloper(userValue)){
                     //create instance of the NewPage
                     ProjectManagerPage pmPage = new ProjectManagerPage(userValue);

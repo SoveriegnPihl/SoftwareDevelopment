@@ -13,12 +13,19 @@ public class SoftwareHuset {
     ArrayList<Report> reports;
     static HashMap<String, Developer> developers;
     HashMap<String, Manager> projectManagers;
-    HashMap<Developer,Integer> hoursWorked;
+    static HashMap<Developer,Integer> hoursWorked;
     ArrayList<Developer> availableDevelopers;
     ArrayList<Project> projects;
-  //  static Scanner scanner = new Scanner(System.in);
 
-    public SoftwareHuset() {
+    Developer dev1;
+    Developer dev2;
+    Developer dev3;
+    Developer dev4;
+
+
+    public SoftwareHuset() { }
+
+    public void startProgram(){
 
         projects = new ArrayList<>();
         reports = new ArrayList<>();
@@ -26,62 +33,12 @@ public class SoftwareHuset {
         hoursWorked = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        fakeTest();
-
-    /*    System.out.println("What would you like to do?");
-        System.out.println("8: Hour report");
-        System.out.println("7: Add hours");
-        System.out.println("6: Assign project manager");
-        System.out.println("5: Add developer");
-        System.out.println("4: List all available developers");
-        System.out.println("3: List all developers");
-        System.out.println("2: Create project");
-        System.out.println("1: See all projects");
-        System.out.println("0: Exit");
-        int input = scanner.nextInt();
-
-        while( input < 0 || input > 9){
-            input = scanner.nextInt();
-        }
-
-        fakeTest();
-        while (input != 0){
-
-            if(input == 1){
-                listProjects();
-            }
-            if(input == 2){
-                createProject();
-            }
-            if(input == 3){
-
-                listDevelopers();
-            }
-            if(input == 4){
-
-                whoIsAvailable();
-                listAvailableDevelopers();
-            }
-            if(input == 5){
-
-                addDeveloper1();
-            }
-            if(input == 6){
-                addPm();
-            }
-            if(input == 7){
-                addHours();
-            }
-            if(input == 8){
-                workedHoursReport();
-            }
-
-            input = scanner.nextInt();
-        }
+       addDeveloper1("abc");
+        addDeveloper1("def");
+        addDeveloper1("ghi");
+        addDeveloper1("jlm");
 
 
-
-     */
     }
 
     private void addDeveloper1(String name) {
@@ -123,11 +80,11 @@ public class SoftwareHuset {
     }
 
     public void fakeTest(){
-        Developer dev1 = new Developer("abc");
+       /* Developer dev1 = new Developer("abc");
         Developer dev2 = new Developer("def");
         Developer dev3 = new Developer("ghi");
         Developer dev4 = new Developer("jkl");
-
+*/
         dev1.setOccupied();
         dev2.setOccupied();
         dev4.setOccupied();
@@ -164,27 +121,30 @@ public class SoftwareHuset {
                 System.out.println("no developer found");
         }
     }
-    private void addHours(String name,int hours){
+    public void addHours(String name,int hours){
         System.out.println("Please input your initials");
-
+        System.out.println(name);
         if (developers.containsKey(name)) {
             System.out.println("How many hours?");
-            if(hoursWorked.containsKey(developers.get(name))){
-                hoursWorked.put(developers.get(name), hoursWorked.get(developers.get(name))+hours);
+            if (hoursWorked.containsKey(developers.get(name))) {
+                hoursWorked.put(developers.get(name), hoursWorked.get(developers.get(name)) + hours);
             } else {
-                hoursWorked.put(developers.get(name),hours);
+                hoursWorked.put(developers.get(name), hours);
+
             }
-            System.out.println("Success");
+            System.out.println("Success hours");
+        }
+            else {
+            System.out.println("No such user found");
         }
     }
-    private void workedHoursReport(String name){
-        System.out.println("Please input your initials");
+     public int workedHoursReport(String name){
         if (developers.containsKey(name)) {
-            System.out.println("number of hours= "+ hoursWorked.get(developers.get(name)));
+            return hoursWorked.get(developers.get(name));
         }
+        return 0;
     }
     public static boolean isDeveloper(String ini){
-       System.out.println(developers.containsKey(ini));
         return developers.containsKey(ini);
     }
 

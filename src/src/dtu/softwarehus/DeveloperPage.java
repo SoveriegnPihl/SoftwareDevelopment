@@ -1,6 +1,8 @@
 package dtu.softwarehus;//import required classes and packages
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 //create NewPage class to create a new page on which user will navigate  
 class DeveloperPage extends JFrame
@@ -36,6 +38,19 @@ class DeveloperPage extends JFrame
         newPanel.add(b5);
 
         add(newPanel, BorderLayout.CENTER);
+
+        b1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               OptionPane OP = new OptionPane(initials,"Register hours worked");
+            }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(userValue,"View hours worked");
+            }
+        });
 
         setDefaultCloseOperation(javax.swing.
                 WindowConstants.DISPOSE_ON_CLOSE);
