@@ -11,7 +11,7 @@ class CreateLoginForm extends JFrame  {
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel newPanel;
-    JLabel userLabel, passLabel;
+    JLabel userLabel;
     JTextField textField1;
     private JPanel panel1;
     private JCheckBox checkBox1;
@@ -54,11 +54,14 @@ class CreateLoginForm extends JFrame  {
         checkBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!managerCheckBox) {
+                managerCheckBox = !managerCheckBox;
+                /* sinds cleanup
+                 if (!managerCheckBox) {
                     managerCheckBox = true;
                 } else {
                     managerCheckBox = false;
                 }
+                 */
             }
         });
 
@@ -91,35 +94,5 @@ class CreateLoginForm extends JFrame  {
             }
         });
 
-/*
-        //define abstract method actionPerformed() which will be called on button click
-        //perform action on button click
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e)     //pass action listener as a parameter
-            {
-                String userValue = textField1.getText();        //get user entered username from the textField1
-
-                //check whether the credentials are authentic or not
-
-                //create instance of the NewPage
-                NewPage page = new NewPage();
-
-                //make page visible to the user
-                page.setVisible(true);
-
-                //create a welcome label and set it to the new page
-                JLabel wel_label = new JLabel("Welcome: " + userValue);
-                page.getContentPane().add(wel_label);
-
-            }
-
-        });
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-    }*/
     }
 }

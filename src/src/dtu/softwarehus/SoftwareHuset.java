@@ -7,7 +7,6 @@ import dtu.project.Report;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Scanner;
 
 public class SoftwareHuset {
     ArrayList<Report> reports;
@@ -73,10 +72,13 @@ public class SoftwareHuset {
         }
     }
 
-    public void listDevelopers(){
+    public String listDevelopers(){
+        StringBuilder str = new StringBuilder();
+
         for (Developer var : developers.values()){
-            var.printDeveloper();
+            str.append(var.printDeveloper());
         }
+        return str.toString();
     }
 
     public void fakeTest(){
@@ -96,10 +98,13 @@ public class SoftwareHuset {
         addDeveloper(dev4);
     }
 
-    public void listAvailableDevelopers(){
+    public String listAvailableDevelopers(){
+        StringBuilder str = new StringBuilder();
+
         for (Developer var : availableDevelopers){
-            var.printDeveloper();
+            str.append(var.printDeveloper());
         }
+        return str.toString();
     }
 
     public void whoIsAvailable(){

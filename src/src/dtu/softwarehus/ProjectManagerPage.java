@@ -1,6 +1,8 @@
 package dtu.softwarehus;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class ProjectManagerPage extends JFrame {
     String initials;
@@ -19,7 +21,7 @@ public class ProjectManagerPage extends JFrame {
         //create submit button
 
         b1 = new JButton("Add developer"); //set label to button
-        b2 = new JButton("View available developers"); //set label to button
+        b2 = new JButton("View *available* developers"); //set label to button
         b3 = new JButton("Make new project"); //set label to button
         b4 = new JButton("Add developer to project"); //set label to button
         b5 = new JButton("Add project activity"); //set label to button
@@ -33,8 +35,12 @@ public class ProjectManagerPage extends JFrame {
         newPanel.add(b4);
         newPanel.add(b5);
 
-
-
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(initials,"View available developers");
+            }
+        });
 
 
         add(newPanel, BorderLayout.CENTER);

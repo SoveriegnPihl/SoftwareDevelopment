@@ -17,8 +17,8 @@ public class Developer {
         return initials;
     }
 
-    public void printDeveloper(){
-        System.out.println("Initials: " + initials + " is occupied?: " + isOccupied);
+    public String printDeveloper(){
+        return "Initials: " + initials + " is occupied?: " + isOccupied +"\n" ;
     }
 
     public void requestDailyHours(){
