@@ -9,18 +9,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 public class SoftwareHuset {
-    ArrayList<Report> reports;
+    static ArrayList<Report> reports;
     static HashMap<String, Developer> developers;
-    HashMap<String, Manager> projectManagers;
+    static HashMap<String, Manager> projectManagers;
     static HashMap<Developer,Integer> hoursWorked;
-    ArrayList<Developer> availableDevelopers;
-    ArrayList<Project> projects;
-
-    Developer dev1;
-    Developer dev2;
-    Developer dev3;
-    Developer dev4;
-
+    static ArrayList<Developer> availableDevelopers;
+    static  ArrayList<Project> projects;
 
     public SoftwareHuset() { }
 
