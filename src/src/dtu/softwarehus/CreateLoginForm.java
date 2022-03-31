@@ -76,11 +76,10 @@ class CreateLoginForm extends JFrame  {
                     ProjectManagerPage pmPage = new ProjectManagerPage(userValue);
 
                     //make page visible to the user
+                    setVisible(false);
                     pmPage.setVisible(true);
+                    pmPage.setLocationRelativeTo(null);
 
-                    //create a welcome label and set it to the new page
-                    JLabel wel_label = new JLabel("Welcome project manager: " + userValue);
-                    pmPage.getContentPane().add(wel_label);
                 } else if (softwareHuset.isDeveloper(userValue)) {
                     //check whether the credentials are authentic or not
 
@@ -88,6 +87,8 @@ class CreateLoginForm extends JFrame  {
                     DeveloperPage dPage = new DeveloperPage(userValue);
 
                     //make page visible to the user
+                    setVisible(false);
+                    dPage.setLocationRelativeTo(null);
                     dPage.setVisible(true);
 
                 }

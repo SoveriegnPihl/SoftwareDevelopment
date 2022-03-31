@@ -11,7 +11,9 @@ public class Main {
             //create instance of the CreateLoginForm
             CreateLoginForm form = new CreateLoginForm();
             form.setSize(500,200);  //set size of the frame
+            form.setLocationRelativeTo(null);
             form.setVisible(true);  //make form visible to the user
+
         }
         catch(Exception e)
         {
