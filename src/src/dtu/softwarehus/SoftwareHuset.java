@@ -11,14 +11,14 @@ import java.util.Scanner;
 
 public class SoftwareHuset {
     ArrayList<Report> reports;
-    HashMap<String, Developer> developers;
+    static HashMap<String, Developer> developers;
     HashMap<String, Manager> projectManagers;
     HashMap<Developer,Integer> hoursWorked;
     ArrayList<Developer> availableDevelopers;
     ArrayList<Project> projects;
-    static Scanner scanner = new Scanner(System.in);
+  //  static Scanner scanner = new Scanner(System.in);
 
-    public SoftwareHuset(){
+    public SoftwareHuset() {
 
         projects = new ArrayList<>();
         reports = new ArrayList<>();
@@ -26,8 +26,9 @@ public class SoftwareHuset {
         hoursWorked = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
+        fakeTest();
 
-        System.out.println("What would you like to do?");
+    /*    System.out.println("What would you like to do?");
         System.out.println("8: Hour report");
         System.out.println("7: Add hours");
         System.out.println("6: Assign project manager");
@@ -78,11 +79,13 @@ public class SoftwareHuset {
             input = scanner.nextInt();
         }
 
+
+
+     */
     }
 
-    private void addDeveloper1() {
-            System.out.println("Please input initials");
-            String name = scanner.next();
+    private void addDeveloper1(String name) {
+
             Developer newDeveloper = new Developer(name);
             developers.put(name,newDeveloper);
             if(developers.containsKey(name)){
@@ -91,13 +94,10 @@ public class SoftwareHuset {
         }
 
 
-    public void createProject(){
+    public void createProject(String name, int startWeek, int endWeek, int budget){
 
         System.out.println("Please input name, start & end week and budget");
-        String name = scanner.next();
-        int startWeek = scanner.nextInt();
-        int endWeek = scanner.nextInt();
-        int budget = scanner.nextInt();
+
         Project toAdd = new Project(name, startWeek, endWeek, budget);
         toAdd.printProject();
         projects.add(toAdd);
@@ -153,9 +153,8 @@ public class SoftwareHuset {
         }
     }
 
-    private void addPm() {
+    private void addPm(String name) {
         System.out.println("Please input initials");
-        String name = scanner.next();
 
         if (developers.containsKey(name)) {
             Manager PM = new Manager(name);
@@ -165,25 +164,28 @@ public class SoftwareHuset {
                 System.out.println("no developer found");
         }
     }
-    private void addHours(){
+    private void addHours(String name,int hours){
         System.out.println("Please input your initials");
-        String name = scanner.next();
+
         if (developers.containsKey(name)) {
             System.out.println("How many hours?");
             if(hoursWorked.containsKey(developers.get(name))){
-                hoursWorked.put(developers.get(name), hoursWorked.get(developers.get(name))+scanner.nextInt());
+                hoursWorked.put(developers.get(name), hoursWorked.get(developers.get(name))+hours);
             } else {
-                hoursWorked.put(developers.get(name),scanner.nextInt());
+                hoursWorked.put(developers.get(name),hours);
             }
             System.out.println("Success");
         }
     }
-    private void workedHoursReport(){
+    private void workedHoursReport(String name){
         System.out.println("Please input your initials");
-        String name = scanner.next();
         if (developers.containsKey(name)) {
             System.out.println("number of hours= "+ hoursWorked.get(developers.get(name)));
         }
+    }
+    public static boolean isDeveloper(String ini){
+       System.out.println(developers.containsKey(ini));
+        return developers.containsKey(ini);
     }
 
     }
