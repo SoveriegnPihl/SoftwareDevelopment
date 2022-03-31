@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 class DeveloperPage extends JFrame
 {
     String initials;
-    JButton b1,b2,b3,b4,b5;
+    JButton b1,b2,b3,b4,b5,b6;
     JPanel newPanel;
     JLabel userLabel;
     JTextField textField1;
@@ -28,6 +28,7 @@ class DeveloperPage extends JFrame
         b4 = new JButton("Register holiday"); //set label to button
         b5 = new JButton("Assign project manager"); //set label to button
         b5 = new JButton("Add project activity"); //set label to button
+        b6 = new JButton("Back to login");
 
         //create panel to put form elements
         newPanel = new JPanel(new GridLayout(3, 1));
@@ -36,6 +37,7 @@ class DeveloperPage extends JFrame
         newPanel.add(b3);
         newPanel.add(b4);
         newPanel.add(b5);
+        newPanel.add(b6);
 
         add(newPanel, BorderLayout.CENTER);
 
@@ -49,6 +51,18 @@ class DeveloperPage extends JFrame
             @Override
             public void actionPerformed(ActionEvent e) {
                 OptionPane OP = new OptionPane(userValue,"View hours worked");
+            }
+        });
+
+        b6.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                //create instance of the CreateLoginForm
+                CreateLoginForm form = new CreateLoginForm();
+                form.setSize(500,200);  //set size of the frame
+                form.setLocationRelativeTo(null);
+                form.setVisible(true);  //make form visible to the user
             }
         });
 
