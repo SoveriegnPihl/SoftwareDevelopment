@@ -10,11 +10,11 @@ import java.util.HashMap;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
-    public static HashMap<String, Developer> developers;
+    static HashMap<String, Developer> developers;
     static HashMap<String, Manager> projectManagers;
     static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
-    public static  ArrayList<Project> projects;
+    public static ArrayList<Project> projects;
 
     public SoftwareHuset() { }
 
@@ -26,18 +26,22 @@ public class SoftwareHuset {
         hoursWorked = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        addDeveloper1("abc");
-        addDeveloper1("def");
-        addDeveloper1("ghi");
+        addDeveloper1("ekki");
+        addDeveloper1("vic7");
+        addDeveloper1("jako");
         addDeveloper1("jlm");
-        developers.get("abc").setOccupied();
-        developers.get("def").setOccupied();
-        developers.get("ghi").setOccupied();
-        developers.get("jlm").setUnOccupied();
+        developers.get("ekki").setOccupied(false);
+        developers.get("vic7").setOccupied(false);
+        developers.get("jako").setOccupied(true);
+        developers.get("jlm").setOccupied(false);
+
+        developers.get("ekki").setToProjectManager();
+        Project testProject = new Project("22001", 1,2,4);
+        projects.add(testProject);
 
     }
 
-    public void addDeveloper1(String name) {
+    private void addDeveloper1(String name) {
 
             Developer newDeveloper = new Developer(name);
             developers.put(name,newDeveloper);
@@ -97,7 +101,7 @@ public class SoftwareHuset {
         }
     }
 
-    public void addPm(String name) {
+    private void addPm(String name) {
         System.out.println("Please input initials");
 
         if (developers.containsKey(name)) {
@@ -135,5 +139,16 @@ public class SoftwareHuset {
         return developers.containsKey(ini);
     }
 
+    public boolean findProject(String projectId){
+        for (Project proj : projects){
+            System.out.println(proj.name);
+            if(proj.name.equals(projectId)){
+                return true;
+            }
+        }
+        return false;
     }
+
+}
+
 
