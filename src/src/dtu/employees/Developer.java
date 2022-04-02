@@ -6,11 +6,13 @@ import dtu.project.Project;
 public class Developer {
     String initials;
     Activity[] activities = new Activity[20];
-    boolean isOccupied = false;
+    boolean isOccupied;
+    boolean isProjectManager;
 
     public Developer(String ini){
-
         initials = ini;
+        isOccupied = false;
+        isProjectManager = false;
     }
 
     public  String getInitials(){
@@ -37,15 +39,16 @@ public class Developer {
 
     }
 
-    public void setOccupied(){
-        isOccupied = true;
+    public void setOccupied(boolean occupation){
+        isOccupied = occupation;
     }
 
-    public void setUnOccupied(){
-        isOccupied = false;
-    }
     public boolean isOccupied(){
         return isOccupied;
     }
+
+    public void setToProjectManager(){isProjectManager = true;}
+
+    public boolean isProjectManager() {return isProjectManager;}
 
 }
