@@ -14,7 +14,7 @@ public class SoftwareHuset {
     static HashMap<String, Manager> projectManagers;
     static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
-    public static ArrayList<Project> projects;
+    static  ArrayList<Project> projects;
 
     public SoftwareHuset() { }
 
@@ -41,7 +41,7 @@ public class SoftwareHuset {
 
     }
 
-    private void addDeveloper1(String name) {
+    public void addDeveloper1(String name) {
 
             Developer newDeveloper = new Developer(name);
             developers.put(name,newDeveloper);
