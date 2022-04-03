@@ -10,7 +10,7 @@ import java.util.HashMap;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
-    static HashMap<String, Developer> developers;
+    public static HashMap<String, Developer> developers;
     static HashMap<String, Manager> projectManagers;
     static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
@@ -30,14 +30,14 @@ public class SoftwareHuset {
         addDeveloper1("def");
         addDeveloper1("ghi");
         addDeveloper1("jlm");
-        developers.get("abc").setOccupied();
-        developers.get("def").setOccupied();
-        developers.get("ghi").setOccupied();
-        developers.get("jlm").setUnOccupied();
+        developers.get("abc").setOccupied(true);
+        developers.get("def").setOccupied(true);
+        developers.get("ghi").setOccupied(true);
+        developers.get("jlm").setOccupied(false);
 
     }
 
-    private void addDeveloper1(String name) {
+    public void addDeveloper1(String name) {
 
             Developer newDeveloper = new Developer(name);
             developers.put(name,newDeveloper);
@@ -135,5 +135,14 @@ public class SoftwareHuset {
         return developers.containsKey(ini);
     }
 
+    public boolean findProject(String projectId){
+        for (Project proj : projects){
+            System.out.println(proj.name);
+            if(proj.name.equals(projectId)){
+                return true;
+            }
+        }
+        return false;
+    }
     }
 

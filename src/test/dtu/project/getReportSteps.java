@@ -32,21 +32,6 @@ public class getReportSteps {
         manager = new Developer(managerInitials);
     }
 
-    @Given("that the developer is a procject manager")
-    public void that_the_developer_is_a_procject_manager() throws Exception {
-        manager.setToProjectManager();
-    }
-
-    @Then("The developer is a project manager")
-    public void the_developer_is_a_project_manager() throws Exception {
-        assertThat(manager.isProjectManager(),is(true));
-    }
-
-    @Given("there is a project with id {string}")
-    public void there_is_a_project_with_id(String projectId) throws Exception{
-        project = new Project(projectId, 1, 2, 4);
-    }
-
     @When("the procject manager requests a report for the project")
     public void the_procject_manager_requests_a_report_for_the_project() throws Exception{
         // Write code here that turns the phrase above into concrete actions

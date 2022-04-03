@@ -2,33 +2,43 @@ package dtu.project;
 
 import dtu.Helper.ErrorMessageHolder;
 import dtu.dto.developerInfo;
+import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import io.cucumber.java.hu.De;
 import org.hamcrest.MatcherAssert;
 import org.hamcrest.Matchers;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
 
 public class assignPmTest {
-    private SoftwareHuset softwareHuset = new SoftwareHuset();
-    private Project project;
-    private developerInfo developer;
+
     private ErrorMessageHolder errorMessage;;
+    SoftwareHuset softwareHuset;
+    HashMap<String, Developer> developers;
+    ArrayList<Project> projects;
+    Developer developer,manager;
+
+    Project project;
 
 
-    public assignPmTest() {
-        softwareHuset.startProgram();
-    }
-
+    public assignPmTest(SoftwareHuset softwareHuset, HashMap<String, Developer> developers, ArrayList<Project> projects){
+            this.softwareHuset = softwareHuset;
+            this.developers = developers;
+            this.projects = projects;
+        }
     @Given("that there is a developer with initials {string}")
     public void that_there_is_a_developer_with_initials(String name) throws Exception {
-        softwareHuset.addDeveloper1(name);
-        assertThat(softwareHuset.developers.containsKey(name), is(true));
+       developer = new Developer(name);
+        assertThat(developer.getInitials(), is(equalTo(name)));
     }
 
     @And("there is a project named {string}")
@@ -44,11 +54,18 @@ public class assignPmTest {
 
     @Then("the project manager {string} is assigned to the project")
     public void theProjectManagerIsAssignedToTheProject(String name) {
-        softwareHuset.addPm(name);
+        manager = new Developer(name);
+        manager.setToProjectManager();
+
     }
 
     @Given("that there isn't a developer with initials {string}")
-    public void thatThereIsnTADeveloperWithInitials(String string) {
+    public void thatThereIsnTADeveloperWithInitials(String anotherName) {
+
+    }
+
+    @And("there is a project manager with initials {string}")
+    public void thereIsAProjectManagerWithInitials(String arg0) {
 
     }
 }
