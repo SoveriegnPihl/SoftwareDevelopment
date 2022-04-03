@@ -17,6 +17,7 @@ class CreateLoginForm extends JFrame  {
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
     SoftwareHuset softwareHuset;
+    boolean b;
 
     //calling constructor
     CreateLoginForm() {
@@ -77,8 +78,9 @@ class CreateLoginForm extends JFrame  {
 
                     //make page visible to the user
                     setVisible(false);
-                    pmPage.setVisible(true);
                     pmPage.setLocationRelativeTo(null);
+                    pmPage.setVisible(true);
+                    
 
                 } else if (softwareHuset.isDeveloper(userValue)) {
                     //check whether the credentials are authentic or not

@@ -63,6 +63,8 @@ class DeveloperPage extends JFrame
                 form.setSize(500,200);  //set size of the frame
                 form.setLocationRelativeTo(null);
                 form.setVisible(true);  //make form visible to the user
+
+
             }
         });
 

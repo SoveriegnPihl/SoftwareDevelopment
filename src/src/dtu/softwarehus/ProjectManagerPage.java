@@ -22,7 +22,7 @@ public class ProjectManagerPage extends JFrame {
 
         b1 = new JButton("Add developer"); //set label to button
         b2 = new JButton("View *available* developers"); //set label to button
-        b3 = new JButton("Make new project"); //set label to button
+        b3 = new JButton("Create project"); //set label to button
         b4 = new JButton("Add developer to project"); //set label to button
         b5 = new JButton("Add project activity"); //set label to button
         b5 = new JButton("Get project report"); //set label to button
@@ -39,6 +39,13 @@ public class ProjectManagerPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OptionPane OP = new OptionPane(initials,"View available developers");
+            }
+        });
+
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(initials,"Create project");
             }
         });
 
