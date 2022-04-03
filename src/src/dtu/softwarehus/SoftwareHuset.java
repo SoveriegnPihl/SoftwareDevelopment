@@ -14,7 +14,7 @@ public class SoftwareHuset {
     static HashMap<String, Manager> projectManagers;
     static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
-    static  ArrayList<Project> projects;
+    public static ArrayList<Project> projects;
 
     public SoftwareHuset() { }
 
