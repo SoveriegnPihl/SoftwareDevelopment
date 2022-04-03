@@ -1,27 +1,28 @@
 package dtu.project;
 
 import dtu.employees.*;
+import dtu.softwarehus.SoftwareHuset;
 
 import java.util.ArrayList;
 
 public class Project {
     static int nextId = 1;
 
+    public String name;
+    int id;
     int startWeek;
     int endWeek;
     int budget;
-    String name;
-    ArrayList<Developer> developers;
-    int id;
-    ArrayList<Activity> activities;
     Manager pm;
 
+    ArrayList<Developer> developers = new ArrayList<Developer>();
+    ArrayList<Activity> activities;
 
     public Project(String n, int sW, int eW, int b){
+        name = n;
         startWeek = sW;
         endWeek = eW;
         budget = b;
-        name = n;
         id = (Project.nextId++) + 22000;
     }
 
@@ -36,6 +37,8 @@ public class Project {
     public void addDeveloper(Developer dev){
         developers.add(dev);
     }
+
+    public boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
 
     public void printProject(){
         System.out.println("Project name: " + name + " project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);

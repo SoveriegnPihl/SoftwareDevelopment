@@ -10,11 +10,11 @@ import java.util.HashMap;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
-    public static HashMap<String, Developer> developers;
+    static HashMap<String, Developer> developers;
     static HashMap<String, Manager> projectManagers;
     static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
-    public static  ArrayList<Project> projects;
+    static  ArrayList<Project> projects;
 
     public SoftwareHuset() { }
 
@@ -37,7 +37,7 @@ public class SoftwareHuset {
 
     }
 
-    public void addDeveloper1(String name) {
+    private void addDeveloper1(String name) {
 
             Developer newDeveloper = new Developer(name);
             developers.put(name,newDeveloper);
@@ -97,7 +97,7 @@ public class SoftwareHuset {
         }
     }
 
-    public void addPm(String name) {
+    private void addPm(String name) {
         System.out.println("Please input initials");
 
         if (developers.containsKey(name)) {
