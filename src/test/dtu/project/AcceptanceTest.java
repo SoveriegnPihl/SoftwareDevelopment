@@ -7,11 +7,11 @@ import org.junit.runner.RunWith;
 
 
 @RunWith(Cucumber.class)
-@CucumberOptions(features = "use_cases", 
+@CucumberOptions(features = "features",
 	plugin = { "summary", "html:target/cucumber/wikipedia.html"}, 
 	monochrome=true, 
 	snippets = SnippetType.CAMELCASE, 
-	glue = { "dtu.library.project", "dtu.library.student_tests"})
+	glue = {"dtu.project"})
 public class AcceptanceTest {
 
 }
