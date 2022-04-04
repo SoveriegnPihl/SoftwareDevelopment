@@ -12,7 +12,6 @@ public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
     static HashMap<String, Manager> projectManagers;
-    static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
     public static  ArrayList<Project> projects;
 
@@ -23,7 +22,6 @@ public class SoftwareHuset {
         projects = new ArrayList<>();
         reports = new ArrayList<>();
         developers = new HashMap<>();
-        hoursWorked = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
         addDeveloper1("ekki");
@@ -82,6 +80,9 @@ public class SoftwareHuset {
         return str.toString();
     }
 
+    public Developer getDeveloper(String name){
+        return developers.get(name);
+    }
 
 
     public String listAvailableDevelopers(){
@@ -112,29 +113,7 @@ public class SoftwareHuset {
                 System.out.println("no developer found");
         }
     }
-    public void addHours(String name,int hours){
-        System.out.println("Please input your initials");
-        System.out.println(name);
-        if (developers.containsKey(name)) {
-            System.out.println("How many hours?");
-            if (hoursWorked.containsKey(developers.get(name))) {
-                hoursWorked.put(developers.get(name), hoursWorked.get(developers.get(name)) + hours);
-            } else {
-                hoursWorked.put(developers.get(name), hours);
 
-            }
-            System.out.println("Success hours");
-        }
-            else {
-            System.out.println("No such user found");
-        }
-    }
-     public int workedHoursReport(String name){
-        if (developers.containsKey(name)) {
-            return hoursWorked.get(developers.get(name));
-        }
-        return 0;
-    }
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
     }

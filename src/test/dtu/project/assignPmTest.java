@@ -24,16 +24,15 @@ public class assignPmTest {
     private ErrorMessageHolder errorMessage;;
     SoftwareHuset softwareHuset;
     HashMap<String, Developer> developers;
-    ArrayList<Project> projects;
     Developer developer,manager;
 
     Project project;
 
 
-    public assignPmTest(SoftwareHuset softwareHuset, HashMap<String, Developer> developers, ArrayList<Project> projects){
+    public assignPmTest(SoftwareHuset softwareHuset, HashMap<String, Developer> developers){
             this.softwareHuset = softwareHuset;
             this.developers = developers;
-            this.projects = projects;
+
         }
     @Given("that there is a developer with initials {string}")
     public void that_there_is_a_developer_with_initials(String name) throws Exception {
@@ -68,4 +67,38 @@ public class assignPmTest {
     public void thereIsAProjectManagerWithInitials(String arg0) {
 
     }
+
+    @And("there is registered hours")
+    public void thereIsRegisteredHours() {
+
+        //assertThat(developer.getHours(),is(true));
+    }
+
+    @When("the developer requests reported worked hours for today")
+    public void theDeveloperRequestsReportedWorkedHoursForToday() {
+        developer.getHours();
+    }
+
+    @Then("daily worked hours is given for {string}")
+    public void dailyWorkedHoursIsGivenFor(String name) {
+
+        assertThat(developer.getHours()>0,is(true));
+    }
+
+
+    @And("there is no registered time")
+    public void thereIsNoRegisteredTime() {
+    }
+
+
+    @And("the hours registered is zero")
+    public void theHoursRegisteredIsZero() {
+
+    }
+
+    @Then("Then the error message {string} is given")
+    public void thenTheErrorMessageIsGiven(String arg0) {
+    }
+
+
 }

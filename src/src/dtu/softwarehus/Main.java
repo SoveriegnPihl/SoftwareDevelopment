@@ -1,5 +1,7 @@
 package dtu.softwarehus;
 
+import dtu.gui.CreateLoginForm;
+
 import javax.swing.*;
 
 public class Main {
