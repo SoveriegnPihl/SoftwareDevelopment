@@ -1,11 +1,13 @@
-package dtu.softwarehus;
+package dtu.gui;
+import dtu.employees.Developer;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProjectManagerPage extends JFrame {
-    String initials;
+    Developer user;
     JButton b1,b2,b3,b4,b5;
     JPanel newPanel;
     JLabel userLabel;
@@ -14,15 +16,15 @@ public class ProjectManagerPage extends JFrame {
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
     //constructor
-    ProjectManagerPage(String userValue)
+    ProjectManagerPage(Developer user)
     {
-        initials = userValue;
+        this.user = user;
         //create a welcome label and set it to the new page
         //create submit button
 
         b1 = new JButton("Add developer"); //set label to button
         b2 = new JButton("View *available* developers"); //set label to button
-        b3 = new JButton("Make new project"); //set label to button
+        b3 = new JButton("Create project"); //set label to button
         b4 = new JButton("Add developer to project"); //set label to button
         b5 = new JButton("Add project activity"); //set label to button
         b5 = new JButton("Get project report"); //set label to button
@@ -38,7 +40,14 @@ public class ProjectManagerPage extends JFrame {
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(initials,"View available developers");
+                OptionPane OP = new OptionPane(user,"View available developers");
+            }
+        });
+
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(user,"Create project");
             }
         });
 

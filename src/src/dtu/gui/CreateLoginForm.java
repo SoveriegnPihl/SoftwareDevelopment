@@ -1,5 +1,10 @@
-package dtu.softwarehus;
+package dtu.gui;
 //import required classes and packages
+import dtu.employees.Developer;
+import dtu.gui.DeveloperPage;
+import dtu.gui.ProjectManagerPage;
+import dtu.softwarehus.SoftwareHuset;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
@@ -7,7 +12,7 @@ import java.awt.event.*;
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
 //class implements ActionListener to perform an action on button click
-class CreateLoginForm extends JFrame  {
+public class CreateLoginForm extends JFrame  {
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel newPanel;
@@ -17,9 +22,10 @@ class CreateLoginForm extends JFrame  {
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
     SoftwareHuset softwareHuset;
+    boolean b;
 
     //calling constructor
-    CreateLoginForm() {
+    public CreateLoginForm() {
         softwareHuset = new SoftwareHuset();
         softwareHuset.startProgram();
 
@@ -70,29 +76,32 @@ class CreateLoginForm extends JFrame  {
             public void actionPerformed(ActionEvent e) {
                 String userValue = textField1.getText();        //get user entered username from the textField1
 
+                if (softwareHuset.isDeveloper(userValue)) {
+                    Developer user = softwareHuset.getDeveloper(userValue);
+                    if (managerCheckBox) {
+                        //create instance of the NewPage
+                        ProjectManagerPage pmPage = new ProjectManagerPage(user);
 
-                if(managerCheckBox && softwareHuset.isDeveloper(userValue)){
-                    //create instance of the NewPage
-                    ProjectManagerPage pmPage = new ProjectManagerPage(userValue);
+                        //make page visible to the user
+                        setVisible(false);
+                        pmPage.setLocationRelativeTo(null);
+                        pmPage.setVisible(true);
 
-                    //make page visible to the user
-                    setVisible(false);
-                    pmPage.setVisible(true);
-                    pmPage.setLocationRelativeTo(null);
 
-                } else if (softwareHuset.isDeveloper(userValue)) {
-                    //check whether the credentials are authentic or not
+                    } else  {
+                        //check whether the credentials are authentic or not
 
-                    //create instance of the NewPage
-                    DeveloperPage dPage = new DeveloperPage(userValue);
+                        //create instance of the NewPage
+                        DeveloperPage dPage = new DeveloperPage(user);
 
-                    //make page visible to the user
-                    setVisible(false);
-                    dPage.setLocationRelativeTo(null);
-                    dPage.setVisible(true);
+                        //make page visible to the user
+                        setVisible(false);
+                        dPage.setLocationRelativeTo(null);
+                        dPage.setVisible(true);
+
+                    }
 
                 }
-
             }
         });
 

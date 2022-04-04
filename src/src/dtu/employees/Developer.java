@@ -2,15 +2,18 @@ package dtu.employees;
 
 import dtu.project.Activity;
 import dtu.project.Project;
+import dtu.softwarehus.SoftwareHuset;
 
 public class Developer {
     String initials;
+    int hoursWorked;
     Activity[] activities = new Activity[20];
     boolean isOccupied;
     boolean isProjectManager;
 
     public Developer(String ini){
         initials = ini;
+        hoursWorked=0;
         isOccupied = false;
         isProjectManager = false;
     }
@@ -22,6 +25,12 @@ public class Developer {
     public String printDeveloper(){
         return "Initials: " + initials + " is occupied?: " + isOccupied +"\n" ;
     }
+    public void addHours(int hours){
+        hoursWorked+=hours;
+    }
+
+
+    public int getHours(){ return hoursWorked; }
 
     public void requestDailyHours(){
 

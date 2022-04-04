@@ -1,13 +1,16 @@
-package dtu.softwarehus;//import required classes and packages
+package dtu.gui;//import required classes and packages
+import dtu.employees.Developer;
+import dtu.gui.CreateLoginForm;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 //create NewPage class to create a new page on which user will navigate  
-class DeveloperPage extends JFrame
+public class DeveloperPage extends JFrame
 {
-    String initials;
+    Developer user;
     JButton b1,b2,b3,b4,b5,b6;
     JPanel newPanel;
     JLabel userLabel;
@@ -16,9 +19,9 @@ class DeveloperPage extends JFrame
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
     //constructor  
-    DeveloperPage(String userValue)
+    DeveloperPage(Developer user)
     {
-        initials = userValue;
+        this.user = user;
         //create a welcome label and set it to the new page
         //create submit button
 
@@ -44,13 +47,13 @@ class DeveloperPage extends JFrame
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-               OptionPane OP = new OptionPane(initials,"Register hours worked");
+               OptionPane OP = new OptionPane(user,"Register hours worked");
             }
         });
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(userValue,"View hours worked");
+                OptionPane OP = new OptionPane(user,"View hours worked");
             }
         });
 
@@ -63,6 +66,8 @@ class DeveloperPage extends JFrame
                 form.setSize(500,200);  //set size of the frame
                 form.setLocationRelativeTo(null);
                 form.setVisible(true);  //make form visible to the user
+
+
             }
         });
 
