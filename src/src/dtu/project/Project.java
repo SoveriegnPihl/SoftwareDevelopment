@@ -18,20 +18,16 @@ public class Project {
     ArrayList<Developer> developers = new ArrayList<Developer>();
     ArrayList<Activity> activities;
 
-    public Project(String n, int sW, int eW, int b){
-        name = n;
-        startWeek = sW;
-        endWeek = eW;
-        budget = b;
+    public Project(String name, int startW, int endW, int budget){
+        this.name = name;
+        startWeek = startW;
+        endWeek = endW;
+        this.budget = budget;
         id = (Project.nextId++) + 22000;
     }
 
     public void listDevelopers(){
 
-    }
-
-    Report createReport(){
-        return new Report();
     }
 
     public void addDeveloper(Developer dev){

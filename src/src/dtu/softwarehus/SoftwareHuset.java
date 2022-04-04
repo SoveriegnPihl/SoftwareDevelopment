@@ -61,10 +61,11 @@ public class SoftwareHuset {
         System.out.println("Success");
     }
 
+    /*
     public void addDeveloper(Developer dev){
 
         developers.put(dev.getInitials(),dev);
-    }
+    }*/
 
     public void listProjects(){
         for (Project var : projects){

@@ -43,6 +43,7 @@ public class bookingSteps {
         manager.setToProjectManager();
     }
 
+
     @Then("The developer is a project manager")
     public void the_developer_is_a_project_manager() throws Exception {
         assertThat(manager.isProjectManager(),is(true));
@@ -58,8 +59,8 @@ public class bookingSteps {
         assertThat(developer.isOccupied(),is(false));
     }
 
-    @When("the procject manager books the developer")
-    public void the_procject_manager_books_the_developer() throws Exception {
+    @When("the project manager books the developer")
+    public void the_project_manager_books_the_developer() throws Exception {
         project.addDeveloper(developer);
     }
 
@@ -78,8 +79,8 @@ public class bookingSteps {
         System.out.println(errorMsg);
     }
 
-    @Given("that the developer is not a procject manager")
-    public void that_the_developer_is_not_a_procject_manager() {
+    @Given("that the developer is not a project manager")
+    public void that_the_developer_is_not_a_project_manager() {
         assertThat(manager.isProjectManager(),is(false));
     }
 
