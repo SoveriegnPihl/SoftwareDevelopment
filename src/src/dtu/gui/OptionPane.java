@@ -42,5 +42,14 @@ class OptionPane extends JFrame {
 
 
         }
+        if (method.equals("Assign project manager")) {
+            f = new JFrame();
+            f.setLocationRelativeTo(null);
+            String name = JOptionPane.showInputDialog(f, "Who do you want to assign");
+            String project = JOptionPane.showInputDialog(f, "Which project?");
+            softwareHuset.assignPM(name,Integer.parseInt(project));
+
+
+        }
     }
 }
