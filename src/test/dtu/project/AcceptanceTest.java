@@ -8,10 +8,10 @@ import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(features = "features",
-	plugin = { "summary", "html:target/cucumber/wikipedia.html"}, 
-	monochrome=true, 
-	snippets = SnippetType.CAMELCASE, 
-	glue = {"dtu.project"})
+		plugin = { "summary", "html:target/cucumber/wikipedia.html"},
+		monochrome=true,
+		snippets = SnippetType.CAMELCASE,
+		glue = {"dtu.project"})
 public class AcceptanceTest {
 
 }

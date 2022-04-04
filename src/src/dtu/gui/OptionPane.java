@@ -1,4 +1,7 @@
-package dtu.softwarehus;
+package dtu.gui;
+import dtu.employees.Developer;
+import dtu.softwarehus.SoftwareHuset;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,17 +11,18 @@ class OptionPane extends JFrame {
     SoftwareHuset softwareHuset = new SoftwareHuset();
     JFrame f;
 
-    OptionPane(String userValue, String method) {
+    OptionPane(Developer user, String method) {
         if (method.equals("Register hours worked")) {
             f = new JFrame();
             f.setLocationRelativeTo(null);
             String hours = JOptionPane.showInputDialog(f, method);
-            softwareHuset.addHours(userValue, Integer.valueOf(hours));
+            user.addHours(Integer.parseInt(hours));
+
         }
         if (method.equals("View hours worked")) {
             f = new JFrame();
             f.setLocationRelativeTo(null);
-            int hours = softwareHuset.workedHoursReport(userValue);
+            int hours = user.getHours();
             JOptionPane.showMessageDialog(f, "You have worked " + hours + " today");
 
         }
@@ -34,7 +38,7 @@ class OptionPane extends JFrame {
             String startWeek = JOptionPane.showInputDialog(f, "Please enter start week");
             String endWeek = JOptionPane.showInputDialog(f, "Please enter end week");
             String budget = JOptionPane.showInputDialog(f, "Please enter budget");
-            softwareHuset.createProject(name,Integer.valueOf(startWeek),Integer.valueOf(endWeek),Integer.valueOf(budget));
+            softwareHuset.createProject(name,Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
 
 
         }

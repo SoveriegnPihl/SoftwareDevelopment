@@ -12,7 +12,6 @@ public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
     static HashMap<String, Manager> projectManagers;
-    static HashMap<Developer,Integer> hoursWorked;
     static ArrayList<Developer> availableDevelopers;
     public static  ArrayList<Project> projects;
 
@@ -23,17 +22,20 @@ public class SoftwareHuset {
         projects = new ArrayList<>();
         reports = new ArrayList<>();
         developers = new HashMap<>();
-        hoursWorked = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        addDeveloper1("abc");
-        addDeveloper1("def");
-        addDeveloper1("ghi");
+        addDeveloper1("ekki");
+        addDeveloper1("vic7");
+        addDeveloper1("jako");
         addDeveloper1("jlm");
-        developers.get("abc").setOccupied();
-        developers.get("def").setOccupied();
-        developers.get("ghi").setOccupied();
-        developers.get("jlm").setUnOccupied();
+        developers.get("ekki").setOccupied(false);
+        developers.get("vic7").setOccupied(false);
+        developers.get("jako").setOccupied(true);
+        developers.get("jlm").setOccupied(false);
+
+        developers.get("ekki").setToProjectManager();
+        Project testProject = new Project("22001", 1,2,4);
+        projects.add(testProject);
 
     }
 
@@ -78,6 +80,9 @@ public class SoftwareHuset {
         return str.toString();
     }
 
+    public Developer getDeveloper(String name){
+        return developers.get(name);
+    }
 
 
     public String listAvailableDevelopers(){
@@ -108,32 +113,21 @@ public class SoftwareHuset {
                 System.out.println("no developer found");
         }
     }
-    public void addHours(String name,int hours){
-        System.out.println("Please input your initials");
-        System.out.println(name);
-        if (developers.containsKey(name)) {
-            System.out.println("How many hours?");
-            if (hoursWorked.containsKey(developers.get(name))) {
-                hoursWorked.put(developers.get(name), hoursWorked.get(developers.get(name)) + hours);
-            } else {
-                hoursWorked.put(developers.get(name), hours);
 
-            }
-            System.out.println("Success hours");
-        }
-            else {
-            System.out.println("No such user found");
-        }
-    }
-     public int workedHoursReport(String name){
-        if (developers.containsKey(name)) {
-            return hoursWorked.get(developers.get(name));
-        }
-        return 0;
-    }
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
     }
 
+    public boolean findProject(String projectId){
+        for (Project proj : projects){
+            System.out.println(proj.name);
+            if(proj.name.equals(projectId)){
+                return true;
+            }
+        }
+        return false;
     }
+
+}
+
 
