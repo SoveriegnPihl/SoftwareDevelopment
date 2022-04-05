@@ -78,7 +78,7 @@ public class CreateLoginForm extends JFrame  {
 
                 if (softwareHuset.isDeveloper(userValue)) {
                     Developer user = softwareHuset.getDeveloper(userValue);
-                    if (managerCheckBox) {
+                    if (managerCheckBox && softwareHuset.isManager(userValue)) {
                         //create instance of the NewPage
                         ProjectManagerPage pmPage = new ProjectManagerPage(user);
 
@@ -88,7 +88,7 @@ public class CreateLoginForm extends JFrame  {
                         pmPage.setVisible(true);
 
 
-                    } else  {
+                    } else if (!managerCheckBox)  {
                         //check whether the credentials are authentic or not
 
                         //create instance of the NewPage

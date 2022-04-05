@@ -12,20 +12,20 @@ import java.util.concurrent.ExecutionException;
 public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
-    static HashMap<String, Manager> projectManagers;
+    static HashMap<Integer,String> projectManagers;
     static ArrayList<Developer> availableDevelopers;
-    public static  ArrayList<Project> projects;
+    static HashMap<Integer, Project> projects;
+    //public static  ArrayList<Project> projects;
     private DateServer dateServer;
 
     public SoftwareHuset() {
-
-
     }
 
     public void startProgram(){
         readProjectsFromCSV("src/src/dtu/data/projects.csv","src/src/dtu/data/developers.csv");
 
-        /*reports = new ArrayList<>();
+        projects = new HashMap<>();
+        reports = new ArrayList<>();
         developers = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
@@ -38,6 +38,8 @@ public class SoftwareHuset {
         developers.get("jako").setOccupied(true);
         developers.get("jlm").setOccupied(false);
 
+        int project = createProject("22001", 1,2,4);
+        assignPM("ekki",project);
         developers.get("ekki").setToProjectManager();
         Project testProject = new Project("22001", 1,2,4);
         projects.add(testProject);*/
@@ -92,20 +94,29 @@ public class SoftwareHuset {
                 System.out.println("Success");
             }
         }
-        
+
     public void setDateServer(DateServer dateServer) {
         this.dateServer = dateServer;
     }
 
 
-    public void createProject(String name, int startWeek, int endWeek, int budget){
+    public int createProject(String name, int startWeek, int endWeek, int budget){
 
         System.out.println("Please input name, start & end week and budget");
 
         Project toAdd = new Project(name, startWeek, endWeek, budget);
         toAdd.printProject();
-        projects.add(toAdd);
-        System.out.println("Success");
+        projects.put(toAdd.getId(),toAdd);
+        return toAdd.getId();
+
+    }
+
+    public void assignPM(String dev, int projectID){
+        projectManagers.put(projectID,dev);
+        if(!Project.hasManager()) {
+            projects.get(projectID).setPm(developers.get(dev));
+        }
+        System.out.println(projects.get(projectID).manager.getInitials());
     }
 
     public void addDeveloper(Developer dev){
@@ -114,10 +125,21 @@ public class SoftwareHuset {
     }
 
     public void listProjects(){
-        for (Project var : projects){
+        for (Project var : projects.values()){
             var.printProject();
             System.out.println("");
         }
+    }
+    public static String[] projectList(Developer developer){
+        String[] projectlist = new String[5];
+        int count = 0;
+        String name = developer.getInitials();
+        for (Integer var : projectManagers.keySet()){
+        if (projectManagers.get(var).equals(name)){
+            projectlist[count]=var.toString();
+        }
+        }
+        return projectlist;
     }
 
     public String listDevelopers(){
@@ -151,24 +173,18 @@ public class SoftwareHuset {
         }
     }
 
-    public void addPm(String name) {
-        System.out.println("Please input initials");
-
-        if (developers.containsKey(name)) {
-            Manager PM = new Manager(name);
-            projectManagers.put(name,PM);
-            System.out.println("success");
-        } else {
-                System.out.println("no developer found");
-        }
-    }
 
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
     }
 
+    public static boolean isManager(String ini){
+        return projectManagers.containsValue(ini);
+    }
+
     public boolean findProject(String projectId){
-        for (Project proj : projects){
+        for (Project proj : projects.values()){
+            System.out.println(proj.name);
             if(proj.name.equals(projectId)){
                 return true;
             }
