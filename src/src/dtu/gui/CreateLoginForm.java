@@ -14,7 +14,7 @@ import java.awt.event.*;
 //class implements ActionListener to perform an action on button click
 public class CreateLoginForm extends JFrame  {
     //initialize button, panel, label, and text field
-    JButton b1;
+    JButton b1,b2;
     JPanel newPanel;
     JLabel userLabel;
     JTextField textField1;
@@ -26,8 +26,7 @@ public class CreateLoginForm extends JFrame  {
 
     //calling constructor
     public CreateLoginForm() {
-        softwareHuset = new SoftwareHuset();
-        softwareHuset.startProgram();
+        //softwareHuset = new SoftwareHuset();
 
         //create label for username
         userLabel = new JLabel();
@@ -39,23 +38,39 @@ public class CreateLoginForm extends JFrame  {
         //create submit button
         b1 = new JButton("Login"); //set label to button
 
+        b2 = new JButton("Create project");
+
+
         //create checkbox
         checkBox1 = new JCheckBox("As project manager");
 
 
         //create panel to put form elements
-        newPanel = new JPanel(new GridLayout(2, 1));
+        newPanel = new JPanel();
+        newPanel.setLayout(null);
+        newPanel.setBorder(BorderFactory.createTitledBorder(
+                "Start page"));
+
+        userLabel.setBounds(75, 25, 193, 29);
         newPanel.add(userLabel);    //set username label to panel
+        textField1.setBounds(225, 25, 193, 29);
         newPanel.add(textField1);   //set text field to panel
+        checkBox1.setBounds(50, 55, 193, 29);
         newPanel.add(checkBox1);
+        b1.setBounds(55, 100, 193, 45);
         newPanel.add(b1);
+        b2.setBounds(255, 100, 193, 45);
+        newPanel.add(b2);
 
         //set button to panel
         //set border to panel
-        add(newPanel, BorderLayout.CENTER);
+        add(newPanel);
 
 
         setTitle("LOGIN FORM");         //set title to the login form
+        setDefaultCloseOperation(javax.swing.
+                WindowConstants.DISPOSE_ON_CLOSE);
+        setSize(500, 200);
 
         checkBox1.addActionListener(new ActionListener() {
             @Override
@@ -76,9 +91,9 @@ public class CreateLoginForm extends JFrame  {
             public void actionPerformed(ActionEvent e) {
                 String userValue = textField1.getText();        //get user entered username from the textField1
 
-                if (softwareHuset.isDeveloper(userValue)) {
-                    Developer user = softwareHuset.getDeveloper(userValue);
-                    if (managerCheckBox) {
+                if (SoftwareHuset.isDeveloper(userValue)) {
+                    Developer user = SoftwareHuset.getDeveloper(userValue);
+                    if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
                         //create instance of the NewPage
                         ProjectManagerPage pmPage = new ProjectManagerPage(user);
 
@@ -88,7 +103,7 @@ public class CreateLoginForm extends JFrame  {
                         pmPage.setVisible(true);
 
 
-                    } else  {
+                    } else if (!managerCheckBox)  {
                         //check whether the credentials are authentic or not
 
                         //create instance of the NewPage
@@ -102,6 +117,18 @@ public class CreateLoginForm extends JFrame  {
                     }
 
                 }
+            }
+        });
+        b2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                CreateProjectPage OP = new CreateProjectPage();
+                OP.setSize(500,500);  //set size of the frame
+                OP.setLocationRelativeTo(null);
+                OP.setVisible(true);
+
+
             }
         });
 

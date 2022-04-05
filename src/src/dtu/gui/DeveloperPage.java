@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 public class DeveloperPage extends JFrame
 {
     Developer user;
-    JButton b1,b2,b3,b4,b5,b6;
+    JButton b1,b2,b3,b4,b5,b6,b7;
     JPanel newPanel;
     JLabel userLabel;
     JTextField textField1;
@@ -22,6 +22,7 @@ public class DeveloperPage extends JFrame
     DeveloperPage(Developer user)
     {
         this.user = user;
+
         //create a welcome label and set it to the new page
         //create submit button
 
@@ -30,19 +31,32 @@ public class DeveloperPage extends JFrame
         b3 = new JButton("Register sick day"); //set label to button
         b4 = new JButton("Register holiday"); //set label to button
         b5 = new JButton("Assign project manager"); //set label to button
-        b5 = new JButton("Add project activity"); //set label to button
-        b6 = new JButton("Back to login");
+        b6 = new JButton("Add project activity"); //set label to button
+        b7 = new JButton("Create project");
 
         //create panel to put form elements
-        newPanel = new JPanel(new GridLayout(3, 1));
+        newPanel = new JPanel();
+        newPanel.setLayout(null);
+        newPanel.setBorder(BorderFactory.createTitledBorder(
+                "Developer page"));
+        b1.setBounds(50, 50, 193, 29);
         newPanel.add(b1);
+        b2.setBounds(50, 100, 193, 29);
         newPanel.add(b2);
+        b3.setBounds(50, 150, 193, 29);
         newPanel.add(b3);
+        b4.setBounds(50, 200, 193, 29);
         newPanel.add(b4);
-        newPanel.add(b5);
+        b6.setBounds(50, 250, 193, 29);
         newPanel.add(b6);
 
-        add(newPanel, BorderLayout.CENTER);
+        b5.setBounds(325, 100, 193, 29);
+        newPanel.add(b5);
+        b7.setBounds(325, 50, 193, 29);
+        newPanel.add(b7);
+
+        add(newPanel);
+
 
         b1.addActionListener(new ActionListener() {
             @Override
@@ -57,15 +71,21 @@ public class DeveloperPage extends JFrame
             }
         });
 
+        b5.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(user,"Assign project manager");
+            }
+        });
+
         b6.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                //create instance of the CreateLoginForm
-                CreateLoginForm form = new CreateLoginForm();
-                form.setSize(500,200);  //set size of the frame
-                form.setLocationRelativeTo(null);
-                form.setVisible(true);  //make form visible to the user
+                CreateProjectPage OP = new CreateProjectPage();
+                OP.setSize(500,500);  //set size of the frame
+                OP.setLocationRelativeTo(null);
+                OP.setVisible(true);
 
 
             }
@@ -74,6 +94,6 @@ public class DeveloperPage extends JFrame
         setDefaultCloseOperation(javax.swing.
                 WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Welcome");
-        setSize(400, 200);
+        setSize(600, 600);
     }
 }  

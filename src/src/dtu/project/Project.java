@@ -31,6 +31,11 @@ public class Project {
 
     }
 
+
+    public int getId(){
+        return id;
+    }
+
     Report createReport(){
         return new Report();
     }
