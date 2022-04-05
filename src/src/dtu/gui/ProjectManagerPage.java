@@ -19,6 +19,10 @@ public class ProjectManagerPage {
     SoftwareHuset softwareHuset;
     Main parentWindow;
     static JComboBox projectList;
+    private JLabel selectLabel;
+    int yCountR=100,yCountL=100;
+    private JButton addDev,viewDev,addDevProj,addActi,backB,getReport,createProjBut,changeProjBut;
+
     //constructor
     ProjectManagerPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -31,87 +35,82 @@ public class ProjectManagerPage {
         parentWindow.addPanel(projectManagerPage);
         projectManagerPage.setLayout(null);
        // projectManagerPage.setBorder(BorderFactory.createTitledBorder(
-        b1 = new JButton("Add developer"); //set label to button
-        b2 = new JButton("View *available* developers"); //set label to button
-        b4 = new JButton("Add developer to project"); //set label to button
-        b5 = new JButton("Add project activity"); //set label to button
-        b5 = new JButton("Get project report"); //set label to button
-        b7 = new JButton("Back");
+        addDev = makeLeftButton("Add developer");
+        viewDev = makeLeftButton("View *available* developers");
+        addDevProj = makeLeftButton("Add developer to project");
+        addActi = makeLeftButton("Add project activity");
+        getReport = makeLeftButton("Get project report");
+        backB = makeLeftButton("Back");
 
-        b3 = new JButton("Create project"); //set label to button
-        b6 = new JButton("Manage selected project"); //set label to button
+        //createProjBut = makeRightButton("Create project"); //set label to button
+        changeProjBut = makeRightButton("Change selected project"); //set label to button
 
-        //create panel to put form elements
+        selectLabel = new JLabel();
+        selectLabel.setText("Select project");
+        selectLabel.setBounds(100, 25, 193, 29);
+        projectManagerPage.add(selectLabel);
 
-        b1.setBounds(25, 50, 193, 29);
-        projectManagerPage.add(b1);
-        b2.setBounds(25, 100, 193, 29);
-        projectManagerPage.add(b2);
-        b4.setBounds(25, 150, 193, 29);
-        projectManagerPage.add(b4);
-        b5.setBounds(25, 200, 193, 29);
-        projectManagerPage.add(b5);
-        b7.setBounds(25, 250, 193, 29);
-        projectManagerPage.add(b7);
-
-        b3.setBounds(275, 50, 193, 29);
-       // projectManagerPage.add(b3);
-        b6.setBounds(285, 50, 193, 29);
-        projectManagerPage.add(b6);
-
-        b2.addActionListener(new ActionListener() {
+        viewDev.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OptionPane OP = new OptionPane(user1,"View available developers");
             }
         });
 
-        /*b3.addActionListener(new ActionListener() {
+        changeProjBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                CreateProjectPage OP = new CreateProjectPage();
-                OP.setSize(500,500);  //set size of the frame
-                OP.setLocationRelativeTo(null);
-                OP.setVisible(true);
-            }
-
-        });*/
-
-        b6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
+                manageProjectPage.setLabels(projectList.getItemAt(projectList.getSelectedIndex()).toString());
                 manageProjectPage.setVisible(true);
-                System.out.println(projectList.getItemAt(projectList.getSelectedIndex()));
             }
 
         });
-        b7.addActionListener(new ActionListener() {
+        backB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
+                removeList();
                 parentWindow.setVisible(true);
             }
         });
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);
 
-
     }
-    public void setVisible(boolean visi){
+    public static void setVisible(boolean visi){
         projectManagerPage.setVisible(visi);
     }
    public static void createList(Developer user){
        String[] list = SoftwareHuset.projectList(user).toArray(new String[0]);
 
        projectList = new JComboBox(list);
-       projectList.setBounds(285, 100, 193, 29);
+       projectList.setBounds(225, 25, 193, 29);
        projectManagerPage.add(projectList);
+
+    }
+    public static void removeList(){
+        projectManagerPage.remove(projectList);
 
     }
 
     public static void setUser(Developer user){
         user1 = user;
     }
+    public JButton makeLeftButton(String name){
+        JButton b1 = new JButton(name);
+        b1.setBounds(25, yCountL, 193, 29);
+        projectManagerPage.add(b1);
+        yCountL+=50;
+        return b1;
+    }
+    public JButton makeRightButton(String name){
+        JButton b1 = new JButton(name);
+        b1.setBounds(285, yCountR, 193, 29);
+        projectManagerPage.add(b1);
+        yCountR+=50;
+        return b1;
+    }
+
 }
+
 

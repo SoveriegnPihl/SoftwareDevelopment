@@ -8,12 +8,16 @@ import java.util.HashMap;
 public class Activity {
     int estimatedTime;
     Developer developer;
-    HashMap<String, Developer> developers;
+    HashMap<Developer,int[]> developers = new HashMap<>();
     public String name;
 
     public Activity (String name, int time){
         this.name = name;
         this.estimatedTime = time;
+    }
+    public void addDev(Developer dev, int start,int end){
+        int[] act= {start, end};
+        developers.put(dev,act);
     }
 
     public String getActivity(){

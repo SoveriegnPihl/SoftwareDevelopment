@@ -20,6 +20,7 @@ public class DeveloperPage
     boolean managerCheckBox = false;
     SoftwareHuset softwareHuset;
     Main parentWindow;
+    int yCountL =50, yCountR = 50;
     //constructor  
     DeveloperPage( SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -28,75 +29,45 @@ public class DeveloperPage
     }
 
     public void initialize() {
-        //create a welcome label and set it to the new page
-        //create submit button
 
-        b1 = new JButton("Register hours worked"); //set label to button
-        b2 = new JButton("View hours worked"); //set label to button
-        b3 = new JButton("Register sick day"); //set label to button
-        b4 = new JButton("Register holiday"); //set label to button
-        b5 = new JButton("Assign project manager"); //set label to button
-        b6 = new JButton("Add project activity"); //set label to button
-        b7 = new JButton("Create project");
-        b8 = new JButton("Back");
-        //create panel to put form elements
         developerPage = new JPanel();
         parentWindow.addPanel(developerPage);
         developerPage.setLayout(null);
         developerPage.setBorder(BorderFactory.createTitledBorder(
                 "Developer page"));
-        b1.setBounds(25, 50, 193, 29);
-        developerPage.add(b1);
-        b2.setBounds(25, 100, 193, 29);
-        developerPage.add(b2);
-        b3.setBounds(25, 150, 193, 29);
-        developerPage.add(b3);
-        b4.setBounds(25, 200, 193, 29);
-        developerPage.add(b4);
-        b6.setBounds(25, 250, 193, 29);
-        developerPage.add(b6);
-        b8.setBounds(20, 300, 193, 29);
-        developerPage.add(b8);
 
-        b5.setBounds(285, 50, 193, 29);
-        developerPage.add(b5);
-        //b7.setBounds(325, 50, 193, 29);
-       // developerPage.add(b7);
+        JButton regHbut = makeLeftButton("Register hours worked");
+        JButton viewHbut = makeLeftButton("View hours worked");
+        JButton regSickBut = makeLeftButton("Register sick day");
+        JButton regHoliBut = makeLeftButton("Register holiday");
+        JButton addActBut = makeLeftButton("Add project activity");
+       // JButton createProBut = makeLeftButton("Create project");
+        JButton backBut = makeLeftButton("Back");
 
-        b1.addActionListener(new ActionListener() {
+        JButton addPmBut = makeRightButton("Assign project manager");
+
+
+        regHbut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OptionPane OP = new OptionPane(user1, "Register hours worked");
             }
         });
-        b2.addActionListener(new ActionListener() {
+       viewHbut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OptionPane OP = new OptionPane(user1, "View hours worked");
             }
         });
 
-        b5.addActionListener(new ActionListener() {
+        addPmBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 OptionPane OP = new OptionPane(user1, "Assign project manager");
             }
         });
 
-       /* b7.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // setVisible(false);
-                CreateProjectPage OP = new CreateProjectPage();
-                OP.setSize(500, 500);  //set size of the frame
-                OP.setLocationRelativeTo(null);
-                OP.setVisible(true);
-
-
-            }
-        });*/
-
-        b8.addActionListener(new ActionListener() {
+        backBut.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
@@ -110,5 +81,20 @@ public class DeveloperPage
         public static void setUser(Developer user){
         user1 = user;
         }
+
+    public JButton makeLeftButton(String name){
+        JButton b1 = new JButton(name);
+        b1.setBounds(25, yCountL, 193, 29);
+        developerPage.add(b1);
+        yCountL+=50;
+        return b1;
+    }
+    public JButton makeRightButton(String name){
+        JButton b1 = new JButton(name);
+        b1.setBounds(285, yCountR, 193, 29);
+        developerPage.add(b1);
+        yCountR+=50;
+        return b1;
+    }
 
 }  
