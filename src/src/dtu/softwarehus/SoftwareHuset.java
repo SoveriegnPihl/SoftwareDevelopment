@@ -18,6 +18,7 @@ public class SoftwareHuset {
     static HashMap<Integer, Project> projects;
     //public static  ArrayList<Project> projects;
     private DateServer dateServer;
+    public static ArrayList<String[]> csvProjectData;
 
     public SoftwareHuset() {
     }
@@ -42,15 +43,14 @@ public class SoftwareHuset {
         developers.get("jlm").setOccupied(false);
 
 
-        developers.get("ekki").setToProjectManager();
-        Project testProject = new Project("22001", 1,2,4);
-        projects.add(testProject);*/
+        developers.get("ekki").setToProjectManager();*/
 
     }
 
     public static void readProjectsFromCSV(String filePathProj, String filePathDevs){
         projects = new HashMap<>();
         developers = new HashMap<>();
+        csvProjectData = new ArrayList<>();
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
@@ -59,6 +59,8 @@ public class SoftwareHuset {
             while (sc1.hasNextLine()){
                 String[] att = sc1.nextLine().split(",");
                 createProject(Integer.parseInt(att[1]),Integer.parseInt(att[2]),Integer.parseInt(att[3]));
+                csvProjectData.add(att);
+
             }
             sc1.close();
 

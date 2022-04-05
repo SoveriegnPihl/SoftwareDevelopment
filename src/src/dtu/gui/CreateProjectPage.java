@@ -4,6 +4,9 @@ import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.io.PrintWriter;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -90,10 +93,19 @@ public class CreateProjectPage {
                 String endWeek = endDate.getText();
                 String budget = budget1.getText();
                 String projectManager1 = projectManager.getText();
-                String name = "New project";
-
 
                 int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+
+                SoftwareHuset.csvProjectData.add(new String[] {String.valueOf(project), startWeek, endWeek, budget});
+
+                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+                try(PrintWriter writer = new PrintWriter("src/src/dtu/data/projects.csv")){
+                    SoftwareHuset.csvProjectData.stream().map(this::convertToCSV).forEach(writer::println);
+
+                }catch (Exception excep){
+                    excep.printStackTrace();
+                }
+
                 if(!projectManager1.isEmpty()) {
                     SoftwareHuset.assignPM(projectManager1, project);
                 }
@@ -102,14 +114,30 @@ public class CreateProjectPage {
                     //make page visible to the user
 
                     setVisible(false);
+                    pmPage.setLocationRelativeTo(null);
+                    pmPage.setVisible(true);
+
+            }
                     clear();
                     parentWindow.setVisible(true);
                     //pmPage.setLocationRelativeTo(null);
                    // pmPage.setVisible(true);
 
+            public String convertToCSV(String[] data) {
+                return Stream.of(data).map(this::escapeSpecialCharacters).collect(Collectors.joining(","));
+            }
 
+            public String escapeSpecialCharacters(String data) {
+                String escapedData = data.replaceAll("\\R", " ");
+                if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+                    data = data.replace("\"", "\"\"");
+                    escapedData = "\"" + data + "\"";
+                }
+                return escapedData;
             }
         });
+
+
 
     }
     public void setVisible(boolean visi){
@@ -120,6 +148,7 @@ public class CreateProjectPage {
         endDate.setText("");
         projectManager.setText("");
         budget1.setText("");
+
 
     }
 }

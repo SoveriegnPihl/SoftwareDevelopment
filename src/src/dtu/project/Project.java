@@ -35,9 +35,7 @@ public class Project {
         return id;
     }
 
-    Report createReport(){
-        return new Report();
-    }
+
 
     public void addActivity(Activity activity){
         activities.add(activity);
