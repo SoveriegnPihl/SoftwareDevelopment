@@ -52,12 +52,9 @@ public class ProjectManagerPage extends JFrame {
         newPanel.add(b6);
 
         String[] list = SoftwareHuset.projectList(user);
-       // String[] petStrings = { "Bird", "Cat", "Dog", "Rabbit", "Pig" };
 
-        //Create the combo box, select item at index 4.
-        //Indices start at 0, so 4 specifies the pig.
         JComboBox projectList = new JComboBox(list);
-        projectList.setSelectedIndex(4);
+        projectList.setSelectedIndex(list.length);
         projectList.setBounds(350, 150, 193, 29);
         newPanel.add(projectList);
 
@@ -76,7 +73,7 @@ public class ProjectManagerPage extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                CreateProjectPage OP = new CreateProjectPage(user);
+                CreateProjectPage OP = new CreateProjectPage();
                 OP.setSize(500,500);  //set size of the frame
                 OP.setLocationRelativeTo(null);
                 OP.setVisible(true);

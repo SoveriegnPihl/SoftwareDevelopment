@@ -15,8 +15,6 @@ public class Project {
     int endWeek;
     int budget;
     Manager pm;
-    public Developer manager;
-    static boolean hasManager = false;
 
     ArrayList<Developer> developers = new ArrayList<Developer>();
     ArrayList<Activity> activities;
@@ -32,17 +30,8 @@ public class Project {
     public void listDevelopers(){
 
     }
-    public void setPm(Developer manager){
-        this.manager = manager;
-        hasManager = true;
-    }
-    public static boolean hasManager(){
-        return hasManager;
-    }
 
-    public boolean isManager(Developer isManager){
-        return isManager.equals(manager);
-    }
+
     public int getId(){
         return id;
     }
