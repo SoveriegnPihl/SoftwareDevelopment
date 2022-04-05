@@ -38,7 +38,7 @@ class OptionPane extends JFrame {
             String startWeek = JOptionPane.showInputDialog(f, "Please enter start week");
             String endWeek = JOptionPane.showInputDialog(f, "Please enter end week");
             String budget = JOptionPane.showInputDialog(f, "Please enter budget");
-            softwareHuset.createProject(name,Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+            softwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
 
 
         }

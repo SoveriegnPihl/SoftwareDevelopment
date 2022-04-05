@@ -48,10 +48,10 @@ public class bookingAndActivitySteps {
         assertThat(manager.isProjectManager(),is(true));
     }
 
-    @Given("there is a project with id {string}")
+    /*@Given("there is a project with id {string}")
     public void there_is_a_project_with_id(String projectId) throws Exception{
         project = new Project(projectId, 1, 2, 4);
-    }
+    }*/
 
     @Given("the developer is available for the project")
     public void the_developer_is_available_for_the_project() {

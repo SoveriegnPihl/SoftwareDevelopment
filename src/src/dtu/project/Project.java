@@ -19,8 +19,7 @@ public class Project {
     ArrayList<Developer> developers = new ArrayList<Developer>();
     ArrayList<Activity> activities;
 
-    public Project(String n, int sW, int eW, int b){
-        name = n;
+    public Project(int sW, int eW, int b){
         startWeek = sW;
         endWeek = eW;
         budget = b;
@@ -36,9 +35,7 @@ public class Project {
         return id;
     }
 
-    Report createReport(){
-        return new Report();
-    }
+
 
     public void addActivity(Activity activity){
         activities.add(activity);

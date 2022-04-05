@@ -1,7 +1,6 @@
 package dtu.softwarehus;
 
 import dtu.employees.Developer;
-import dtu.employees.Manager;
 import dtu.project.Project;
 import dtu.project.Report;
 
@@ -10,7 +9,6 @@ import java.util.HashMap;
 
 import java.io.File;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -20,6 +18,7 @@ public class SoftwareHuset {
     static HashMap<Integer, Project> projects;
     //public static  ArrayList<Project> projects;
     private DateServer dateServer;
+    public static ArrayList<String[]> csvProjectData;
 
     public SoftwareHuset() {
     }
@@ -27,31 +26,15 @@ public class SoftwareHuset {
     public static void startProgram(){
         readProjectsFromCSV("src/src/dtu/data/projects.csv","src/src/dtu/data/developers.csv");
 
-        /*projects = new HashMap<>();
-        reports = new ArrayList<>();
-        developers = new HashMap<>();
-        projectManagers = new HashMap<>();
-        availableDevelopers = new ArrayList<>();
-        addDeveloper("ekki");
-        addDeveloper("vic7");
-        addDeveloper("jako");
-        addDeveloper("jlm");
-        developers.get("ekki").setOccupied(false);
-        developers.get("vic7").setOccupied(false);
         developers.get("jako").setOccupied(true);
-        developers.get("jlm").setOccupied(false);
-
-        int project = createProject("22001", 1,2,4);
-        assignPM("ekki",project);
         developers.get("ekki").setToProjectManager();
-        Project testProject = new Project("22001", 1,2,4);
-        projects.add(testProject);*/
 
     }
 
     public static void readProjectsFromCSV(String filePathProj, String filePathDevs){
         projects = new HashMap<>();
         developers = new HashMap<>();
+        csvProjectData = new ArrayList<>();
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
@@ -59,33 +42,19 @@ public class SoftwareHuset {
 
             while (sc1.hasNextLine()){
                 String[] att = sc1.nextLine().split(",");
-                Project project = createProjectFromCSV(att);
-
-                projects.put(Integer.valueOf(att[1]),project);
+                createProject(Integer.parseInt(att[1]),Integer.parseInt(att[2]),Integer.parseInt(att[3]));
+                csvProjectData.add(att);
             }
             sc1.close();
 
             while (sc2.hasNext()){
-                String initials = sc2.next();
-
-                Developer developer = new Developer(initials);
-                developers.put(initials, developer);
+                addDeveloper(sc2.next());
             }
             sc2.close();
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
-    }
-
-    public static Project createProjectFromCSV(String[] att){
-        String name = att[0];
-        int startW = Integer.parseInt(att[1]);
-        int endW = Integer.parseInt(att[2]);
-        int budget = Integer.parseInt(att[3]);
-
-        return new Project(name, startW, endW, budget);
 
     }
 
@@ -103,11 +72,11 @@ public class SoftwareHuset {
     }
 
 
-    public static int createProject(String name, int startWeek, int endWeek, int budget){
+    public static int createProject(int startWeek, int endWeek, int budget){
 
         System.out.println("Please input name, start & end week and budget");
 
-        Project toAdd = new Project(name, startWeek, endWeek, budget);
+        Project toAdd = new Project(startWeek, endWeek, budget);
         toAdd.printProject();
         projects.put(toAdd.getId(),toAdd);
         return toAdd.getId();
