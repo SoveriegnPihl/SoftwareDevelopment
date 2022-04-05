@@ -24,7 +24,7 @@ public class SoftwareHuset {
     public void startProgram(){
         readProjectsFromCSV("src/src/dtu/data/projects.csv","src/src/dtu/data/developers.csv");
 
-        projects = new HashMap<>();
+        /*projects = new HashMap<>();
         reports = new ArrayList<>();
         developers = new HashMap<>();
         projectManagers = new HashMap<>();
@@ -47,7 +47,7 @@ public class SoftwareHuset {
     }
 
     public static void readProjectsFromCSV(String filePathProj, String filePathDevs){
-        projects = new ArrayList<>();
+        projects = new HashMap<>();
         developers = new HashMap<>();
 
         try{
@@ -58,7 +58,7 @@ public class SoftwareHuset {
                 String[] att = sc1.nextLine().split(",");
                 Project project = createProjectFromCSV(att);
 
-                projects.add(project);
+                projects.put(Integer.valueOf(att[1]),project);
             }
             sc1.close();
 
