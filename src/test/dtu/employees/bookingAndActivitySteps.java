@@ -1,7 +1,7 @@
-package dtu.project;
+package dtu.employees;
 
-import dtu.employees.Developer;
-import dtu.employees.Manager;
+import dtu.project.Activity;
+import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
@@ -11,19 +11,18 @@ import io.cucumber.java.en.When;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class bookingSteps {
+public class bookingAndActivitySteps {
     SoftwareHuset softwareHuset;
     HashMap<String, Developer> developers;
     ArrayList<Project> projects;
     Developer developer, manager;
-
+    Activity activity;
     Project project;
 
-    public bookingSteps(SoftwareHuset softwareHuset, HashMap<String, Developer> developers, ArrayList<Project> projects){
+    public bookingAndActivitySteps(SoftwareHuset softwareHuset, HashMap<String, Developer> developers, ArrayList<Project> projects){
         this.softwareHuset = softwareHuset;
         this.developers = developers;
         this.projects = projects;
@@ -38,8 +37,8 @@ public class bookingSteps {
        developers.put(devInitials, developer);
     }
 
-    @Given("that the developer is a procject manager")
-    public void that_the_developer_is_a_procject_manager() throws Exception {
+    @Given("that the developer is a project manager")
+    public void that_the_developer_is_a_project_manager() throws Exception {
         manager.setToProjectManager();
     }
 
@@ -58,8 +57,8 @@ public class bookingSteps {
         assertThat(developer.isOccupied(),is(false));
     }
 
-    @When("the procject manager books the developer")
-    public void the_procject_manager_books_the_developer() throws Exception {
+    @When("the project manager books the developer")
+    public void the_project_manager_books_the_developer() throws Exception {
         project.addDeveloper(developer);
     }
 
@@ -78,8 +77,8 @@ public class bookingSteps {
         System.out.println(errorMsg);
     }
 
-    @Given("that the developer is not a procject manager")
-    public void that_the_developer_is_not_a_procject_manager() {
+    @Given("that the developer is not a project manager")
+    public void that_the_developer_is_not_a_project_manager() {
         assertThat(manager.isProjectManager(),is(false));
     }
 
@@ -88,4 +87,31 @@ public class bookingSteps {
     public void theDeveloperIsNotAvailableForTheProject() {
         assertThat(developer.isOccupied(),is(true));
     }
+
+    @When("the developer wants to add a activity {string} with {int} hours estimated")
+    public void the_developer_wants_to_add_a_activity_with_hours_estimated(String activityName, Integer estHours) throws Exception {
+        activity = new Activity(activityName, estHours);
+    }
+
+    @And("the activity is not already in the project")
+    public void the_activity_is_not_already_in_the_project() {
+        assertThat(project.findActivity(activity.name),is(false));
+    }
+
+    @And("the activity is already in the project")
+    public void the_activity_is_already_in_the_project() {
+        assertThat(project.findActivity(activity.name),is(true));
+    }
+
+    @Then("the activity is added to the given project")
+    public void the_activity_is_added_to_the_given_project() {
+        project.addActivity(activity);
+        assertThat(project.findActivity(activity.name),is(true));
+    }
+
+    @Given("there is not a project named {string}")
+    public void there_is_not_a_project_named(String projectName) {
+        assertThat(softwareHuset.findProject(projectName),is(false));
+    }
+
 }

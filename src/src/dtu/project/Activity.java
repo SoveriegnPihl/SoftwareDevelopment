@@ -9,18 +9,18 @@ public class Activity {
     int estimatedTime;
     Developer developer;
     HashMap<String, Developer> developers;
-    String name;
+    public String name;
 
-    public Activity (String name, int tid){
+    public Activity (String name, int time){
         this.name = name;
-        this.estimatedTime = tid;
+        this.estimatedTime = time;
     }
 
     public String getActivity(){
         return name;
     }
-    public void setEstimatedTime(int tid){
-        estimatedTime = tid;
+    public void setEstimatedTime(int time){
+        estimatedTime = time;
     }
 
 

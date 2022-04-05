@@ -2,6 +2,7 @@ package dtu.project;
 
 import dtu.employees.*;
 import dtu.softwarehus.SoftwareHuset;
+import io.cucumber.java.en_old.Ac;
 
 import java.util.ArrayList;
 
@@ -32,6 +33,19 @@ public class Project {
 
     Report createReport(){
         return new Report();
+    }
+
+    public void addActivity(Activity activity){
+        activities.add(activity);
+    }
+
+    public boolean findActivity(String activityName){
+        for (Activity a : activities){
+            if(a.name.equals(activityName)){
+                return true;
+            }
+        }
+        return false;
     }
 
     public void addDeveloper(Developer dev){
