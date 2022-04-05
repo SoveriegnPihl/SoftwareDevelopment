@@ -3,25 +3,25 @@ package dtu.project;
 import dtu.employees.*;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Activity {
     int estimatedTime;
-    ArrayList<Developer> developers;
-    String name;
-    int projectID;
+    Developer developer;
+    HashMap<String, Developer> developers;
+    public String name;
 
-    public Activity (String projectName,String name, int estimatedTime) {
-        this.estimatedTime = estimatedTime;
+    public Activity (String name, int time){
         this.name = name;
-        this.projectName = projectName;
-        projectId = (project.nextId++) + 22000;
-
-
+        this.estimatedTime = time;
     }
 
-
-    public void printActivity(){
-        System.out.println("Project name: " + projectName + " project id: " + projectId + " activity name: " + name + " estimated time: " + estimatedTime);
+    public String getActivity(){
+        return name;
     }
+    public void setEstimatedTime(int time){
+        estimatedTime = time;
+    }
+
 
 }
