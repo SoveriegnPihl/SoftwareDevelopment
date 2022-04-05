@@ -49,7 +49,7 @@ public class bookingAndActivitySteps {
 
     @Given("there is a project with id {string}")
     public void there_is_a_project_with_id(String projectId) throws Exception{
-        project = new Project(projectId, 1, 2, 4);
+        project = new Project(1, 2, 4);
     }
 
     @Given("the developer is available for the project")

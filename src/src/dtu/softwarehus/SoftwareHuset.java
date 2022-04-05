@@ -1,7 +1,6 @@
 package dtu.softwarehus;
 
 import dtu.employees.Developer;
-import dtu.employees.Manager;
 import dtu.project.Project;
 import dtu.project.Report;
 
@@ -10,7 +9,6 @@ import java.util.HashMap;
 
 import java.io.File;
 import java.util.*;
-import java.util.concurrent.ExecutionException;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -24,25 +22,26 @@ public class SoftwareHuset {
     public SoftwareHuset() {
     }
 
-    public static void startProgram(){
-        readProjectsFromCSV("src/src/dtu/data/projects.csv","src/src/dtu/data/developers.csv");
+    public static void startProgram() {
+        readProjectsFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv");
 
-        /*projects = new HashMap<>();
         reports = new ArrayList<>();
-        developers = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
+        int project = createProject( 1,2,4);
+        assignPM("ekki",project);
+        /*
         addDeveloper("ekki");
         addDeveloper("vic7");
         addDeveloper("jako");
         addDeveloper("jlm");
+
         developers.get("ekki").setOccupied(false);
         developers.get("vic7").setOccupied(false);
         developers.get("jako").setOccupied(true);
         developers.get("jlm").setOccupied(false);
 
-        int project = createProject("22001", 1,2,4);
-        assignPM("ekki",project);
+
         developers.get("ekki").setToProjectManager();
         Project testProject = new Project("22001", 1,2,4);
         projects.add(testProject);*/
@@ -59,33 +58,19 @@ public class SoftwareHuset {
 
             while (sc1.hasNextLine()){
                 String[] att = sc1.nextLine().split(",");
-                Project project = createProjectFromCSV(att);
-
-                projects.put(Integer.valueOf(att[1]),project);
+                createProject(Integer.parseInt(att[1]),Integer.parseInt(att[2]),Integer.parseInt(att[3]));
             }
             sc1.close();
 
             while (sc2.hasNext()){
                 String initials = sc2.next();
-
-                Developer developer = new Developer(initials);
-                developers.put(initials, developer);
+                addDeveloper(initials);
             }
             sc2.close();
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
-    }
-
-    public static Project createProjectFromCSV(String[] att){
-        String name = att[0];
-        int startW = Integer.parseInt(att[1]);
-        int endW = Integer.parseInt(att[2]);
-        int budget = Integer.parseInt(att[3]);
-
-        return new Project(name, startW, endW, budget);
 
     }
 
@@ -103,11 +88,11 @@ public class SoftwareHuset {
     }
 
 
-    public static int createProject(String name, int startWeek, int endWeek, int budget){
+    public static int createProject(int startWeek, int endWeek, int budget){
 
         System.out.println("Please input name, start & end week and budget");
 
-        Project toAdd = new Project(name, startWeek, endWeek, budget);
+        Project toAdd = new Project(startWeek, endWeek, budget);
         toAdd.printProject();
         projects.put(toAdd.getId(),toAdd);
         return toAdd.getId();
@@ -115,6 +100,7 @@ public class SoftwareHuset {
     }
 
     public static void assignPM(String dev, int projectID){
+
         projectManagers.put(projectID,dev);
     }
 
@@ -124,14 +110,13 @@ public class SoftwareHuset {
             System.out.println("");
         }
     }
-    public static String[] projectList(Developer developer){
-        String[] projectlist = new String[5];
-        int count = 0;
+    public static ArrayList<String> projectList(Developer developer){
+        ArrayList<String> projectlist = new ArrayList<>();
         String name = developer.getInitials();
         for (Integer var : projectManagers.keySet()){
-        if (projectManagers.get(var).equals(name)){
-            projectlist[count]=var.toString();
-        }
+            if (projectManagers.get(var).equals(name)){
+                projectlist.add(var.toString());
+            }
         }
         return projectlist;
     }

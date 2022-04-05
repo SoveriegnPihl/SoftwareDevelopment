@@ -1,32 +1,68 @@
-/*package dtu.gui;
-//import required classes and packages
+package dtu.gui;
+
 import dtu.employees.Developer;
-import dtu.gui.DeveloperPage;
-import dtu.gui.ProjectManagerPage;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-//create CreateLoginForm class to create login form
-//class extends JFrame to create a window where our component add
-//class implements ActionListener to perform an action on button click
-public class CreateLoginForm extends JFrame  {
+public class Main {
+    SoftwareHuset softwareHuset;
+    DeveloperPage developerPage;
+    ProjectManagerPage projectManagerPage;
+    CreateProjectPage OP;
     //initialize button, panel, label, and text field
+    JFrame frame;
     JButton b1,b2;
-    JPanel newPanel;
+    JPanel panelMenu,newPanel;
     JLabel userLabel;
     JTextField textField1;
     private JPanel panel1;
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
-    SoftwareHuset softwareHuset;
     boolean b;
+    Developer user;
 
-    //calling constructor
-    public CreateLoginForm() {
-        //softwareHuset = new SoftwareHuset();
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    Main screen = new Main();
+                    SoftwareHuset.startProgram();
+                    screen.frame.setLocationRelativeTo(null);
+                    screen.frame.setSize(500,500);
+                    screen.frame.setVisible(true);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
+
+    /**
+     * Create the application.
+     * @throws Exception
+     */
+
+    public Main() throws Exception {
+    softwareHuset = new SoftwareHuset();
+    initialize();
+    }
+
+    private void initialize(){
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+
+
+        newPanel = new JPanel();
+        frame.getContentPane().add(newPanel);
+        newPanel.setLayout(null);
+       // newPanel.setBorder(BorderFactory.createTitledBorder(
+              //  "Main Menu"));
 
         //create label for username
         userLabel = new JLabel();
@@ -43,14 +79,6 @@ public class CreateLoginForm extends JFrame  {
 
         //create checkbox
         checkBox1 = new JCheckBox("As project manager");
-
-
-        //create panel to put form elements
-        newPanel = new JPanel();
-        newPanel.setLayout(null);
-        newPanel.setBorder(BorderFactory.createTitledBorder(
-                "Start page"));
-
         userLabel.setBounds(75, 25, 193, 29);
         newPanel.add(userLabel);    //set username label to panel
         textField1.setBounds(225, 25, 193, 29);
@@ -62,28 +90,11 @@ public class CreateLoginForm extends JFrame  {
         b2.setBounds(255, 100, 193, 45);
         newPanel.add(b2);
 
-        //set button to panel
-        //set border to panel
-        add(newPanel);
-
-
-        setTitle("LOGIN FORM");         //set title to the login form
-        setDefaultCloseOperation(javax.swing.
-                WindowConstants.DISPOSE_ON_CLOSE);
-        setSize(500, 200);
-
         checkBox1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 managerCheckBox = !managerCheckBox;
-                /* sinds cleanup
-                 if (!managerCheckBox) {
-                    managerCheckBox = true;
-                } else {
-                    managerCheckBox = false;
-                }
-                 */
-/*
+
             }
         });
 
@@ -91,48 +102,56 @@ public class CreateLoginForm extends JFrame  {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userValue = textField1.getText();        //get user entered username from the textField1
+                DeveloperPage.setUser(SoftwareHuset.getDeveloper(userValue));
+                ProjectManagerPage.setUser(SoftwareHuset.getDeveloper(userValue));
 
                 if (SoftwareHuset.isDeveloper(userValue)) {
-                    Developer user = SoftwareHuset.getDeveloper(userValue);
+                    user = SoftwareHuset.getDeveloper(userValue);
                     if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
                         //create instance of the NewPage
-                        ProjectManagerPage pmPage = new ProjectManagerPage(user);
-
                         //make page visible to the user
                         setVisible(false);
-                        pmPage.setLocationRelativeTo(null);
-                        pmPage.setVisible(true);
+                        ProjectManagerPage.createList(user);
+                        projectManagerPage.setVisible(true);
 
 
                     } else if (!managerCheckBox)  {
-                        //check whether the credentials are authentic or not
 
-                        //create instance of the NewPage
-                        DeveloperPage dPage = new DeveloperPage(user);
-
-                        //make page visible to the user
                         setVisible(false);
-                        dPage.setLocationRelativeTo(null);
-                        dPage.setVisible(true);
+                        developerPage.setVisible(true);
 
                     }
 
                 }
             }
         });
+
+
         b2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                CreateProjectPage OP = new CreateProjectPage();
-                OP.setSize(500,500);  //set size of the frame
-                OP.setLocationRelativeTo(null);
                 OP.setVisible(true);
 
 
             }
         });
+        OP = new CreateProjectPage(softwareHuset,this);
+        developerPage = new DeveloperPage(softwareHuset,this);
+        projectManagerPage= new ProjectManagerPage(softwareHuset,this);
+
+    }
+    public void setVisible(boolean setVisi){
+        newPanel.setVisible(setVisi);
+    }
+
+    public JFrame getFrame() {
+        return frame;
+    }
+
+    public void addPanel (JPanel panel ){
+        frame.getContentPane().add(panel);
+    }
 
     }
 
-}*/

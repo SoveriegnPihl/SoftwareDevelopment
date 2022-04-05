@@ -42,7 +42,7 @@ public class assignPmTest {
 
     @And("there is a project named {string}")
     public void thereIsAProjectNamed(String name) {
-        project = new Project(name,1,1,1);
+        project = new Project(1,1,1);
         assertThat(project.name,is(equalTo((name))));
     }
 

@@ -8,7 +8,7 @@ import java.awt.event.*;
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
 //class implements ActionListener to perform an action on button click
-public class CreateProjectPage {
+public class manageProjectPage {
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel createProjectPanel;
@@ -23,7 +23,7 @@ public class CreateProjectPage {
     Developer user;
 
     //calling constructor
-    public CreateProjectPage( SoftwareHuset softwareHuset, Main parentWindow) {
+    public manageProjectPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
@@ -36,15 +36,15 @@ public class CreateProjectPage {
 
         //create label for username
         userLabel = new JLabel();
-        userLabel.setText("Start date");      //set label value for textField1
+        userLabel.setText("Change Start date");      //set label value for textField1
         userLabel.setBounds(25, 50, 193, 29);
 
         userLabel2 = new JLabel();
-        userLabel2.setText("End date");
+        userLabel2.setText("Change End date");
         userLabel2.setBounds(25, 100, 193, 29);
 
         userLabel3 = new JLabel();
-        userLabel3.setText("Budget");
+        userLabel3.setText("Change Budget");
         userLabel3.setBounds(25, 150, 193, 29);
 
         userLabel4 = new JLabel();
@@ -57,7 +57,7 @@ public class CreateProjectPage {
 
         //create text field to get username from the user
         endDate = new JTextField(15);
-         endDate.setBounds(250, 100, 193, 29);
+        endDate.setBounds(250, 100, 193, 29);
 
         budget1 = new JTextField(15);
         budget1.setBounds(250, 150, 193, 29);
@@ -66,7 +66,7 @@ public class CreateProjectPage {
         projectManager = new JTextField(15);
         projectManager.setBounds(250, 200, 193, 29);
         //create submit button
-        b1 = new JButton("Create project"); //set label to button
+        b1 = new JButton("Save"); //set label to button
         b1.setBounds(150, 300, 193, 29);
 
 
@@ -92,20 +92,19 @@ public class CreateProjectPage {
                 String projectManager1 = projectManager.getText();
                 String name = "New project";
 
-
                 int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
                 if(!projectManager1.isEmpty()) {
                     SoftwareHuset.assignPM(projectManager1, project);
                 }
 
-                   // CreateLoginForm pmPage = new CreateLoginForm();
-                    //make page visible to the user
+                // CreateLoginForm pmPage = new CreateLoginForm();
+                //make page visible to the user
 
-                    setVisible(false);
-                    clear();
-                    parentWindow.setVisible(true);
-                    //pmPage.setLocationRelativeTo(null);
-                   // pmPage.setVisible(true);
+                setVisible(false);
+                clear();
+                parentWindow.setVisible(true);
+                //pmPage.setLocationRelativeTo(null);
+                // pmPage.setVisible(true);
 
 
             }

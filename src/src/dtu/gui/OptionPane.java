@@ -38,7 +38,7 @@ class OptionPane extends JFrame {
             String startWeek = JOptionPane.showInputDialog(f, "Please enter start week");
             String endWeek = JOptionPane.showInputDialog(f, "Please enter end week");
             String budget = JOptionPane.showInputDialog(f, "Please enter budget");
-            softwareHuset.createProject(name,Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+            SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
 
 
         }
@@ -47,7 +47,7 @@ class OptionPane extends JFrame {
             f.setLocationRelativeTo(null);
             String name = JOptionPane.showInputDialog(f, "Who do you want to assign");
             String project = JOptionPane.showInputDialog(f, "Which project?");
-            softwareHuset.assignPM(name,Integer.parseInt(project));
+            SoftwareHuset.assignPM(name,Integer.parseInt(project));
 
 
         }
