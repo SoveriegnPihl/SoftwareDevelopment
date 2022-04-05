@@ -1,12 +1,12 @@
 package dtu.gui;
 import dtu.employees.Developer;
+import dtu.employees.Developer;
+import dtu.softwarehus.Main;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.PrintWriter;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -60,7 +60,7 @@ public class CreateProjectPage {
 
         //create text field to get username from the user
         endDate = new JTextField(15);
-         endDate.setBounds(250, 100, 193, 29);
+        endDate.setBounds(250, 100, 193, 29);
 
         budget1 = new JTextField(15);
         budget1.setBounds(250, 150, 193, 29);
@@ -94,17 +94,15 @@ public class CreateProjectPage {
                 String budget = budget1.getText();
                 String projectManager1 = projectManager.getText();
 
+
                 int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+                if(!projectManager1.isEmpty()) {
+                    SoftwareHuset.assignPM(projectManager1, project);
+                }
 
                 SoftwareHuset.csvProjectData.add(new String[] {String.valueOf(project), startWeek, endWeek, budget});
 
-                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
-                try(PrintWriter writer = new PrintWriter("src/src/dtu/data/projects.csv")){
-                    SoftwareHuset.csvProjectData.stream().map(this::convertToCSV).forEach(writer::println);
-
-                }catch (Exception excep){
-                    excep.printStackTrace();
-                }
+                softwareHuset.writeToCSV("projects");
 
                 if(!projectManager1.isEmpty()) {
                     SoftwareHuset.assignPM(projectManager1, project);
@@ -122,21 +120,22 @@ public class CreateProjectPage {
                     parentWindow.setVisible(true);
                     //pmPage.setLocationRelativeTo(null);
                    // pmPage.setVisible(true);
+                setVisible(false);
+                clear();
+                parentWindow.setVisible(true);
 
-            public String convertToCSV(String[] data) {
-                return Stream.of(data).map(this::escapeSpecialCharacters).collect(Collectors.joining(","));
-            }
-
-            public String escapeSpecialCharacters(String data) {
-                String escapedData = data.replaceAll("\\R", " ");
-                if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-                    data = data.replace("\"", "\"\"");
-                    escapedData = "\"" + data + "\"";
-                }
-                return escapedData;
             }
         });
 
+    }
+    public void setVisible(boolean visi){
+        createProjectPanel.setVisible(visi);
+    }
+    public void clear() {
+        startDate.setText("");
+        endDate.setText("");
+        projectManager.setText("");
+        budget1.setText("");
 
 
     }
