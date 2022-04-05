@@ -5,8 +5,9 @@ import dtu.employees.Manager;
 import dtu.project.Project;
 import dtu.project.Report;
 
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.io.File;
+import java.util.*;
+import java.util.concurrent.ExecutionException;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -14,13 +15,17 @@ public class SoftwareHuset {
     static HashMap<String, Manager> projectManagers;
     static ArrayList<Developer> availableDevelopers;
     public static  ArrayList<Project> projects;
+    private DateServer dateServer;
 
-    public SoftwareHuset() { }
+    public SoftwareHuset() {
+
+
+    }
 
     public void startProgram(){
+        readProjectsFromCSV("src/src/dtu/data/projects.csv","src/src/dtu/data/developers.csv");
 
-        projects = new ArrayList<>();
-        reports = new ArrayList<>();
+        /*reports = new ArrayList<>();
         developers = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
@@ -35,7 +40,47 @@ public class SoftwareHuset {
 
         developers.get("ekki").setToProjectManager();
         Project testProject = new Project("22001", 1,2,4);
-        projects.add(testProject);
+        projects.add(testProject);*/
+
+    }
+
+    public static void readProjectsFromCSV(String filePathProj, String filePathDevs){
+        projects = new ArrayList<>();
+        developers = new HashMap<>();
+
+        try{
+            Scanner sc1 = new Scanner(new File(filePathProj));
+            Scanner sc2 = new Scanner(new File(filePathDevs));
+
+            while (sc1.hasNextLine()){
+                String[] att = sc1.nextLine().split(",");
+                Project project = createProjectFromCSV(att);
+
+                projects.add(project);
+            }
+            sc1.close();
+
+            while (sc2.hasNext()){
+                String initials = sc2.next();
+
+                Developer developer = new Developer(initials);
+                developers.put(initials, developer);
+            }
+            sc2.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+    }
+
+    public static Project createProjectFromCSV(String[] att){
+        String name = att[0];
+        int startW = Integer.parseInt(att[1]);
+        int endW = Integer.parseInt(att[2]);
+        int budget = Integer.parseInt(att[3]);
+
+        return new Project(name, startW, endW, budget);
 
     }
 
@@ -47,6 +92,10 @@ public class SoftwareHuset {
                 System.out.println("Success");
             }
         }
+        
+    public void setDateServer(DateServer dateServer) {
+        this.dateServer = dateServer;
+    }
 
 
     public void createProject(String name, int startWeek, int endWeek, int budget){
@@ -121,7 +170,6 @@ public class SoftwareHuset {
 
     public boolean findProject(String projectId){
         for (Project proj : projects){
-            System.out.println(proj.name);
             if(proj.name.equals(projectId)){
                 return true;
             }

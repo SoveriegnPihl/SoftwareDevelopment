@@ -5,7 +5,7 @@ import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
 public class Developer {
-    String initials;
+    public String initials;
     int hoursWorked;
     Activity[] activities = new Activity[20];
     boolean isOccupied;
