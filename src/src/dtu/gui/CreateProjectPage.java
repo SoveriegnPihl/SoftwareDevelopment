@@ -1,29 +1,36 @@
 package dtu.gui;
+import dtu.employees.Developer;
+import dtu.softwarehus.Main;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.io.PrintWriter;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
-//create CreateLoginForm class to create login form
-//class extends JFrame to create a window where our component add
-//class implements ActionListener to perform an action on button click
-public class CreateProjectPage extends JFrame  {
-    //initialize button, panel, label, and text field
+
+public class CreateProjectPage {
+
     JButton b1;
-    JPanel newPanel;
+    JPanel createProjectPanel;
     JLabel userLabel,userLabel2,userLabel3,userLabel4;
     JTextField startDate,endDate,projectManager,budget1;
     private JPanel panel1;
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
-    SoftwareHuset softwareHuset;
     boolean b;
+    SoftwareHuset softwareHuset;
+    Main parentWindow;
+    Developer user;
 
     //calling constructor
-    public CreateProjectPage() {
+    public CreateProjectPage( SoftwareHuset softwareHuset, Main parentWindow) {
+        this.softwareHuset = softwareHuset;
+        this.parentWindow = parentWindow;
+        initialize();
+    }
+    public void initialize(){
+        createProjectPanel = new JPanel();
+        parentWindow.addPanel(createProjectPanel);
+        createProjectPanel.setLayout(null);
 
 
         //create label for username
@@ -49,7 +56,7 @@ public class CreateProjectPage extends JFrame  {
 
         //create text field to get username from the user
         endDate = new JTextField(15);
-         endDate.setBounds(250, 100, 193, 29);
+        endDate.setBounds(250, 100, 193, 29);
 
         budget1 = new JTextField(15);
         budget1.setBounds(250, 150, 193, 29);
@@ -62,25 +69,17 @@ public class CreateProjectPage extends JFrame  {
         b1.setBounds(150, 300, 193, 29);
 
 
-        //create panel to put form elements
-        newPanel = new JPanel();
-        newPanel.setLayout(null);
-        newPanel.add(startDate);    //set username label to panel
-        newPanel.add(endDate);   //set text field to panel
-        newPanel.add(projectManager);
-        newPanel.add(budget1);
-        newPanel.add(userLabel);
-        newPanel.add(userLabel2);
-        newPanel.add(userLabel3);
-        newPanel.add(userLabel4);
-        newPanel.add(b1);
+        createProjectPanel.setLayout(null);
+        createProjectPanel.add(startDate);    //set username label to panel
+        createProjectPanel.add(endDate);   //set text field to panel
+        createProjectPanel.add(projectManager);
+        createProjectPanel.add(budget1);
+        createProjectPanel.add(userLabel);
+        createProjectPanel.add(userLabel2);
+        createProjectPanel.add(userLabel3);
+        createProjectPanel.add(userLabel4);
+        createProjectPanel.add(b1);
 
-        //set button to panel
-        //set border to panel
-        add(newPanel);
-
-
-        setTitle("Create Project");         //set title to the login form
 
 
         b1.addActionListener(new ActionListener() {
@@ -91,46 +90,37 @@ public class CreateProjectPage extends JFrame  {
                 String budget = budget1.getText();
                 String projectManager1 = projectManager.getText();
 
+
                 int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+                if(!projectManager1.isEmpty()) {
+                    SoftwareHuset.assignPM(projectManager1, project);
+                }
 
                 SoftwareHuset.csvProjectData.add(new String[] {String.valueOf(project), startWeek, endWeek, budget});
 
-                try(PrintWriter writer = new PrintWriter("src/src/dtu/data/projects.csv")){
-                    SoftwareHuset.csvProjectData.stream().map(this::convertToCSV).forEach(writer::println);
-
-                }catch (Exception excep){
-                    excep.printStackTrace();
-                }
+                softwareHuset.writeToCSV("projects");
 
                 if(!projectManager1.isEmpty()) {
                     SoftwareHuset.assignPM(projectManager1, project);
                 }
 
-                    CreateLoginForm pmPage = new CreateLoginForm();
-                    //make page visible to the user
-                    setVisible(false);
-                    pmPage.setLocationRelativeTo(null);
-                    pmPage.setVisible(true);
+                setVisible(false);
+                clear();
+                parentWindow.setVisible(true);
 
-            }
-
-            public String convertToCSV(String[] data) {
-                return Stream.of(data).map(this::escapeSpecialCharacters).collect(Collectors.joining(","));
-            }
-
-            public String escapeSpecialCharacters(String data) {
-                String escapedData = data.replaceAll("\\R", " ");
-                if (data.contains(",") || data.contains("\"") || data.contains("'")) {
-                    data = data.replace("\"", "\"\"");
-                    escapedData = "\"" + data + "\"";
-                }
-                return escapedData;
             }
         });
-        
-        
 
     }
-    
+    public void setVisible(boolean visi){
+        createProjectPanel.setVisible(visi);
+    }
+    public void clear() {
+        startDate.setText("");
+        endDate.setText("");
+        projectManager.setText("");
+        budget1.setText("");
 
+
+    }
 }
