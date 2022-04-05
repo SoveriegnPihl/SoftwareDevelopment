@@ -1,7 +1,7 @@
 package dtu.gui;
 import dtu.employees.Developer;
 import dtu.employees.Developer;
-import dtu.softwarehus.Main;
+
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
@@ -93,6 +93,7 @@ public class CreateProjectPage {
                 String endWeek = endDate.getText();
                 String budget = budget1.getText();
                 String projectManager1 = projectManager.getText();
+                String name = "New project";
 
 
                 int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
@@ -108,21 +109,15 @@ public class CreateProjectPage {
                     SoftwareHuset.assignPM(projectManager1, project);
                 }
 
-                   // CreateLoginForm pmPage = new CreateLoginForm();
-                    //make page visible to the user
+                // CreateLoginForm pmPage = new CreateLoginForm();
+                //make page visible to the user
 
-                    setVisible(false);
-                    pmPage.setLocationRelativeTo(null);
-                    pmPage.setVisible(true);
-
-            }
-                    clear();
-                    parentWindow.setVisible(true);
-                    //pmPage.setLocationRelativeTo(null);
-                   // pmPage.setVisible(true);
                 setVisible(false);
                 clear();
                 parentWindow.setVisible(true);
+                //pmPage.setLocationRelativeTo(null);
+                // pmPage.setVisible(true);
+
 
             }
         });
@@ -139,15 +134,5 @@ public class CreateProjectPage {
 
 
     }
-    public void setVisible(boolean visi){
-        createProjectPanel.setVisible(visi);
-    }
-    public void clear() {
-        startDate.setText("");
-        endDate.setText("");
-        projectManager.setText("");
-        budget1.setText("");
 
-
-    }
 }

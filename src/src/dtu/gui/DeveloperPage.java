@@ -4,82 +4,93 @@ import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 //create NewPage class to create a new page on which user will navigate  
-public class DeveloperPage
-{
-    static Developer user1;
-    JButton b1,b2,b3,b4,b5,b6,b7,b8;
+public class DeveloperPage {
+    static Developer loggedInUser;
     JPanel developerPage;
-    JLabel userLabel;
-    JTextField textField1;
-    private JPanel panel1;
-    private JCheckBox checkBox1;
-    boolean managerCheckBox = false;
+    JFrame frame;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     int yCountL =50, yCountR = 50;
-    //constructor  
-    DeveloperPage( SoftwareHuset softwareHuset, Main parentWindow) {
+
+    DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) throws Exception {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
     }
 
-    public void initialize() {
+    public void initialize() throws Exception {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
 
         developerPage = new JPanel();
+        frame.getContentPane().add(developerPage);
         parentWindow.addPanel(developerPage);
         developerPage.setLayout(null);
-        developerPage.setBorder(BorderFactory.createTitledBorder(
-                "Developer page"));
+        developerPage.setBorder(BorderFactory.createTitledBorder("Developer page"));
 
-        JButton regHbut = makeLeftButton("Register hours worked");
-        JButton viewHbut = makeLeftButton("View hours worked");
-        JButton regSickBut = makeLeftButton("Register sick day");
-        JButton regHoliBut = makeLeftButton("Register holiday");
-        JButton addActBut = makeLeftButton("Add project activity");
-       // JButton createProBut = makeLeftButton("Create project");
-        JButton backBut = makeLeftButton("Back");
+        JButton regHbtn = makeLeftButton("Register hours worked");
+        JButton viewHbtn = makeLeftButton("View hours worked");
+        JButton regSickBtn = makeLeftButton("Register sick day");
+        JButton regHoliBtn = makeLeftButton("Register holiday");
+        JButton addActBtn = makeLeftButton("Add project activity");
+        JButton backBtn = makeLeftButton("Back");
 
-        JButton addPmBut = makeRightButton("Assign project manager");
+        JButton addPmBtn = makeRightButton("Assign project manager");
 
 
-        regHbut.addActionListener(new ActionListener() {
+        regHbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user1, "Register hours worked");
-            }
-        });
-       viewHbut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user1, "View hours worked");
+                OptionPane OP = new OptionPane(loggedInUser, "Register hours worked");
+
             }
         });
 
-        addPmBut.addActionListener(new ActionListener() {
+       viewHbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user1, "Assign project manager");
+                OptionPane OP = new OptionPane(loggedInUser, "View hours worked");
             }
         });
 
-        backBut.addActionListener(new ActionListener() {
+        addPmBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
+            }
+        });
+
+        backBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 parentWindow.setVisible(true);
             }
         });
+
+        addActBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+
+            }
+        });
+
+
     }
         public void setVisible(boolean visi){
             developerPage.setVisible(visi);
         }
+
         public static void setUser(Developer user){
-        user1 = user;
+        loggedInUser = user;
         }
 
     public JButton makeLeftButton(String name){
@@ -95,6 +106,10 @@ public class DeveloperPage
         developerPage.add(b1);
         yCountR+=50;
         return b1;
+    }
+
+    public void addPanel (JPanel panel ){
+        frame.getContentPane().add(panel);
     }
 
 }  

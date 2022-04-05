@@ -119,7 +119,7 @@ public class SoftwareHuset {
         return projectlist;
     }
 
-    public String listDevelopers(){
+    public static String listDevelopers(){
         StringBuilder str = new StringBuilder();
 
         for (Developer var : developers.values()){
