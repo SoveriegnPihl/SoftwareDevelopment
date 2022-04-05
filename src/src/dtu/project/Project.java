@@ -5,19 +5,21 @@ import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en_old.Ac;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Project {
     static int nextId = 1;
 
     public String name;
     int id;
-    int startWeek;
-    int endWeek;
-    int budget;
+    public static int startWeek;
+    public static int endWeek;
+    public int budget;
     Manager pm;
 
     ArrayList<Developer> developers = new ArrayList<Developer>();
-    ArrayList<Activity> activities;
+   // ArrayList<Activity> activities;
+    public static HashMap<Activity, int[]> activities = new HashMap<>() ;
 
     public Project(int sW, int eW, int b){
         startWeek = sW;
@@ -30,25 +32,30 @@ public class Project {
 
     }
 
-
     public int getId(){
         return id;
     }
 
 
 
-    public void addActivity(Activity activity){
-        activities.add(activity);
+    public void addActivity(Activity activity, int startW, int endW, int budget){
+        int[] act= {startW, endW, budget};
+        if(act[0] >= startWeek && act[1] <= endWeek && budget < this.budget){
+            this.budget -= budget;
+            activities.put(activity,act);
+        } else {
+            System.out.println("add act virker ik");
+        }
     }
 
-    public boolean findActivity(String activityName){
+   /* public boolean findActivity(String activityName){
         for (Activity a : activities){
             if(a.name.equals(activityName)){
                 return true;
             }
         }
         return false;
-    }
+    }*/
 
     public void addDeveloper(Developer dev){
         developers.add(dev);

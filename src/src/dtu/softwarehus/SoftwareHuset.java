@@ -1,8 +1,10 @@
 package dtu.softwarehus;
 
 import dtu.employees.Developer;
+import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
+import io.cucumber.java.bs.A;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,7 +17,7 @@ public class SoftwareHuset {
     public static HashMap<String, Developer> developers;
     static HashMap<Integer,String> projectManagers;
     static ArrayList<Developer> availableDevelopers;
-    static HashMap<Integer, Project> projects;
+    public static HashMap<Integer, Project> projects;
     //public static  ArrayList<Project> projects;
     private DateServer dateServer;
     public static ArrayList<String[]> csvProjectData;
@@ -29,8 +31,13 @@ public class SoftwareHuset {
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        int project = createProject( 1,2,4);
+        int project = createProject( 1,10,50000);
         assignPM("ekki",project);
+        Activity test = new Activity("test",50);
+        projects.get(project).addActivity(test, 1, 5, 5000);
+        System.out.println(developers.get("ekki"));
+        test.addDev(developers.get("ekki"),2,3);
+
         /*
         addDeveloper("ekki");
         addDeveloper("vic7");
@@ -67,6 +74,7 @@ public class SoftwareHuset {
             while (sc2.hasNext()){
                 String initials = sc2.next();
                 addDeveloper(initials);
+                System.out.println(initials);
             }
             sc2.close();
 
