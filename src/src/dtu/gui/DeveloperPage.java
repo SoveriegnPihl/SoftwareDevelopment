@@ -82,7 +82,7 @@ public class DeveloperPage extends JFrame
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                CreateProjectPage OP = new CreateProjectPage(user);
+                CreateProjectPage OP = new CreateProjectPage();
                 OP.setSize(500,500);  //set size of the frame
                 OP.setLocationRelativeTo(null);
                 OP.setVisible(true);

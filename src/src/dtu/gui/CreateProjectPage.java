@@ -25,8 +25,8 @@ public class CreateProjectPage extends JFrame  {
     boolean b;
 
     //calling constructor
-    public CreateProjectPage(Developer user) {
-        softwareHuset = new SoftwareHuset();
+    public CreateProjectPage() {
+
 
         //create label for username
         userLabel = new JLabel();
@@ -92,20 +92,21 @@ public class CreateProjectPage extends JFrame  {
                 String endWeek = endDate.getText();
                 String budget = budget1.getText();
                 String projectManager1 = projectManager.getText();
-                String name = "hej";
+                String name = "New project";
 
 
-                int project = softwareHuset.createProject(name,Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
-                if(!projectManager1.isEmpty()){
-                    softwareHuset.assignPM(projectManager1,project);
+                int project = SoftwareHuset.createProject(name,Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+                if(!projectManager1.isEmpty()) {
+                    SoftwareHuset.assignPM(projectManager1, project);
+                }
 
-                    ProjectManagerPage pmPage = new ProjectManagerPage(user);
+                    CreateLoginForm pmPage = new CreateLoginForm();
                     //make page visible to the user
                     setVisible(false);
                     pmPage.setLocationRelativeTo(null);
                     pmPage.setVisible(true);
 
-                }
+
 
 
 

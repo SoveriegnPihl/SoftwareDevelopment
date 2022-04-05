@@ -16,17 +16,17 @@ public class SoftwareHuset {
     static HashMap<Integer, Project> projects;
     public SoftwareHuset() { }
 
-    public void startProgram(){
+    public static void startProgram(){
 
         projects = new HashMap<>();
         reports = new ArrayList<>();
         developers = new HashMap<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        addDeveloper1("ekki");
-        addDeveloper1("vic7");
-        addDeveloper1("jako");
-        addDeveloper1("jlm");
+        addDeveloper("ekki");
+        addDeveloper("vic7");
+        addDeveloper("jako");
+        addDeveloper("jlm");
         developers.get("ekki").setOccupied(false);
         developers.get("vic7").setOccupied(false);
         developers.get("jako").setOccupied(true);
@@ -37,7 +37,7 @@ public class SoftwareHuset {
 
     }
 
-    public void addDeveloper1(String name) {
+    public static void addDeveloper(String name) {
 
             Developer newDeveloper = new Developer(name);
             developers.put(name,newDeveloper);
@@ -47,7 +47,7 @@ public class SoftwareHuset {
         }
 
 
-    public int createProject(String name, int startWeek, int endWeek, int budget){
+    public static int createProject(String name, int startWeek, int endWeek, int budget){
 
         System.out.println("Please input name, start & end week and budget");
 
@@ -58,17 +58,8 @@ public class SoftwareHuset {
 
     }
 
-    public void assignPM(String dev, int projectID){
+    public static void assignPM(String dev, int projectID){
         projectManagers.put(projectID,dev);
-        if(!Project.hasManager()) {
-            projects.get(projectID).setPm(developers.get(dev));
-        }
-        System.out.println(projects.get(projectID).manager.getInitials());
-    }
-
-    public void addDeveloper(Developer dev){
-
-        developers.put(dev.getInitials(),dev);
     }
 
     public void listProjects(){
@@ -98,7 +89,7 @@ public class SoftwareHuset {
         return str.toString();
     }
 
-    public Developer getDeveloper(String name){
+    public static Developer getDeveloper(String name){
         return developers.get(name);
     }
 
@@ -119,7 +110,6 @@ public class SoftwareHuset {
             }
         }
     }
-
 
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
