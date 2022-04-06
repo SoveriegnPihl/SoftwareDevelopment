@@ -9,19 +9,13 @@ import java.awt.event.ActionListener;
 public class ProjectManagerPage {
     static Developer user1;
     manageProjectPage manageProjectPage;
-    JButton b1,b2,b3,b4,b5,b6,b7;
+    CreateActivityPage createActivityPage;
     static JPanel projectManagerPage;
-    JLabel userLabel;
-    JTextField textField1;
-    private JPanel panel1;
-    private JCheckBox checkBox1;
-    boolean managerCheckBox = false;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     static JComboBox projectList;
     private JLabel selectLabel;
     int yCountR=100,yCountL=100;
-    private JButton addDev,viewDev,addDevProj,addActi,backB,getReport,createProjBut,changeProjBut;
 
     //constructor
     ProjectManagerPage(SoftwareHuset softwareHuset, Main parentWindow) {
@@ -34,16 +28,14 @@ public class ProjectManagerPage {
         projectManagerPage = new JPanel();
         parentWindow.addPanel(projectManagerPage);
         projectManagerPage.setLayout(null);
-       // projectManagerPage.setBorder(BorderFactory.createTitledBorder(
-        addDev = makeLeftButton("Add developer");
-        viewDev = makeLeftButton("View *available* developers");
-        addDevProj = makeLeftButton("Add developer to project");
-        addActi = makeLeftButton("Add project activity");
-        getReport = makeLeftButton("Get project report");
-        backB = makeLeftButton("Back");
 
-        //createProjBut = makeRightButton("Create project"); //set label to button
-        changeProjBut = makeRightButton("Change selected project"); //set label to button
+        JButton addDev = makeLeftButton("Add developer");
+        JButton viewDev = makeLeftButton("View *available* developers");
+        JButton addDevToProj = makeLeftButton("Add developer to project");
+        JButton addActi = makeLeftButton("Add activity to project");
+        JButton getReport = makeLeftButton("Get project report");
+        JButton backB = makeLeftButton("Back");
+        JButton changeProjBut = makeRightButton("Change selected project");
 
         selectLabel = new JLabel();
         selectLabel.setText("Select project");
@@ -74,7 +66,32 @@ public class ProjectManagerPage {
                 parentWindow.setVisible(true);
             }
         });
+
+        addActi.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                createActivityPage.setVisible(true);
+            }
+        });
+
+        addDevToProj.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(user1,"Add developer to project");
+            }
+        });
+
+        addDev.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(user1,"Add developer");
+            }
+        });
+
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);
+        createActivityPage = new CreateActivityPage(softwareHuset, parentWindow);
+
 
     }
     public static void setVisible(boolean visi){
@@ -96,6 +113,7 @@ public class ProjectManagerPage {
     public static void setUser(Developer user){
         user1 = user;
     }
+
     public JButton makeLeftButton(String name){
         JButton b1 = new JButton(name);
         b1.setBounds(25, yCountL, 193, 29);

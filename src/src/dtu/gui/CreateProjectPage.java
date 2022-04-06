@@ -1,6 +1,5 @@
 package dtu.gui;
 import dtu.employees.Developer;
-import dtu.employees.Developer;
 
 import dtu.softwarehus.SoftwareHuset;
 
@@ -13,14 +12,10 @@ import java.awt.event.*;
 //class implements ActionListener to perform an action on button click
 public class CreateProjectPage {
     //initialize button, panel, label, and text field
-    JButton b1;
+    JButton createProjectBtn;
     JPanel createProjectPanel;
     JLabel userLabel,userLabel2,userLabel3,userLabel4;
     JTextField startDate,endDate,projectManager,budget1;
-    private JPanel panel1;
-    private JCheckBox checkBox1;
-    boolean managerCheckBox = false;
-    boolean b;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     Developer user;
@@ -69,8 +64,8 @@ public class CreateProjectPage {
         projectManager = new JTextField(15);
         projectManager.setBounds(250, 200, 193, 29);
         //create submit button
-        b1 = new JButton("Create project"); //set label to button
-        b1.setBounds(150, 300, 193, 29);
+        createProjectBtn = new JButton("Create project"); //set label to button
+        createProjectBtn.setBounds(150, 300, 193, 29);
 
 
         createProjectPanel.setLayout(null);
@@ -82,42 +77,27 @@ public class CreateProjectPage {
         createProjectPanel.add(userLabel2);
         createProjectPanel.add(userLabel3);
         createProjectPanel.add(userLabel4);
-        createProjectPanel.add(b1);
+        createProjectPanel.add(createProjectBtn);
 
 
 
-        b1.addActionListener(new ActionListener() {
+        createProjectBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String startWeek = startDate.getText();        //get user entered username from the textField1
-                String endWeek = endDate.getText();
-                String budget = budget1.getText();
-                String projectManager1 = projectManager.getText();
-                String name = "New project";
+                String startWeekTxt = startDate.getText();        //get user entered username from the textField1
+                String endWeekTxt = endDate.getText();
+                String budgetTxt = budget1.getText();
+                String projectManagerTxt = projectManager.getText();
 
 
-                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
-                if(!projectManager1.isEmpty()) {
-                    SoftwareHuset.assignPM(projectManager1, project);
+                int project = SoftwareHuset.createProject(Integer.parseInt(startWeekTxt),Integer.parseInt(endWeekTxt),Integer.parseInt(budgetTxt));
+                if(!projectManagerTxt.isEmpty()) {
+                    SoftwareHuset.assignPM(projectManagerTxt, project);
                 }
-
-                SoftwareHuset.csvProjectData.add(new String[] {String.valueOf(project), startWeek, endWeek, budget});
-
-                softwareHuset.writeToCSV("projects");
-
-                if(!projectManager1.isEmpty()) {
-                    SoftwareHuset.assignPM(projectManager1, project);
-                }
-
-                // CreateLoginForm pmPage = new CreateLoginForm();
-                //make page visible to the user
 
                 setVisible(false);
                 clear();
                 parentWindow.setVisible(true);
-                //pmPage.setLocationRelativeTo(null);
-                // pmPage.setVisible(true);
-
 
             }
         });

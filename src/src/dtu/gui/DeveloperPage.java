@@ -16,6 +16,7 @@ public class DeveloperPage {
     SoftwareHuset softwareHuset;
     Main parentWindow;
     CreateActivityPage createActivityPage;
+    CreateProjectPage createProjectPage;
     int yCountL =50, yCountR = 50;
 
     DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) throws Exception {
@@ -40,7 +41,7 @@ public class DeveloperPage {
         JButton viewHbtn = makeLeftButton("View hours worked");
         JButton regSickBtn = makeLeftButton("Register sick day");
         JButton regHoliBtn = makeLeftButton("Register holiday");
-        JButton addActBtn = makeLeftButton("Add project activity");
+        JButton addActBtn = makeLeftButton("Add activity to project");
         JButton backBtn = makeLeftButton("Back");
 
         JButton addPmBtn = makeRightButton("Assign project manager");
@@ -88,8 +89,7 @@ public class DeveloperPage {
         regHoliBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                createActivityPage.setVisible(true);
+                //holiday
 
             }
         });
@@ -97,13 +97,13 @@ public class DeveloperPage {
         regSickBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                createActivityPage.setVisible(true);
+                OptionPane OP = new OptionPane(loggedInUser,"Register sick day");
 
             }
         });
 
         createActivityPage = new CreateActivityPage(softwareHuset,parentWindow);
+        createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
 
     }
         public static void setVisible(boolean visi){

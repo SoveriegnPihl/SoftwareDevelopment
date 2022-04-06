@@ -42,6 +42,7 @@ public class SoftwareHuset {
         projects = new HashMap<>();
         developers = new HashMap<>();
         csvProjectData = new ArrayList<>();
+        csvDeveloperData = new ArrayList<>();
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
@@ -50,7 +51,7 @@ public class SoftwareHuset {
             while (sc1.hasNextLine()){
                 String[] att = sc1.nextLine().split(",");
                 createProject(Integer.parseInt(att[1]),Integer.parseInt(att[2]),Integer.parseInt(att[3]));
-                csvProjectData.add(att);
+                //csvProjectData.add(att);
 
             }
             sc1.close();
@@ -58,7 +59,7 @@ public class SoftwareHuset {
             while (sc2.hasNext()){
                 String[] initialsarr = {sc2.next()};
                 addDeveloper(initialsarr[0]);
-                csvDeveloperData.add(initialsarr);
+                //csvDeveloperData.add(initialsarr);
             }
             sc2.close();
 
@@ -69,10 +70,14 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String name) {
-        csvDeveloperData = new ArrayList<>();
+        String[] nameArr = {name};
 
         Developer newDeveloper = new Developer(name);
         developers.put(name,newDeveloper);
+
+        csvDeveloperData.add(nameArr);
+        writeToCSV("developers");
+
         if(developers.containsKey(name)){
             System.out.println("Success");
         }
@@ -82,17 +87,15 @@ public class SoftwareHuset {
         this.dateServer = dateServer;
     }
 
-
     public static int createProject(int startWeek, int endWeek, int budget){
-
-        System.out.println("Please input name, start & end week and budget");
-
         Project toAdd = new Project(startWeek, endWeek, budget);
         toAdd.printProject();
 
+        projects.put(toAdd.getId(),toAdd);
         csvProjectData.add(new String[] {String.valueOf(toAdd.getId()), String.valueOf(startWeek), String.valueOf(endWeek), String.valueOf(budget)});
 
-        projects.put(toAdd.getId(),toAdd);
+        writeToCSV("projects");
+
         return toAdd.getId();
 
     }
@@ -168,11 +171,11 @@ public class SoftwareHuset {
         return false;
     }
 
-    public void writeToCSV(String file){
+    public static void writeToCSV(String file){
 
         if (Objects.equals(file, "projects")){
             try(PrintWriter writer = new PrintWriter("src/src/dtu/data/projects.csv")){
-                csvProjectData.stream().map(this::convertToCSV).forEach(writer::println);
+                csvProjectData.stream().map(SoftwareHuset::convertToCSV).forEach(writer::println);
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -180,7 +183,7 @@ public class SoftwareHuset {
         }
         else if (Objects.equals(file, "developers")){
             try(PrintWriter writer = new PrintWriter("src/src/dtu/data/developers.csv")){
-                csvDeveloperData.stream().map(this::convertToCSV).forEach(writer::println);
+                csvDeveloperData.stream().map(SoftwareHuset::convertToCSV).forEach(writer::println);
 
             }catch (Exception e){
                 e.printStackTrace();
@@ -192,11 +195,11 @@ public class SoftwareHuset {
 
     }
 
-    public String convertToCSV(String[] data) {
-        return Stream.of(data).map(this::escapeSpecialCharacters).collect(Collectors.joining(","));
+    public static String convertToCSV(String[] data) {
+        return Stream.of(data).map(SoftwareHuset::escapeSpecialCharacters).collect(Collectors.joining(","));
     }
 
-    public String escapeSpecialCharacters(String data) {
+    public static String escapeSpecialCharacters(String data) {
         String escapedData = data.replaceAll("\\R", " ");
         if (data.contains(",") || data.contains("\"") || data.contains("'")) {
             data = data.replace("\"", "\"\"");
