@@ -1,3 +1,4 @@
+/*
 package dtu.project;
 
 /**
@@ -5,6 +6,8 @@ package dtu.project;
  * If run as a JUnit 5 (Jupiter) test, then both tests are run.
  * If run as a JUnit 4 test, then only the JUnit 4 tests are run.
  */
+
+/*
 public class TestJUnit4AndJUnit5 {
 	
 	@org.junit.Before // Junit 4
@@ -25,3 +28,4 @@ public class TestJUnit4AndJUnit5 {
 	}
 
 }
+*/

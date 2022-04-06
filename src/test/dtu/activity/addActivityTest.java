@@ -1,3 +1,4 @@
+/*
 package dtu.project;
 
 import io.cucumber.java.en.And;
@@ -27,3 +28,4 @@ public class addActivityTest {
         // Write code here that turns the phrase above into concrete actions
     }
 
+*/

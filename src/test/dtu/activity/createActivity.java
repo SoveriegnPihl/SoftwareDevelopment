@@ -1,3 +1,4 @@
+/*
 package dtu.project;
 
 import dtu.Helper.ErrorMessageHolder;
@@ -22,7 +23,7 @@ public class createActivity {
 
 
     public createActivity (Project project, String name, EstimatedTime estimatedTime) {
-        this.project = there_is_a_project_named(String projectID);
+       //this.project = there_is_a_project_named(String projectID);
         this.name = name;
         this.estimatedTime = estimatedTime;
 
@@ -52,3 +53,5 @@ public class createActivity {
 
 
 }
+
+ */

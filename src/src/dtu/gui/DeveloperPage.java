@@ -1,9 +1,7 @@
 package dtu.gui;//import required classes and packages
 import dtu.employees.Developer;
-import dtu.gui.CreateLoginForm;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -11,7 +9,7 @@ import java.awt.event.ActionListener;
 public class DeveloperPage extends JFrame
 {
     Developer user;
-    JButton b1,b2,b3,b4,b5,b6,b7;
+    JButton b1,b2,b3,b4,b5,b6,b7,b8;
     JPanel newPanel;
     JLabel userLabel;
     JTextField textField1;
@@ -29,10 +27,10 @@ public class DeveloperPage extends JFrame
         b1 = new JButton("Register hours worked"); //set label to button
         b2 = new JButton("View hours worked"); //set label to button
         b3 = new JButton("Register sick day"); //set label to button
-        b4 = new JButton("Register holiday"); //set label to button
         b5 = new JButton("Assign project manager"); //set label to button
         b6 = new JButton("Add project activity"); //set label to button
         b7 = new JButton("Create project");
+        b8 = new JButton("Other activities");
 
         //create panel to put form elements
         newPanel = new JPanel();
@@ -43,17 +41,20 @@ public class DeveloperPage extends JFrame
         newPanel.add(b1);
         b2.setBounds(50, 100, 193, 29);
         newPanel.add(b2);
+
         b3.setBounds(50, 150, 193, 29);
         newPanel.add(b3);
-        b4.setBounds(50, 200, 193, 29);
-        newPanel.add(b4);
-        b6.setBounds(50, 250, 193, 29);
+
+        b6.setBounds(50, 200, 193, 29);
         newPanel.add(b6);
 
         b5.setBounds(325, 100, 193, 29);
         newPanel.add(b5);
         b7.setBounds(325, 50, 193, 29);
         newPanel.add(b7);
+        b8.setBounds(325, 150, 193, 29);
+        newPanel.add(b8);
+
 
         add(newPanel);
 
@@ -70,6 +71,14 @@ public class DeveloperPage extends JFrame
                 OptionPane OP = new OptionPane(user,"View hours worked");
             }
         });
+
+        b3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(user,"Register sick day");
+            }
+        });
+
 
         b5.addActionListener(new ActionListener() {
             @Override
@@ -90,7 +99,18 @@ public class DeveloperPage extends JFrame
 
             }
         });
+        b8.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                OtherActivity otherActivity = new OtherActivity();
+                otherActivity.setSize(500,500);  //set size of the frame
+                otherActivity.setLocationRelativeTo(null);
+                otherActivity.setVisible(true);
 
+
+            }
+        });
         setDefaultCloseOperation(javax.swing.
                 WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Welcome");
