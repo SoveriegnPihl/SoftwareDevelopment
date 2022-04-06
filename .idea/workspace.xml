@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/test.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/SoftwareDevelopment.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/SoftwareDevelopment.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="add medarbejder">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/medarbejder-ferie-sygdom.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/medarbejder-ferie-sygdom.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/medarbejder.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/medarbejder.feature" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,8 +88,26 @@
       <workItem from="1646669003717" duration="783000" />
       <workItem from="1646749315268" duration="594000" />
       <workItem from="1647197577171" duration="767000" />
-      <workItem from="1647253666111" duration="4859000" />
+      <workItem from="1647253666111" duration="6537000" />
+      <workItem from="1647625867456" duration="1197000" />
+      <workItem from="1647796647969" duration="3439000" />
+      <workItem from="1649246724634" duration="710000" />
     </task>
+    <task id="LOCAL-00001" summary="add medarbejder">
+      <created>1647259836070</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1647259836070</updated>
+    </task>
+    <task id="LOCAL-00002" summary="add medarbejder">
+      <created>1647259859415</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1647259859415</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -107,5 +123,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="add medarbejder" />
+    <option name="LAST_COMMIT_MESSAGE" value="add medarbejder" />
   </component>
 </project>
