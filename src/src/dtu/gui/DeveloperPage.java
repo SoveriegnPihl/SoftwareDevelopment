@@ -1,12 +1,8 @@
 package dtu.gui;//import required classes and packages
 import dtu.employees.Developer;
-
 import dtu.softwarehus.SoftwareHuset;
-
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 //create NewPage class to create a new page on which user will navigate  
 public class DeveloperPage {
@@ -19,13 +15,13 @@ public class DeveloperPage {
     CreateProjectPage createProjectPage;
     int yCountL =50, yCountR = 50;
 
-    DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) throws Exception {
+    DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
     }
 
-    public void initialize() throws Exception {
+    public void initialize()  {
         frame = new JFrame();
         frame.setBounds(100, 100, 500,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -47,66 +43,40 @@ public class DeveloperPage {
         JButton addPmBtn = makeRightButton("Assign project manager");
 
 
-        regHbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
+        regHbtn.addActionListener(e -> {
+        RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
+        setVisible(false);
+        RegisterHours.createList(loggedInUser);
+        registerHours.setVisible(true);
+        });
+
+       viewHbtn.addActionListener(e -> {
+           OptionPane OP = new OptionPane(loggedInUser, "View hours worked");
+       });
+
+        addPmBtn.addActionListener(e -> {
+            OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
+        });
+
+        backBtn.addActionListener(e -> {
             setVisible(false);
-            registerHours.createList(loggedInUser);
-            registerHours.setVisible(true);
-            }
+            parentWindow.setVisible(true);
         });
 
-       viewHbtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser, "View hours worked");
-            }
+        addActBtn.addActionListener(e -> {
+            setVisible(false);
+            createActivityPage.setVisible(true);
         });
 
-        addPmBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
-            }
+        regHoliBtn.addActionListener(e -> {
         });
 
-        backBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                parentWindow.setVisible(true);
-            }
-        });
-
-        addActBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                createActivityPage.setVisible(true);
-
-            }
-        });
-
-        regHoliBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //holiday
-
-            }
-        });
-
-        regSickBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser,"Register sick day");
-
-            }
+        regSickBtn.addActionListener(e -> {
+            OptionPane OP = new OptionPane(loggedInUser,"Register sick day");
         });
 
         createActivityPage = new CreateActivityPage(softwareHuset,parentWindow);
         createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
-
     }
         public static void setVisible(boolean visi){
             developerPage.setVisible(visi);

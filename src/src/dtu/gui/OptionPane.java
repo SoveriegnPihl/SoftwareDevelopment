@@ -6,7 +6,6 @@ import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
 
 class OptionPane extends JFrame {
-    SoftwareHuset softwareHuset = new SoftwareHuset();
 
     OptionPane(Developer user, String method) {
         if (method.equals("Register hours worked")) {
@@ -43,6 +42,7 @@ class OptionPane extends JFrame {
             Developer developer = SoftwareHuset.developers.get(developerToAdd);
             Project project = SoftwareHuset.projects.get(projectToAddDevTo);
             project.addDeveloper(developer);
+            System.out.println("NOOOOO");
         }
         if (method.equals("Assign project manager")) {
             JFrame alertFrame = new JFrame();

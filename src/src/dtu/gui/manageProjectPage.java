@@ -1,10 +1,8 @@
 package dtu.gui;
-import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
-
 import javax.swing.*;
-import java.awt.event.*;
+
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -18,7 +16,6 @@ public class manageProjectPage {
     JTextField startDateTxtField, endDateTxtField, budgetTxtField, projectManagerTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    Developer user;
 
 
     //calling constructor
@@ -43,25 +40,16 @@ public class manageProjectPage {
         saveBtn.setBounds(150, 300, 193, 29);
         createProjectPanel.add(saveBtn);
 
-        /*
-        b2 = new JButton("Add developer to project"); //set label to button
-        b2.setBounds(25, 250, 193, 29);
-        */
 
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                thisProject.startWeek = Integer.parseInt(startDateTxtField.getText());
-                thisProject.endWeek = Integer.parseInt(endDateTxtField.getText());
-                thisProject.budget = Integer.parseInt(budgetTxtField.getText());
-               // String projectManager1 = projectManager.getText();
-              //  String name = "New project";
+        saveBtn.addActionListener(e -> {
+            thisProject.startWeek = Integer.parseInt(startDateTxtField.getText());
+            thisProject.endWeek = Integer.parseInt(endDateTxtField.getText());
+            thisProject.budget = Integer.parseInt(budgetTxtField.getText());
 
-                setVisible(false);
-                clear();
-                ProjectManagerPage.setVisible(true);
+            setVisible(false);
+            clear();
+            ProjectManagerPage.setVisible(true);
 
-            }
         });
 
     }

@@ -5,11 +5,11 @@ import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -29,17 +29,19 @@ public class SoftwareHuset {
     }
 
     public static void startProgram() {
-        readFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv");
+         readFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv");
+
 
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
         assignPM("ekki",projects.get(22001).getId());
+
+        projects.get(22001).addDeveloper(developers.get("vic7"));
+        projects.get(22002).addDeveloper(developers.get("ekki"));
         Activity activity = new Activity("fodbold",5);
-        projects.get(22001).addDeveloper(developers.get("ekki"));
-        projects.get(22001).addActivity(activity,5,5,0,5);
-        activity.addDev(developers.get("ekki"),1,2);
-        System.out.println(projects.get(22001).userActivities(developers.get("ekki")).toString());
+        projects.get(22001).addActivity(activity,2,2,0,5);
+        activity.addDev(developers.get("vic7"),1,2);
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs){
@@ -47,6 +49,7 @@ public class SoftwareHuset {
         developers = new HashMap<>();
         csvProjectData = new ArrayList<>();
         csvDeveloperData = new ArrayList<>();
+
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
@@ -71,6 +74,8 @@ public class SoftwareHuset {
             e.printStackTrace();
         }
 
+
+
     }
 
     public static void addDeveloper(String name) {
@@ -92,7 +97,7 @@ public class SoftwareHuset {
     }
 
     public static Project getProject(String id){
-        return projects.get(id);
+        return projects.get(Integer.valueOf(id));
     }
 
     public static int createProject(int startWeek, int endWeek, int budget){
@@ -104,8 +109,8 @@ public class SoftwareHuset {
 
         writeToCSV("projects");
 
-        return toAdd.getId();
 
+        return toAdd.getId();
     }
 
     public static void assignPM(String dev, int projectID){
@@ -130,14 +135,19 @@ public class SoftwareHuset {
         return projectlist;
     }
     public static ArrayList<Project> projectListDeveloper(Developer developer){
-        ArrayList<Project> projectlist = new ArrayList<>();
-        String name = developer.getInitials();
+        ArrayList<Project> projectlist2 = new ArrayList<>();
+
+        System.out.println("WTF:"+ projects.get(22001).getId());
+
         for (Project var : projects.values()){
-            if (var.developerIsInProject(developer)){
-                projectlist.add(var);
+            System.out.println("ID ER "+var.getId()); // siger id er 220002, id 22002
+            System.out.println("det er "+var.developerIsInProject(developer));
+            if (var.developerIsInProject(developer)){ //true hver gang
+                projectlist2.add(var);
             }
         }
-        return projectlist;
+        return projectlist2;
+
     }
 
     public static ArrayList<String> fullProjectList(){

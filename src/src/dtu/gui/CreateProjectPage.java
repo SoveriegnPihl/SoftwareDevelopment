@@ -1,10 +1,6 @@
 package dtu.gui;
-import dtu.employees.Developer;
-
 import dtu.softwarehus.SoftwareHuset;
-
 import javax.swing.*;
-import java.awt.event.*;
 
 
 //create CreateLoginForm class to create login form
@@ -18,7 +14,6 @@ public class CreateProjectPage {
     JTextField startDate,endDate,projectManager,budget1;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    Developer user;
 
     //calling constructor
     public CreateProjectPage( SoftwareHuset softwareHuset, Main parentWindow) {
@@ -81,25 +76,20 @@ public class CreateProjectPage {
 
 
 
-        createProjectBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String startWeekTxt = startDate.getText();        //get user entered username from the textField1
-                String endWeekTxt = endDate.getText();
-                String budgetTxt = budget1.getText();
-                String projectManagerTxt = projectManager.getText();
+        createProjectBtn.addActionListener(e -> {
+            String startWeekTxt = startDate.getText();
+            String endWeekTxt = endDate.getText();
+            String budgetTxt = budget1.getText();
+            String projectManagerTxt = projectManager.getText();
 
-
-                int project = SoftwareHuset.createProject(Integer.parseInt(startWeekTxt),Integer.parseInt(endWeekTxt),Integer.parseInt(budgetTxt));
-                if(!projectManagerTxt.isEmpty()) {
+            int project = SoftwareHuset.createProject(Integer.parseInt(startWeekTxt),Integer.parseInt(endWeekTxt),Integer.parseInt(budgetTxt));
+                if (!projectManagerTxt.isEmpty()) {
                     SoftwareHuset.assignPM(projectManagerTxt, project);
-                }
-
-                setVisible(false);
-                clear();
-                parentWindow.setVisible(true);
-
             }
+            setVisible(false);
+            clear();
+            parentWindow.setVisible(true);
+
         });
 
     }

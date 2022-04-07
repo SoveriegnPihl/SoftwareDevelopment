@@ -4,20 +4,14 @@ import dtu.employees.*;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 public class Project {
     static int nextId = 1;
-
     public String name;
-    int id;
-    public static int startWeek;
-    public static int endWeek;
-    public int budget;
-    Manager pm;
-
-    static ArrayList<Developer> developers = new ArrayList<Developer>();
-   // ArrayList<Activity> activities;
-    public static HashMap<Activity, int[]> activities = new HashMap<>() ;
+    public int startWeek,endWeek, budget,id;
+    private List<Developer> developers = new ArrayList<>();
+    public HashMap<Activity, int[]> activities = new HashMap<>() ;
 
     public Project(int sW, int eW, int b){
         startWeek = sW;
@@ -26,15 +20,11 @@ public class Project {
         id = (Project.nextId++) + 22000;
     }
 
-    public void listDevelopers(){
-
-    }
-
     public int getId(){
         return id;
     }
 
-    public static ArrayList<Activity> userActivities(Developer user){
+    public  ArrayList<Activity> userActivities(Developer user){
         ArrayList<Activity> developerList = new ArrayList<>();
         if(developerIsInProject(user)) {
             for (Activity activity : activities.keySet()) {
@@ -77,11 +67,15 @@ public class Project {
     }*/
 
     public void addDeveloper(Developer dev){
+        System.out.println("tilføjer dev til "+this.getId());
         developers.add(dev);
     }
 
-    public static boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
+    public boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
 
+    public  List<Developer> developerList(){
+        return developers;
+    }
     public void printProject(){
         System.out.println("Project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);
     }

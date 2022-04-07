@@ -7,40 +7,29 @@ import dtu.project.TimeRegistration;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
-import java.util.Vector;
 
 public class RegisterHours {
     private static JPanel registerHours;
-    private static JComboBox projectList;
+    private final Main parentWindow;
+    private static JComboBox<Object> projectList;
+    private static JComboBox<String> projectList2,projectList3;
+    private static JComboBox activeBox;
     private static Developer loggedInUser;
-    private static JComboBox projectList3;
-    private static JComboBox activBox;
-    private Main parentWindow;
-    private JLabel selectLabel;
-    private JLabel userLabel;
-    private JLabel userLabel2;
-    private JLabel userLabel4;
-    private JTextField startDate;
-    private JTextField endDate;
-    private JButton sumbitButton;
+    private JLabel selectLabel,userLabel5;
     private boolean checked = false;
-    private JTextField writeProject;
-    private JLabel userLabel5;
     JCheckBox checkBox1;
     private JComboBox<Integer> hoursCB;
-    private JComboBox minCB;
     static Activity[] activityList;
-    static List<String> activilist;
-    static List<String> activilist2;
-    static JComboBox projectList2;
+    static List<String> firstActivityList;
+    static List<String> secondActivityList;
+
 
     public RegisterHours(Developer loggedInUser, Main parentWindow) {
-        this.loggedInUser = loggedInUser;
+        RegisterHours.loggedInUser = loggedInUser;
         this.parentWindow = parentWindow;
         initialize();
     }
@@ -66,31 +55,31 @@ public class RegisterHours {
             userLabel5.setText("Type project id");
             userLabel5.setBounds(25, 75, 193, 29);
 
-            writeProject = new JTextField(15);
+            JTextField writeProject = new JTextField(15);
             writeProject.setBounds(250, 75, 193, 29);
 
             //create label for username
-            userLabel = new JLabel();
+            JLabel userLabel = new JLabel();
             userLabel.setText("Enter time");      //set label value for textField1
             userLabel.setBounds(25, 150, 193, 29);
 
-            userLabel2 = new JLabel();
+            JLabel userLabel2 = new JLabel();
             userLabel2.setText("Date");
             userLabel2.setBounds(25, 200, 193, 29);
 
             //create text field to get username from the user
-            endDate = new JTextField(15);
+            JTextField endDate = new JTextField(15);
             endDate.setBounds(250, 200, 193, 29);
 
-            JLabel hourlbl = new JLabel();
-            hourlbl.setText("Hours:");
-            hourlbl.setBounds(210, 150, 250, 40);
-            registerHours.add(hourlbl);
+            JLabel hourLbl = new JLabel();
+            hourLbl.setText("Hours:");
+            hourLbl.setBounds(210, 150, 250, 40);
+            registerHours.add(hourLbl);
 
-            JLabel minlbl = new JLabel();
-            minlbl.setText("Min:");
-            minlbl.setBounds(375, 150, 250, 40);
-            registerHours.add(minlbl);
+            JLabel minLbl = new JLabel();
+            minLbl.setText("Min:");
+            minLbl.setBounds(375, 150, 250, 40);
+            registerHours.add(minLbl);
 
             Integer[] comboBoxItemsMinutes = new Integer[2];
             comboBoxItemsMinutes[0] = 0;
@@ -104,74 +93,55 @@ public class RegisterHours {
             hoursCB.setBounds(250, 155, 70, 30);
             registerHours.add(hoursCB);
 
-            minCB = new JComboBox<>(comboBoxItemsMinutes);
+            JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
             minCB.setBounds(400, 155, 70, 30);
             registerHours.add(minCB);
 
-            //create submit button
-
-            checkBox1.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    checked = !checked;
-                    createProjectList();
-                    setLabelVisible(checked);
-                }
+            checkBox1.addActionListener(e -> {
+                checked = !checked;
+                createProjectList();
+                setLabelVisible(checked);
             });
-            /*
-            projectManager = new JTextField(15);
-            projectManager.setBounds(250, 200, 193, 29);
-*/            //create submit button
-            sumbitButton = new JButton("Sumbit"); //set label to button
-            sumbitButton.setBounds(150, 300, 193, 29);
+
+            JButton submitButton = new JButton("Submit"); //set label to button
+            submitButton.setBounds(150, 300, 193, 29);
 
             registerHours.setLayout(null);
-            registerHours.add(endDate);   //set text field to panel
-//            registerHours.add(projectManager);
-             registerHours.add(selectActivity);
+            registerHours.add(endDate);
+            registerHours.add(selectActivity);
             registerHours.add(userLabel);
             registerHours.add(userLabel2);
             registerHours.add(selectLabel);
-            // registerHours.add(userLabel4);
-            registerHours.add(sumbitButton);
+            registerHours.add(submitButton);
             registerHours.add(checkBox1);
             registerHours.add(userLabel5);
             registerHours.add(writeProject);
              userLabel5.setVisible(false);
              writeProject.setVisible(false);
 
-
-
-            sumbitButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-//                    String startWeekTxt = startDate.getText();        //get user entered username from the textField1
-//                    String endWeekTxt = endDate.getText();
-//
-                    GregorianCalendar date = new GregorianCalendar(2,2,2022);
-                    TimeRegistration timeRegistration = new TimeRegistration(loggedInUser,date, hoursCB.getSelectedIndex());
-                    Activity activity = activityList[projectList.getSelectedIndex()];
-                    activity.registerTime(timeRegistration);
-                    setVisible(false);
-                    removeList();
-                    clear();
-                    DeveloperPage.setVisible(true);
-                    System.out.println(timeRegistration.getAmountOfTime());
-                    System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser,date).toString());
-                    System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
-                }
+            submitButton.addActionListener(e -> {
+                GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH,2);
+                TimeRegistration timeRegistration = new TimeRegistration(loggedInUser,date, hoursCB.getSelectedIndex());
+                Activity activity = activityList[projectList.getSelectedIndex()];
+                activity.registerTime(timeRegistration);
+                setVisible(false);
+                removeList();
+                clear();
+                DeveloperPage.setVisible(true);
+                System.out.println(timeRegistration.getAmountOfTime());
+                System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser,date).toString());
+                System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
             });
 
         }
     }
 
-
     public void setLabelVisible(boolean visible){
         userLabel5.setVisible(visible);
         projectList3.setVisible(visible);
-        activBox.setVisible(visible);
-         selectLabel.setVisible(!visible);
-         projectList2.setVisible(!visible);
+        activeBox.setVisible(visible);
+        selectLabel.setVisible(!visible);
+        projectList2.setVisible(!visible);
         projectList.setVisible(!visible);
 
     }
@@ -185,29 +155,35 @@ public class RegisterHours {
 
     public static void createProjectList(){
         String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
-        System.out.println(SoftwareHuset.fullProjectList().toString());
-        projectList3 = new JComboBox(list);
+        projectList3 = new JComboBox<>(list);
         projectList3.setBounds(250, 75, 193, 29);
         registerHours.add(projectList3);
-        activilist2 = new ArrayList<>();
-
-        projectList3.addActionListener(new ActionListener() {
-        public void actionPerformed(ActionEvent e) {
-            String project = (String) projectList3.getItemAt(projectList3.getSelectedIndex());
+        secondActivityList = new ArrayList<>();
+        String project = projectList3.getItemAt(0);
         Project project1 =  SoftwareHuset.getProject(project);
 
-        for (Activity activity : ((Project) project1).activities.keySet()) {
-            activilist2.add(activity.name);
+        for (Activity activity : project1.activities.keySet()) {
+            secondActivityList.add(activity.name);
         }
-        System.out.println(activilist2);
-           activBox.removeAllItems();
-            activBox.setModel(new DefaultComboBoxModel(activilist2.toArray()));
 
-            }
-             });
-        activBox = new JComboBox(activilist2.toArray(new String[0]));
-        activBox.setBounds(250, 400, 193, 29);
-        registerHours.add(activBox);
+        projectList3.addActionListener(e -> {
+            String project2 = projectList3.getItemAt(projectList3.getSelectedIndex());
+        Project project11 =  SoftwareHuset.getProject(project2);
+
+        for (int i = 0; i < secondActivityList.size(); i++) {
+            secondActivityList.remove(i);
+        }
+
+        for (Activity activity : project11.activities.keySet()) {
+            secondActivityList.add(activity.name);
+        }
+        activeBox.removeAllItems();
+        activeBox.setModel(new DefaultComboBoxModel<>(secondActivityList.toArray()));
+
+            });
+        activeBox = new JComboBox<>(secondActivityList.toArray(new String[0]));
+        activeBox.setBounds(250, 110, 193, 29);
+        registerHours.add(activeBox);
 
     }
     public static void createList(Developer user){
@@ -216,25 +192,33 @@ public class RegisterHours {
         for (Project project: list) {
             projectList123.add(String.valueOf(project.getId()));
         }
-        projectList2 = new JComboBox(projectList123.toArray(new String[0]));
+        projectList2 = new JComboBox<>(projectList123.toArray(new String[0]));
         projectList2.setBounds(250, 75, 193, 29);
-            registerHours.add(projectList2);
-        activilist = new ArrayList<>();
-            projectList2.addActionListener(new ActionListener() {
-                public void actionPerformed(ActionEvent e) {
-                //createActivityList((String) projectList2.getItemAt(projectList2.getSelectedIndex()));
-                String project = (String) projectList2.getItemAt(projectList2.getSelectedIndex());
-                activityList = SoftwareHuset.getProject(project).userActivities(loggedInUser).toArray(new Activity[0]);
+        projectList2.setSelectedIndex(0);
+        registerHours.add(projectList2);
+        firstActivityList = new ArrayList<>();
+        String project = projectList2.getItemAt(0);
+        System.out.println(projectList2.getItemAt(0));
+        activityList = SoftwareHuset.getProject(project).userActivities(loggedInUser).toArray(new Activity[0]);
+        for (Activity activity : activityList) {
+            firstActivityList.add(activity.name);
+        }
 
-                for (Activity activity : activityList) {
-                    activilist.add(activity.name);
-                }
-                System.out.println(activilist);
-                    projectList.removeAllItems();
-                    projectList.setModel(new DefaultComboBoxModel(activilist.toArray()));
+        projectList2.addActionListener(e -> {
+        String project1 = projectList2.getItemAt(projectList2.getSelectedIndex());
+        activityList = SoftwareHuset.getProject(project1).userActivities(loggedInUser).toArray(new Activity[0]);
+            for (int i = 0; i < firstActivityList.size(); i++) {
+                firstActivityList.remove(i);
             }
-          });
-        projectList = new JComboBox(activilist.toArray(new String[0]));
+        for (Activity activity : activityList) {
+            firstActivityList.add(activity.name);
+        }
+        System.out.println(firstActivityList);
+            projectList.removeAllItems();
+            projectList.setModel(new DefaultComboBoxModel<>(firstActivityList.toArray()));
+
+        });
+        projectList = new JComboBox<>(firstActivityList.toArray(new String[0]));
         projectList.setBounds(250, 110, 193, 29);
         registerHours.add(projectList);
     }

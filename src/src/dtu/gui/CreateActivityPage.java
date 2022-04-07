@@ -1,23 +1,19 @@
 package dtu.gui;
 
-import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 
 public class CreateActivityPage {
-    Project thisProject;
     JButton saveBtn;
     JPanel createProjectPanel;
     JLabel startDateLabel, endDateLabel, budgetLabel, projectLabel, activityNameLabel, estTimeLabel;
     JTextField startDateTxtField, endDateTxtField, estTimeTxtField, projectTxtField, activityTxtField, budgetTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    Developer user;
 
     public CreateActivityPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -40,20 +36,17 @@ public class CreateActivityPage {
         saveBtn.setBounds(150, 350, 193, 29);
         createProjectPanel.add(saveBtn);
 
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                Activity newActivity = new Activity(activityTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
-                Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
+        saveBtn.addActionListener(e -> {
+            Activity newActivity = new Activity(activityTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
+            Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
 
-                projectToAddTo.addActivity(newActivity, Integer.parseInt(startDateTxtField.getText()), Integer.parseInt(endDateTxtField.getText()),
-                        Integer.parseInt(budgetTxtField.getText()), Integer.parseInt(estTimeTxtField.getText()));
+            projectToAddTo.addActivity(newActivity, Integer.parseInt(startDateTxtField.getText()), Integer.parseInt(endDateTxtField.getText()),
+                    Integer.parseInt(budgetTxtField.getText()), Integer.parseInt(estTimeTxtField.getText()));
 
-                setVisible(false);
-                clear();
-                DeveloperPage.setVisible(true);
+            setVisible(false);
+            clear();
+            DeveloperPage.setVisible(true);
 
-            }
         });
 
     }

@@ -12,7 +12,7 @@ public class Activity {
     Developer developer;
     HashMap<Developer,int[]> developers = new HashMap<>();
     public String name;
-    private List<TimeRegistration> timeRegistrations = new ArrayList<>();
+    List<TimeRegistration> timeRegistrations = new ArrayList<>();
 
     public Activity (String name, int time){
         this.name = name;
@@ -23,14 +23,13 @@ public class Activity {
         developers.put(dev,act);
     }
     public ArrayList<Developer> getDevelopers(){
-        ArrayList<Developer> developerList = new ArrayList<>();
-        developerList.addAll(developers.keySet());
-        return developerList;
+        return new ArrayList<>(developers.keySet());
     }
 
     public String getActivity(){
         return name;
     }
+
     public void setEstimatedTime(int time){
         estimatedTime = time;
     }
