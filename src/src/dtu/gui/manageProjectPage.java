@@ -49,20 +49,16 @@ public class manageProjectPage {
         saveBtn.setBounds(150, 300, 193, 29);
         createProjectPanel.add(saveBtn);
 
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                /*thisProject.startWeek = Integer.parseInt(startDateTxtField.getText());
-                thisProject.endWeek = Integer.parseInt(endDateTxtField.getText());
-                thisProject.budget = Integer.parseInt(budgetTxtField.getText());
-               // String projectManager1 = projectManager.getText();
-              //  String name = "New project";*/
 
-                setVisible(false);
-                clear();
-                ProjectManagerPage.setVisible(true);
+        saveBtn.addActionListener(e -> {
+            projectToManage.startWeek = Integer.parseInt(startDateTxtField.getText());
+            projectToManage.endWeek = Integer.parseInt(endDateTxtField.getText());
+            projectToManage.budget = Integer.parseInt(budgetTxtField.getText());
 
-            }
+            setVisible(false);
+            clear();
+            ProjectManagerPage.setVisible(true);
+
         });
 
     }

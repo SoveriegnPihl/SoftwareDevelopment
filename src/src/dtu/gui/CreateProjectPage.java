@@ -70,11 +70,10 @@ public class CreateProjectPage {
 
                 if(!projectManagerTxt.isEmpty()) {
                     SoftwareHuset.assignPM(projectManagerTxt, project);
-                }
-
-                setVisible(false);
-                clear();
-                parentWindow.setVisible(true);
+            }
+            setVisible(false);
+            clear();
+            parentWindow.setVisible(true);
 
             }
         });

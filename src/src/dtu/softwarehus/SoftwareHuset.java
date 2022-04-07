@@ -6,12 +6,12 @@ import dtu.project.Project;
 import dtu.project.Report;
 import io.cucumber.java.bs.A;
 
+import java.io.File;
 import java.io.PrintWriter;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -37,6 +37,15 @@ public class SoftwareHuset {
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
         assignPM("ekki",projects.get(22001).getId());
+
+        projects.get(22001).addDeveloper(developers.get("vic7"));
+        projects.get(22002).addDeveloper(developers.get("ekki"));
+        Activity activity = new Activity("fodbold",5);
+        Activity activity2 = new Activity("film",5);
+        projects.get(22001).addActivity(activity,2,2,0,5);
+        projects.get(22001).addActivity(activity2,2,2,0,5);
+        activity.addDev(developers.get("vic7"),1,2);
+        activity2.addDev(developers.get("vic7"),1,2);
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs){
@@ -44,6 +53,7 @@ public class SoftwareHuset {
         developers = new HashMap<>();
         csvProjectData = new ArrayList<>();
         csvDeveloperData = new ArrayList<>();
+
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
@@ -118,13 +128,36 @@ public class SoftwareHuset {
             System.out.println("");
         }
     }
-    public static ArrayList<String> projectList(Developer developer){
+    public static ArrayList<String> projectListManagers(Developer developer){
         ArrayList<String> projectlist = new ArrayList<>();
         String name = developer.getInitials();
         for (Integer var : projectManagers.keySet()){
             if (projectManagers.get(var).equals(name)){
                 projectlist.add(var.toString());
             }
+        }
+        return projectlist;
+    }
+    public static ArrayList<Project> projectListDeveloper(Developer developer){
+        ArrayList<Project> projectlist2 = new ArrayList<>();
+
+        System.out.println("WTF:"+ projects.get(22001).getId());
+
+        for (Project var : projects.values()){
+            System.out.println("ID ER "+var.getId()); // siger id er 220002, id 22002
+            System.out.println("det er "+var.developerIsInProject(developer));
+            if (var.developerIsInProject(developer)){ //true hver gang
+                projectlist2.add(var);
+            }
+        }
+        return projectlist2;
+
+    }
+
+    public static ArrayList<String> fullProjectList(){
+        ArrayList<String> projectlist = new ArrayList<>();
+        for (Project project : projects.values()){
+                projectlist.add(String.valueOf(project.getId()));
         }
         return projectlist;
     }
@@ -214,7 +247,5 @@ public class SoftwareHuset {
         }
         return escapedData;
     }
-
-
 
 }

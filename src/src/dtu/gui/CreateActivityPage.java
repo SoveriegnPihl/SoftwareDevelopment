@@ -14,8 +14,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
+
 public class CreateActivityPage {
-    Project thisProject;
     JButton saveBtn;
     JPanel createProjectPanel;
     JLabel startDateLabel, endDateLabel, budgetLabel, projectLabel, activityNameLabel, estTimeLabel;
@@ -67,9 +67,9 @@ public class CreateActivityPage {
                 Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
                 projectToAddTo.addActivity(newActivity);
 
-                setVisible(false);
-                clear();
-                DeveloperPage.setVisible(true);
+            setVisible(false);
+            clear();
+            DeveloperPage.setVisible(true);
 
             }
         });

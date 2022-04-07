@@ -1,7 +1,6 @@
 package dtu.gui;
 import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
-
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,8 +12,7 @@ public class ProjectManagerPage {
     static JPanel projectManagerPage;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    static JComboBox projectList;
-    private JLabel selectLabel;
+    static JComboBox<String> projectList;
     int yCountR=100,yCountL=100;
 
     //constructor
@@ -32,62 +30,42 @@ public class ProjectManagerPage {
         JButton addDev = makeLeftButton("Add developer");
         JButton viewDev = makeLeftButton("View *available* developers");
         JButton addDevToProj = makeLeftButton("Add developer to project");
-        JButton addActi = makeLeftButton("Add activity to project");
+        JButton addActivityBut = makeLeftButton("Add activity to project");
         JButton getReport = makeLeftButton("Get project report");
         JButton backB = makeLeftButton("Back");
         JButton changeProjBut = makeRightButton("Change selected project");
 
-        selectLabel = new JLabel();
+        JLabel selectLabel = new JLabel();
         selectLabel.setText("Select project");
         selectLabel.setBounds(100, 25, 193, 29);
         projectManagerPage.add(selectLabel);
 
-        viewDev.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser,"View available developers");
-            }
+        viewDev.addActionListener(e -> {
+            OptionPane OP = new OptionPane(user1,"View available developers");
         });
 
-        changeProjBut.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-
-                manageProjectPage.setLabels(projectList.getItemAt(projectList.getSelectedIndex()).toString());
-                manageProjectPage.setVisible(true);
-            }
-
+        changeProjBut.addActionListener(e -> {
+            setVisible(false);
+            manageProjectPage.setLabels(projectList.getItemAt(projectList.getSelectedIndex()));
+            manageProjectPage.setVisible(true);
         });
-        backB.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                removeList();
-                parentWindow.setVisible(true);
-            }
+        backB.addActionListener(e -> {
+            setVisible(false);
+            removeList();
+            parentWindow.setVisible(true);
         });
 
-        addActi.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                createActivityPage.setVisible(true);
-            }
+        addActivityBut.addActionListener(e -> {
+            setVisible(false);
+            createActivityPage.setVisible(true);
         });
 
-        addDevToProj.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser,"Add developer to project");
-            }
+        addDevToProj.addActionListener(e -> {
+            OptionPane OP = new OptionPane(user1,"Add developer to project");
         });
 
-        addDev.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser,"Add developer");
-            }
+        addDev.addActionListener(e -> {
+            OptionPane OP = new OptionPane(user1,"Add developer");
         });
 
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);
@@ -99,10 +77,10 @@ public class ProjectManagerPage {
         projectManagerPage.setVisible(visi);
     }
    public static void createList(Developer user){
-       String[] list = SoftwareHuset.projectList(user).toArray(new String[0]);
+       String[] list = SoftwareHuset.projectListManagers(user).toArray(new String[0]);
 
-       projectList = new JComboBox(list);
-       projectList.setBounds(225, 25, 193, 29);
+       projectList = new JComboBox<>(list);
+       projectList.setBounds(250, 25, 193, 29);
        projectManagerPage.add(projectList);
 
     }
