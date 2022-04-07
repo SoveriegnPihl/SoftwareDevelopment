@@ -8,16 +8,24 @@ import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.Month;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Vector;
 
 public class CreateActivityPage {
     Project thisProject;
     JButton saveBtn;
     JPanel createProjectPanel;
     JLabel startDateLabel, endDateLabel, budgetLabel, projectLabel, activityNameLabel, estTimeLabel;
-    JTextField startDateTxtField, endDateTxtField, estTimeTxtField, projectTxtField, activityTxtField, budgetTxtField;
+    JTextField startDateTxtField, endDateTxtField, estTimeTxtField, projectTxtField, nameTxtField, budgetTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     Developer user;
+    JComboBox<Month> monthSelStart, monthSelFin;
+    JComboBox<Integer> yearSelStart, yearSelFin;
+    int year;
 
     public CreateActivityPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -43,11 +51,21 @@ public class CreateActivityPage {
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Activity newActivity = new Activity(activityTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
-                Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
+                //date intervals
+                GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                        monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
 
-                projectToAddTo.addActivity(newActivity, Integer.parseInt(startDateTxtField.getText()), Integer.parseInt(endDateTxtField.getText()),
-                        Integer.parseInt(budgetTxtField.getText()), Integer.parseInt(estTimeTxtField.getText()));
+                GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                        monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
+
+                //making activity
+                Activity newActivity = new Activity(nameTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
+                newActivity.setDateInterval(startDate, endDate);
+                newActivity.setBudget(Integer.parseInt(budgetTxtField.getText()));
+
+                //adding to project
+                Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
+                projectToAddTo.addActivity(newActivity);
 
                 setVisible(false);
                 clear();
@@ -62,12 +80,16 @@ public class CreateActivityPage {
     }
 
     private void clear() {
-        activityTxtField.setText("");
+        nameTxtField.setText("");
         startDateTxtField.setText("");
         endDateTxtField.setText("");
         projectTxtField.setText("");
         estTimeTxtField.setText("");
         budgetTxtField.setText("");
+        monthSelStart.setSelectedItem("January");
+        monthSelFin.setSelectedItem("January");
+        yearSelStart.setSelectedItem(year);
+        yearSelFin.setSelectedItem(year);
     }
 
     private void addLabelsToScreen(){
@@ -104,14 +126,30 @@ public class CreateActivityPage {
     }
 
     private void addTextFieldsToScreen(){
-        activityTxtField = new JTextField(15);
-        activityTxtField.setBounds(250, 50, 193, 29);
+        Vector v = getYears();
+
+        nameTxtField = new JTextField(15);
+        nameTxtField.setBounds(250, 50, 193, 29);
 
         startDateTxtField = new JTextField(15);
-        startDateTxtField.setBounds(250, 100, 193, 29);
+        startDateTxtField.setBounds(225, 100, 45, 29);
+
+        monthSelStart = new JComboBox<>(Month.values());
+        monthSelStart.setBounds(280,100,95,29);
+
+        yearSelStart = new JComboBox<Integer>(v);
+        yearSelStart.setSelectedItem(year);
+        yearSelStart.setBounds(385,100,60,29);
 
         endDateTxtField = new JTextField(15);
-        endDateTxtField.setBounds(250, 150, 193, 29);
+        endDateTxtField.setBounds(225, 150, 45, 29);
+
+        monthSelFin = new JComboBox<>(Month.values());
+        monthSelFin.setBounds(280,150,95,29);
+
+        yearSelFin = new JComboBox<Integer>(v);
+        yearSelFin.setSelectedItem(year);
+        yearSelFin.setBounds(385,150,60,29);
 
         estTimeTxtField = new JTextField(15);
         estTimeTxtField.setBounds(250, 200, 193, 29);
@@ -126,8 +164,22 @@ public class CreateActivityPage {
         createProjectPanel.add(endDateTxtField);
         createProjectPanel.add(projectTxtField);
         createProjectPanel.add(estTimeTxtField);
-        createProjectPanel.add(activityTxtField);
+        createProjectPanel.add(nameTxtField);
         createProjectPanel.add(budgetTxtField);
+        createProjectPanel.add(monthSelStart);
+        createProjectPanel.add(yearSelStart);
+        createProjectPanel.add(yearSelFin);
+        createProjectPanel.add(monthSelFin);
+    }
+
+    private Vector getYears() {
+        Calendar now = Calendar.getInstance();
+        year = now.get(Calendar.YEAR);
+        Vector v = new Vector();
+        for (int i = year; i <= 2030; i++) {
+            v.add(i);
+        }
+        return v;
     }
 
 }

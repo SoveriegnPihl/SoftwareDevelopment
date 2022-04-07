@@ -7,6 +7,7 @@ import dtu.project.Report;
 import io.cucumber.java.bs.A;
 
 import java.io.PrintWriter;
+import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -50,7 +51,10 @@ public class SoftwareHuset {
 
             while (sc1.hasNextLine()){
                 String[] att = sc1.nextLine().split(",");
-                createProject(Integer.parseInt(att[1]),Integer.parseInt(att[2]),Integer.parseInt(att[3]));
+                System.out.println(Arrays.toString(att));
+                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(att[1]), Integer.parseInt(att[2]),Integer.parseInt(att[3]));
+                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(att[4]),Integer.parseInt(att[5]),Integer.parseInt(att[6]));
+                createProject(start,end,Integer.parseInt(att[7]));
                 //csvProjectData.add(att);
 
             }
@@ -87,16 +91,19 @@ public class SoftwareHuset {
         this.dateServer = dateServer;
     }
 
-    public static int createProject(int startWeek, int endWeek, int budget){
-        Project toAdd = new Project(startWeek, endWeek, budget);
-        toAdd.printProject();
+    public static int createProject(GregorianCalendar start, GregorianCalendar end, int budget){
+        Project newProject = new Project(start,end, budget);
+        newProject.printProject();
 
-        projects.put(toAdd.getId(),toAdd);
-        csvProjectData.add(new String[] {String.valueOf(toAdd.getId()), String.valueOf(startWeek), String.valueOf(endWeek), String.valueOf(budget)});
+        projects.put(newProject.getId(),newProject);
+        csvProjectData.add(new String[] {String.valueOf(newProject.getId()), String.valueOf(newProject.getDateYear("start")),
+                String.valueOf(newProject.getDateMonth("start")),String.valueOf(newProject.getDateDay("start")),
+                String.valueOf(newProject.getDateYear("end")), String.valueOf(newProject.getDateMonth("end")),
+                String.valueOf(newProject.getDateDay("end")), String.valueOf(budget)});
 
         writeToCSV("projects");
 
-        return toAdd.getId();
+        return newProject.getId();
 
     }
 
@@ -207,5 +214,7 @@ public class SoftwareHuset {
         }
         return escapedData;
     }
+
+
 
 }

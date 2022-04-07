@@ -5,13 +5,16 @@ import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.time.Month;
+import java.util.Calendar;
+import java.util.Vector;
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
 //class implements ActionListener to perform an action on button click
 public class manageProjectPage {
     //initialize button, panel, label, and text field
-    Project thisProject;
+    Project projectToManage;
     JButton saveBtn;
     JPanel createProjectPanel;
     JLabel startDateLabel, endDateLabel, budgetLabel, projectManagerLabel;
@@ -19,6 +22,9 @@ public class manageProjectPage {
     SoftwareHuset softwareHuset;
     Main parentWindow;
     Developer user;
+    private int year;
+    JComboBox<Month> monthSelStart, monthSelFin;
+    JComboBox<Integer> yearSelStart, yearSelFin;
 
 
     //calling constructor
@@ -43,19 +49,14 @@ public class manageProjectPage {
         saveBtn.setBounds(150, 300, 193, 29);
         createProjectPanel.add(saveBtn);
 
-        /*
-        b2 = new JButton("Add developer to project"); //set label to button
-        b2.setBounds(25, 250, 193, 29);
-        */
-
         saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                thisProject.startWeek = Integer.parseInt(startDateTxtField.getText());
+                /*thisProject.startWeek = Integer.parseInt(startDateTxtField.getText());
                 thisProject.endWeek = Integer.parseInt(endDateTxtField.getText());
                 thisProject.budget = Integer.parseInt(budgetTxtField.getText());
                // String projectManager1 = projectManager.getText();
-              //  String name = "New project";
+              //  String name = "New project";*/
 
                 setVisible(false);
                 clear();
@@ -73,15 +74,26 @@ public class manageProjectPage {
         endDateTxtField.setText("");
         projectManagerTxtField.setText("");
         budgetTxtField.setText("");
+        monthSelStart.setSelectedItem("January");
+        monthSelFin.setSelectedItem("January");
+        yearSelStart.setSelectedItem(year);
+        yearSelFin.setSelectedItem(year);
 
     }
     public void setLabels(String project ){
 
-        thisProject = SoftwareHuset.projects.get(Integer.parseInt(project));
+        projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 
-        startDateTxtField.setText(String.valueOf(thisProject.startWeek));
-        endDateTxtField.setText(String.valueOf(thisProject.endWeek));
-        budgetTxtField.setText(String.valueOf(thisProject.budget));
+        System.out.println(projectToManage.getDateDay("start"));
+
+        startDateTxtField.setText(String.valueOf(projectToManage.getDateDay("start")));
+        monthSelStart.setSelectedItem(projectToManage.getDateMonth("start"));
+        yearSelStart.setSelectedItem(projectToManage.getDateYear("start"));
+
+        endDateTxtField.setText(String.valueOf(projectToManage.getDateDay("end")));
+        monthSelFin.setSelectedItem(projectToManage.getDateMonth("end"));
+        yearSelFin.setSelectedItem(projectToManage.getDateYear("end"));
+        budgetTxtField.setText(String.valueOf(projectToManage.budget));
     }
 
     private void addLabelsToScreen(){
@@ -108,11 +120,27 @@ public class manageProjectPage {
     }
 
     private void addTextFieldsToScreen(){
-        startDateTxtField = new JTextField(15); //set length of the text
-        startDateTxtField.setBounds(250, 50, 193, 29);
+        Vector v = getYears();
+
+        startDateTxtField = new JTextField(15);
+        startDateTxtField.setBounds(225, 50, 45, 29);
+
+        monthSelStart = new JComboBox<>(Month.values());
+        monthSelStart.setBounds(280,50,95,29);
+
+        yearSelStart = new JComboBox<Integer>(v);
+        yearSelStart.setSelectedItem(year);
+        yearSelStart.setBounds(385,50,60,29);
 
         endDateTxtField = new JTextField(15);
-        endDateTxtField.setBounds(250, 100, 193, 29);
+        endDateTxtField.setBounds(225, 100, 45, 29);
+
+        monthSelFin = new JComboBox<>(Month.values());
+        monthSelFin.setBounds(280,100,95,29);
+
+        yearSelFin = new JComboBox<Integer>(v);
+        yearSelFin.setSelectedItem(year);
+        yearSelFin.setBounds(385,100,60,29);
 
         budgetTxtField = new JTextField(15);
         budgetTxtField.setBounds(250, 150, 193, 29);
@@ -124,5 +152,19 @@ public class manageProjectPage {
         createProjectPanel.add(endDateTxtField);
         createProjectPanel.add(projectManagerTxtField);
         createProjectPanel.add(budgetTxtField);
+        createProjectPanel.add(monthSelStart);
+        createProjectPanel.add(yearSelStart);
+        createProjectPanel.add(yearSelFin);
+        createProjectPanel.add(monthSelFin);
+    }
+
+    private Vector getYears() {
+        Calendar now = Calendar.getInstance();
+        year = now.get(Calendar.YEAR);
+        Vector v = new Vector();
+        for (int i = year; i <= 2030; i++) {
+            v.add(i);
+        }
+        return v;
     }
 }

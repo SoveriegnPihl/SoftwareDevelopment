@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class ProjectManagerPage {
-    static Developer user1;
+    static Developer loggedInUser;
     manageProjectPage manageProjectPage;
     CreateActivityPage createActivityPage;
     static JPanel projectManagerPage;
@@ -45,7 +45,7 @@ public class ProjectManagerPage {
         viewDev.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user1,"View available developers");
+                OptionPane OP = new OptionPane(loggedInUser,"View available developers");
             }
         });
 
@@ -53,6 +53,7 @@ public class ProjectManagerPage {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
+
                 manageProjectPage.setLabels(projectList.getItemAt(projectList.getSelectedIndex()).toString());
                 manageProjectPage.setVisible(true);
             }
@@ -78,14 +79,14 @@ public class ProjectManagerPage {
         addDevToProj.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user1,"Add developer to project");
+                OptionPane OP = new OptionPane(loggedInUser,"Add developer to project");
             }
         });
 
         addDev.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user1,"Add developer");
+                OptionPane OP = new OptionPane(loggedInUser,"Add developer");
             }
         });
 
@@ -111,7 +112,7 @@ public class ProjectManagerPage {
     }
 
     public static void setUser(Developer user){
-        user1 = user;
+        loggedInUser = user;
     }
 
     public JButton makeLeftButton(String name){

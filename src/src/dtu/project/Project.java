@@ -5,46 +5,41 @@ import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en_old.Ac;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
 public class Project {
     static int nextId = 1;
-
     public String name;
     int id;
-    public static int startWeek;
-    public static int endWeek;
+    public static GregorianCalendar startDate;
+    public static GregorianCalendar endDate;
     public int budget;
     Manager pm;
 
-    ArrayList<Developer> developers = new ArrayList<Developer>();
-   // ArrayList<Activity> activities;
-    public static HashMap<Activity, int[]> activities = new HashMap<>() ;
+    ArrayList<Developer> developers;
+    public static HashMap<String, Activity> activities;
 
-    public Project(int sW, int eW, int b){
-        startWeek = sW;
-        endWeek = eW;
-        budget = b;
+    public Project(GregorianCalendar start, GregorianCalendar end, int budget){
+        startDate = start;
+        endDate = end;
+        this.budget = budget;
         id = (Project.nextId++) + 22000;
-    }
-
-    public void listDevelopers(){
-
+        developers = new ArrayList<>();
+        activities = new HashMap<>();
     }
 
     public int getId(){
         return id;
     }
 
-
-
-    public void addActivity(Activity activity, int startW, int endW, int budget, int estimatedTime){
-        int[] act = {startW, endW, budget, estimatedTime};
-        if(act[0] >= startWeek && act[1] <= endWeek && budget < this.budget){
-            this.budget -= budget;
-            activities.put(activity,act);
+    public void addActivity(Activity activity){
+        if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){
+            this.budget -= activity.getBudget();
+            activities.put(activity.getName(), activity);
         } else {
-            System.out.println("add act virker ik");
+            System.out.println("ikke inden for datoen af projektet");
         }
     }
 
@@ -63,7 +58,35 @@ public class Project {
 
     public boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
 
+    public int getDateDay(String time){
+        if(time.equals("start")){
+            return startDate.get(Calendar.DAY_OF_MONTH);
+        }
+        else{
+            return endDate.get(Calendar.DAY_OF_MONTH);
+        }
+    }
+
+    public int getDateMonth(String time){
+        if(time.equals("start")){
+            return startDate.get(Calendar.MONTH);
+
+        }
+        else{
+            return endDate.get(Calendar.MONTH);
+        }
+    }
+
+    public int getDateYear(String time){
+        if(time.equals("start")){
+            return startDate.get(Calendar.YEAR);
+        }
+        else{
+            return endDate.get(Calendar.YEAR);
+        }
+    }
+
     public void printProject(){
-        System.out.println("Project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);
+        System.out.println("Project id: " + id + " start date: " + startDate.getTime() + " end date: " + endDate.getTime() + " budget " + budget);
     }
 }

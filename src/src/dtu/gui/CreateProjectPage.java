@@ -5,6 +5,11 @@ import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.event.*;
+import java.time.Month;
+import java.time.Year;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Vector;
 
 
 //create CreateLoginForm class to create login form
@@ -14,11 +19,14 @@ public class CreateProjectPage {
     //initialize button, panel, label, and text field
     JButton createProjectBtn;
     JPanel createProjectPanel;
-    JLabel userLabel,userLabel2,userLabel3,userLabel4;
-    JTextField startDate,endDate,projectManager,budget1;
+    JLabel startDateLabel, endDateLabel, budgetLabel, asignPMLabel;
+    JTextField startDateTxtField, endDateTxtField, projectManagerTxtField, budgetTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     Developer user;
+    private int year;
+    JComboBox<Month> monthSelStart, monthSelFin;
+    JComboBox<Integer> yearSelStart, yearSelFin;
 
     //calling constructor
     public CreateProjectPage( SoftwareHuset softwareHuset, Main parentWindow) {
@@ -31,52 +39,14 @@ public class CreateProjectPage {
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
 
+        //adding labels to screen
+        addLabelsToScreen();
 
-        //create label for username
-        userLabel = new JLabel();
-        userLabel.setText("Start date");      //set label value for textField1
-        userLabel.setBounds(25, 50, 193, 29);
+        //adding textfields to screen
+        addTextFieldsToScreen();
 
-        userLabel2 = new JLabel();
-        userLabel2.setText("End date");
-        userLabel2.setBounds(25, 100, 193, 29);
-
-        userLabel3 = new JLabel();
-        userLabel3.setText("Budget");
-        userLabel3.setBounds(25, 150, 193, 29);
-
-        userLabel4 = new JLabel();
-        userLabel4.setText("Assign project manager");
-        userLabel4.setBounds(25, 200, 193, 29);
-
-        //create text field to get username from the user
-        startDate = new JTextField(15); //set length of the text
-        startDate.setBounds(250, 50, 193, 29);
-
-        //create text field to get username from the user
-        endDate = new JTextField(15);
-        endDate.setBounds(250, 100, 193, 29);
-
-        budget1 = new JTextField(15);
-        budget1.setBounds(250, 150, 193, 29);
-        //create submit button
-
-        projectManager = new JTextField(15);
-        projectManager.setBounds(250, 200, 193, 29);
-        //create submit button
         createProjectBtn = new JButton("Create project"); //set label to button
         createProjectBtn.setBounds(150, 300, 193, 29);
-
-
-        createProjectPanel.setLayout(null);
-        createProjectPanel.add(startDate);    //set username label to panel
-        createProjectPanel.add(endDate);   //set text field to panel
-        createProjectPanel.add(projectManager);
-        createProjectPanel.add(budget1);
-        createProjectPanel.add(userLabel);
-        createProjectPanel.add(userLabel2);
-        createProjectPanel.add(userLabel3);
-        createProjectPanel.add(userLabel4);
         createProjectPanel.add(createProjectBtn);
 
 
@@ -84,13 +54,20 @@ public class CreateProjectPage {
         createProjectBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String startWeekTxt = startDate.getText();        //get user entered username from the textField1
-                String endWeekTxt = endDate.getText();
-                String budgetTxt = budget1.getText();
-                String projectManagerTxt = projectManager.getText();
+                String startWeekTxt = startDateTxtField.getText();
+                String endWeekTxt = endDateTxtField.getText();
+                String budgetTxt = budgetTxtField.getText();
+                String projectManagerTxt = projectManagerTxtField.getText();
 
+                //getting date intervals
+                GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                        monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
 
-                int project = SoftwareHuset.createProject(Integer.parseInt(startWeekTxt),Integer.parseInt(endWeekTxt),Integer.parseInt(budgetTxt));
+                GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                        monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
+
+                int project = SoftwareHuset.createProject(startDate, endDate,Integer.parseInt(budgetTxt));
+
                 if(!projectManagerTxt.isEmpty()) {
                     SoftwareHuset.assignPM(projectManagerTxt, project);
                 }
@@ -103,16 +80,93 @@ public class CreateProjectPage {
         });
 
     }
+
+    private void addTextFieldsToScreen() {
+        Vector v = getYears();
+
+        startDateTxtField = new JTextField(15);
+        startDateTxtField.setBounds(225, 50, 45, 29);
+
+        monthSelStart = new JComboBox<>(Month.values());
+        monthSelStart.setBounds(280,50,95,29);
+
+        yearSelStart = new JComboBox<Integer>(v);
+        yearSelStart.setSelectedItem(year);
+        yearSelStart.setBounds(385,50,60,29);
+
+        endDateTxtField = new JTextField(15);
+        endDateTxtField.setBounds(225, 100, 45, 29);
+
+        monthSelFin = new JComboBox<>(Month.values());
+        monthSelFin.setBounds(280,100,95,29);
+
+        yearSelFin = new JComboBox<Integer>(v);
+        yearSelFin.setSelectedItem(year);
+        yearSelFin.setBounds(385,100,60,29);
+
+        budgetTxtField = new JTextField(15);
+        budgetTxtField.setBounds(250, 150, 193, 29);
+
+        projectManagerTxtField = new JTextField(15);
+        projectManagerTxtField.setBounds(250, 200, 193, 29);
+
+        createProjectPanel.add(startDateTxtField);
+        createProjectPanel.add(endDateTxtField);
+        createProjectPanel.add(projectManagerTxtField);
+        createProjectPanel.add(budgetTxtField);
+        createProjectPanel.add(monthSelStart);
+        createProjectPanel.add(yearSelStart);
+        createProjectPanel.add(yearSelFin);
+        createProjectPanel.add(monthSelFin);
+    }
+
+    private void addLabelsToScreen() {
+        startDateLabel = new JLabel();
+        startDateLabel.setText("Start date");
+        startDateLabel.setBounds(25, 50, 193, 29);
+
+        endDateLabel = new JLabel();
+        endDateLabel.setText("End date");
+        endDateLabel.setBounds(25, 100, 193, 29);
+
+        budgetLabel = new JLabel();
+        budgetLabel.setText("Budget");
+        budgetLabel.setBounds(25, 150, 193, 29);
+
+        asignPMLabel = new JLabel();
+        asignPMLabel.setText("Assign project manager");
+        asignPMLabel.setBounds(25, 200, 193, 29);
+
+        createProjectPanel.add(startDateLabel);
+        createProjectPanel.add(endDateLabel);
+        createProjectPanel.add(budgetLabel);
+        createProjectPanel.add(asignPMLabel);
+    }
+
     public void setVisible(boolean visi){
         createProjectPanel.setVisible(visi);
     }
+
     public void clear() {
-        startDate.setText("");
-        endDate.setText("");
-        projectManager.setText("");
-        budget1.setText("");
+        startDateTxtField.setText("");
+        endDateTxtField.setText("");
+        projectManagerTxtField.setText("");
+        budgetTxtField.setText("");
+        monthSelStart.setSelectedItem("January");
+        monthSelFin.setSelectedItem("January");
+        yearSelStart.setSelectedItem(year);
+        yearSelFin.setSelectedItem(year);
 
+    }
 
+    private Vector getYears() {
+        Calendar now = Calendar.getInstance();
+        year = now.get(Calendar.YEAR);
+        Vector v = new Vector();
+        for (int i = year; i <= 2030; i++) {
+            v.add(i);
+        }
+        return v;
     }
 
 }
