@@ -16,27 +16,23 @@ public class Main {
     //initialize button, panel, label, and text field
     JFrame frame;
     JButton loginBtn, createProjectBtn;
-    JPanel panelMenu,newPanel;
+    JPanel newPanel;
     JLabel userLabel;
     JTextField textField1;
     private JPanel panel1;
-    private JCheckBox checkBox1;
     boolean managerCheckBox = false;
-    boolean b;
     Developer user;
 
     public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    Main screen = new Main();
-                    SoftwareHuset.startProgram();
-                    screen.frame.setLocationRelativeTo(null);
-                    screen.frame.setSize(500,500);
-                    screen.frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+        EventQueue.invokeLater(() -> {
+            try {
+                Main screen = new Main();
+                SoftwareHuset.startProgram();
+                screen.frame.setLocationRelativeTo(null);
+                screen.frame.setSize(500,500);
+                screen.frame.setVisible(true);
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         });
     }
@@ -78,7 +74,7 @@ public class Main {
 
 
         //create checkbox
-        checkBox1 = new JCheckBox("As project manager");
+        JCheckBox checkBox1 = new JCheckBox("As project manager");
         userLabel.setBounds(75, 25, 193, 29);
         newPanel.add(userLabel);    //set username label to panel
         textField1.setBounds(225, 25, 193, 29);
@@ -90,51 +86,39 @@ public class Main {
         createProjectBtn.setBounds(255, 100, 193, 45);
         newPanel.add(createProjectBtn);
 
-        checkBox1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                managerCheckBox = !managerCheckBox;
+        checkBox1.addActionListener(e -> managerCheckBox = !managerCheckBox);
 
-            }
-        });
+        loginBtn.addActionListener(e -> {
+            String userValue = textField1.getText();        //get user entered username from the textField1
+            DeveloperPage.setUser(SoftwareHuset.getDeveloper(userValue));
+            ProjectManagerPage.setUser(SoftwareHuset.getDeveloper(userValue));
 
-        loginBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String userValue = textField1.getText();        //get user entered username from the textField1
-                DeveloperPage.setUser(SoftwareHuset.getDeveloper(userValue));
-                ProjectManagerPage.setUser(SoftwareHuset.getDeveloper(userValue));
-
-                if (SoftwareHuset.isDeveloper(userValue)) {
-                    user = SoftwareHuset.getDeveloper(userValue);
-                    if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
-                        //create instance of the NewPage
-                        //make page visible to the user
-                        setVisible(false);
-                        ProjectManagerPage.createList(user);
-                        projectManagerPage.setVisible(true);
+            if (SoftwareHuset.isDeveloper(userValue)) {
+                user = SoftwareHuset.getDeveloper(userValue);
+                if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
+                    //create instance of the NewPage
+                    //make page visible to the user
+                    setVisible(false);
+                    ProjectManagerPage.createList(user);
+                    ProjectManagerPage.setVisible(true);
 
 
-                    } else if (!managerCheckBox)  {
+                } else if (!managerCheckBox)  {
 
-                        setVisible(false);
-                        developerPage.setVisible(true);
-
-                    }
+                    setVisible(false);
+                    DeveloperPage.setVisible(true);
 
                 }
+
             }
         });
 
 
-        createProjectBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                newProjectPage.setVisible(true);
+        createProjectBtn.addActionListener(e -> {
+            setVisible(false);
+            newProjectPage.setVisible(true);
 
 
-            }
         });
         newProjectPage = new CreateProjectPage(softwareHuset,this);
         developerPage = new DeveloperPage(softwareHuset, this);

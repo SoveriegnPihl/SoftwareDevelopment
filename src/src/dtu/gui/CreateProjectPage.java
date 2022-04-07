@@ -1,10 +1,8 @@
 package dtu.gui;
-import dtu.employees.Developer;
 
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.time.Month;
 import java.time.Year;
 import java.util.Calendar;
@@ -23,7 +21,6 @@ public class CreateProjectPage {
     JTextField startDateTxtField, endDateTxtField, projectManagerTxtField, budgetTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    Developer user;
     private int year;
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
@@ -51,31 +48,28 @@ public class CreateProjectPage {
 
 
 
-        createProjectBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                String startWeekTxt = startDateTxtField.getText();
-                String endWeekTxt = endDateTxtField.getText();
-                String budgetTxt = budgetTxtField.getText();
-                String projectManagerTxt = projectManagerTxtField.getText();
+        createProjectBtn.addActionListener(e -> {
+            String startWeekTxt = startDateTxtField.getText();
+            String endWeekTxt = endDateTxtField.getText();
+            String budgetTxt = budgetTxtField.getText();
+            String projectManagerTxt = projectManagerTxtField.getText();
 
-                //getting date intervals
-                GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                        monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
+            //getting date intervals
+            GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                    monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
 
-                GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                        monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
+            GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                    monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
 
-                int project = SoftwareHuset.createProject(startDate, endDate,Integer.parseInt(budgetTxt));
+            int project = SoftwareHuset.createProject(startDate, endDate,Integer.parseInt(budgetTxt));
 
-                if(!projectManagerTxt.isEmpty()) {
-                    SoftwareHuset.assignPM(projectManagerTxt, project);
-            }
-            setVisible(false);
-            clear();
-            parentWindow.setVisible(true);
+            if(!projectManagerTxt.isEmpty()) {
+                SoftwareHuset.assignPM(projectManagerTxt, project);
+        }
+        setVisible(false);
+        clear();
+        parentWindow.setVisible(true);
 
-            }
         });
 
     }

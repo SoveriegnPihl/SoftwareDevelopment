@@ -118,18 +118,16 @@ public class RegisterHours {
              writeProject.setVisible(false);
 
             submitButton.addActionListener(e -> {
-               if(!checked) {
-                   GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
-                   TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
-                   Activity activity = activityList[activityCombo.getSelectedIndex()];
+                GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
+                TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
+                if(!checked) {
+                    Activity activity = activityList[activityCombo.getSelectedIndex()];
                    activity.registerTime(timeRegistration);
                    System.out.println(timeRegistration.getAmountOfTime());
                    System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser, date).toString());
                    System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
                } else {
-                   GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
-                   TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
-                   int i = activeBox.getSelectedIndex();
+                    int i = activeBox.getSelectedIndex();
                    Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
                    activity2.registerTime(timeRegistration);
                }
@@ -173,14 +171,14 @@ public class RegisterHours {
         activeBox.setBounds(250, 110, 193, 29);
         registerHours.add(activeBox);
 
-        for (Activity activity : project11.activities.keySet()) {
+        for (Activity activity : project11.activities.values()) {
             activeBox.addItem(activity.name);
         }
         projectComboNotAssigned.addActionListener(e -> {
         project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(projectComboNotAssigned.getSelectedIndex()));
         activeBox.removeAllItems();
 
-        for (Activity activity : project11.activities.keySet()) {
+        for (Activity activity : project11.activities.values()) {
             activeBox.addItem(activity.name);
             }
         });

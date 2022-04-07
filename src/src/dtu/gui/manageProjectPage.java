@@ -1,10 +1,8 @@
 package dtu.gui;
-import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.event.*;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.Vector;
@@ -21,7 +19,6 @@ public class manageProjectPage {
     JTextField startDateTxtField, endDateTxtField, budgetTxtField, projectManagerTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    Developer user;
     private int year;
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
@@ -51,9 +48,9 @@ public class manageProjectPage {
 
 
         saveBtn.addActionListener(e -> {
-            projectToManage.startWeek = Integer.parseInt(startDateTxtField.getText());
-            projectToManage.endWeek = Integer.parseInt(endDateTxtField.getText());
-            projectToManage.budget = Integer.parseInt(budgetTxtField.getText());
+           // projectToManage.startWeek = Integer.parseInt(startDateTxtField.getText());
+            //projectToManage.endWeek = Integer.parseInt(endDateTxtField.getText());
+           // projectToManage.budget = Integer.parseInt(budgetTxtField.getText());
 
             setVisible(false);
             clear();

@@ -2,14 +2,12 @@ package dtu.project;
 
 import dtu.employees.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
 public class Activity {
     int estimatedTime;
-    Developer developer;
     HashMap<Developer,int[]> developers;
     public String name;
     GregorianCalendar startDate, endDate;
@@ -29,6 +27,7 @@ public class Activity {
     public ArrayList<Developer> getDevelopers(){
         return new ArrayList<>(developers.keySet());
     }
+
     public String getName(){
         return name;
     }
@@ -42,10 +41,6 @@ public class Activity {
 
     public void setBudget(int budget){
         this.budget = budget;
-    }
-
-    public String getName(){
-        return name;
     }
 
     public GregorianCalendar getStartDate(){return startDate;}

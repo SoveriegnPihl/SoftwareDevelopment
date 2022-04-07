@@ -2,8 +2,6 @@ package dtu.gui;
 import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class ProjectManagerPage {
     static Developer loggedInUser;
@@ -41,7 +39,7 @@ public class ProjectManagerPage {
         projectManagerPage.add(selectLabel);
 
         viewDev.addActionListener(e -> {
-            OptionPane OP = new OptionPane(user1,"View available developers");
+            OptionPane OP = new OptionPane(loggedInUser,"View available developers");
         });
 
         changeProjBut.addActionListener(e -> {
@@ -61,11 +59,11 @@ public class ProjectManagerPage {
         });
 
         addDevToProj.addActionListener(e -> {
-            OptionPane OP = new OptionPane(user1,"Add developer to project");
+            OptionPane OP = new OptionPane(loggedInUser,"Add developer to project");
         });
 
         addDev.addActionListener(e -> {
-            OptionPane OP = new OptionPane(user1,"Add developer");
+            OptionPane OP = new OptionPane(loggedInUser,"Add developer");
         });
 
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);

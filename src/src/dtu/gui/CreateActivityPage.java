@@ -1,15 +1,10 @@
 package dtu.gui;
-
-import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.time.Month;
-import java.time.Year;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
@@ -22,7 +17,6 @@ public class CreateActivityPage {
     JTextField startDateTxtField, endDateTxtField, estTimeTxtField, projectTxtField, nameTxtField, budgetTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
-    Developer user;
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
     int year;
@@ -48,30 +42,27 @@ public class CreateActivityPage {
         saveBtn.setBounds(150, 350, 193, 29);
         createProjectPanel.add(saveBtn);
 
-        saveBtn.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                //date intervals
-                GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                        monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
+        saveBtn.addActionListener(e -> {
+            //date intervals
+            GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                    monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
 
-                GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                        monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
+            GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                    monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
 
-                //making activity
-                Activity newActivity = new Activity(nameTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
-                newActivity.setDateInterval(startDate, endDate);
-                newActivity.setBudget(Integer.parseInt(budgetTxtField.getText()));
+            //making activity
+            Activity newActivity = new Activity(nameTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
+            newActivity.setDateInterval(startDate, endDate);
+            newActivity.setBudget(Integer.parseInt(budgetTxtField.getText()));
 
-                //adding to project
-                Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
-                projectToAddTo.addActivity(newActivity);
+            //adding to project
+            Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
+            projectToAddTo.addActivity(newActivity);
 
-            setVisible(false);
-            clear();
-            DeveloperPage.setVisible(true);
+        setVisible(false);
+        clear();
+        DeveloperPage.setVisible(true);
 
-            }
         });
 
     }
