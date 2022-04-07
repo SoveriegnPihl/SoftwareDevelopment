@@ -50,8 +50,10 @@ public class DeveloperPage {
         regHbtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(loggedInUser, "Register hours worked");
-
+            RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
+            setVisible(false);
+            registerHours.createList(loggedInUser);
+            registerHours.setVisible(true);
             }
         });
 

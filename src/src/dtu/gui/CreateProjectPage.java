@@ -111,8 +111,6 @@ public class CreateProjectPage {
         endDate.setText("");
         projectManager.setText("");
         budget1.setText("");
-
-
     }
 
 }

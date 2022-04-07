@@ -4,7 +4,6 @@ import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
-import io.cucumber.java.bs.A;
 
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -36,6 +35,11 @@ public class SoftwareHuset {
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
         assignPM("ekki",projects.get(22001).getId());
+        Activity activity = new Activity("fodbold",5);
+        projects.get(22001).addDeveloper(developers.get("ekki"));
+        projects.get(22001).addActivity(activity,5,5,0,5);
+        activity.addDev(developers.get("ekki"),1,2);
+        System.out.println(projects.get(22001).userActivities(developers.get("ekki")).toString());
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs){
@@ -87,6 +91,10 @@ public class SoftwareHuset {
         this.dateServer = dateServer;
     }
 
+    public static Project getProject(String id){
+        return projects.get(id);
+    }
+
     public static int createProject(int startWeek, int endWeek, int budget){
         Project toAdd = new Project(startWeek, endWeek, budget);
         toAdd.printProject();
@@ -111,13 +119,31 @@ public class SoftwareHuset {
             System.out.println("");
         }
     }
-    public static ArrayList<String> projectList(Developer developer){
+    public static ArrayList<String> projectListManagers(Developer developer){
         ArrayList<String> projectlist = new ArrayList<>();
         String name = developer.getInitials();
         for (Integer var : projectManagers.keySet()){
             if (projectManagers.get(var).equals(name)){
                 projectlist.add(var.toString());
             }
+        }
+        return projectlist;
+    }
+    public static ArrayList<Project> projectListDeveloper(Developer developer){
+        ArrayList<Project> projectlist = new ArrayList<>();
+        String name = developer.getInitials();
+        for (Project var : projects.values()){
+            if (var.developerIsInProject(developer)){
+                projectlist.add(var);
+            }
+        }
+        return projectlist;
+    }
+
+    public static ArrayList<String> fullProjectList(){
+        ArrayList<String> projectlist = new ArrayList<>();
+        for (Project project : projects.values()){
+                projectlist.add(String.valueOf(project.getId()));
         }
         return projectlist;
     }

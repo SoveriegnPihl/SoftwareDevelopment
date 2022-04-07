@@ -3,13 +3,16 @@ package dtu.project;
 import dtu.employees.*;
 
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
+import java.util.List;
 
 public class Activity {
     int estimatedTime;
     Developer developer;
     HashMap<Developer,int[]> developers = new HashMap<>();
     public String name;
+    private List<TimeRegistration> timeRegistrations = new ArrayList<>();
 
     public Activity (String name, int time){
         this.name = name;
@@ -19,6 +22,11 @@ public class Activity {
         int[] act= {start, end};
         developers.put(dev,act);
     }
+    public ArrayList<Developer> getDevelopers(){
+        ArrayList<Developer> developerList = new ArrayList<>();
+        developerList.addAll(developers.keySet());
+        return developerList;
+    }
 
     public String getActivity(){
         return name;
@@ -27,5 +35,21 @@ public class Activity {
         estimatedTime = time;
     }
 
+    public void registerTime(TimeRegistration timeRegistration) {
+        timeRegistrations.add(timeRegistration);
+    }
+
+    public List<TimeRegistration> getTimeRegistrations() {
+        return timeRegistrations;
+    }
+
+    public TimeRegistration getTimeRegistrationForEmployeeOnDate(Developer developer, GregorianCalendar date) {
+        for (TimeRegistration t : this.timeRegistrations) {
+            if (t.match(developer, date)) {
+                return t;
+            }
+        }
+        return null;
+    }
 
 }

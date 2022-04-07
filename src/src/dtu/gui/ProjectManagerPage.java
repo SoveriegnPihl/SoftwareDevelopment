@@ -98,10 +98,10 @@ public class ProjectManagerPage {
         projectManagerPage.setVisible(visi);
     }
    public static void createList(Developer user){
-       String[] list = SoftwareHuset.projectList(user).toArray(new String[0]);
+       String[] list = SoftwareHuset.projectListManagers(user).toArray(new String[0]);
 
        projectList = new JComboBox(list);
-       projectList.setBounds(225, 25, 193, 29);
+       projectList.setBounds(250, 25, 193, 29);
        projectManagerPage.add(projectList);
 
     }

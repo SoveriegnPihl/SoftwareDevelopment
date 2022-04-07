@@ -1,8 +1,6 @@
 package dtu.project;
 
 import dtu.employees.*;
-import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.en_old.Ac;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -17,7 +15,7 @@ public class Project {
     public int budget;
     Manager pm;
 
-    ArrayList<Developer> developers = new ArrayList<Developer>();
+    static ArrayList<Developer> developers = new ArrayList<Developer>();
    // ArrayList<Activity> activities;
     public static HashMap<Activity, int[]> activities = new HashMap<>() ;
 
@@ -36,11 +34,32 @@ public class Project {
         return id;
     }
 
+    public static ArrayList<Activity> userActivities(Developer user){
+        ArrayList<Activity> developerList = new ArrayList<>();
+        if(developerIsInProject(user)) {
+            for (Activity activity : activities.keySet()) {
+                if (activity.developers.containsKey(user)) {
+                    developerList.add(activity);
+                }
+            }
 
+        }
+        return developerList;
+    }
+    public double getReportedTimeForActivity(Activity activity)  {
+        double reportedTime = 0;
+        for (TimeRegistration t : activity.getTimeRegistrations()) {
+            reportedTime += t.getAmountOfTime();
+        }
+        return reportedTime;
+    }
 
-    public void addActivity(Activity activity, int startW, int endW, int budget, int estimatedTime){
-        int[] act = {startW, endW, budget, estimatedTime};
-        if(act[0] >= startWeek && act[1] <= endWeek && budget < this.budget){
+    public void addActivity(Activity activity, int startW, int endW, int budget1, int estimatedTime){
+        int[] act = {startW, endW, budget1, estimatedTime};
+
+        System.out.println(startWeek+" "+endWeek+" "+budget+" "+id);
+        System.out.println(act[0]+" > " +startWeek+" "+act[1]+" < "+endWeek+" "+act[2]+" < "+ this.budget);
+        if(act[0] >= startWeek && act[1] <= endWeek && act[2] < this.budget){
             this.budget -= budget;
             activities.put(activity,act);
         } else {
@@ -61,7 +80,7 @@ public class Project {
         developers.add(dev);
     }
 
-    public boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
+    public static boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
 
     public void printProject(){
         System.out.println("Project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);
