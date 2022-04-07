@@ -129,7 +129,6 @@ public class CreateLoginForm extends JFrame  {
                 OP.setLocationRelativeTo(null);
                 OP.setVisible(true);
 
-
             }
         });
 

@@ -1,4 +1,5 @@
 package dtu.gui;
+
 import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
@@ -12,8 +13,8 @@ public class CreateProjectPage {
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel createProjectPanel;
-    JLabel userLabel,userLabel2,userLabel3,userLabel4;
-    JTextField startDate,endDate,projectManager,budget1;
+    JLabel userLabel, userLabel2, userLabel3, userLabel4;
+    JTextField startDate, endDate, projectManager, budget1;
     private JPanel panel1;
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
@@ -22,13 +23,17 @@ public class CreateProjectPage {
     Main parentWindow;
     Developer user;
 
+
+
+
     //calling constructor
-    public CreateProjectPage( SoftwareHuset softwareHuset, Main parentWindow) {
+    public CreateProjectPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
     }
-    public void initialize(){
+
+    public void initialize() {
         createProjectPanel = new JPanel();
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
@@ -57,7 +62,7 @@ public class CreateProjectPage {
 
         //create text field to get username from the user
         endDate = new JTextField(15);
-         endDate.setBounds(250, 100, 193, 29);
+        endDate.setBounds(250, 100, 193, 29);
 
         budget1 = new JTextField(15);
         budget1.setBounds(250, 150, 193, 29);
@@ -82,7 +87,6 @@ public class CreateProjectPage {
         createProjectPanel.add(b1);
 
 
-
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -93,28 +97,30 @@ public class CreateProjectPage {
                 String name = "New project";
 
 
-                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
-                if(!projectManager1.isEmpty()) {
+                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek), Integer.parseInt(endWeek), Integer.parseInt(budget));
+                if (!projectManager1.isEmpty()) {
                     SoftwareHuset.assignPM(projectManager1, project);
                 }
 
-                   // CreateLoginForm pmPage = new CreateLoginForm();
-                    //make page visible to the user
+                // CreateLoginForm pmPage = new CreateLoginForm();
+                //make page visible to the user
 
-                    setVisible(false);
-                    clear();
-                    parentWindow.setVisible(true);
-                    //pmPage.setLocationRelativeTo(null);
-                   // pmPage.setVisible(true);
+                setVisible(false);
+                clear();
+                parentWindow.setVisible(true);
+                //pmPage.setLocationRelativeTo(null);
+                // pmPage.setVisible(true);
 
 
             }
         });
 
     }
-    public void setVisible(boolean visi){
+
+    public void setVisible(boolean visi) {
         createProjectPanel.setVisible(visi);
     }
+
     public void clear() {
         startDate.setText("");
         endDate.setText("");
