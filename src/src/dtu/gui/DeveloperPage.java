@@ -11,10 +11,12 @@ import java.awt.event.ActionListener;
 //create NewPage class to create a new page on which user will navigate  
 public class DeveloperPage {
     static Developer loggedInUser;
-    JPanel developerPage;
+    static JPanel developerPage;
     JFrame frame;
     SoftwareHuset softwareHuset;
     Main parentWindow;
+    CreateActivityPage createActivityPage;
+    CreateProjectPage createProjectPage;
     int yCountL =50, yCountR = 50;
 
     DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) throws Exception {
@@ -39,7 +41,7 @@ public class DeveloperPage {
         JButton viewHbtn = makeLeftButton("View hours worked");
         JButton regSickBtn = makeLeftButton("Register sick day");
         JButton regHoliBtn = makeLeftButton("Register holiday");
-        JButton addActBtn = makeLeftButton("Add project activity");
+        JButton addActBtn = makeLeftButton("Add activity to project");
         JButton backBtn = makeLeftButton("Back");
 
         JButton addPmBtn = makeRightButton("Assign project manager");
@@ -78,14 +80,33 @@ public class DeveloperPage {
         addActBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                setVisible(false);
+                createActivityPage.setVisible(true);
 
             }
         });
 
+        regHoliBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //holiday
+
+            }
+        });
+
+        regSickBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                OptionPane OP = new OptionPane(loggedInUser,"Register sick day");
+
+            }
+        });
+
+        createActivityPage = new CreateActivityPage(softwareHuset,parentWindow);
+        createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
 
     }
-        public void setVisible(boolean visi){
+        public static void setVisible(boolean visi){
             developerPage.setVisible(visi);
         }
 

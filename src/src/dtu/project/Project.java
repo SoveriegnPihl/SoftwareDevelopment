@@ -38,8 +38,8 @@ public class Project {
 
 
 
-    public void addActivity(Activity activity, int startW, int endW, int budget){
-        int[] act= {startW, endW, budget};
+    public void addActivity(Activity activity, int startW, int endW, int budget, int estimatedTime){
+        int[] act = {startW, endW, budget, estimatedTime};
         if(act[0] >= startWeek && act[1] <= endWeek && budget < this.budget){
             this.budget -= budget;
             activities.put(activity,act);
@@ -64,6 +64,6 @@ public class Project {
     public boolean developerIsInProject(Developer dev){ return developers.contains(dev); }
 
     public void printProject(){
-        System.out.println("Project name: " + name + " project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);
+        System.out.println("Project id: " + id + " start week: " + startWeek + " endweek: " + endWeek + " budget " + budget);
     }
 }

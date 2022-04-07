@@ -12,18 +12,14 @@ import java.awt.event.*;
 public class manageProjectPage {
     //initialize button, panel, label, and text field
     Project thisProject;
-    JButton b1;
+    JButton saveBtn;
     JPanel createProjectPanel;
-    JLabel userLabel,userLabel2,userLabel3,userLabel4;
-    JTextField startDate,endDate,projectManager,budget1;
-    private JPanel panel1;
-    private JCheckBox checkBox1;
-    boolean managerCheckBox = false;
-    boolean b;
+    JLabel startDateLabel, endDateLabel, budgetLabel, projectManagerLabel;
+    JTextField startDateTxtField, endDateTxtField, budgetTxtField, projectManagerTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     Developer user;
-    private JButton b2;
+
 
     //calling constructor
     public manageProjectPage(SoftwareHuset softwareHuset, Main parentWindow) {
@@ -36,65 +32,28 @@ public class manageProjectPage {
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
 
+        //adding labels to screen
+        addLabelsToScreen();
 
-        //create label for username
-        userLabel = new JLabel();
-        userLabel.setText("Change Start date");      //set label value for textField1
-        userLabel.setBounds(25, 50, 193, 29);
+        //adding textfields to screen
+        addTextFieldsToScreen();
 
-        userLabel2 = new JLabel();
-        userLabel2.setText("Change End date");
-        userLabel2.setBounds(25, 100, 193, 29);
+        //adding save button
+        saveBtn = new JButton("Save"); //set label to button
+        saveBtn.setBounds(150, 300, 193, 29);
+        createProjectPanel.add(saveBtn);
 
-        userLabel3 = new JLabel();
-        userLabel3.setText("Change Budget");
-        userLabel3.setBounds(25, 150, 193, 29);
-
-        userLabel4 = new JLabel();
-        userLabel4.setText("Assign project manager");
-        userLabel4.setBounds(25, 200, 193, 29);
-
-        //create text field to get username from the user
-        startDate = new JTextField(15); //set length of the text
-        startDate.setBounds(250, 50, 193, 29);
-
-        //create text field to get username from the user
-        endDate = new JTextField(15);
-        endDate.setBounds(250, 100, 193, 29);
-
-        budget1 = new JTextField(15);
-        budget1.setBounds(250, 150, 193, 29);
-        //create submit button
-
-        projectManager = new JTextField(15);
-        projectManager.setBounds(250, 200, 193, 29);
-        //create submit button
-        b1 = new JButton("Save"); //set label to button
-        b1.setBounds(150, 300, 193, 29);
-
+        /*
         b2 = new JButton("Add developer to project"); //set label to button
         b2.setBounds(25, 250, 193, 29);
+        */
 
-
-        createProjectPanel.setLayout(null);
-        createProjectPanel.add(startDate);    //set username label to panel
-        createProjectPanel.add(endDate);   //set text field to panel
-        createProjectPanel.add(projectManager);
-        createProjectPanel.add(budget1);
-        createProjectPanel.add(userLabel);
-        createProjectPanel.add(userLabel2);
-        createProjectPanel.add(userLabel3);
-        createProjectPanel.add(userLabel4);
-        createProjectPanel.add(b1);
-
-
-
-        b1.addActionListener(new ActionListener() {
+        saveBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                thisProject.startWeek = Integer.parseInt(startDate.getText());        //get user entered username from the textField1
-                thisProject.endWeek = Integer.parseInt(startDate.getText());
-                thisProject.budget = Integer.parseInt(startDate.getText());
+                thisProject.startWeek = Integer.parseInt(startDateTxtField.getText());
+                thisProject.endWeek = Integer.parseInt(endDateTxtField.getText());
+                thisProject.budget = Integer.parseInt(budgetTxtField.getText());
                // String projectManager1 = projectManager.getText();
               //  String name = "New project";
 
@@ -110,18 +69,60 @@ public class manageProjectPage {
         createProjectPanel.setVisible(visi);
     }
     public void clear() {
-        startDate.setText("");
-        endDate.setText("");
-        projectManager.setText("");
-        budget1.setText("");
+        startDateTxtField.setText("");
+        endDateTxtField.setText("");
+        projectManagerTxtField.setText("");
+        budgetTxtField.setText("");
 
     }
     public void setLabels(String project ){
 
         thisProject = SoftwareHuset.projects.get(Integer.parseInt(project));
 
-        startDate.setText(String.valueOf(thisProject.startWeek));
-        endDate.setText(String.valueOf(thisProject.endWeek));
-        budget1.setText(String.valueOf(thisProject.budget));
+        startDateTxtField.setText(String.valueOf(thisProject.startWeek));
+        endDateTxtField.setText(String.valueOf(thisProject.endWeek));
+        budgetTxtField.setText(String.valueOf(thisProject.budget));
+    }
+
+    private void addLabelsToScreen(){
+        startDateLabel = new JLabel();
+        startDateLabel.setText("Change Start date");      //set label value for textField1
+        startDateLabel.setBounds(25, 50, 193, 29);
+
+        endDateLabel = new JLabel();
+        endDateLabel.setText("Change End date");
+        endDateLabel.setBounds(25, 100, 193, 29);
+
+        budgetLabel = new JLabel();
+        budgetLabel.setText("Change Budget");
+        budgetLabel.setBounds(25, 150, 193, 29);
+
+        projectManagerLabel = new JLabel();
+        projectManagerLabel.setText("Assign project manager");
+        projectManagerLabel.setBounds(25, 200, 193, 29);
+
+        createProjectPanel.add(startDateLabel);
+        createProjectPanel.add(endDateLabel);
+        createProjectPanel.add(budgetLabel);
+        createProjectPanel.add(projectManagerLabel);
+    }
+
+    private void addTextFieldsToScreen(){
+        startDateTxtField = new JTextField(15); //set length of the text
+        startDateTxtField.setBounds(250, 50, 193, 29);
+
+        endDateTxtField = new JTextField(15);
+        endDateTxtField.setBounds(250, 100, 193, 29);
+
+        budgetTxtField = new JTextField(15);
+        budgetTxtField.setBounds(250, 150, 193, 29);
+
+        projectManagerTxtField = new JTextField(15);
+        projectManagerTxtField.setBounds(250, 200, 193, 29);
+
+        createProjectPanel.add(startDateTxtField);
+        createProjectPanel.add(endDateTxtField);
+        createProjectPanel.add(projectManagerTxtField);
+        createProjectPanel.add(budgetTxtField);
     }
 }
