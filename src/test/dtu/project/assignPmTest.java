@@ -40,11 +40,11 @@ public class assignPmTest {
         assertThat(developer.getInitials(), is(equalTo(name)));
     }
 
-    @And("there is a project named {string}")
+    /*@And("there is a project named {string}")
     public void thereIsAProjectNamed(String name) {
         project = new Project(1,1,1);
         assertThat(project.name,is(equalTo((name))));
-    }
+    }*/
 
     @When("the developer assigns the project manager with initials {string}")
     public void theDeveloperAssignsTheProjectManagerWithInitials(String arg0) {

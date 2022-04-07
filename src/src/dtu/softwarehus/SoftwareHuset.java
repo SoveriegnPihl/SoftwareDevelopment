@@ -6,11 +6,14 @@ import dtu.project.Project;
 import dtu.project.Report;
 import io.cucumber.java.bs.A;
 
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import java.io.File;
 import java.util.*;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -20,44 +23,25 @@ public class SoftwareHuset {
     public static HashMap<Integer, Project> projects;
     //public static  ArrayList<Project> projects;
     private DateServer dateServer;
+    public static ArrayList<String[]> csvProjectData;
+    public static ArrayList<String[]> csvDeveloperData;
 
     public SoftwareHuset() {
     }
 
     public static void startProgram() {
-        readProjectsFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv");
+        readFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv");
 
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        int project = createProject( 1,10,50000);
-        assignPM("ekki",project);
-        Activity test = new Activity("test",50);
-        projects.get(project).addActivity(test, 1, 5, 5000);
-        System.out.println(developers.get("ekki"));
-        test.addDev(developers.get("ekki"),2,3);
-
-        /*
-        addDeveloper("ekki");
-        addDeveloper("vic7");
-        addDeveloper("jako");
-        addDeveloper("jlm");
-
-        developers.get("ekki").setOccupied(false);
-        developers.get("vic7").setOccupied(false);
-        developers.get("jako").setOccupied(true);
-        developers.get("jlm").setOccupied(false);
-
-
-        developers.get("ekki").setToProjectManager();
-        Project testProject = new Project("22001", 1,2,4);
-        projects.add(testProject);*/
-
+        assignPM("ekki",projects.get(22001).getId());
     }
 
-    public static void readProjectsFromCSV(String filePathProj, String filePathDevs){
+    public static void readFromCSV(String filePathProj, String filePathDevs){
         projects = new HashMap<>();
         developers = new HashMap<>();
+        csvProjectData = new ArrayList<>();
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
@@ -66,13 +50,15 @@ public class SoftwareHuset {
             while (sc1.hasNextLine()){
                 String[] att = sc1.nextLine().split(",");
                 createProject(Integer.parseInt(att[1]),Integer.parseInt(att[2]),Integer.parseInt(att[3]));
+                csvProjectData.add(att);
+
             }
             sc1.close();
 
             while (sc2.hasNext()){
-                String initials = sc2.next();
-                addDeveloper(initials);
-                System.out.println(initials);
+                String[] initialsarr = {sc2.next()};
+                addDeveloper(initialsarr[0]);
+                csvDeveloperData.add(initialsarr);
             }
             sc2.close();
 
@@ -83,13 +69,14 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String name) {
+        csvDeveloperData = new ArrayList<>();
 
-            Developer newDeveloper = new Developer(name);
-            developers.put(name,newDeveloper);
-            if(developers.containsKey(name)){
-                System.out.println("Success");
-            }
+        Developer newDeveloper = new Developer(name);
+        developers.put(name,newDeveloper);
+        if(developers.containsKey(name)){
+            System.out.println("Success");
         }
+    }
 
     public void setDateServer(DateServer dateServer) {
         this.dateServer = dateServer;
@@ -102,6 +89,9 @@ public class SoftwareHuset {
 
         Project toAdd = new Project(startWeek, endWeek, budget);
         toAdd.printProject();
+
+        csvProjectData.add(new String[] {String.valueOf(toAdd.getId()), String.valueOf(startWeek), String.valueOf(endWeek), String.valueOf(budget)});
+
         projects.put(toAdd.getId(),toAdd);
         return toAdd.getId();
 
@@ -129,7 +119,7 @@ public class SoftwareHuset {
         return projectlist;
     }
 
-    public String listDevelopers(){
+    public static String listDevelopers(){
         StringBuilder str = new StringBuilder();
 
         for (Developer var : developers.values()){
@@ -178,6 +168,41 @@ public class SoftwareHuset {
         return false;
     }
 
+    public void writeToCSV(String file){
+
+        if (Objects.equals(file, "projects")){
+            try(PrintWriter writer = new PrintWriter("src/src/dtu/data/projects.csv")){
+                csvProjectData.stream().map(this::convertToCSV).forEach(writer::println);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if (Objects.equals(file, "developers")){
+            try(PrintWriter writer = new PrintWriter("src/src/dtu/data/developers.csv")){
+                csvDeveloperData.stream().map(this::convertToCSV).forEach(writer::println);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else{
+            System.out.println("ikke en eksisterende csv fil");
+        }
+
+    }
+
+    public String convertToCSV(String[] data) {
+        return Stream.of(data).map(this::escapeSpecialCharacters).collect(Collectors.joining(","));
+    }
+
+    public String escapeSpecialCharacters(String data) {
+        String escapedData = data.replaceAll("\\R", " ");
+        if (data.contains(",") || data.contains("\"") || data.contains("'")) {
+            data = data.replace("\"", "\"\"");
+            escapedData = "\"" + data + "\"";
+        }
+        return escapedData;
+    }
+
 }
-
-

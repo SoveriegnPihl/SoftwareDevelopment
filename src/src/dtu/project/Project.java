@@ -36,9 +36,7 @@ public class Project {
         return id;
     }
 
-    Report createReport(){
-        return new Report();
-    }
+
 
     public void addActivity(Activity activity, int startW, int endW, int budget){
         int[] act= {startW, endW, budget};

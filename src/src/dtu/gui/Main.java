@@ -12,10 +12,10 @@ public class Main {
     SoftwareHuset softwareHuset;
     DeveloperPage developerPage;
     ProjectManagerPage projectManagerPage;
-    CreateProjectPage OP;
+    CreateProjectPage newProjectPage;
     //initialize button, panel, label, and text field
     JFrame frame;
-    JButton b1,b2;
+    JButton loginBtn, createProjectBtn;
     JPanel panelMenu,newPanel;
     JLabel userLabel;
     JTextField textField1;
@@ -51,7 +51,7 @@ public class Main {
     initialize();
     }
 
-    private void initialize(){
+    private void initialize() throws Exception {
         frame = new JFrame();
         frame.setBounds(100, 100, 500,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -72,9 +72,9 @@ public class Main {
         textField1 = new JTextField(15);    //set length of the text
 
         //create submit button
-        b1 = new JButton("Login"); //set label to button
+        loginBtn = new JButton("Login"); //set label to button
 
-        b2 = new JButton("Create project");
+        createProjectBtn = new JButton("Create project");
 
 
         //create checkbox
@@ -85,10 +85,10 @@ public class Main {
         newPanel.add(textField1);   //set text field to panel
         checkBox1.setBounds(50, 55, 193, 29);
         newPanel.add(checkBox1);
-        b1.setBounds(55, 100, 193, 45);
-        newPanel.add(b1);
-        b2.setBounds(255, 100, 193, 45);
-        newPanel.add(b2);
+        loginBtn.setBounds(55, 100, 193, 45);
+        newPanel.add(loginBtn);
+        createProjectBtn.setBounds(255, 100, 193, 45);
+        newPanel.add(createProjectBtn);
 
         checkBox1.addActionListener(new ActionListener() {
             @Override
@@ -98,7 +98,7 @@ public class Main {
             }
         });
 
-        b1.addActionListener(new ActionListener() {
+        loginBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 String userValue = textField1.getText();        //get user entered username from the textField1
@@ -127,17 +127,17 @@ public class Main {
         });
 
 
-        b2.addActionListener(new ActionListener() {
+        createProjectBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
-                OP.setVisible(true);
+                newProjectPage.setVisible(true);
 
 
             }
         });
-        OP = new CreateProjectPage(softwareHuset,this);
-        developerPage = new DeveloperPage(softwareHuset,this);
+        newProjectPage = new CreateProjectPage(softwareHuset,this);
+        developerPage = new DeveloperPage(softwareHuset, this);
         projectManagerPage= new ProjectManagerPage(softwareHuset,this);
 
     }

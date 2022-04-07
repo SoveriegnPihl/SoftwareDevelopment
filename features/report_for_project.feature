@@ -7,7 +7,6 @@ Feature: Get report for a project
   Scenario: Get project report
     Given that there is a Developer with initials "ekki"
     And that the developer is a procject manager
-    Then The developer is a project manager
     And there is a project with id "22001"
     When the procject manager requests a report for the project
     Then the procject manager get's the project report

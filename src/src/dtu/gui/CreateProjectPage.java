@@ -1,10 +1,12 @@
 package dtu.gui;
-
 import dtu.employees.Developer;
+import dtu.employees.Developer;
+
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.event.*;
+
 
 //create CreateLoginForm class to create login form
 //class extends JFrame to create a window where our component add
@@ -13,8 +15,8 @@ public class CreateProjectPage {
     //initialize button, panel, label, and text field
     JButton b1;
     JPanel createProjectPanel;
-    JLabel userLabel, userLabel2, userLabel3, userLabel4;
-    JTextField startDate, endDate, projectManager, budget1;
+    JLabel userLabel,userLabel2,userLabel3,userLabel4;
+    JTextField startDate,endDate,projectManager,budget1;
     private JPanel panel1;
     private JCheckBox checkBox1;
     boolean managerCheckBox = false;
@@ -23,17 +25,13 @@ public class CreateProjectPage {
     Main parentWindow;
     Developer user;
 
-
-
-
     //calling constructor
-    public CreateProjectPage(SoftwareHuset softwareHuset, Main parentWindow) {
+    public CreateProjectPage( SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
     }
-
-    public void initialize() {
+    public void initialize(){
         createProjectPanel = new JPanel();
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
@@ -87,6 +85,7 @@ public class CreateProjectPage {
         createProjectPanel.add(b1);
 
 
+
         b1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -97,8 +96,16 @@ public class CreateProjectPage {
                 String name = "New project";
 
 
-                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek), Integer.parseInt(endWeek), Integer.parseInt(budget));
-                if (!projectManager1.isEmpty()) {
+                int project = SoftwareHuset.createProject(Integer.parseInt(startWeek),Integer.parseInt(endWeek),Integer.parseInt(budget));
+                if(!projectManager1.isEmpty()) {
+                    SoftwareHuset.assignPM(projectManager1, project);
+                }
+
+                SoftwareHuset.csvProjectData.add(new String[] {String.valueOf(project), startWeek, endWeek, budget});
+
+                softwareHuset.writeToCSV("projects");
+
+                if(!projectManager1.isEmpty()) {
                     SoftwareHuset.assignPM(projectManager1, project);
                 }
 
@@ -116,16 +123,16 @@ public class CreateProjectPage {
         });
 
     }
-
-    public void setVisible(boolean visi) {
+    public void setVisible(boolean visi){
         createProjectPanel.setVisible(visi);
     }
-
     public void clear() {
         startDate.setText("");
         endDate.setText("");
         projectManager.setText("");
         budget1.setText("");
 
+
     }
+
 }
