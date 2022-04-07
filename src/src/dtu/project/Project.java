@@ -49,8 +49,8 @@ public class Project {
 
         System.out.println(startWeek+" "+endWeek+" "+budget+" "+id);
         System.out.println(act[0]+" > " +startWeek+" "+act[1]+" < "+endWeek+" "+act[2]+" < "+ this.budget);
-        if(act[0] >= startWeek && act[1] <= endWeek && act[2] < this.budget){
-            this.budget -= budget;
+        if(act[0] >= startWeek && act[1] <= endWeek && act[2] <= this.budget){
+            this.budget -= budget1;
             activities.put(activity,act);
         } else {
             System.out.println("add act virker ik");

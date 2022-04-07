@@ -10,22 +10,20 @@ import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 public class RegisterHours {
     private static JPanel registerHours;
     private final Main parentWindow;
-    private static JComboBox<Object> projectList;
-    private static JComboBox<String> projectList2,projectList3;
-    private static JComboBox activeBox;
+    private static JComboBox<Object> activityCombo;
+    private static JComboBox<String> projectsComboBox,projectComboNotAssigned;
+    private static JComboBox<Object> activeBox;
     private static Developer loggedInUser;
     private JLabel selectLabel,userLabel5;
     private boolean checked = false;
     JCheckBox checkBox1;
     private JComboBox<Integer> hoursCB;
     static Activity[] activityList;
-    static List<String> firstActivityList;
-    static List<String> secondActivityList;
+    static Project project11;
 
 
     public RegisterHours(Developer loggedInUser, Main parentWindow) {
@@ -120,17 +118,27 @@ public class RegisterHours {
              writeProject.setVisible(false);
 
             submitButton.addActionListener(e -> {
-                GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH,2);
-                TimeRegistration timeRegistration = new TimeRegistration(loggedInUser,date, hoursCB.getSelectedIndex());
-                Activity activity = activityList[projectList.getSelectedIndex()];
-                activity.registerTime(timeRegistration);
+               if(!checked) {
+                   GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
+                   TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
+                   Activity activity = activityList[activityCombo.getSelectedIndex()];
+                   activity.registerTime(timeRegistration);
+                   System.out.println(timeRegistration.getAmountOfTime());
+                   System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser, date).toString());
+                   System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
+               } else {
+                   GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
+                   TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
+                   int i = activeBox.getSelectedIndex();
+                   Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
+                   activity2.registerTime(timeRegistration);
+               }
                 setVisible(false);
                 removeList();
                 clear();
                 DeveloperPage.setVisible(true);
-                System.out.println(timeRegistration.getAmountOfTime());
-                System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser,date).toString());
-                System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
+
+
             });
 
         }
@@ -138,11 +146,11 @@ public class RegisterHours {
 
     public void setLabelVisible(boolean visible){
         userLabel5.setVisible(visible);
-        projectList3.setVisible(visible);
+        projectComboNotAssigned.setVisible(visible);
         activeBox.setVisible(visible);
         selectLabel.setVisible(!visible);
-        projectList2.setVisible(!visible);
-        projectList.setVisible(!visible);
+        projectsComboBox.setVisible(!visible);
+        activityCombo.setVisible(!visible);
 
     }
 
@@ -155,75 +163,58 @@ public class RegisterHours {
 
     public static void createProjectList(){
         String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
-        projectList3 = new JComboBox<>(list);
-        projectList3.setBounds(250, 75, 193, 29);
-        registerHours.add(projectList3);
-        secondActivityList = new ArrayList<>();
-        String project = projectList3.getItemAt(0);
-        Project project1 =  SoftwareHuset.getProject(project);
+        projectComboNotAssigned = new JComboBox<>(list);
+        projectComboNotAssigned.setBounds(250, 75, 193, 29);
+        registerHours.add(projectComboNotAssigned);
 
-        for (Activity activity : project1.activities.keySet()) {
-            secondActivityList.add(activity.name);
-        }
+        project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(0));
 
-        projectList3.addActionListener(e -> {
-            String project2 = projectList3.getItemAt(projectList3.getSelectedIndex());
-        Project project11 =  SoftwareHuset.getProject(project2);
-
-        for (int i = 0; i < secondActivityList.size(); i++) {
-            secondActivityList.remove(i);
-        }
-
-        for (Activity activity : project11.activities.keySet()) {
-            secondActivityList.add(activity.name);
-        }
-        activeBox.removeAllItems();
-        activeBox.setModel(new DefaultComboBoxModel<>(secondActivityList.toArray()));
-
-            });
-        activeBox = new JComboBox<>(secondActivityList.toArray(new String[0]));
+        activeBox = new JComboBox<>();
         activeBox.setBounds(250, 110, 193, 29);
         registerHours.add(activeBox);
 
+        for (Activity activity : project11.activities.keySet()) {
+            activeBox.addItem(activity.name);
+        }
+        projectComboNotAssigned.addActionListener(e -> {
+        project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(projectComboNotAssigned.getSelectedIndex()));
+        activeBox.removeAllItems();
+
+        for (Activity activity : project11.activities.keySet()) {
+            activeBox.addItem(activity.name);
+            }
+        });
     }
     public static void createList(Developer user){
         ArrayList<Project> list = SoftwareHuset.projectListDeveloper(user);
-        List<String> projectList123 = new ArrayList<>();
+        projectsComboBox = new JComboBox<>();
+        projectsComboBox.setBounds(250, 75, 193, 29);
+        registerHours.add(projectsComboBox);
+
         for (Project project: list) {
-            projectList123.add(String.valueOf(project.getId()));
+            projectsComboBox.addItem(String.valueOf(project.getId()));
         }
-        projectList2 = new JComboBox<>(projectList123.toArray(new String[0]));
-        projectList2.setBounds(250, 75, 193, 29);
-        projectList2.setSelectedIndex(0);
-        registerHours.add(projectList2);
-        firstActivityList = new ArrayList<>();
-        String project = projectList2.getItemAt(0);
-        System.out.println(projectList2.getItemAt(0));
+        activityCombo = new JComboBox<>();
+        activityCombo.setBounds(250, 110, 193, 29);
+        registerHours.add(activityCombo);
+
+        String project = projectsComboBox.getItemAt(0);
         activityList = SoftwareHuset.getProject(project).userActivities(loggedInUser).toArray(new Activity[0]);
         for (Activity activity : activityList) {
-            firstActivityList.add(activity.name);
+            activityCombo.addItem(activity.name);
         }
 
-        projectList2.addActionListener(e -> {
-        String project1 = projectList2.getItemAt(projectList2.getSelectedIndex());
+        projectsComboBox.addActionListener(e -> {
+        String project1 = projectsComboBox.getItemAt(projectsComboBox.getSelectedIndex());
+        activityCombo.removeAllItems();
         activityList = SoftwareHuset.getProject(project1).userActivities(loggedInUser).toArray(new Activity[0]);
-            for (int i = 0; i < firstActivityList.size(); i++) {
-                firstActivityList.remove(i);
-            }
         for (Activity activity : activityList) {
-            firstActivityList.add(activity.name);
-        }
-        System.out.println(firstActivityList);
-            projectList.removeAllItems();
-            projectList.setModel(new DefaultComboBoxModel<>(firstActivityList.toArray()));
-
+            activityCombo.addItem(activity.name);
+            }
         });
-        projectList = new JComboBox<>(firstActivityList.toArray(new String[0]));
-        projectList.setBounds(250, 110, 193, 29);
-        registerHours.add(projectList);
     }
     public static void removeList(){
-        projectList.remove(projectList);
+        activityCombo.remove(activityCombo);
 
     }
 

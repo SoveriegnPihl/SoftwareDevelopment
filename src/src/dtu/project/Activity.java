@@ -25,6 +25,9 @@ public class Activity {
     public ArrayList<Developer> getDevelopers(){
         return new ArrayList<>(developers.keySet());
     }
+    public String getName(){
+        return name;
+    }
 
     public String getActivity(){
         return name;
