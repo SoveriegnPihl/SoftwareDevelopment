@@ -36,16 +36,13 @@ public class SoftwareHuset {
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
+        assignPM("vic7",projects.get(22002).getId());
         assignPM("ekki",projects.get(22001).getId());
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
         Activity activity = new Activity("fodbold",5);
         Activity activity2 = new Activity("film",5);
-       // projects.get(22001).addActivity(activity);
-       // projects.get(22001).addActivity(activity2);
-       // activity.addDev(developers.get("vic7"),1,2);
-       // activity2.addDev(developers.get("vic7"),1,2);
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs){
@@ -65,22 +62,18 @@ public class SoftwareHuset {
                 GregorianCalendar start = new GregorianCalendar(Integer.parseInt(att[1]), Integer.parseInt(att[2]),Integer.parseInt(att[3]));
                 GregorianCalendar end = new GregorianCalendar(Integer.parseInt(att[4]),Integer.parseInt(att[5]),Integer.parseInt(att[6]));
                 createProject(start,end,Integer.parseInt(att[7]));
-                //csvProjectData.add(att);
-
             }
             sc1.close();
 
             while (sc2.hasNext()){
                 String[] initialsarr = {sc2.next()};
                 addDeveloper(initialsarr[0]);
-                //csvDeveloperData.add(initialsarr);
             }
             sc2.close();
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
     public static void addDeveloper(String name) {

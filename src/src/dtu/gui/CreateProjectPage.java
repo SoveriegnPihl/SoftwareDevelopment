@@ -46,8 +46,6 @@ public class CreateProjectPage {
         createProjectBtn.setBounds(150, 300, 193, 29);
         createProjectPanel.add(createProjectBtn);
 
-
-
         createProjectBtn.addActionListener(e -> {
             String startWeekTxt = startDateTxtField.getText();
             String endWeekTxt = endDateTxtField.getText();
@@ -66,6 +64,7 @@ public class CreateProjectPage {
             if(!projectManagerTxt.isEmpty()) {
                 SoftwareHuset.assignPM(projectManagerTxt, project);
         }
+
         setVisible(false);
         clear();
         parentWindow.setVisible(true);

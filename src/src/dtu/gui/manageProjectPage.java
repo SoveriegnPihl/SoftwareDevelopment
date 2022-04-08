@@ -48,9 +48,11 @@ public class manageProjectPage {
 
 
         saveBtn.addActionListener(e -> {
-           // projectToManage.startWeek = Integer.parseInt(startDateTxtField.getText());
-            //projectToManage.endWeek = Integer.parseInt(endDateTxtField.getText());
-           // projectToManage.budget = Integer.parseInt(budgetTxtField.getText());
+            int[] newStartDate = {Integer.parseInt(startDateTxtField.getText()), monthSelStart.getSelectedIndex(), yearSelStart.getItemAt(yearSelStart.getSelectedIndex())};
+            int[] newEndDate = {Integer.parseInt(endDateTxtField.getText()), monthSelFin.getSelectedIndex(), yearSelFin.getItemAt(yearSelStart.getSelectedIndex())};
+            int newBudget = Integer.parseInt(budgetTxtField.getText());
+
+            projectToManage.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
 
             setVisible(false);
             clear();
@@ -62,6 +64,7 @@ public class manageProjectPage {
     public void setVisible(boolean visi){
         createProjectPanel.setVisible(visi);
     }
+
     public void clear() {
         startDateTxtField.setText("");
         endDateTxtField.setText("");
@@ -74,17 +77,14 @@ public class manageProjectPage {
 
     }
     public void setLabels(String project ){
-
         projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 
-        System.out.println(projectToManage.getDateDay("start"));
-
         startDateTxtField.setText(String.valueOf(projectToManage.getDateDay("start")));
-        monthSelStart.setSelectedItem(projectToManage.getDateMonth("start"));
+        monthSelStart.setSelectedIndex(projectToManage.getDateMonth("start"));
         yearSelStart.setSelectedItem(projectToManage.getDateYear("start"));
 
         endDateTxtField.setText(String.valueOf(projectToManage.getDateDay("end")));
-        monthSelFin.setSelectedItem(projectToManage.getDateMonth("end"));
+        monthSelFin.setSelectedIndex(projectToManage.getDateMonth("end"));
         yearSelFin.setSelectedItem(projectToManage.getDateYear("end"));
         budgetTxtField.setText(String.valueOf(projectToManage.budget));
     }
