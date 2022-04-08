@@ -53,11 +53,10 @@ public class manageProjectPage {
             int newBudget = Integer.parseInt(budgetTxtField.getText());
 
             projectToManage.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
+            SoftwareHuset.updateCSVFile();
 
             setVisible(false);
-            clear();
             ProjectManagerPage.setVisible(true);
-
         });
 
     }
@@ -65,17 +64,6 @@ public class manageProjectPage {
         createProjectPanel.setVisible(visi);
     }
 
-    public void clear() {
-        startDateTxtField.setText("");
-        endDateTxtField.setText("");
-        projectManagerTxtField.setText("");
-        budgetTxtField.setText("");
-        monthSelStart.setSelectedItem("January");
-        monthSelFin.setSelectedItem("January");
-        yearSelStart.setSelectedItem(year);
-        yearSelFin.setSelectedItem(year);
-
-    }
     public void setLabels(String project ){
         projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 

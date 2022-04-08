@@ -56,7 +56,7 @@ class OptionPane extends JFrame {
             alertFrame.setLocationRelativeTo(null);
             int isSick = JOptionPane.showConfirmDialog(alertFrame, "Are you gonna call in sick today?");
             if (isSick == JOptionPane.YES_OPTION){
-                DeveloperPage.loggedInUser.setOccupied(true);
+                DeveloperPage.loggedInUser.setSick();
             }
 
 

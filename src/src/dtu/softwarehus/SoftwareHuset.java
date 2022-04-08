@@ -103,7 +103,6 @@ public class SoftwareHuset {
                 String.valueOf(newProject.getDateMonth("start")),String.valueOf(newProject.getDateDay("start")),
                 String.valueOf(newProject.getDateYear("end")), String.valueOf(newProject.getDateMonth("end")),
                 String.valueOf(newProject.getDateDay("end")), String.valueOf(budget)});
-
         writeToCSV("projects");
 
         return newProject.getId();
@@ -205,6 +204,17 @@ public class SoftwareHuset {
     }
     public static Project getProject(String id){
         return projects.get(Integer.valueOf(id));
+    }
+
+    public static void updateCSVFile() {
+        csvProjectData.clear();
+        for (Project p : projects.values()){
+            csvProjectData.add(new String[] {String.valueOf(p.getId()), String.valueOf(p.getDateYear("start")),
+                    String.valueOf(p.getDateMonth("start")),String.valueOf(p.getDateDay("start")),
+                    String.valueOf(p.getDateYear("end")), String.valueOf(p.getDateMonth("end")),
+                    String.valueOf(p.getDateDay("end")), String.valueOf(p.getBudget())});
+        }
+        writeToCSV("projects");
     }
 
     public static void writeToCSV(String file){

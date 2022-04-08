@@ -114,8 +114,8 @@ public class RegisterHours {
             registerHours.add(checkBox1);
             registerHours.add(userLabel5);
             registerHours.add(writeProject);
-             userLabel5.setVisible(false);
-             writeProject.setVisible(false);
+            userLabel5.setVisible(false);
+            writeProject.setVisible(false);
 
             submitButton.addActionListener(e -> {
                 GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);

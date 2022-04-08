@@ -1,6 +1,5 @@
 package dtu.gui;
-import dtu.project.Activity;
-import dtu.project.Project;
+
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
@@ -9,24 +8,24 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
-
-public class CreateActivityPage {
+public class RegisterHoliday {
     JButton saveBtn;
     JPanel createProjectPanel;
-    JLabel startDateLabel, endDateLabel, budgetLabel, projectLabel, activityNameLabel, estTimeLabel;
-    JTextField startDateTxtField, endDateTxtField, estTimeTxtField, projectTxtField, nameTxtField, budgetTxtField;
+    JLabel startDateLabel, endDateLabel;
+    JTextField startDateTxtField, endDateTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
     int year;
 
-    public CreateActivityPage(SoftwareHuset softwareHuset, Main parentWindow) {
+    public RegisterHoliday(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
     }
-    public void initialize(){
+
+    public void initialize() {
         createProjectPanel = new JPanel();
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
@@ -50,44 +49,27 @@ public class CreateActivityPage {
             GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
                     monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
 
-            //making activity
-            Activity newActivity = new Activity(nameTxtField.getText(), Integer.parseInt(estTimeTxtField.getText()));
-            newActivity.setDateInterval(startDate, endDate);
-            newActivity.setBudget(Integer.parseInt(budgetTxtField.getText()));
+            DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
 
-            //adding to project
-            Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
-            projectToAddTo.addActivity(newActivity);
-
-        setVisible(false);
-        clear();
-        DeveloperPage.setVisible(true);
-
+            setVisible(false);
+            clear();
+            DeveloperPage.setVisible(true);
         });
-
     }
-    public void setVisible(boolean visi){
-        createProjectPanel.setVisible(visi);
-    }
-
     private void clear() {
-        nameTxtField.setText("");
         startDateTxtField.setText("");
         endDateTxtField.setText("");
-        projectTxtField.setText("");
-        estTimeTxtField.setText("");
-        budgetTxtField.setText("");
         monthSelStart.setSelectedIndex(0);
         monthSelFin.setSelectedIndex(0);
         yearSelStart.setSelectedItem(year);
         yearSelFin.setSelectedItem(year);
     }
 
-    private void addLabelsToScreen(){
-        activityNameLabel = new JLabel();
-        activityNameLabel.setText("Activity name");
-        activityNameLabel.setBounds(25, 50, 193, 29);
+    public void setVisible(boolean visi){
+        createProjectPanel.setVisible(visi);
+    }
 
+    private void addLabelsToScreen(){
         startDateLabel = new JLabel();
         startDateLabel.setText("Activity start date");
         startDateLabel.setBounds(25, 100, 193, 29);
@@ -96,31 +78,13 @@ public class CreateActivityPage {
         endDateLabel.setText("Activity end date");
         endDateLabel.setBounds(25, 150, 193, 29);
 
-        estTimeLabel = new JLabel();
-        estTimeLabel.setText("Estimated time");
-        estTimeLabel.setBounds(25, 200, 193, 29);
-
-        budgetLabel = new JLabel();
-        budgetLabel.setText("Budget");
-        budgetLabel.setBounds(25, 250, 193, 29);
-
-        projectLabel = new JLabel();
-        projectLabel.setText("Which project to assign activity to");
-        projectLabel.setBounds(25, 300, 193, 29);
 
         createProjectPanel.add(startDateLabel);
         createProjectPanel.add(endDateLabel);
-        createProjectPanel.add(budgetLabel);
-        createProjectPanel.add(projectLabel);
-        createProjectPanel.add(activityNameLabel);
-        createProjectPanel.add(estTimeLabel);
     }
 
     private void addTextFieldsToScreen(){
         Vector v = getYears();
-
-        nameTxtField = new JTextField(15);
-        nameTxtField.setBounds(250, 50, 193, 29);
 
         startDateTxtField = new JTextField(15);
         startDateTxtField.setBounds(225, 100, 45, 29);
@@ -142,21 +106,8 @@ public class CreateActivityPage {
         yearSelFin.setSelectedItem(year);
         yearSelFin.setBounds(385,150,60,29);
 
-        estTimeTxtField = new JTextField(15);
-        estTimeTxtField.setBounds(250, 200, 193, 29);
-
-        budgetTxtField = new JTextField(15);
-        budgetTxtField.setBounds(250, 250, 193, 29);
-
-        projectTxtField = new JTextField(15);
-        projectTxtField.setBounds(250, 300, 193, 29);
-
         createProjectPanel.add(startDateTxtField);
         createProjectPanel.add(endDateTxtField);
-        createProjectPanel.add(projectTxtField);
-        createProjectPanel.add(estTimeTxtField);
-        createProjectPanel.add(nameTxtField);
-        createProjectPanel.add(budgetTxtField);
         createProjectPanel.add(monthSelStart);
         createProjectPanel.add(yearSelStart);
         createProjectPanel.add(yearSelFin);
@@ -172,5 +123,4 @@ public class CreateActivityPage {
         }
         return v;
     }
-
 }

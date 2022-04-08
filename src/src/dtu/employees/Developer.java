@@ -2,14 +2,20 @@ package dtu.employees;
 
 import dtu.project.Activity;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Developer {
     public String initials;
     int hoursWorked;
-    Activity[] activities = new Activity[20];
+    List<Activity> activities = new ArrayList<>();
     boolean isOccupied;
     boolean isProjectManager;
+    GregorianCalendar occupiedUntilThisDate = new GregorianCalendar();
+    GregorianCalendar occupiedFromThisDate = new GregorianCalendar();
 
     public Developer(String ini){
         initials = ini;
@@ -60,4 +66,14 @@ public class Developer {
 
     public boolean isProjectManager() {return isProjectManager;}
 
+    public void setSick(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        occupiedFromThisDate.setTime(Calendar.getInstance().getTime());
+        occupiedUntilThisDate.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+1);
+    }
+
+    public void setHoliday(GregorianCalendar startDate, GregorianCalendar endDate) {
+        occupiedFromThisDate = startDate;
+        occupiedUntilThisDate = endDate;
+    }
 }

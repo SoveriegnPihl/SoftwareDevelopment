@@ -117,8 +117,8 @@ public class Project {
     }
 
     public void setNewDateAndBudget(int[] newStartDate, int[] newEndDate, int newBudget) {
-        startDate = new GregorianCalendar(newStartDate[0], newStartDate[1], newStartDate[2]);
-        endDate = new GregorianCalendar(newEndDate[0], newEndDate[1], newEndDate[2]);
+        startDate = new GregorianCalendar(newStartDate[2], newStartDate[1], newStartDate[0]);
+        endDate = new GregorianCalendar(newEndDate[2], newEndDate[1], newEndDate[0]);
         budget = newBudget - budgetUsed;
         SoftwareHuset.writeToCSV("projects");
     }

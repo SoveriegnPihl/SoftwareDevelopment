@@ -13,6 +13,7 @@ public class DeveloperPage {
     Main parentWindow;
     CreateActivityPage createActivityPage;
     CreateProjectPage createProjectPage;
+    RegisterHoliday registerHoliday;
     int yCountL =50, yCountR = 50;
 
     DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) {
@@ -51,11 +52,11 @@ public class DeveloperPage {
         });
 
        viewHbtn.addActionListener(e -> {
-           OptionPane OP = new OptionPane(loggedInUser, "View hours worked");
+            new OptionPane(loggedInUser, "View hours worked");
        });
 
         addPmBtn.addActionListener(e -> {
-            OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
+            new OptionPane(loggedInUser, "Assign project manager");
         });
 
         backBtn.addActionListener(e -> {
@@ -69,14 +70,17 @@ public class DeveloperPage {
         });
 
         regHoliBtn.addActionListener(e -> {
+            setVisible(false);
+            registerHoliday.setVisible(true);
         });
 
         regSickBtn.addActionListener(e -> {
-            OptionPane OP = new OptionPane(loggedInUser,"Register sick day");
+            new OptionPane(loggedInUser,"Register sick day");
         });
 
         createActivityPage = new CreateActivityPage(softwareHuset,parentWindow);
         createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
+        registerHoliday = new RegisterHoliday(softwareHuset, parentWindow);
     }
         public static void setVisible(boolean visi){
             developerPage.setVisible(visi);
