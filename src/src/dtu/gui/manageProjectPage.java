@@ -159,6 +159,18 @@ public class manageProjectPage {
         createProjectPanel.setBorder(BorderFactory.createTitledBorder("Manage project page"));
     }
 
+    public void clear() {
+        startDateTxtField.setText("");
+        endDateTxtField.setText("");
+        projectManagerTxtField.setText("");
+        budgetTxtField.setText("");
+        monthSelStart.setSelectedItem("January");
+        monthSelFin.setSelectedItem("January");
+        yearSelStart.setSelectedItem(year);
+        yearSelFin.setSelectedItem(year);
+
+    }
+
     private Vector getYears() {
         Calendar now = Calendar.getInstance();
         year = now.get(Calendar.YEAR);
