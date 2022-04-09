@@ -18,6 +18,7 @@ public class Project {
     public int budget, budgetUsed;
     Manager pm;
 
+
     private List<Developer> developers = new ArrayList<>();
     // public HashMap<Activity, int[]> activities = new HashMap<>();
     public HashMap<String, Activity> activities = new HashMap<>();
@@ -45,15 +46,20 @@ public class Project {
             System.out.println("ikke inden for datoen af projektet");
         }
     }
+            public ArrayList<Activity> userActivities (Developer user){
+                System.out.println(user.getInitials());
+                ArrayList<Activity> developerList = new ArrayList<>();
+                System.out.println(developerIsInProject(user)+" bruger i projekt");
 
-    public ArrayList<Activity> userActivities (Developer user){
-        ArrayList<Activity> developerList = new ArrayList<>();
-        if (developerIsInProject(user)) {
-            for (Activity activity : activities.values()) {
-                if (activity.developers.containsKey(user)) {
-                    developerList.add(activity);
-                }
-            }
+                if (developerIsInProject(user)) {
+                    for (Activity activity : activities.values()) {
+                        System.out.println(activity.name+ " act navn");
+                        System.out.println(activity.getDevelopers().toString());
+                        if (activity.developers.containsKey(user)) {
+                            System.out.println("YEEES contains key");
+                            developerList.add(activity);
+                        }
+                    }
 
         }
         return developerList;

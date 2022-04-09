@@ -3,6 +3,7 @@ import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
+import java.awt.*;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.Vector;
@@ -12,6 +13,7 @@ import java.util.Vector;
 //class implements ActionListener to perform an action on button click
 public class manageProjectPage {
     //initialize button, panel, label, and text field
+    JFrame frame;
     Project projectToManage;
     JButton saveBtn;
     JPanel createProjectPanel;
@@ -31,9 +33,16 @@ public class manageProjectPage {
         initialize();
     }
     public void initialize(){
-        createProjectPanel = new JPanel();
-        parentWindow.addPanel(createProjectPanel);
-        createProjectPanel.setLayout(null);
+        createPage();
+
+        JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(e -> {
+            setVisible(false);
+            clear();
+            ProjectManagerPage.setVisible(true);
+        });
+        btnBack.setBounds(21, 300, 59, 29);
+        createProjectPanel.add(btnBack);
 
         //adding labels to screen
         addLabelsToScreen();
@@ -137,6 +146,17 @@ public class manageProjectPage {
         createProjectPanel.add(yearSelStart);
         createProjectPanel.add(yearSelFin);
         createProjectPanel.add(monthSelFin);
+    }
+    private void createPage() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+        createProjectPanel = new JPanel();
+        frame.getContentPane().add(createProjectPanel);
+        parentWindow.addPanel(createProjectPanel);
+        createProjectPanel.setLayout(null);
+        createProjectPanel.setBorder(BorderFactory.createTitledBorder("Manage project page"));
     }
 
     private Vector getYears() {

@@ -4,6 +4,9 @@ import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -20,6 +23,7 @@ public class CreateActivityPage {
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
     int year;
+    private JFrame frame;
 
     public CreateActivityPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -27,9 +31,18 @@ public class CreateActivityPage {
         initialize();
     }
     public void initialize(){
-        createProjectPanel = new JPanel();
-        parentWindow.addPanel(createProjectPanel);
-        createProjectPanel.setLayout(null);
+     createPage();
+
+        JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+                setVisible(false);
+                clear();
+                DeveloperPage.setVisible(true);
+            }
+        });
+        btnBack.setBounds(21, 350, 59, 29);
+        createProjectPanel.add(btnBack);
 
         //adding labels to screen
         addLabelsToScreen();
@@ -66,6 +79,18 @@ public class CreateActivityPage {
         });
 
     }
+    private void createPage() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+        createProjectPanel = new JPanel();
+        frame.getContentPane().add(createProjectPanel);
+        parentWindow.addPanel(createProjectPanel);
+        createProjectPanel .setLayout(null);
+        createProjectPanel .setBorder(BorderFactory.createTitledBorder("Create activity page"));
+    }
+    
     public void setVisible(boolean visi){
         createProjectPanel.setVisible(visi);
     }

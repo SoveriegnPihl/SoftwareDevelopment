@@ -15,6 +15,7 @@ public class DeveloperPage {
     CreateProjectPage createProjectPage;
     RegisterHoliday registerHoliday;
     int yCountL =50, yCountR = 50;
+    private JPanel developerPage2;
 
     DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -23,16 +24,8 @@ public class DeveloperPage {
     }
 
     public void initialize()  {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
 
-        developerPage = new JPanel();
-        frame.getContentPane().add(developerPage);
-        parentWindow.addPanel(developerPage);
-        developerPage.setLayout(null);
-        developerPage.setBorder(BorderFactory.createTitledBorder("Developer page"));
+        createPage();
 
         JButton regHbtn = makeLeftButton("Register hours worked");
         JButton viewHbtn = makeLeftButton("View hours worked");
@@ -56,7 +49,8 @@ public class DeveloperPage {
        });
 
         addPmBtn.addActionListener(e -> {
-            new OptionPane(loggedInUser, "Assign project manager");
+            //OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
+            createAssignPM();
         });
 
         backBtn.addActionListener(e -> {
@@ -82,12 +76,79 @@ public class DeveloperPage {
         createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
         registerHoliday = new RegisterHoliday(softwareHuset, parentWindow);
     }
-        public static void setVisible(boolean visi){
+
+    private void createPage() {
+        frame = new JFrame();
+         frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+        developerPage = new JPanel();
+        frame.getContentPane().add(developerPage);
+        parentWindow.addPanel(developerPage);
+        developerPage.setLayout(null);
+        developerPage.setBorder(BorderFactory.createTitledBorder("Developer Page"));
+    }
+
+    public static void setVisible(boolean visi){
             developerPage.setVisible(visi);
         }
 
         public static void setUser(Developer user){
         loggedInUser = user;
+        }
+
+        public void createAssignPM(){
+            setVisible(false);
+            developerPage2 = new JPanel();
+            parentWindow.addPanel(developerPage2);
+            developerPage2.setLayout(null);
+            developerPage2.setBorder(BorderFactory.createTitledBorder("Developer Page 2"));
+            JLabel selDev = new JLabel();
+            selDev.setText("Select developer to assign");      //set label value for textField1
+            selDev.setBounds(25, 50, 193, 29);
+            developerPage2.add(selDev);
+
+            JComboBox<Object> developerCombo = new JComboBox<>();
+            for (String developer : SoftwareHuset.developers.keySet()) {
+                developerCombo.addItem(developer);
+            }
+
+            developerCombo.setBounds(250, 50, 193, 29);
+            developerPage2.add(developerCombo);
+
+            String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
+            JComboBox<String> projectCombo = new JComboBox<>(list);
+            projectCombo.setBounds(250, 100, 193, 29);
+            developerPage2.add(projectCombo);
+
+            JLabel selProject = new JLabel();
+            selProject.setText("Select project");
+            selProject.setBounds(25, 100, 193, 29);
+            developerPage2.add(selProject);
+
+            JButton b1 = new JButton("Save");
+            b1.setBounds(140,200, 250, 50);
+            developerPage2.add(b1);
+            b1.addActionListener(e -> {
+
+                SoftwareHuset.assignPM((String) developerCombo.getSelectedItem(), Integer.parseInt((String) projectCombo.getSelectedItem()));
+                developerPage2.setVisible(false);
+                developerPage.setVisible(true);
+            });
+
+            JButton b2 = new JButton("Back");
+            b2.setBounds(140,250, 250, 50);
+            developerPage2.add(b2);
+            b2.addActionListener(e -> {
+
+                            developerPage2.setVisible(false);
+                            developerPage.setVisible(true);
+                        });
+
+
+
+            developerPage2.setVisible(true);
+
         }
 
     public JButton makeLeftButton(String name){
