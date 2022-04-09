@@ -13,6 +13,7 @@ public class Activity {
     GregorianCalendar startDate, endDate;
     int budget;
     List<TimeRegistration> timeRegistrations = new ArrayList<>();
+    public HashMap<Developer, Integer> activities = new HashMap<>();
 
     public Activity (String name, int time){
         this.name = name;
