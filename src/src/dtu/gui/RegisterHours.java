@@ -121,7 +121,7 @@ public class RegisterHours {
                 GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
                 TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
                 if(!checked) {
-                    Activity activity = activityList[activityCombo.getSelectedIndex()];
+                   Activity activity = activityList[activityCombo.getSelectedIndex()];
                    activity.registerTime(timeRegistration);
                    System.out.println(timeRegistration.getAmountOfTime());
                    System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser, date).toString());
@@ -135,7 +135,6 @@ public class RegisterHours {
                 removeList();
                 clear();
                 DeveloperPage.setVisible(true);
-
 
             });
 
