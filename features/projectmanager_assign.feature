@@ -2,12 +2,11 @@ Feature: Assign project manager
     Description: A project manager gets assigned by a developer
     Actors: Developer
 ## Author: Victor Larsen-Saldeen
-    Scenario Outline: Assign project manager to a project
+        Scenario: Assign project manager to a project
         Given that there is a developer with initials "ekki"
         And  there is a project named "22001"
         When the developer assigns the project manager with initials "huba"
         Then the project manager "MMMM" is assigned to the project
-        Examples:
 
 Scenario: Assign project manager to a project when no developer with such initials
     Given that there isn't a developer with initials "ekki"
