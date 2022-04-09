@@ -93,28 +93,28 @@ public class Project {
     public List<Developer> developerList () {
         return developers;
     }
-    public int getDateDay (String time){
+    public String getDateDay (String time){
         if (time.equals("start")) {
-            return startDate.get(Calendar.DAY_OF_MONTH);
+            return String.valueOf(startDate.get(Calendar.DAY_OF_MONTH));
         } else {
-            return endDate.get(Calendar.DAY_OF_MONTH);
+            return String.valueOf(endDate.get(Calendar.DAY_OF_MONTH));
         }
     }
 
-    public int getDateMonth (String time){
+    public String getDateMonth (String time){
         if (time.equals("start")) {
-            return startDate.get(Calendar.MONTH);
+            return String.valueOf(startDate.get(Calendar.MONTH));
 
         } else {
-            return endDate.get(Calendar.MONTH);
+            return String.valueOf(endDate.get(Calendar.MONTH));
         }
     }
 
-    public int getDateYear (String time){
+    public String getDateYear (String time){
         if (time.equals("start")) {
-            return startDate.get(Calendar.YEAR);
+            return String.valueOf(startDate.get(Calendar.YEAR));
         } else {
-            return endDate.get(Calendar.YEAR);
+            return String.valueOf(endDate.get(Calendar.YEAR));
         }
     }
 

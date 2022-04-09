@@ -31,7 +31,7 @@ class OptionPane extends JFrame {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
             String developerToCreate = JOptionPane.showInputDialog(alertFrame, method);
-            SoftwareHuset.addDeveloper(developerToCreate);
+            SoftwareHuset.addDeveloper(new String[]{developerToCreate});
         }
         if (method.equals("Add developer to project")) {
             JFrame alertFrame = new JFrame();

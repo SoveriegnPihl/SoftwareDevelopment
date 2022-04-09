@@ -39,125 +39,126 @@ public class RegisterHours {
     }
     
     public void initialize() {
-        {
+        createPage();
 
-            JButton btnBack = new JButton("Back");
-            btnBack.addActionListener(e -> {
-                setVisible(false);
-                clear();
-                DeveloperPage.setVisible(true);
-            });
-            btnBack.setBounds(21, 300, 59, 29);
-            registerHours.add(btnBack);
+        JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(e -> {
+            setVisible(false);
+            clear();
+            DeveloperPage.setVisible(true);
+        });
 
-            checkBox1 = new JCheckBox("Not assigned to project");
-            checkBox1.setBounds(150, 25, 193, 29);
+        btnBack.setBounds(21, 300, 59, 29);
+        registerHours.add(btnBack);
 
-            selectLabel = new JLabel();
-            selectLabel.setText("Select project");
-            selectLabel.setBounds(25, 75, 193, 29);
+        checkBox1 = new JCheckBox("Not assigned to project");
+        checkBox1.setBounds(150, 25, 193, 29);
 
-            JLabel selectActivity = new JLabel();
-            selectActivity.setText("Select activity");
-            selectActivity.setBounds(25, 110, 193, 29);
+        selectLabel = new JLabel();
+        selectLabel.setText("Select project");
+        selectLabel.setBounds(25, 75, 193, 29);
 
-            userLabel5 = new JLabel();
-            userLabel5.setText("Type project id");
-            userLabel5.setBounds(25, 75, 193, 29);
+        JLabel selectActivity = new JLabel();
+        selectActivity.setText("Select activity");
+        selectActivity.setBounds(25, 110, 193, 29);
 
-            JTextField writeProject = new JTextField(15);
-            writeProject.setBounds(250, 75, 193, 29);
+        userLabel5 = new JLabel();
+        userLabel5.setText("Type project id");
+        userLabel5.setBounds(25, 75, 193, 29);
 
-            //create label for username
-            JLabel userLabel = new JLabel();
-            userLabel.setText("Enter time");      //set label value for textField1
-            userLabel.setBounds(25, 150, 193, 29);
+        JTextField writeProject = new JTextField(15);
+        writeProject.setBounds(250, 75, 193, 29);
 
-            JLabel userLabel2 = new JLabel();
-            userLabel2.setText("Date");
-            userLabel2.setBounds(25, 200, 193, 29);
+        //create label for username
+        JLabel userLabel = new JLabel();
+        userLabel.setText("Enter time");      //set label value for textField1
+        userLabel.setBounds(25, 150, 193, 29);
 
-            //create text field to get username from the user
-            JTextField endDate = new JTextField(15);
-            endDate.setBounds(250, 200, 193, 29);
+        JLabel userLabel2 = new JLabel();
+        userLabel2.setText("Date");
+        userLabel2.setBounds(25, 200, 193, 29);
 
-            JLabel hourLbl = new JLabel();
-            hourLbl.setText("Hours:");
-            hourLbl.setBounds(210, 150, 250, 40);
-            registerHours.add(hourLbl);
+        //create text field to get username from the user
+        JTextField endDate = new JTextField(15);
+        endDate.setBounds(250, 200, 193, 29);
 
-            JLabel minLbl = new JLabel();
-            minLbl.setText("Min:");
-            minLbl.setBounds(375, 150, 250, 40);
-            registerHours.add(minLbl);
+        JLabel hourLbl = new JLabel();
+        hourLbl.setText("Hours:");
+        hourLbl.setBounds(210, 150, 250, 40);
+        registerHours.add(hourLbl);
 
-            Integer[] comboBoxItemsMinutes = new Integer[2];
-            comboBoxItemsMinutes[0] = 0;
-            comboBoxItemsMinutes[1] = 30;
+        JLabel minLbl = new JLabel();
+        minLbl.setText("Min:");
+        minLbl.setBounds(375, 150, 250, 40);
+        registerHours.add(minLbl);
 
-            Integer[] comboBoxItemsHours = new Integer[24];
-            for (int i = 0; i < 24; i++) {
-                comboBoxItemsHours[i] = i;
-            }
-            hoursCB = new JComboBox<>(comboBoxItemsHours);
-            hoursCB.setBounds(250, 155, 70, 30);
-            registerHours.add(hoursCB);
+        Integer[] comboBoxItemsMinutes = new Integer[2];
+        comboBoxItemsMinutes[0] = 0;
+        comboBoxItemsMinutes[1] = 30;
 
-            JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
-            minCB.setBounds(400, 155, 70, 30);
-            registerHours.add(minCB);
-
-           /* checkBox1.addActionListener(e -> {
-                checked = !checked;
-                createProjectList();
-                setLabelVisible(checked);
-            });
-
-            */
-
-            JButton submitButton = new JButton("Submit"); //set label to button
-            submitButton.setBounds(150, 300, 193, 29);
-
-            registerHours.setLayout(null);
-            registerHours.add(endDate);
-            registerHours.add(selectActivity);
-            registerHours.add(userLabel);
-            registerHours.add(userLabel2);
-            registerHours.add(selectLabel);
-            registerHours.add(submitButton);
-            registerHours.add(checkBox1);
-            registerHours.add(userLabel5);
-            registerHours.add(writeProject);
-            userLabel5.setVisible(false);
-            writeProject.setVisible(false);
-
-            submitButton.addActionListener(e -> {
-                GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
-                TimeRegistration timeRegistration = null;
-                try {
-                    timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
-                } catch (OperationNotAllowedException ex) {
-                    ex.printStackTrace();
-                }
-                if(!checked) {
-                   Activity activity = activityList[activityCombo.getSelectedIndex()];
-                   activity.registerTime(timeRegistration);
-                   System.out.println(timeRegistration.getAmountOfTime());
-                   System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser, date).toString());
-                   System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
-               } else {
-                    int i = activeBox.getSelectedIndex();
-                   Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
-                   activity2.registerTime(timeRegistration);
-               }
-                setVisible(false);
-                removeList();
-                clear();
-                DeveloperPage.setVisible(true);
-
-            });
-
+        Integer[] comboBoxItemsHours = new Integer[24];
+        for (int i = 0; i < 24; i++) {
+            comboBoxItemsHours[i] = i;
         }
+        hoursCB = new JComboBox<>(comboBoxItemsHours);
+        hoursCB.setBounds(250, 155, 70, 30);
+        registerHours.add(hoursCB);
+
+        JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
+        minCB.setBounds(400, 155, 70, 30);
+        registerHours.add(minCB);
+
+       /* checkBox1.addActionListener(e -> {
+            checked = !checked;
+            createProjectList();
+            setLabelVisible(checked);
+        });
+
+        */
+
+        JButton submitButton = new JButton("Submit"); //set label to button
+        submitButton.setBounds(150, 300, 193, 29);
+
+        registerHours.setLayout(null);
+        registerHours.add(endDate);
+        registerHours.add(selectActivity);
+        registerHours.add(userLabel);
+        registerHours.add(userLabel2);
+        registerHours.add(selectLabel);
+        registerHours.add(submitButton);
+        registerHours.add(checkBox1);
+        registerHours.add(userLabel5);
+        registerHours.add(writeProject);
+        userLabel5.setVisible(false);
+        writeProject.setVisible(false);
+
+        submitButton.addActionListener(e -> {
+            GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
+            TimeRegistration timeRegistration = null;
+            try {
+                timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
+            } catch (OperationNotAllowedException ex) {
+                ex.printStackTrace();
+            }
+            if(!checked) {
+               Activity activity = activityList[activityCombo.getSelectedIndex()];
+               activity.registerTime(timeRegistration);
+               System.out.println(timeRegistration.getAmountOfTime());
+               System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser, date).toString());
+               System.out.println(SoftwareHuset.projects.get(22001).getReportedTimeForActivity(activity));
+           } else {
+                int i = activeBox.getSelectedIndex();
+               Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
+               activity2.registerTime(timeRegistration);
+           }
+            setVisible(false);
+            removeList();
+            clear();
+            DeveloperPage.setVisible(true);
+
+        });
+
+
     }
 
     /*public void setLabelVisible(boolean visible){

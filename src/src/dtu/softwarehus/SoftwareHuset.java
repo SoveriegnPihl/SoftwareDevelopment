@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Arrays;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -57,17 +58,17 @@ public class SoftwareHuset {
             Scanner sc2 = new Scanner(new File(filePathDevs));
 
             while (sc1.hasNextLine()){
-                String[] att = sc1.nextLine().split(",");
-                System.out.println(Arrays.toString(att));
-                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(att[1]), Integer.parseInt(att[2]),Integer.parseInt(att[3]));
-                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(att[4]),Integer.parseInt(att[5]),Integer.parseInt(att[6]));
-                createProject(start,end,Integer.parseInt(att[7]));
+                String[] projArr = sc1.nextLine().split(",");
+                System.out.println(Arrays.toString(projArr));
+                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(projArr[1]), Integer.parseInt(projArr[2]),Integer.parseInt(projArr[3]));
+                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(projArr[4]),Integer.parseInt(projArr[5]),Integer.parseInt(projArr[6]));
+                createProject(start,end,Integer.parseInt(projArr[7]));
             }
             sc1.close();
 
-            while (sc2.hasNext()){
-                String[] initialsarr = {sc2.next()};
-                addDeveloper(initialsarr[0]);
+            while (sc2.hasNextLine()){
+                String[] devArr = sc2.nextLine().split(",");
+                addDeveloper(devArr);
             }
             sc2.close();
 
@@ -76,16 +77,19 @@ public class SoftwareHuset {
         }
     }
 
-    public static void addDeveloper(String name) {
-        String[] nameArr = {name};
+    public static void addDeveloper(String[] readData) {
+        Developer newDeveloper = new Developer(readData[0]);
+        newDeveloper.setOccupationDates(readData);
+        developers.put(readData[0],newDeveloper);
 
-        Developer newDeveloper = new Developer(name);
-        developers.put(name,newDeveloper);
-
-        csvDeveloperData.add(nameArr);
+        if (!newDeveloper.hasOccupation){
+            csvDeveloperData.add(new String[] {readData[0], "noOcc"});
+        }else{
+            csvDeveloperData.add(readData);
+        }
         writeToCSV("developers");
 
-        if(developers.containsKey(name)){
+        if(developers.containsKey(readData[0])){
             System.out.println("Success");
         }
     }
@@ -206,15 +210,34 @@ public class SoftwareHuset {
         return projects.get(Integer.valueOf(id));
     }
 
-    public static void updateCSVFile() {
-        csvProjectData.clear();
-        for (Project p : projects.values()){
-            csvProjectData.add(new String[] {String.valueOf(p.getId()), String.valueOf(p.getDateYear("start")),
-                    String.valueOf(p.getDateMonth("start")),String.valueOf(p.getDateDay("start")),
-                    String.valueOf(p.getDateYear("end")), String.valueOf(p.getDateMonth("end")),
-                    String.valueOf(p.getDateDay("end")), String.valueOf(p.getBudget())});
+    public static void updateCSVFile(String file) {
+
+        if(Objects.equals(file, "projects")){
+            csvProjectData.clear();
+            for (Project p : projects.values()){
+                csvProjectData.add(new String[] {String.valueOf(p.getId()), p.getDateYear("start"),
+                        p.getDateMonth("start"),p.getDateDay("start"),
+                        p.getDateYear("end"), p.getDateMonth("end"),
+                        p.getDateDay("end"), String.valueOf(p.getBudget())});
+            }
+            writeToCSV("projects");
         }
-        writeToCSV("projects");
+        else if (Objects.equals(file, "developers")){
+            csvDeveloperData.clear();
+            for (Developer d : developers.values()){
+                if(!d.hasOccupation){
+                    csvDeveloperData.add(new String[]{d.getInitials(), "noOcc"});
+                }
+                else {
+                    csvDeveloperData.add(new String[]{d.getInitials(), d.getOccDateYear("start"),
+                            d.getOccDateMonth("start"), d.getOccDateDay("start"),
+                            d.getOccDateYear("end"), d.getOccDateMonth("end"),
+                            d.getOccDateDay("end")});
+                }
+            }
+            writeToCSV("developers");
+        }
+
     }
 
     public static void writeToCSV(String file){

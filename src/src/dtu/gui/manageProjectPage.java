@@ -62,7 +62,7 @@ public class manageProjectPage {
             int newBudget = Integer.parseInt(budgetTxtField.getText());
 
             projectToManage.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
-            SoftwareHuset.updateCSVFile();
+            SoftwareHuset.updateCSVFile("projects");
 
             setVisible(false);
             ProjectManagerPage.setVisible(true);
@@ -77,11 +77,11 @@ public class manageProjectPage {
         projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 
         startDateTxtField.setText(String.valueOf(projectToManage.getDateDay("start")));
-        monthSelStart.setSelectedIndex(projectToManage.getDateMonth("start"));
+        monthSelStart.setSelectedIndex(Integer.parseInt(projectToManage.getDateMonth("start")));
         yearSelStart.setSelectedItem(projectToManage.getDateYear("start"));
 
         endDateTxtField.setText(String.valueOf(projectToManage.getDateDay("end")));
-        monthSelFin.setSelectedIndex(projectToManage.getDateMonth("end"));
+        monthSelFin.setSelectedIndex(Integer.parseInt(projectToManage.getDateMonth("end")));
         yearSelFin.setSelectedItem(projectToManage.getDateYear("end"));
         budgetTxtField.setText(String.valueOf(projectToManage.budget));
     }
