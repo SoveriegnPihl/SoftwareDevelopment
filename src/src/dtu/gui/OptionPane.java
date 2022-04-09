@@ -48,8 +48,18 @@ class OptionPane extends JFrame {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
             String name = JOptionPane.showInputDialog(alertFrame, "Who do you want to assign");
+            while (!SoftwareHuset.isDeveloper(name)){
+                name = JOptionPane.showInputDialog(alertFrame, "Developer not found. Try Again");
+            }
             String project = JOptionPane.showInputDialog(alertFrame, "Which project?");
-            SoftwareHuset.assignPM(name,Integer.parseInt(project));
+
+                while (!SoftwareHuset.projects.containsKey(Integer.parseInt(project))) {
+                    project = JOptionPane.showInputDialog(alertFrame, "Project not found. Try Again");
+                }
+                System.out.println("success mf");
+                SoftwareHuset.assignPM(name,Integer.parseInt(project));
+
+
         }
         if(method.equals("Register sick day")){
             JFrame alertFrame = new JFrame();

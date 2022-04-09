@@ -2,16 +2,22 @@ package dtu.gui;
 
 import dtu.employees.Developer;
 import dtu.project.Activity;
+import dtu.project.OperationNotAllowedException;
 import dtu.project.Project;
 import dtu.project.TimeRegistration;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 public class RegisterHours {
+    JFrame frame;
     private static JPanel registerHours;
     private final Main parentWindow;
     private static JComboBox<Object> activityCombo;
@@ -34,9 +40,15 @@ public class RegisterHours {
     
     public void initialize() {
         {
-            registerHours = new JPanel();
-            parentWindow.addPanel(registerHours);
-            registerHours.setLayout(null);
+
+            JButton btnBack = new JButton("Back");
+            btnBack.addActionListener(e -> {
+                setVisible(false);
+                clear();
+                DeveloperPage.setVisible(true);
+            });
+            btnBack.setBounds(21, 300, 59, 29);
+            registerHours.add(btnBack);
 
             checkBox1 = new JCheckBox("Not assigned to project");
             checkBox1.setBounds(150, 25, 193, 29);
@@ -119,7 +131,12 @@ public class RegisterHours {
 
             submitButton.addActionListener(e -> {
                 GregorianCalendar date = new GregorianCalendar(2022, Calendar.MARCH, 2);
-                TimeRegistration timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
+                TimeRegistration timeRegistration = null;
+                try {
+                    timeRegistration = new TimeRegistration(loggedInUser, date, hoursCB.getSelectedIndex());
+                } catch (OperationNotAllowedException ex) {
+                    ex.printStackTrace();
+                }
                 if(!checked) {
                     Activity activity = activityList[activityCombo.getSelectedIndex()];
                    activity.registerTime(timeRegistration);
@@ -166,7 +183,6 @@ public class RegisterHours {
         registerHours.add(projectComboNotAssigned);
 
         project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(0));
-
         activeBox = new JComboBox<>();
         activeBox.setBounds(250, 110, 193, 29);
         registerHours.add(activeBox);
@@ -197,7 +213,13 @@ public class RegisterHours {
         registerHours.add(activityCombo);
 
         String project = projectsComboBox.getItemAt(0);
-        activityList = SoftwareHuset.getProject(project).userActivities(loggedInUser).toArray(new Activity[0]);
+        System.out.println(project.toString()+" hej");
+
+
+        activityList = SoftwareHuset.getProject(project).userActivities(user).toArray(new Activity[0]);
+
+        System.out.println(SoftwareHuset.getProject(project));
+        System.out.println(Arrays.toString(activityList));
         for (Activity activity : activityList) {
             activityCombo.addItem(activity.name);
         }
@@ -205,7 +227,7 @@ public class RegisterHours {
         projectsComboBox.addActionListener(e -> {
         String project1 = projectsComboBox.getItemAt(projectsComboBox.getSelectedIndex());
         activityCombo.removeAllItems();
-        activityList = SoftwareHuset.getProject(project1).userActivities(loggedInUser).toArray(new Activity[0]);
+        activityList = SoftwareHuset.getProject(project1).userActivities(user).toArray(new Activity[0]);
         for (Activity activity : activityList) {
             activityCombo.addItem(activity.name);
             }
@@ -214,6 +236,17 @@ public class RegisterHours {
     public static void removeList(){
         activityCombo.remove(activityCombo);
 
+    }
+    private void createPage() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+        registerHours = new JPanel();
+        frame.getContentPane().add(registerHours);
+        parentWindow.addPanel(registerHours);
+        registerHours.setLayout(null);
+        registerHours.setBorder(BorderFactory.createTitledBorder("Project manager page"));
     }
 
 

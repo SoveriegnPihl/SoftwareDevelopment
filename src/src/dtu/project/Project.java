@@ -19,6 +19,7 @@ public class Project {
     public int budget;
     Manager pm;
 
+
     private List<Developer> developers = new ArrayList<>();
    // public HashMap<Activity, int[]> activities = new HashMap<>();
     public HashMap<String, Activity> activities = new HashMap<>();
@@ -42,10 +43,16 @@ public class Project {
         }
     }
             public ArrayList<Activity> userActivities (Developer user){
+                System.out.println(user.getInitials());
                 ArrayList<Activity> developerList = new ArrayList<>();
+                System.out.println(developerIsInProject(user)+" bruger i projekt");
+
                 if (developerIsInProject(user)) {
                     for (Activity activity : activities.values()) {
+                        System.out.println(activity.name+ " act navn");
+                        System.out.println(activity.getDevelopers().toString());
                         if (activity.developers.containsKey(user)) {
+                            System.out.println("YEEES contains key");
                             developerList.add(activity);
                         }
                     }

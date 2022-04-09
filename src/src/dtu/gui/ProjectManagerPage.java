@@ -2,6 +2,7 @@ package dtu.gui;
 import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
+import java.awt.*;
 
 public class ProjectManagerPage {
     static Developer loggedInUser;
@@ -12,6 +13,7 @@ public class ProjectManagerPage {
     Main parentWindow;
     static JComboBox<String> projectList;
     int yCountR=100,yCountL=100;
+    private JFrame frame;
 
     //constructor
     ProjectManagerPage(SoftwareHuset softwareHuset, Main parentWindow) {
@@ -20,10 +22,7 @@ public class ProjectManagerPage {
         initialize();
     }
     public void initialize(){
-
-        projectManagerPage = new JPanel();
-        parentWindow.addPanel(projectManagerPage);
-        projectManagerPage.setLayout(null);
+        createPage();
 
         JButton addDev = makeLeftButton("Add developer");
         JButton viewDev = makeLeftButton("View *available* developers");
@@ -71,6 +70,18 @@ public class ProjectManagerPage {
 
 
     }
+    private void createPage() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+        projectManagerPage = new JPanel();
+        frame.getContentPane().add(projectManagerPage);
+        parentWindow.addPanel(projectManagerPage);
+        projectManagerPage.setLayout(null);
+        projectManagerPage.setBorder(BorderFactory.createTitledBorder("Project manager page"));
+    }
+
     public static void setVisible(boolean visi){
         projectManagerPage.setVisible(visi);
     }

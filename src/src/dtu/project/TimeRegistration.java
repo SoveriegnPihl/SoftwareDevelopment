@@ -11,13 +11,13 @@ public class TimeRegistration {
     private Developer developer;
 
     // We have chosen to make the key the day for an employee for an activity
-    public TimeRegistration(Developer developer, GregorianCalendar date, float amountOfTime){
-//            throws OperationNotAllowedException {
-/*
+    public TimeRegistration(Developer developer, GregorianCalendar date, float amountOfTime)
+           throws OperationNotAllowedException {
+
         if (amountOfTime < 0) {
             throw new OperationNotAllowedException("You cannot report negative hours");
         }
-*/
+
         this.developer = developer;
         this.date = date;
         this.amountOfTime = amountOfTime;

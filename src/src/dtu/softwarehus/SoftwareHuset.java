@@ -42,10 +42,12 @@ public class SoftwareHuset {
         projects.get(22002).addDeveloper(developers.get("ekki"));
         Activity activity = new Activity("fodbold",5);
         Activity activity2 = new Activity("film",5);
-       // projects.get(22001).addActivity(activity);
-       // projects.get(22001).addActivity(activity2);
-       // activity.addDev(developers.get("vic7"),1,2);
-       // activity2.addDev(developers.get("vic7"),1,2);
+       // activity.setDateInterval();
+        //projects.get(22001).addActivity(activity);
+        //projects.get(22001).addActivity(activity2);
+
+        //activity.addDev(developers.get("vic7"),1,2);
+        //activity2.addDev(developers.get("vic7"),1,2);
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs){

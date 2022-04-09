@@ -14,7 +14,7 @@ public class Main {
     ProjectManagerPage projectManagerPage;
     CreateProjectPage newProjectPage;
     //initialize button, panel, label, and text field
-    JFrame frame;
+    static JFrame frame;
     JButton loginBtn, createProjectBtn;
     JPanel newPanel;
     JLabel userLabel;
@@ -29,7 +29,7 @@ public class Main {
                 Main screen = new Main();
                 SoftwareHuset.startProgram();
                 screen.frame.setLocationRelativeTo(null);
-                screen.frame.setSize(500,500);
+               // screen.frame.setSize(500,500);
                 screen.frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -48,17 +48,7 @@ public class Main {
     }
 
     private void initialize() throws Exception {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
-
-
-        newPanel = new JPanel();
-        frame.getContentPane().add(newPanel);
-        newPanel.setLayout(null);
-       // newPanel.setBorder(BorderFactory.createTitledBorder(
-              //  "Main Menu"));
+        createPage();
 
         //create label for username
         userLabel = new JLabel();
@@ -93,25 +83,25 @@ public class Main {
             DeveloperPage.setUser(SoftwareHuset.getDeveloper(userValue));
             ProjectManagerPage.setUser(SoftwareHuset.getDeveloper(userValue));
 
+
             if (SoftwareHuset.isDeveloper(userValue)) {
                 user = SoftwareHuset.getDeveloper(userValue);
                 if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
-                    //create instance of the NewPage
-                    //make page visible to the user
                     setVisible(false);
                     ProjectManagerPage.createList(user);
-                    ProjectManagerPage.setVisible(true);
-
-
-                } else if (!managerCheckBox)  {
-
+                    ProjectManagerPage.setVisible(true); }
+                else if (managerCheckBox) {
+                    createMessage("Developer is not project manager");
+                }
+                if (!managerCheckBox)  {
                     setVisible(false);
                     DeveloperPage.setVisible(true);
-
                 }
-
+                } else {
+                createMessage("No such user found");
             }
         });
+
 
 
         createProjectBtn.addActionListener(e -> {
@@ -125,6 +115,23 @@ public class Main {
         projectManagerPage= new ProjectManagerPage(softwareHuset,this);
 
     }
+    private void createPage() {
+        frame = new JFrame();
+        frame.setBounds(100, 100, 500,500);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.getContentPane().setLayout(new CardLayout(0, 0));
+        newPanel = new JPanel();
+        frame.getContentPane().add(newPanel);
+        newPanel .setLayout(null);
+        newPanel .setBorder(BorderFactory.createTitledBorder("Main page"));
+    }
+    public static void createMessage(String message){
+        JFrame alertFrame = new JFrame();
+        alertFrame.setLocationRelativeTo(null);
+        JOptionPane.showMessageDialog(alertFrame, message);
+    }
+
+
     public void setVisible(boolean setVisi){
         newPanel.setVisible(setVisi);
     }
