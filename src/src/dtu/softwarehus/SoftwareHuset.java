@@ -15,6 +15,7 @@ import java.util.HashMap;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+import java.util.Arrays;
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -36,18 +37,13 @@ public class SoftwareHuset {
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
+        assignPM("vic7",projects.get(22002).getId());
         assignPM("ekki",projects.get(22001).getId());
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
         Activity activity = new Activity("fodbold",5);
         Activity activity2 = new Activity("film",5);
-       // activity.setDateInterval();
-        //projects.get(22001).addActivity(activity);
-        //projects.get(22001).addActivity(activity2);
-
-        //activity.addDev(developers.get("vic7"),1,2);
-        //activity2.addDev(developers.get("vic7"),1,2);
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs){
@@ -62,39 +58,38 @@ public class SoftwareHuset {
             Scanner sc2 = new Scanner(new File(filePathDevs));
 
             while (sc1.hasNextLine()){
-                String[] att = sc1.nextLine().split(",");
-                System.out.println(Arrays.toString(att));
-                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(att[1]), Integer.parseInt(att[2]),Integer.parseInt(att[3]));
-                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(att[4]),Integer.parseInt(att[5]),Integer.parseInt(att[6]));
-                createProject(start,end,Integer.parseInt(att[7]));
-                //csvProjectData.add(att);
-
+                String[] projArr = sc1.nextLine().split(",");
+                System.out.println(Arrays.toString(projArr));
+                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(projArr[1]), Integer.parseInt(projArr[2]),Integer.parseInt(projArr[3]));
+                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(projArr[4]),Integer.parseInt(projArr[5]),Integer.parseInt(projArr[6]));
+                createProject(start,end,Integer.parseInt(projArr[7]));
             }
             sc1.close();
 
-            while (sc2.hasNext()){
-                String[] initialsarr = {sc2.next()};
-                addDeveloper(initialsarr[0]);
-                //csvDeveloperData.add(initialsarr);
+            while (sc2.hasNextLine()){
+                String[] devArr = sc2.nextLine().split(",");
+                addDeveloper(devArr);
             }
             sc2.close();
 
         }catch (Exception e){
             e.printStackTrace();
         }
-
     }
 
-    public static void addDeveloper(String name) {
-        String[] nameArr = {name};
+    public static void addDeveloper(String[] readData) {
+        Developer newDeveloper = new Developer(readData[0]);
+        newDeveloper.setOccupationDates(readData);
+        developers.put(readData[0],newDeveloper);
 
-        Developer newDeveloper = new Developer(name);
-        developers.put(name,newDeveloper);
-
-        csvDeveloperData.add(nameArr);
+        if (!newDeveloper.hasOccupation){
+            csvDeveloperData.add(new String[] {readData[0], "noOcc"});
+        }else{
+            csvDeveloperData.add(readData);
+        }
         writeToCSV("developers");
 
-        if(developers.containsKey(name)){
+        if(developers.containsKey(readData[0])){
             System.out.println("Success");
         }
     }
@@ -112,7 +107,6 @@ public class SoftwareHuset {
                 String.valueOf(newProject.getDateMonth("start")),String.valueOf(newProject.getDateDay("start")),
                 String.valueOf(newProject.getDateYear("end")), String.valueOf(newProject.getDateMonth("end")),
                 String.valueOf(newProject.getDateDay("end")), String.valueOf(budget)});
-
         writeToCSV("projects");
 
         return newProject.getId();
@@ -214,6 +208,36 @@ public class SoftwareHuset {
     }
     public static Project getProject(String id){
         return projects.get(Integer.valueOf(id));
+    }
+
+    public static void updateCSVFile(String file) {
+
+        if(Objects.equals(file, "projects")){
+            csvProjectData.clear();
+            for (Project p : projects.values()){
+                csvProjectData.add(new String[] {String.valueOf(p.getId()), p.getDateYear("start"),
+                        p.getDateMonth("start"),p.getDateDay("start"),
+                        p.getDateYear("end"), p.getDateMonth("end"),
+                        p.getDateDay("end"), String.valueOf(p.getBudget())});
+            }
+            writeToCSV("projects");
+        }
+        else if (Objects.equals(file, "developers")){
+            csvDeveloperData.clear();
+            for (Developer d : developers.values()){
+                if(!d.hasOccupation){
+                    csvDeveloperData.add(new String[]{d.getInitials(), "noOcc"});
+                }
+                else {
+                    csvDeveloperData.add(new String[]{d.getInitials(), d.getOccDateYear("start"),
+                            d.getOccDateMonth("start"), d.getOccDateDay("start"),
+                            d.getOccDateYear("end"), d.getOccDateMonth("end"),
+                            d.getOccDateDay("end")});
+                }
+            }
+            writeToCSV("developers");
+        }
+
     }
 
     public static void writeToCSV(String file){

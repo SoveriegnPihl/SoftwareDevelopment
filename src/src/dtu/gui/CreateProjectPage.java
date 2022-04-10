@@ -57,8 +57,6 @@ public class CreateProjectPage {
         createProjectBtn.setBounds(150, 300, 193, 29);
         createProjectPanel.add(createProjectBtn);
 
-
-
         createProjectBtn.addActionListener(e -> {
 
             String budgetTxt = budgetTxtField.getText();

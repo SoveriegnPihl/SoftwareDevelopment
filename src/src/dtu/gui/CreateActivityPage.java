@@ -102,8 +102,8 @@ public class CreateActivityPage {
         projectTxtField.setText("");
         estTimeTxtField.setText("");
         budgetTxtField.setText("");
-        monthSelStart.setSelectedItem("January");
-        monthSelFin.setSelectedItem("January");
+        monthSelStart.setSelectedIndex(0);
+        monthSelFin.setSelectedIndex(0);
         yearSelStart.setSelectedItem(year);
         yearSelFin.setSelectedItem(year);
     }

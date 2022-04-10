@@ -3,19 +3,29 @@ package dtu.employees;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
+import io.cucumber.java.ca.Cal;
+
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
 
 public class Developer {
     public String initials;
     int hoursWorked;
-    Activity[] activities = new Activity[20];
+    List<Activity> activities = new ArrayList<>();
     boolean isOccupied;
     boolean isProjectManager;
+    public GregorianCalendar occupiedUntilThisDate;
+    public GregorianCalendar occupiedFromThisDate;
+    public boolean hasOccupation;
 
     public Developer(String ini){
         initials = ini;
         hoursWorked=0;
         isOccupied = false;
         isProjectManager = false;
+        hasOccupation = false;
     }
 
     public  String getInitials(){
@@ -60,4 +70,68 @@ public class Developer {
 
     public boolean isProjectManager() {return isProjectManager;}
 
+    public String getOccDateDay (String time){
+        if (time.equals("start")) {
+            return String.valueOf(occupiedFromThisDate.get(Calendar.DAY_OF_MONTH));
+        } else {
+            return String.valueOf(occupiedUntilThisDate.get(Calendar.DAY_OF_MONTH));
+        }
+    }
+
+    public String getOccDateMonth (String time){
+        if (time.equals("start")) {
+            return String.valueOf(occupiedFromThisDate.get(Calendar.MONTH));
+
+        } else {
+            return String.valueOf(occupiedUntilThisDate.get(Calendar.MONTH));
+        }
+    }
+
+    public String getOccDateYear (String time){
+        if (time.equals("start")) {
+            return String.valueOf(occupiedFromThisDate.get(Calendar.YEAR));
+        } else {
+            return String.valueOf(occupiedUntilThisDate.get(Calendar.YEAR));
+        }
+    }
+
+    public void setOccupationDates(String[] dateInterval){
+        if(dateInterval[1].equals("noOcc")){
+            occupiedFromThisDate = new GregorianCalendar();
+            occupiedUntilThisDate = new GregorianCalendar();
+        }
+        else {
+            GregorianCalendar start = new GregorianCalendar(Integer.parseInt(dateInterval[1]),Integer.parseInt(dateInterval[2]),
+                    Integer.parseInt(dateInterval[3]));
+
+            GregorianCalendar end = new GregorianCalendar(Integer.parseInt(dateInterval[4]),Integer.parseInt(dateInterval[5]),
+                    Integer.parseInt(dateInterval[6]));
+
+            GregorianCalendar today = new GregorianCalendar();
+
+            if(end.compareTo(today) == -1){
+                System.out.println("yeeeeeeeeeeeet");
+                occupiedFromThisDate = new GregorianCalendar();
+                occupiedUntilThisDate = new GregorianCalendar();
+            }
+            else {
+                occupiedFromThisDate = start;
+                occupiedUntilThisDate = end;
+                hasOccupation = true;
+            }
+        }
+    }
+
+    public void setSick(){
+        GregorianCalendar calendar = new GregorianCalendar();
+        occupiedFromThisDate.setTime(Calendar.getInstance().getTime());
+        occupiedUntilThisDate.set(Calendar.DAY_OF_MONTH, calendar.get(Calendar.DAY_OF_MONTH)+1);
+    }
+
+    public void setHoliday(GregorianCalendar startDate, GregorianCalendar endDate) {
+        occupiedFromThisDate = startDate;
+        occupiedUntilThisDate = endDate;
+        hasOccupation = true;
+        SoftwareHuset.updateCSVFile("developers");
+    }
 }
