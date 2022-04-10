@@ -22,19 +22,24 @@ public class Main {
     private JPanel panel1;
     boolean managerCheckBox = false;
     Developer user;
+    static Main screen;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
-                Main screen = new Main();
+                screen = new Main();
                 SoftwareHuset.startProgram();
-                screen.frame.setLocationRelativeTo(null);
-               // screen.frame.setSize(500,500);
-                screen.frame.setVisible(true);
+                frame.setLocationRelativeTo(null);
+                setFrameSize(500,250);
+                frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
+    }
+
+    static void setFrameSize(int i, int i1) {
+        frame.setSize(i,i1);
     }
 
     /**
@@ -52,28 +57,36 @@ public class Main {
 
         //create label for username
         userLabel = new JLabel();
-        userLabel.setText("Username");      //set label value for textField1
+        userLabel.setText("Initials");
+
+        JLabel signInLabel = new JLabel();
+        signInLabel.setText("Sign in");
 
         //create text field to get username from the user
         textField1 = new JTextField(15);    //set length of the text
 
         //create submit button
         loginBtn = new JButton("Login"); //set label to button
-
+        JButton createDeveloperButton = new JButton("Create developer");
         createProjectBtn = new JButton("Create project");
 
 
         //create checkbox
         JCheckBox checkBox1 = new JCheckBox("As project manager");
-        userLabel.setBounds(75, 25, 193, 29);
+        userLabel.setBounds(25, 50, 193, 29);
         newPanel.add(userLabel);    //set username label to panel
-        textField1.setBounds(225, 25, 193, 29);
+        signInLabel.setBounds(25, 10, 193, 50);
+        newPanel.add(signInLabel);
+
+        textField1.setBounds(100, 50, 100, 29);
         newPanel.add(textField1);   //set text field to panel
-        checkBox1.setBounds(50, 55, 193, 29);
+        checkBox1.setBounds(25, 90, 193, 29);
         newPanel.add(checkBox1);
-        loginBtn.setBounds(55, 100, 193, 45);
+        loginBtn.setBounds(25, 130, 193, 45);
         newPanel.add(loginBtn);
-        createProjectBtn.setBounds(255, 100, 193, 45);
+        createDeveloperButton.setBounds(255, 25, 193, 45);
+        newPanel.add( createDeveloperButton);
+        createProjectBtn.setBounds(255, 75, 193, 45);
         newPanel.add(createProjectBtn);
 
         checkBox1.addActionListener(e -> managerCheckBox = !managerCheckBox);
@@ -87,6 +100,7 @@ public class Main {
             if (SoftwareHuset.isDeveloper(userValue)) {
                 user = SoftwareHuset.getDeveloper(userValue);
                 if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
+                    Main.setFrameSize(500,500);
                     setVisible(false);
                     ProjectManagerPage.createList(user);
                     ProjectManagerPage.setVisible(true); }
@@ -94,6 +108,7 @@ public class Main {
                     createMessage("Developer is not project manager");
                 }
                 if (!managerCheckBox)  {
+                    Main.setFrameSize(500,500);
                     setVisible(false);
                     DeveloperPage.setVisible(true);
                 }
@@ -105,8 +120,15 @@ public class Main {
 
 
         createProjectBtn.addActionListener(e -> {
+            setFrameSize(500,500);
             setVisible(false);
             newProjectPage.setVisible(true);
+
+
+        });
+        createDeveloperButton.addActionListener(e -> {
+            OptionPane OP = new OptionPane("Add developer");
+
 
 
         });

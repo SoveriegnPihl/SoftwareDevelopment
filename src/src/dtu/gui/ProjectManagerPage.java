@@ -26,7 +26,7 @@ public class ProjectManagerPage {
     public void initialize(){
         createPage();
 
-        JButton addDev = makeLeftButton("Add developer");
+        JButton addDev = makeLeftButton("Create developer");
         JButton viewDev = makeLeftButton("View *available* developers");
         JButton addDevToProj = makeLeftButton("Add developer to project");
         JButton addActivityBut = makeLeftButton("Add activity to project");
@@ -49,6 +49,7 @@ public class ProjectManagerPage {
             manageProjectPage.setVisible(true);
         });
         backB.addActionListener(e -> {
+            Main.setFrameSize(500,250);
             setVisible(false);
             removeList();
             parentWindow.setVisible(true);
@@ -86,6 +87,7 @@ public class ProjectManagerPage {
         projectManagerPage.setBorder(BorderFactory.createTitledBorder("Project manager page"));
     }
     public void createAddDev(){
+        Main.setFrameSize(500,250);
         setVisible(false);
         pmPage2 = new JPanel();
         parentWindow.addPanel(pmPage2);
@@ -106,23 +108,23 @@ public class ProjectManagerPage {
 
 
         JButton b1 = new JButton("Save");
-        b1.setBounds(140,200, 250, 50);
+        b1.setBounds(140,100, 200, 40);
         pmPage2.add(b1);
         b1.addActionListener(e -> {
 
             Developer developer = SoftwareHuset.developers.get((String) developerCombo.getSelectedItem());
             Project project = SoftwareHuset.projects.get(Integer.parseInt((String) projectList.getSelectedItem()));
             project.addDeveloper(developer);
-
+            Main.setFrameSize(500,500);
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });
 
         JButton b2 = new JButton("Back");
-        b2.setBounds(140,250, 250, 50);
+        b2.setBounds(140,150, 200, 40);
         pmPage2.add(b2);
         b2.addActionListener(e -> {
-
+            Main.setFrameSize(500,500);
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });

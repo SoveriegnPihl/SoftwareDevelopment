@@ -73,4 +73,13 @@ class OptionPane extends JFrame {
         }
 
     }
+    OptionPane(String method) {
+        if (method.equals("Add developer")) {
+            JFrame alertFrame = new JFrame();
+            alertFrame.setLocationRelativeTo(null);
+            String developerToCreate = JOptionPane.showInputDialog(alertFrame, method);
+            SoftwareHuset.addDeveloper(developerToCreate);
+        }
+    }
+
 }
