@@ -27,7 +27,7 @@ public class ProjectManagerPage {
         createPage();
 
         JButton addDevBtn = makeLeftButton("Add developer");
-        JButton viewDevBtn = makeLeftButton("View *available* developers");
+        JButton viewAvailableDevBtn = makeLeftButton("View *available* developers");
         JButton addDevToProjBtn = makeLeftButton("Add developer to project");
         JButton addActivityBtn = makeLeftButton("Add activity to project");
         JButton getReportBtn = makeLeftButton("Get project report");
@@ -39,7 +39,7 @@ public class ProjectManagerPage {
         selectLabel.setBounds(100, 25, 193, 29);
         projectManagerPage.add(selectLabel);
 
-        viewDevBtn.addActionListener(e -> {
+        viewAvailableDevBtn.addActionListener(e -> {
             new OptionPane(loggedInUser,"View available developers");
         });
 
@@ -56,6 +56,7 @@ public class ProjectManagerPage {
 
         addActivityBtn.addActionListener(e -> {
             setVisible(false);
+            createActivityPage.setOriginWindow("ProjectManagerPage");
             createActivityPage.setVisible(true);
         });
 

@@ -141,7 +141,7 @@ public class RegisterHours {
                     ex.printStackTrace();
                 }
                 if(!checked) {
-                    Activity activity = activityList[activityCombo.getSelectedIndex()];
+                   Activity activity = activityList[activityCombo.getSelectedIndex()];
                    activity.registerTime(timeRegistration);
                    System.out.println(timeRegistration.getAmountOfTime());
                    System.out.println(activity.getTimeRegistrationForEmployeeOnDate(loggedInUser, date).toString());

@@ -25,14 +25,13 @@ public class SoftwareHuset {
     public static HashMap<Integer, Project> projects;
     //public static  ArrayList<Project> projects;
     private DateServer dateServer;
-    public static ArrayList<String[]> csvProjectData;
-    public static ArrayList<String[]> csvDeveloperData;
+    public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
     public SoftwareHuset() {
     }
 
     public static void startProgram() {
-        readFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv");
+        readFromCSV("src/src/dtu/data/projects.csv", "src/src/dtu/data/developers.csv","src/src/dtu/data/activities.csv");
 
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
@@ -46,16 +45,17 @@ public class SoftwareHuset {
         Activity activity2 = new Activity("film",5);
     }
 
-    public static void readFromCSV(String filePathProj, String filePathDevs){
+    public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
         projects = new HashMap<>();
         developers = new HashMap<>();
         csvProjectData = new ArrayList<>();
         csvDeveloperData = new ArrayList<>();
-
+        csvActivityData = new ArrayList<>();
 
         try{
             Scanner sc1 = new Scanner(new File(filePathProj));
             Scanner sc2 = new Scanner(new File(filePathDevs));
+            Scanner sc3 = new Scanner(new File(filePathAktivities));
 
             while (sc1.hasNextLine()){
                 String[] projArr = sc1.nextLine().split(",");
@@ -72,9 +72,30 @@ public class SoftwareHuset {
             }
             sc2.close();
 
+            while (sc3.hasNextLine()){
+                String[] actArr = sc3.nextLine().split(",");
+                addProjectActivities(projects.get(Integer.parseInt(actArr[0])), actArr);
+            }
+            sc3.close();
+
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
+
+    public static void addProjectActivities(Project project, String[] activityArray) {
+        Activity activityToAdd = new Activity(activityArray[1], Integer.parseInt(activityArray[8]));
+
+        GregorianCalendar start = new GregorianCalendar(Integer.parseInt(activityArray[2]), Integer.parseInt(activityArray[3]),
+                Integer.parseInt(activityArray[4]));
+        GregorianCalendar end = new GregorianCalendar(Integer.parseInt(activityArray[5]),Integer.parseInt(activityArray[6]),
+                Integer.parseInt(activityArray[7]));
+
+        activityToAdd.setDateInterval(start, end);
+
+        project.addActivity(activityToAdd);
+        csvActivityData.add(activityArray);
+        writeToCSV("activities");
     }
 
     public static void addDeveloper(String[] readData) {
@@ -147,7 +168,6 @@ public class SoftwareHuset {
             }
         }
         return projectlist2;
-
     }
 
     public static ArrayList<String> fullProjectList(){
@@ -158,35 +178,17 @@ public class SoftwareHuset {
         return projectlist;
     }
 
-    public static String listDevelopers(){
-        StringBuilder str = new StringBuilder();
-
-        for (Developer var : developers.values()){
-            str.append(var.printDeveloper());
-        }
-        return str.toString();
-    }
-
     public static Developer getDeveloper(String name){
         return developers.get(name);
     }
 
-
-    public String listAvailableDevelopers(){
+    public static String listAvailableDevelopers(){
         StringBuilder str = new StringBuilder();
 
-        for (Developer var : availableDevelopers){
-            str.append(var.printDeveloper());
+        for (Developer dev : developers.values()){
+            str.append(dev.getAvailability());
         }
         return str.toString();
-    }
-
-    public void whoIsAvailable(){
-        for (Developer var : developers.values()){
-            if(!var.isOccupied()){
-                availableDevelopers.add(var);
-            }
-        }
     }
 
     public static boolean isDeveloper(String ini){
@@ -237,6 +239,9 @@ public class SoftwareHuset {
             }
             writeToCSV("developers");
         }
+        else{
+            System.out.println("forkert filnavn angivet");
+        }
 
     }
 
@@ -253,6 +258,14 @@ public class SoftwareHuset {
         else if (Objects.equals(file, "developers")){
             try(PrintWriter writer = new PrintWriter("src/src/dtu/data/developers.csv")){
                 csvDeveloperData.stream().map(SoftwareHuset::convertToCSV).forEach(writer::println);
+
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+        }
+        else if (Objects.equals(file, "activities")){
+            try(PrintWriter writer = new PrintWriter("src/src/dtu/data/activities.csv")){
+                csvActivityData.stream().map(SoftwareHuset::convertToCSV).forEach(writer::println);
 
             }catch (Exception e){
                 e.printStackTrace();

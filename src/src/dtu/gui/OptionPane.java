@@ -20,12 +20,11 @@ class OptionPane extends JFrame {
             alertFrame.setLocationRelativeTo(null);
             int hours = user.getHours();
             JOptionPane.showMessageDialog(alertFrame, "You have worked " + hours + " today");
-
         }
         if (method.equals("View available developers")) {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
-            JOptionPane.showMessageDialog(alertFrame, SoftwareHuset.listDevelopers());
+            JOptionPane.showMessageDialog(alertFrame, SoftwareHuset.listAvailableDevelopers());
         }
         if (method.equals("Add developer")) {
             JFrame alertFrame = new JFrame();
