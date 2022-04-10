@@ -30,6 +30,15 @@ public class RegisterHoliday {
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
 
+        JButton btnBack = new JButton("Back");
+        btnBack.addActionListener(e -> {
+            setVisible(false);
+            clear();
+            DeveloperPage.setVisible(true);
+        });
+        btnBack.setBounds(21, 300, 59, 29);
+        createProjectPanel.add(btnBack);
+
         //adding labels to screen
         addLabelsToScreen();
 
