@@ -55,7 +55,8 @@ public class bookingAndActivitySteps {
 
     @Given("the developer is available for the project")
     public void the_developer_is_available_for_the_project() {
-        assertThat(developer.isOccupied(),is(false));
+        developer.setSick();
+        //forkert
     }
 
     @When("the project manager books the developer")
@@ -70,7 +71,8 @@ public class bookingAndActivitySteps {
 
     @Given("the developer is not available")
     public void the_developer_is_not_available() throws Exception {
-        developer.setOccupied(true);
+        developer.setSick();
+        //forkert
     }
 
     @And("the error message {string} is given")
@@ -86,7 +88,7 @@ public class bookingAndActivitySteps {
 
     @Then("the developer is not available for the project")
     public void theDeveloperIsNotAvailableForTheProject() {
-        assertThat(developer.isOccupied(),is(true));
+        developer.setSick();//forkert
     }
 
     @When("the developer wants to add a activity {string} with {int} hours estimated")
