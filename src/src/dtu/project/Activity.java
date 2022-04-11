@@ -13,7 +13,8 @@ public class Activity {
     GregorianCalendar startDate, endDate;
     int budget;
     List<TimeRegistration> timeRegistrations = new ArrayList<>();
-    public HashMap<Developer, Integer> activities = new HashMap<>();
+    public HashMap<Developer, Double> registeredHours = new HashMap<>();
+    double totalRegisteredHours = 0;
 
     public Activity (String name, int time){
         this.name = name;
@@ -35,6 +36,31 @@ public class Activity {
     public void setDateInterval(GregorianCalendar start, GregorianCalendar end){
         startDate = start;
         endDate = end;
+    }
+    public void registerHours(Developer developer, double hours){
+        developer.addHoursToday(hours);
+        totalRegisteredHours+=hours;
+        if(registeredHours.containsKey(developer)){
+            registeredHours.put(developer, registeredHours.get(developer) + hours);
+        } else {
+            registeredHours.put(developer,hours);
+        }
+    }
+    public double getTotalRegisteredHours(){
+        return totalRegisteredHours;
+    }
+
+    public void setTotalRegisteredHours(double hours){
+        if(hours > 0) {
+            totalRegisteredHours = hours;
+        }
+    }
+    public double getRegisteredHours(){
+        double amountOfRegisteredHours = 0;
+        for (double i : registeredHours.values()) {
+            amountOfRegisteredHours += i;
+        }
+    return amountOfRegisteredHours;
     }
 
     public void setBudget(int budget){

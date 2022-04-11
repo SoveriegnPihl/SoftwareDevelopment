@@ -18,6 +18,7 @@ public class Developer {
     public GregorianCalendar occupiedUntilThisDate, occupiedFromThisDate, sickFromThisDate, sickUntilThisDate;
     public GregorianCalendar today = new GregorianCalendar();
     public boolean hasOccupation;
+    double registeredHoursToday = 0;
 
     public Developer(String ini){
         initials = ini;
@@ -52,6 +53,12 @@ public class Developer {
                 return isAvailable;
             }
         }
+    }
+    public void addHoursToday(double hours){
+        registeredHoursToday+=hours;
+    }
+    public double getRegisteredHoursToday(){
+        return registeredHoursToday;
     }
 
     public void addHours(int hours){

@@ -166,11 +166,8 @@ public class SoftwareHuset {
     public static ArrayList<Project> projectListDeveloper(Developer developer){
         ArrayList<Project> projectlist2 = new ArrayList<>();
 
-        System.out.println("WTF:"+ projects.get(22001).getId());
-
         for (Project var : projects.values()){
-            System.out.println("ID ER "+var.getId()); // siger id er 220002, id 22002
-            System.out.println("det er "+var.developerIsInProject(developer));
+
             if (var.developerIsInProject(developer)){ //true hver gang
                 projectlist2.add(var);
             }
