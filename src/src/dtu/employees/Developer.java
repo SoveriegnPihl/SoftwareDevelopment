@@ -20,6 +20,7 @@ public class Developer {
     public GregorianCalendar occupiedFromThisDate;
     public GregorianCalendar today = new GregorianCalendar();
     public boolean hasOccupation;
+    double registeredHoursToday = 0;
 
     public Developer(String ini){
         initials = ini;
@@ -43,6 +44,12 @@ public class Developer {
                 return "Developer: " + initials + " is NOT occupied today" + "\n";
             }
         }
+    }
+    public void addHoursToday(double hours){
+        registeredHoursToday+=hours;
+    }
+    public double getRegisteredHoursToday(){
+        return registeredHoursToday;
     }
 
     public String printDeveloper(){

@@ -46,7 +46,10 @@ public class DeveloperPage {
         });
 
        viewHoursBtn.addActionListener(e -> {
-            new OptionPane(loggedInUser, "View hours worked");
+           ChangeHours changeHours = new ChangeHours(loggedInUser,parentWindow);
+           setVisible(false);
+           changeHours.createList(loggedInUser);
+           changeHours.setVisible(true);
        });
 
         addPmBtn.addActionListener(e -> {
