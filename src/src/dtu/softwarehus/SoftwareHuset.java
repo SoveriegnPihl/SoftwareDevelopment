@@ -4,11 +4,9 @@ import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
-import io.cucumber.java.bs.A;
 
 import java.io.File;
 import java.io.PrintWriter;
-import java.time.Month;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -100,7 +98,7 @@ public class SoftwareHuset {
 
     public static void addDeveloper(String[] readData) {
         Developer newDeveloper = new Developer(readData[0]);
-        newDeveloper.setOccupationDates(readData);
+        newDeveloper.setHolidayDates(readData);
         newDeveloper.setSickDates(readData);
         developers.put(readData[0],newDeveloper);
 

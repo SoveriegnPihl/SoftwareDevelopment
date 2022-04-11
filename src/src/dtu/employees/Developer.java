@@ -3,7 +3,6 @@ package dtu.employees;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.ca.Cal;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -141,7 +140,7 @@ public class Developer {
         }
     }
 
-    public void setOccupationDates(String[] dateInterval){
+    public void setHolidayDates(String[] dateInterval){
         if(dateInterval[1].equals("noOcc")){
             occupiedFromThisDate = new GregorianCalendar();
             occupiedUntilThisDate = new GregorianCalendar();
