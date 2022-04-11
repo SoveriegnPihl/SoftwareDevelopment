@@ -14,17 +14,16 @@ public class Developer {
     public String initials;
     int hoursWorked;
     List<Activity> activities = new ArrayList<>();
-    boolean isOccupied;
+    public boolean isSick;
     boolean isProjectManager;
-    public GregorianCalendar occupiedUntilThisDate;
-    public GregorianCalendar occupiedFromThisDate;
+    public GregorianCalendar occupiedUntilThisDate, occupiedFromThisDate, sickFromThisDate, sickUntilThisDate;
     public GregorianCalendar today = new GregorianCalendar();
     public boolean hasOccupation;
 
     public Developer(String ini){
         initials = ini;
         hoursWorked = 0;
-        isOccupied = false;
+        isSick = false;
         isProjectManager = false;
         hasOccupation = false;
     }
@@ -34,19 +33,26 @@ public class Developer {
     }
 
     public String getAvailability(){
+        String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";
+        String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";
+
         if(!hasOccupation){
-            return "Developer: " + initials + " is NOT occupied today" + "\n";
-        }else{
+            return isAvailable;
+        }
+        else if(!isSick){
+            return isAvailable;
+        }
+        else{
             if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){
-                return "Developer: " + initials + " is occupied today" + "\n";
-            }else{
-                return "Developer: " + initials + " is NOT occupied today" + "\n";
+                return isNotAvailable;
+            }
+            else if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){
+                return isNotAvailable;
+            }
+            else{
+                return isAvailable;
             }
         }
-    }
-
-    public String printDeveloper(){
-        return "Initials: " + initials + " is occupied?: " + isOccupied +"\n" ;
     }
 
     public void addHours(int hours){
@@ -71,41 +77,67 @@ public class Developer {
     public void requestAssistance(Activity activity){
 
     }
-
+    /*
     public void setOccupied(boolean occupation){
         isOccupied = occupation;
     }
 
     public boolean isOccupied(){
         return isOccupied;
-    }
+    }*/
 
     public void setToProjectManager(){isProjectManager = true;}
 
     public boolean isProjectManager() {return isProjectManager;}
 
-    public String getOccDateDay (String time){
+    public String getOccDateDay (String time, String kind){
         if (time.equals("start")) {
-            return String.valueOf(occupiedFromThisDate.get(Calendar.DAY_OF_MONTH));
+            if (kind.equals("holiday")){
+                return String.valueOf(occupiedFromThisDate.get(Calendar.DAY_OF_MONTH));
+            } else {
+                return String.valueOf(sickFromThisDate.get(Calendar.DAY_OF_MONTH));
+            }
+
         } else {
-            return String.valueOf(occupiedUntilThisDate.get(Calendar.DAY_OF_MONTH));
+            if (kind.equals("holiday")){
+                return String.valueOf(occupiedUntilThisDate.get(Calendar.DAY_OF_MONTH));
+            } else {
+                return String.valueOf(sickUntilThisDate.get(Calendar.DAY_OF_MONTH));
+            }
         }
     }
 
-    public String getOccDateMonth (String time){
+    public String getOccDateMonth (String time, String kind){
         if (time.equals("start")) {
-            return String.valueOf(occupiedFromThisDate.get(Calendar.MONTH));
+            if (kind.equals("holiday")){
+                return String.valueOf(occupiedFromThisDate.get(Calendar.MONTH));
+            } else {
+                return String.valueOf(sickFromThisDate.get(Calendar.MONTH));
+            }
 
         } else {
-            return String.valueOf(occupiedUntilThisDate.get(Calendar.MONTH));
+            if (kind.equals("holiday")){
+                return String.valueOf(occupiedUntilThisDate.get(Calendar.MONTH));
+            } else {
+                return String.valueOf(sickUntilThisDate.get(Calendar.MONTH));
+            }
         }
     }
 
-    public String getOccDateYear (String time){
+    public String getOccDateYear (String time, String kind){
         if (time.equals("start")) {
-            return String.valueOf(occupiedFromThisDate.get(Calendar.YEAR));
+            if (kind.equals("holiday")){
+                return String.valueOf(occupiedFromThisDate.get(Calendar.YEAR));
+            } else {
+                return String.valueOf(sickFromThisDate.get(Calendar.YEAR));
+            }
+
         } else {
-            return String.valueOf(occupiedUntilThisDate.get(Calendar.YEAR));
+            if (kind.equals("holiday")){
+                return String.valueOf(occupiedUntilThisDate.get(Calendar.YEAR));
+            } else {
+                return String.valueOf(sickUntilThisDate.get(Calendar.YEAR));
+            }
         }
     }
 
@@ -115,31 +147,65 @@ public class Developer {
             occupiedUntilThisDate = new GregorianCalendar();
         }
         else {
-            GregorianCalendar startDate = new GregorianCalendar(Integer.parseInt(dateInterval[1]),Integer.parseInt(dateInterval[2]),
+            occupiedFromThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[1]),Integer.parseInt(dateInterval[2]),
                     Integer.parseInt(dateInterval[3]));
 
-            GregorianCalendar endDate = new GregorianCalendar(Integer.parseInt(dateInterval[4]),Integer.parseInt(dateInterval[5]),
+            occupiedUntilThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[4]),Integer.parseInt(dateInterval[5]),
                     Integer.parseInt(dateInterval[6]));
 
-            //GregorianCalendar today = new GregorianCalendar();
-
-            if(endDate.compareTo(today) == -1){
+            if(occupiedUntilThisDate.compareTo(today) == -1){
                 occupiedFromThisDate = new GregorianCalendar();
                 occupiedUntilThisDate = new GregorianCalendar();
                 hasOccupation = false;
             }
             else {
-                occupiedFromThisDate = startDate;
-                occupiedUntilThisDate = endDate;
                 hasOccupation = true;
+            }
+        }
+    }
+
+    public void setSickDates(String[] dateInterval){
+        if(dateInterval[2].equals("noSick")){
+            sickFromThisDate = new GregorianCalendar();
+            sickUntilThisDate = new GregorianCalendar();
+        }
+        else if (hasOccupation && dateInterval[7].equals("noSick")){
+            sickFromThisDate = new GregorianCalendar();
+            sickUntilThisDate = new GregorianCalendar();
+        }
+        else {
+            if(hasOccupation){
+                sickFromThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[7]), Integer.parseInt(dateInterval[8]),
+                        Integer.parseInt(dateInterval[9]));
+
+                sickUntilThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[10]), Integer.parseInt(dateInterval[11]),
+                        Integer.parseInt(dateInterval[12]));
+            }
+            else{
+                sickFromThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[3]), Integer.parseInt(dateInterval[4]),
+                        Integer.parseInt(dateInterval[5]));
+
+                sickUntilThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[6]), Integer.parseInt(dateInterval[7]),
+                        Integer.parseInt(dateInterval[8]));
+            }
+
+            if (sickUntilThisDate.compareTo(today) == -1) {
+                sickFromThisDate = new GregorianCalendar();
+                sickUntilThisDate = new GregorianCalendar();
+                isSick = false;
+            }
+            else {
+                isSick = true;
             }
         }
     }
 
     public void setSick(){
         GregorianCalendar today = new GregorianCalendar();
-        occupiedFromThisDate.setTime(Calendar.getInstance().getTime());
-        occupiedUntilThisDate.set(Calendar.DAY_OF_MONTH, today.get(Calendar.DAY_OF_MONTH)+1);
+        sickFromThisDate.setTime(Calendar.getInstance().getTime());
+        sickUntilThisDate.set(Calendar.DAY_OF_MONTH, today.get(Calendar.DAY_OF_MONTH)+1);
+        isSick = true;
+        SoftwareHuset.updateCSVFile("developers");
     }
 
     public void setHoliday(GregorianCalendar startDate, GregorianCalendar endDate) {

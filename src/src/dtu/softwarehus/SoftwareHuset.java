@@ -101,11 +101,21 @@ public class SoftwareHuset {
     public static void addDeveloper(String[] readData) {
         Developer newDeveloper = new Developer(readData[0]);
         newDeveloper.setOccupationDates(readData);
+        newDeveloper.setSickDates(readData);
         developers.put(readData[0],newDeveloper);
 
-        if (!newDeveloper.hasOccupation){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc"});
-        }else{
+        if (!newDeveloper.hasOccupation && !newDeveloper.isSick){
+            csvDeveloperData.add(new String[] {readData[0], "noOcc", "noSick"});
+        }
+        else if(!newDeveloper.hasOccupation && newDeveloper.isSick){
+            csvDeveloperData.add(new String[] {readData[0], "noOcc", readData[2],readData[3],readData[4],
+                    readData[5],readData[6],readData[7],});
+        }
+        else if(newDeveloper.hasOccupation && !newDeveloper.isSick){
+            csvDeveloperData.add(new String[] {readData[0], readData[1],readData[2],readData[3],readData[4],
+                    readData[5],readData[6], "noSick"});
+        }
+        else{
             csvDeveloperData.add(readData);
         }
         writeToCSV("developers");
@@ -227,14 +237,29 @@ public class SoftwareHuset {
         else if (Objects.equals(file, "developers")){
             csvDeveloperData.clear();
             for (Developer d : developers.values()){
-                if(!d.hasOccupation){
-                    csvDeveloperData.add(new String[]{d.getInitials(), "noOcc"});
+                if(!d.hasOccupation && !d.isSick){
+                    csvDeveloperData.add(new String[]{d.getInitials(), "noOcc", "noSick"});
+                }
+                else if (!d.hasOccupation && d.isSick){
+                    csvDeveloperData.add(new String[]{d.getInitials(), "noOcc", d.getOccDateYear("start", "sick"),
+                            d.getOccDateMonth("start", "sick"), d.getOccDateDay("start", "sick"),
+                            d.getOccDateYear("end", "sick"), d.getOccDateMonth("end", "sick"),
+                            d.getOccDateDay("end", "sick")});
+                }
+                else if (d.hasOccupation && !d.isSick){
+                    csvDeveloperData.add(new String[]{d.getInitials(), d.getOccDateYear("start", "holiday"),
+                            d.getOccDateMonth("start", "holiday"), d.getOccDateDay("start", "holiday"),
+                            d.getOccDateYear("end", "holiday"), d.getOccDateMonth("end", "holiday"),
+                            d.getOccDateDay("end", "holiday"), "noSick"});
                 }
                 else {
-                    csvDeveloperData.add(new String[]{d.getInitials(), d.getOccDateYear("start"),
-                            d.getOccDateMonth("start"), d.getOccDateDay("start"),
-                            d.getOccDateYear("end"), d.getOccDateMonth("end"),
-                            d.getOccDateDay("end")});
+                    csvDeveloperData.add(new String[]{d.getInitials(), d.getOccDateYear("start", "holiday"),
+                            d.getOccDateMonth("start", "holiday"), d.getOccDateDay("start", "holiday"),
+                            d.getOccDateYear("end", "holiday"), d.getOccDateMonth("end", "holiday"),
+                            d.getOccDateDay("end", "holiday"),d.getOccDateYear("start", "sick"),
+                            d.getOccDateMonth("start", "sick"), d.getOccDateDay("start", "sick"),
+                            d.getOccDateYear("end", "sick"), d.getOccDateMonth("end", "sick"),
+                            d.getOccDateDay("end", "sick")});
                 }
             }
             writeToCSV("developers");
