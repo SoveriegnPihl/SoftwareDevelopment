@@ -268,6 +268,11 @@ public class SoftwareHuset {
 
     }
 
+    public static void updateHoursWorkedOnProject(String projectID){
+        ArrayList<Activity> tempList = (ArrayList)csvActivityData.clone();
+
+    }
+
     public static void writeToCSV(String file){
 
         if (Objects.equals(file, "projects")){
