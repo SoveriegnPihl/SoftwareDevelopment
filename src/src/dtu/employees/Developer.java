@@ -63,9 +63,7 @@ public class Developer {
 
     public void addHours(int hours){
         hoursWorked+=hours;
-        SoftwareHuset.updateCSVFile("activities");
     }
-
 
     public int getHours(){ return hoursWorked; }
 

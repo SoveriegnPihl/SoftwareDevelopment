@@ -1,13 +1,15 @@
 package dtu.project;
 
 import dtu.employees.*;
+import dtu.softwarehus.SoftwareHuset;
+
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
 public class Activity {
-    int estimatedTime;
+    int estimatedTime, projectAssignedTo;
     HashMap<Developer,int[]> developers;
     public String name;
     GregorianCalendar startDate, endDate;
@@ -45,6 +47,7 @@ public class Activity {
         } else {
             registeredHours.put(developer,hours);
         }
+        SoftwareHuset.updateCSVFile("activities");
     }
     public double getTotalRegisteredHours(){
         return totalRegisteredHours;
@@ -62,6 +65,10 @@ public class Activity {
         }
     return amountOfRegisteredHours;
     }
+
+    public void setProjectAssignedTo(int projectID){this.projectAssignedTo = projectID;}
+
+    public String getProjectAssignedTo(){return String.valueOf(projectAssignedTo);}
 
     public void setBudget(int budget){
         this.budget = budget;

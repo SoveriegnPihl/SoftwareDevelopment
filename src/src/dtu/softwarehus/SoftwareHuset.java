@@ -21,7 +21,7 @@ public class SoftwareHuset {
     static HashMap<Integer,String> projectManagers;
     static ArrayList<Developer> availableDevelopers;
     public static HashMap<Integer, Project> projects;
-    //public static  ArrayList<Project> projects;
+    public static HashMap<String, Activity> allActivities;
     private DateServer dateServer;
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
@@ -46,6 +46,7 @@ public class SoftwareHuset {
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
         projects = new HashMap<>();
         developers = new HashMap<>();
+        allActivities = new HashMap<>();
         csvProjectData = new ArrayList<>();
         csvDeveloperData = new ArrayList<>();
         csvActivityData = new ArrayList<>();
@@ -83,6 +84,7 @@ public class SoftwareHuset {
 
     public static void addProjectActivities(Project project, String[] activityArray) {
         Activity activityToAdd = new Activity(activityArray[1], Integer.parseInt(activityArray[8]));
+        activityToAdd.setProjectAssignedTo(project.getId());
 
         GregorianCalendar start = new GregorianCalendar(Integer.parseInt(activityArray[2]), Integer.parseInt(activityArray[3]),
                 Integer.parseInt(activityArray[4]));
@@ -90,6 +92,7 @@ public class SoftwareHuset {
                 Integer.parseInt(activityArray[7]));
 
         activityToAdd.setDateInterval(start, end);
+        allActivities.put(activityArray[1],activityToAdd);
 
         project.addActivity(activityToAdd);
         csvActivityData.add(activityArray);
@@ -259,14 +262,19 @@ public class SoftwareHuset {
             }
             writeToCSV("developers");
         }
+        else if(Objects.equals(file, "activities")){
+            csvActivityData.clear();
+            for (Activity A : allActivities.values()){
+                csvActivityData.add(new String[] {A.getProjectAssignedTo(), A.getName(), String.valueOf(A.getStartDate().get(Calendar.YEAR)),
+                        String.valueOf(A.getStartDate().get(Calendar.MONTH)),String.valueOf(A.getStartDate().get(Calendar.DAY_OF_MONTH)),
+                        String.valueOf(A.getEndDate().get(Calendar.YEAR)),String.valueOf(A.getEndDate().get(Calendar.MONTH)),
+                        String.valueOf(A.getEndDate().get(Calendar.DAY_OF_MONTH)),String.valueOf(A.getTotalRegisteredHours())});
+            }
+            writeToCSV("activities");
+        }
         else{
             System.out.println("forkert filnavn angivet");
         }
-
-    }
-
-    public static void updateHoursWorkedOnProject(String projectID){
-        ArrayList<Activity> tempList = (ArrayList)csvActivityData.clone();
 
     }
 

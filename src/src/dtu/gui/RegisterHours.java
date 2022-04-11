@@ -125,7 +125,6 @@ public class RegisterHours {
                 if(minCB.getSelectedIndex() == 1){
                     hours+=0.5;
                 }
-
                 if(!checked) {
                    Activity activity = project12.activities.get(activityCombo.getSelectedItem());
                    activity.registerHours(loggedInUser,hours);
@@ -136,12 +135,11 @@ public class RegisterHours {
                    Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
                     activity2.registerHours(loggedInUser,hours);
                }
+
                 setVisible(false);
                 removeList();
                 clear();
                 DeveloperPage.setVisible(true);
-
-
             });
 
         }
