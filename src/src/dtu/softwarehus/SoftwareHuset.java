@@ -39,8 +39,6 @@ public class SoftwareHuset {
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
-        Activity activity = new Activity("fodbold",5);
-        Activity activity2 = new Activity("film",5);
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
@@ -268,7 +266,7 @@ public class SoftwareHuset {
                 csvActivityData.add(new String[] {A.getProjectAssignedTo(), A.getName(), String.valueOf(A.getStartDate().get(Calendar.YEAR)),
                         String.valueOf(A.getStartDate().get(Calendar.MONTH)),String.valueOf(A.getStartDate().get(Calendar.DAY_OF_MONTH)),
                         String.valueOf(A.getEndDate().get(Calendar.YEAR)),String.valueOf(A.getEndDate().get(Calendar.MONTH)),
-                        String.valueOf(A.getEndDate().get(Calendar.DAY_OF_MONTH)),String.valueOf(A.getTotalRegisteredHours())});
+                        String.valueOf(A.getEndDate().get(Calendar.DAY_OF_MONTH)),String.valueOf(A.getEstimatedTime()),String.valueOf(A.getTotalRegisteredHours())});
             }
             writeToCSV("activities");
         }

@@ -84,6 +84,8 @@ public class Activity {
         estimatedTime = time;
     }
 
+    public int getEstimatedTime(){return estimatedTime;}
+
     public void registerTime(TimeRegistration timeRegistration) {
         timeRegistrations.add(timeRegistration);
     }
