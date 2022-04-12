@@ -13,6 +13,7 @@ public class DeveloperPage {
     Main parentWindow;
     CreateActivityPage createActivityPage;
     CreateProjectPage createProjectPage;
+    RegisterHoliday registerHoliday;
     int yCountL =50, yCountR = 50;
     private JPanel developerPage2;
 
@@ -26,25 +27,29 @@ public class DeveloperPage {
 
         createPage();
 
-        JButton regHbtn = makeLeftButton("Register hours worked");
-        JButton viewHbtn = makeLeftButton("View hours worked");
+        JButton regHoursBtn = makeLeftButton("Register hours worked");
+        JButton viewHoursBtn = makeLeftButton("View hours worked");
         JButton regSickBtn = makeLeftButton("Register sick day");
         JButton regHoliBtn = makeLeftButton("Register holiday");
         JButton addActBtn = makeLeftButton("Add activity to project");
         JButton backBtn = makeLeftButton("Back");
 
         JButton addPmBtn = makeRightButton("Assign project manager");
+        JButton createDevBtn = makeRightButton("Create developer");
 
 
-        regHbtn.addActionListener(e -> {
+        regHoursBtn.addActionListener(e -> {
         RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
         setVisible(false);
         RegisterHours.createList(loggedInUser);
         registerHours.setVisible(true);
         });
 
-       viewHbtn.addActionListener(e -> {
-           OptionPane OP = new OptionPane(loggedInUser, "View hours worked");
+       viewHoursBtn.addActionListener(e -> {
+           ChangeHours changeHours = new ChangeHours(loggedInUser,parentWindow);
+           setVisible(false);
+           changeHours.createList(loggedInUser);
+           changeHours.setVisible(true);
        });
 
         addPmBtn.addActionListener(e -> {
@@ -52,25 +57,34 @@ public class DeveloperPage {
             createAssignPM();
         });
 
+        createDevBtn.addActionListener(e -> {
+            OptionPane OP = new OptionPane(loggedInUser,"Add developer");
+        });
+
         backBtn.addActionListener(e -> {
+            Main.setFrameSize(500,250);
             setVisible(false);
             parentWindow.setVisible(true);
         });
 
         addActBtn.addActionListener(e -> {
             setVisible(false);
+            createActivityPage.setOriginWindow("DeveloperPage");
             createActivityPage.setVisible(true);
         });
 
         regHoliBtn.addActionListener(e -> {
+            setVisible(false);
+            registerHoliday.setVisible(true);
         });
 
         regSickBtn.addActionListener(e -> {
-            OptionPane OP = new OptionPane(loggedInUser,"Register sick day");
+            new OptionPane(loggedInUser,"Register sick day");
         });
 
-        createActivityPage = new CreateActivityPage(softwareHuset,parentWindow);
+        createActivityPage = new CreateActivityPage(softwareHuset, parentWindow);
         createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
+        registerHoliday = new RegisterHoliday(softwareHuset, parentWindow);
     }
 
     private void createPage() {
@@ -94,6 +108,7 @@ public class DeveloperPage {
         }
 
         public void createAssignPM(){
+            Main.setFrameSize(500,350);
             setVisible(false);
             developerPage2 = new JPanel();
             parentWindow.addPanel(developerPage2);
@@ -126,7 +141,7 @@ public class DeveloperPage {
             b1.setBounds(140,200, 250, 50);
             developerPage2.add(b1);
             b1.addActionListener(e -> {
-
+                Main.setFrameSize(500,500);
                 SoftwareHuset.assignPM((String) developerCombo.getSelectedItem(), Integer.parseInt((String) projectCombo.getSelectedItem()));
                 developerPage2.setVisible(false);
                 developerPage.setVisible(true);
@@ -136,7 +151,7 @@ public class DeveloperPage {
             b2.setBounds(140,250, 250, 50);
             developerPage2.add(b2);
             b2.addActionListener(e -> {
-
+                            Main.setFrameSize(500,500);
                             developerPage2.setVisible(false);
                             developerPage.setVisible(true);
                         });

@@ -39,6 +39,7 @@ public class CreateProjectPage {
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(e -> {
+            Main.setFrameSize(500,250);
             setVisible(false);
             clear();
             parentWindow.setVisible(true);
@@ -55,8 +56,6 @@ public class CreateProjectPage {
         createProjectBtn = new JButton("Create project"); //set label to button
         createProjectBtn.setBounds(150, 300, 193, 29);
         createProjectPanel.add(createProjectBtn);
-
-
 
         createProjectBtn.addActionListener(e -> {
 
@@ -80,6 +79,7 @@ public class CreateProjectPage {
                 if (startDate.compareTo(endDate) < 0 && projectManagerTxt.isEmpty() ) {
                     try {
                         project = SoftwareHuset.createProject(startDate, endDate, Integer.parseInt(budgetTxt));
+                        Main.setFrameSize(500,250);
                         setVisible(false);
                         clear();
                         parentWindow.setVisible(true);
@@ -96,6 +96,7 @@ public class CreateProjectPage {
                                 Main.createMessage("Error. " + b.getMessage());
                             }
                             SoftwareHuset.assignPM(projectManagerTxt, project);
+                            Main.setFrameSize(500,250);
                             setVisible(false);
                             clear();
                             parentWindow.setVisible(true);
@@ -114,7 +115,7 @@ public class CreateProjectPage {
     }
 
     private void createPage() {
-            frame = new JFrame();
+        frame = new JFrame();
             frame.setBounds(100, 100, 500,500);
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.getContentPane().setLayout(new CardLayout(0, 0));
