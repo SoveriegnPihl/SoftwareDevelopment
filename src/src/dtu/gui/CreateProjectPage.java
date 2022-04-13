@@ -115,12 +115,7 @@ public class CreateProjectPage {
     }
 
     private void createPage() {
-        frame = new JFrame();
-            frame.setBounds(100, 100, 500,500);
-            frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            frame.getContentPane().setLayout(new CardLayout(0, 0));
             createProjectPanel = new JPanel();
-            frame.getContentPane().add(createProjectPanel);
             parentWindow.addPanel(createProjectPanel);
             createProjectPanel .setLayout(null);
             createProjectPanel .setBorder(BorderFactory.createTitledBorder("Create project page"));
