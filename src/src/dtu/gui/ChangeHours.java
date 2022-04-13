@@ -202,12 +202,7 @@ public class ChangeHours {
 
     }
     private void createPage() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         changeHours = new JPanel();
-        frame.getContentPane().add(changeHours);
         parentWindow.addPanel(changeHours);
         changeHours.setLayout(null);
         changeHours.setBorder(BorderFactory.createTitledBorder("Register hours page"));

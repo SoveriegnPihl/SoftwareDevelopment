@@ -76,12 +76,7 @@ public class ProjectManagerPage {
 
     }
     private void createPage() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         projectManagerPage = new JPanel();
-        frame.getContentPane().add(projectManagerPage);
         parentWindow.addPanel(projectManagerPage);
         projectManagerPage.setLayout(null);
         projectManagerPage.setBorder(BorderFactory.createTitledBorder("Project manager page"));
