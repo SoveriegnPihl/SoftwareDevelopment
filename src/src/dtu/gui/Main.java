@@ -103,6 +103,7 @@ public class Main {
                 if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
                     Main.setFrameSize(500,500);
                     setVisible(false);
+                    Main.setLocation();
                     ProjectManagerPage.createList(user);
                     ProjectManagerPage.setVisible(true);
                 }
@@ -126,6 +127,7 @@ public class Main {
             setFrameSize(500,500);
             setVisible(false);
             newProjectPage.setVisible(true);
+            Main.setLocation();
 
 
         });

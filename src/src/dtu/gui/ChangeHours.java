@@ -26,6 +26,9 @@ public class ChangeHours {
     static Project project11;
     Activity activity;
     JLabel userLabel;
+    private static JPanel topPanel;
+    private JPanel bottomPanel;
+
     public ChangeHours(Developer loggedInUser, Main parentWindow) {
         this.loggedInUser = loggedInUser;
         this.parentWindow = parentWindow;
@@ -41,51 +44,61 @@ public class ChangeHours {
                 clear();
                 DeveloperPage.setVisible(true);
             });
-            btnBack.setBounds(21, 300, 59, 29);
-            changeHours.add(btnBack);
-
+            btnBack.setBounds(21, 21, 59, 29);
+            bottomPanel.add(btnBack);
+/*
             checkBox1 = new JCheckBox("Not assigned to project");
-            checkBox1.setBounds(150, 25, 193, 29);
+            checkBox1.setBounds(150, 25, 193, 29);*/
 
             JLabel assignedOrNot = new JLabel();
             assignedOrNot.setText("Are you assigned to the project?");
-            assignedOrNot.setBounds(10, 10, 193, 29);
-            changeHours.add(assignedOrNot);
+            assignedOrNot.setBounds(10, 10, 250, 29);
+            topPanel.add(assignedOrNot);
 
             JRadioButton r1=new JRadioButton("Yes");
             JRadioButton r2=new JRadioButton("No");
-            r1.setBounds(250,10,75,30);
-            r2.setBounds(350,10,75,30);
+            r1.setBounds(275,10,75,30);
+            r2.setBounds(375,10,75,30);
             r1.setSelected(true);
             ButtonGroup bg=new ButtonGroup();
 
             bg.add(r1);bg.add(r2);
-            changeHours.add(r1);changeHours.add(r2);
+            topPanel.add(r1);topPanel.add(r2);
 
 
             selectLabel = new JLabel();
             selectLabel.setText("Select project");
-            selectLabel.setBounds(25, 75, 193, 29);
+            selectLabel.setBounds(25, 50, 193, 29);
 
             JLabel selectActivity = new JLabel();
             selectActivity.setText("Select activity");
-            selectActivity.setBounds(25, 110, 193, 29);
+            selectActivity.setBounds(25, 90, 193, 29);
 
             userLabel5 = new JLabel();
             userLabel5.setText("Select project id");
-            userLabel5.setBounds(25, 75, 193, 29);
+            userLabel5.setBounds(25, 50, 193, 29);
 
             JTextField writeProject = new JTextField(15);
-            writeProject.setBounds(250, 75, 193, 29);
+            writeProject.setBounds(250, 90, 193, 29);
 
             JButton searchButton = new JButton("Search registered hours"); //set label to button
-            searchButton.setBounds(250,150 , 193, 29);
+            searchButton.setBounds(248,125 , 193, 29);
 
-            checkBox1.addActionListener(e -> {
-                checked = !checked;
-                createProjectList();
-                setLabelVisible(checked);
+            r2.addActionListener(e -> {
+                if(r2.isSelected()){
+                    checked = !checked;
+                    createProjectList();
+                    setLabelVisible(checked);
+                }
             });
+            r1.addActionListener(e -> {
+                if(r1.isSelected()){
+                    checked = !checked;
+                    createProjectList();
+                    setLabelVisible(checked);
+                }
+            });
+
             searchButton.addActionListener(e -> {
             activity = project12.activities.get(activityCombo.getSelectedItem());
                 System.out.println(activity.getTotalRegisteredHours());
@@ -93,20 +106,19 @@ public class ChangeHours {
             userLabel.setVisible(true);
             });
             userLabel = new JLabel();
-            userLabel.setBounds(25, 250, 500, 29);
-            changeHours.add(userLabel);
+            userLabel.setBounds(25, 160, 500, 29);
+            topPanel.add(userLabel);
             userLabel.setVisible(false);
             JButton submitButton = new JButton("Submit"); //set label to button
-            submitButton.setBounds(150, 300, 193, 29);
+            submitButton.setBounds(150, 100, 193, 29);
 
-            changeHours.setLayout(null);
-            changeHours.add(selectActivity);
-            changeHours.add(selectLabel);
-            changeHours.add(submitButton);
-            changeHours.add(checkBox1);
-            changeHours.add(userLabel5);
-            changeHours.add(writeProject);
-            changeHours.add(searchButton);
+            topPanel.setLayout(null);
+            topPanel.add(selectActivity);
+            topPanel.add(selectLabel);
+            bottomPanel.add(submitButton);
+            topPanel.add(userLabel5);
+            topPanel.add(writeProject);
+            topPanel.add(searchButton);
             userLabel5.setVisible(false);
             writeProject.setVisible(false);
 
@@ -145,13 +157,13 @@ public class ChangeHours {
     public static void createProjectList(){
         String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
         projectComboNotAssigned = new JComboBox<>(list);
-        projectComboNotAssigned.setBounds(250, 75, 193, 29);
-        changeHours.add(projectComboNotAssigned);
+        projectComboNotAssigned.setBounds(250, 50, 193, 29);
+        topPanel.add(projectComboNotAssigned);
 
         project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(0));
         activeBox = new JComboBox<>();
-        activeBox.setBounds(250, 110, 193, 29);
-        changeHours.add(activeBox);
+        activeBox.setBounds(250, 90, 193, 29);
+        topPanel.add(activeBox);
 
         for (Activity activity : project11.activities.values()) {
             activeBox.addItem(activity.name);
@@ -170,13 +182,13 @@ public class ChangeHours {
     public static void createList(Developer user){
         ArrayList<Project> list = SoftwareHuset.projectListDeveloper(user);
         projectsComboBox = new JComboBox<>();
-        projectsComboBox.setBounds(250, 75, 193, 29);
-        changeHours.add(projectsComboBox);
+        projectsComboBox.setBounds(250, 50, 193, 29);
+        topPanel.add(projectsComboBox);
 
         list.forEach(project -> {projectsComboBox.addItem(String.valueOf(project.getId()));});
         activityCombo = new JComboBox<>();
-        activityCombo.setBounds(250, 110, 193, 29);
-        changeHours.add(activityCombo);
+        activityCombo.setBounds(250, 90, 193, 29);
+        topPanel.add(activityCombo);
 
         String project = projectsComboBox.getItemAt(0);
         System.out.println(project.toString()+" hej");
@@ -206,6 +218,17 @@ public class ChangeHours {
         parentWindow.addPanel(changeHours);
         changeHours.setLayout(null);
         changeHours.setBorder(BorderFactory.createTitledBorder("Register hours page"));
+        topPanel = new JPanel();
+        topPanel.setBounds(25,25,450,200);
+        changeHours.add(topPanel);
+        topPanel .setBorder(BorderFactory.createTitledBorder("View hours"));
+        topPanel.setLayout(null);
+        bottomPanel = new JPanel();
+        changeHours.add(bottomPanel);
+        bottomPanel.setBounds(25,250,450,200);
+        bottomPanel.setLayout(null);
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Change hours"));
+
     }
 
 

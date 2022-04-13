@@ -39,9 +39,9 @@ public class CreateProjectPage {
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(e -> {
-            Main.setFrameSize(500,250);
+            Main.setFrameSize(600,400);
+            Main.setLocation();
             setVisible(false);
-            clear();
             parentWindow.setVisible(true);
         });
         btnBack.setBounds(21, 300, 59, 29);
@@ -79,9 +79,10 @@ public class CreateProjectPage {
                 if (startDate.compareTo(endDate) < 0 && projectManagerTxt.isEmpty() ) {
                     try {
                         project = SoftwareHuset.createProject(startDate, endDate, Integer.parseInt(budgetTxt));
-                        Main.setFrameSize(500,250);
-                        setVisible(false);
+                        Main.setFrameSize(600,400);
+                        Main.setLocation();
                         clear();
+                        setVisible(false);
                         parentWindow.setVisible(true);
                         Main.createMessage("Success");
                     } catch (NumberFormatException b) {
