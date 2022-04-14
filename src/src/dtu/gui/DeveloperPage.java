@@ -62,7 +62,8 @@ public class DeveloperPage {
         });
 
         backBtn.addActionListener(e -> {
-            Main.setFrameSize(500,250);
+            Main.setFrameSize(600,400);
+            Main.setLocation();
             setVisible(false);
             parentWindow.setVisible(true);
         });
@@ -88,12 +89,7 @@ public class DeveloperPage {
     }
 
     private void createPage() {
-        frame = new JFrame();
-         frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         developerPage = new JPanel();
-        frame.getContentPane().add(developerPage);
         parentWindow.addPanel(developerPage);
         developerPage.setLayout(null);
         developerPage.setBorder(BorderFactory.createTitledBorder("Developer Page"));
@@ -108,7 +104,6 @@ public class DeveloperPage {
         }
 
         public void createAssignPM(){
-            Main.setFrameSize(500,350);
             setVisible(false);
             developerPage2 = new JPanel();
             parentWindow.addPanel(developerPage2);
