@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/SoftwareHuset.iml" beforeDir="false" />
+    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="test">
+      <change afterPath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -41,6 +43,9 @@
     </option>
   </component>
   <component name="ProjectId" id="263yiUR219Ots1Re32pUVrxjpib" />
+  <component name="ProjectLevelVcsManager">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -155,7 +160,21 @@
       <option name="project" value="LOCAL" />
       <updated>1649247516222</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="test">
+      <created>1649777186659</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1649777186659</updated>
+    </task>
+    <task id="LOCAL-00005" summary="test">
+      <created>1649777234047</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1649777234047</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,6 +194,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add medarbejder" />
     <MESSAGE value="add medarbejder og medarvejder sygdom/ferie" />
-    <option name="LAST_COMMIT_MESSAGE" value="add medarbejder og medarvejder sygdom/ferie" />
+    <MESSAGE value="test" />
+    <option name="LAST_COMMIT_MESSAGE" value="test" />
   </component>
 </project>
