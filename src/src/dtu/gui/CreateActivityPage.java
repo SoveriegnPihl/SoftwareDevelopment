@@ -81,6 +81,8 @@ public class CreateActivityPage {
             String projectID = projectTxtField.getText();
             String actName = nameTxtField.getText();
             String budget = budgetTxtField.getText();
+            String estimatedTime = estTimeTxtField.getText();
+            String timeUsed = "0.0";
 
             String startYear = String.valueOf(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()));
             String startMonth = String.valueOf(monthSelStart.getSelectedIndex());
@@ -92,7 +94,7 @@ public class CreateActivityPage {
 
 
             String[] activityValues = new String[] {projectID, actName, startYear, startMonth, startDay,
-                endYear,endMonth, endDay, budget};
+                endYear,endMonth, endDay, estimatedTime, timeUsed, budget};
 
             Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
 

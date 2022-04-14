@@ -8,11 +8,7 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.Vector;
 
-//create CreateLoginForm class to create login form
-//class extends JFrame to create a window where our component add
-//class implements ActionListener to perform an action on button click
 public class manageProjectPage {
-    //initialize button, panel, label, and text field
     JFrame frame;
     Project projectToManage;
     JButton saveBtn;
