@@ -128,7 +128,6 @@ public class RegisterHours {
                 if(!checked) {
                    Activity activity = project12.activities.get(activityCombo.getSelectedItem());
                    activity.registerHours(loggedInUser,hours);
-                    System.out.println(activity.getRegisteredHours());
 
                } else {
                     int i = activeBox.getSelectedIndex();

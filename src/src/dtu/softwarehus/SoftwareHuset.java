@@ -57,8 +57,10 @@ public class SoftwareHuset {
             while (sc1.hasNextLine()){
                 String[] projArr = sc1.nextLine().split(",");
                 System.out.println(Arrays.toString(projArr));
-                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(projArr[1]), Integer.parseInt(projArr[2]),Integer.parseInt(projArr[3]));
-                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(projArr[4]),Integer.parseInt(projArr[5]),Integer.parseInt(projArr[6]));
+                GregorianCalendar start = new GregorianCalendar(Integer.parseInt(projArr[1]),
+                        Integer.parseInt(projArr[2]),Integer.parseInt(projArr[3]));
+                GregorianCalendar end = new GregorianCalendar(Integer.parseInt(projArr[4]),
+                        Integer.parseInt(projArr[5]),Integer.parseInt(projArr[6]));
                 createProject(start,end,Integer.parseInt(projArr[7]));
             }
             sc1.close();
@@ -90,6 +92,8 @@ public class SoftwareHuset {
                 Integer.parseInt(activityArray[7]));
 
         activityToAdd.setDateInterval(start, end);
+        activityToAdd.setBudget(Integer.parseInt(activityArray[10]));
+        activityToAdd.setTotalRegisteredHours(Double.parseDouble(activityArray[9]));
         allActivities.put(activityArray[1],activityToAdd);
 
         project.addActivity(activityToAdd);
@@ -266,7 +270,8 @@ public class SoftwareHuset {
                 csvActivityData.add(new String[] {A.getProjectAssignedTo(), A.getName(), String.valueOf(A.getStartDate().get(Calendar.YEAR)),
                         String.valueOf(A.getStartDate().get(Calendar.MONTH)),String.valueOf(A.getStartDate().get(Calendar.DAY_OF_MONTH)),
                         String.valueOf(A.getEndDate().get(Calendar.YEAR)),String.valueOf(A.getEndDate().get(Calendar.MONTH)),
-                        String.valueOf(A.getEndDate().get(Calendar.DAY_OF_MONTH)),String.valueOf(A.getEstimatedTime()),String.valueOf(A.getTotalRegisteredHours())});
+                        String.valueOf(A.getEndDate().get(Calendar.DAY_OF_MONTH)),String.valueOf(A.getEstimatedTime()),
+                        String.valueOf(A.getTotalRegisteredHours()), String.valueOf(A.getBudget())});
             }
             writeToCSV("activities");
         }

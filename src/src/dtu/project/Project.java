@@ -2,6 +2,7 @@ package dtu.project;
 
 import dtu.employees.*;
 import dtu.softwarehus.SoftwareHuset;
+import io.cucumber.java.en_old.Ac;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -18,10 +19,9 @@ public class Project {
     public int budget, budgetUsed;
     Manager pm;
 
-
     private List<Developer> developers = new ArrayList<>();
-    // public HashMap<Activity, int[]> activities = new HashMap<>();
     public HashMap<String, Activity> activities = new HashMap<>();
+
     public Project(GregorianCalendar start, GregorianCalendar end, int budget) {
         startDate = start;
         endDate = end;
@@ -36,10 +36,37 @@ public class Project {
 
     public int getBudget(){return budget;}
 
+    public int getEstimatedTime() {
+        int projectEstimatedTime = 0;
+        for (Activity A : activities.values()){
+            projectEstimatedTime += A.getEstimatedTime();
+        }
+
+        return projectEstimatedTime;
+    }
+
+    public int getUsedTime(){
+        int usedTime = 0;
+        for (Activity A : activities.values()){
+            usedTime += A.totalRegisteredHours;
+        }
+        return usedTime;
+    }
+
+    public int getBudgetUsed(){return (budgetUsed*(-1));}
+
+    public int getEstimatedBudget() {
+        int projectEstimatedBudget = 0;
+        for (Activity A : activities.values()){
+            projectEstimatedBudget += A.getBudget();
+        }
+
+        return projectEstimatedBudget;
+    }
+
     public void addActivity(Activity activity){
         if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){
             budgetUsed -= activity.getBudget();
-            budget += budgetUsed;
             activities.put(activity.getName(), activity);
             System.out.println("Activity added");
         } else {

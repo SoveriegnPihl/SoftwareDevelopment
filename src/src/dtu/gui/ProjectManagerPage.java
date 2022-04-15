@@ -3,7 +3,6 @@ import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
-import java.awt.*;
 
 public class ProjectManagerPage {
     static Developer loggedInUser;
@@ -52,7 +51,7 @@ public class ProjectManagerPage {
 
         getReportBtn.addActionListener(e -> {
             setVisible(false);
-            //getReportPage.setOriginWindow("ProjectManagerPage");
+            getReportPage.setProject(projectList.getItemAt(projectList.getSelectedIndex()));
             getReportPage.setVisible(true);
         });
 
@@ -80,7 +79,7 @@ public class ProjectManagerPage {
 
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);
         createActivityPage = new CreateActivityPage(softwareHuset, parentWindow);
-
+        getReportPage = new getReportPage(softwareHuset, parentWindow);
 
 
     }
