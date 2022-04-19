@@ -128,7 +128,6 @@ public class RegisterHours {
                 if(!checked) {
                    Activity activity = project12.activities.get(activityCombo.getSelectedItem());
                    activity.registerHours(loggedInUser,hours);
-                    System.out.println(activity.getRegisteredHours());
 
                } else {
                     int i = activeBox.getSelectedIndex();
@@ -224,13 +223,9 @@ public class RegisterHours {
 
     }
     private void createPage() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         registerHours = new JPanel();
-        frame.getContentPane().add(registerHours);
         parentWindow.addPanel(registerHours);
+        parentWindow.getFrame().setLocationRelativeTo(null);
         registerHours.setLayout(null);
         registerHours.setBorder(BorderFactory.createTitledBorder("Register hours page"));
     }

@@ -4,6 +4,7 @@ import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -16,21 +17,21 @@ public class Main {
     //initialize button, panel, label, and text field
     static JFrame frame;
     JButton loginBtn, createProjectBtn;
-    JPanel newPanel;
+    JPanel rightPanel;
     JLabel userLabel;
     JTextField textField1;
     private JPanel panel1;
     boolean managerCheckBox = false;
     Developer user;
     static Main screen;
+    private JPanel leftPanel;
+    JPanel mainPanel;
 
     public static void main(String[] args) {
         EventQueue.invokeLater(() -> {
             try {
                 screen = new Main();
                 SoftwareHuset.startProgram();
-                frame.setLocationRelativeTo(null);
-                setFrameSize(500,250);
                 frame.setVisible(true);
             } catch (Exception e) {
                 e.printStackTrace();
@@ -74,20 +75,20 @@ public class Main {
         //create checkbox
         JCheckBox checkBox1 = new JCheckBox("As project manager");
         userLabel.setBounds(25, 50, 193, 29);
-        newPanel.add(userLabel);    //set username label to panel
+        rightPanel.add(userLabel);    //set username label to panel
         signInLabel.setBounds(25, 10, 193, 50);
-        newPanel.add(signInLabel);
+        rightPanel.add(signInLabel);
 
         textField1.setBounds(100, 50, 100, 29);
-        newPanel.add(textField1);   //set text field to panel
+        rightPanel.add(textField1);   //set text field to panel
         checkBox1.setBounds(25, 90, 193, 29);
-        newPanel.add(checkBox1);
+        rightPanel.add(checkBox1);
         loginBtn.setBounds(25, 130, 193, 45);
-        newPanel.add(loginBtn);
-        createDeveloperButton.setBounds(255, 25, 193, 45);
-        newPanel.add( createDeveloperButton);
-        createProjectBtn.setBounds(255, 75, 193, 45);
-        newPanel.add(createProjectBtn);
+        rightPanel.add(loginBtn);
+        createDeveloperButton.setBounds(25, 40, 193, 45);
+        leftPanel.add( createDeveloperButton);
+        createProjectBtn.setBounds(25, 100, 193, 45);
+        leftPanel.add(createProjectBtn);
 
         checkBox1.addActionListener(e -> managerCheckBox = !managerCheckBox);
 
@@ -102,8 +103,10 @@ public class Main {
                 if (managerCheckBox && SoftwareHuset.isManager(userValue)) {
                     Main.setFrameSize(500,500);
                     setVisible(false);
+                    Main.setLocation();
                     ProjectManagerPage.createList(user);
-                    ProjectManagerPage.setVisible(true); }
+                    ProjectManagerPage.setVisible(true);
+                }
                 else if (managerCheckBox) {
                     createMessage("Developer is not project manager");
                 }
@@ -111,6 +114,7 @@ public class Main {
                     Main.setFrameSize(500,500);
                     setVisible(false);
                     DeveloperPage.setVisible(true);
+                    Main.setLocation();
                 }
                 } else {
                 createMessage("No such user found");
@@ -123,6 +127,7 @@ public class Main {
             setFrameSize(500,500);
             setVisible(false);
             newProjectPage.setVisible(true);
+            Main.setLocation();
 
 
         });
@@ -139,23 +144,39 @@ public class Main {
     }
     private void createPage() {
         frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(600,400);
+        frame.setLocationRelativeTo(null);
         frame.getContentPane().setLayout(new CardLayout(0, 0));
-        newPanel = new JPanel();
-        frame.getContentPane().add(newPanel);
-        newPanel .setLayout(null);
-        newPanel .setBorder(BorderFactory.createTitledBorder("Main page"));
+
+        mainPanel = new JPanel();
+        frame.getContentPane().add(mainPanel);
+        mainPanel.setLayout(null);
+        mainPanel.setBorder(BorderFactory.createTitledBorder("Main page"));
+        rightPanel = new JPanel();
+        rightPanel.setBounds(25,25,250,300);
+        mainPanel.add(rightPanel);
+        rightPanel .setBorder(BorderFactory.createTitledBorder("Login"));
+        rightPanel.setLayout(null);
+        leftPanel = new JPanel();
+        mainPanel.add(leftPanel);
+        leftPanel.setBounds(325,25,250,300);
+        leftPanel.setLayout(null);
+        leftPanel .setBorder(BorderFactory.createTitledBorder("Functions"));
+
+        //frame.pack();
     }
     public static void createMessage(String message){
         JFrame alertFrame = new JFrame();
         alertFrame.setLocationRelativeTo(null);
         JOptionPane.showMessageDialog(alertFrame, message);
     }
-
+    public static void setLocation(){
+        frame.setLocationRelativeTo(null);
+    }
 
     public void setVisible(boolean setVisi){
-        newPanel.setVisible(setVisi);
+        mainPanel.setVisible(setVisi);
     }
 
     public JFrame getFrame() {

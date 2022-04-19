@@ -54,7 +54,7 @@ public class Activity {
     }
 
     public void setTotalRegisteredHours(double hours){
-        if(hours > 0) {
+        if(hours > -0.5) {
             totalRegisteredHours = hours;
         }
     }
