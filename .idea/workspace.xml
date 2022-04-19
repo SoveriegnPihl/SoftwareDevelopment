@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="test">
-      <change afterPath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" afterDir="false" />
+    <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +22,7 @@
     </option>
   </component>
   <component name="Git.Merge.Settings">
-    <option name="BRANCH" value="main" />
+    <option name="BRANCH" value="Jakob" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">

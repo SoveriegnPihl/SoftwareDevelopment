@@ -1,6 +1,9 @@
 package dtu.gui;
+import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 
 import javax.swing.*;
 
@@ -9,6 +12,7 @@ public class getReportPage {
     JFrame frame;
     Project projectToManage;
     JButton saveBtn;
+    static JComboBox<Object> developerList, activityList;
     JPanel getReportPanel;
     JLabel projectIDLabel, timeLabel, budgetLabel, devListLabel, actListLabel, doneActListLabel;
     JPanel devListPanel, actListPanel, doneActListPanel;
@@ -29,7 +33,7 @@ public class getReportPage {
             clear();
             ProjectManagerPage.setVisible(true);
         });
-        btnBack.setBounds(21, 300, 59, 29);
+        btnBack.setBounds(21, 300, 150, 50);
         getReportPanel.add(btnBack);
 
         //adding labels to screen
@@ -40,13 +44,12 @@ public class getReportPage {
 
         //adding save button
         saveBtn = new JButton("Save"); //set label to button
-        saveBtn.setBounds(150, 300, 193, 29);
+        saveBtn.setBounds(220, 300, 200, 50);
         getReportPanel.add(saveBtn);
 
-
         saveBtn.addActionListener(e -> {
-
             setVisible(false);
+            clear();
             ProjectManagerPage.setVisible(true);
         });
 
@@ -58,24 +61,40 @@ public class getReportPage {
     public void setProject(String project ){
         projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 
+        //Update combobox with developers
+        for (String developer : SoftwareHuset.developers.keySet()) {
+            developerList.addItem(developer);
+        }
+
+        //Update combobox with activities
+        for (String activity : SoftwareHuset.allActivities.keySet()) {
+            activityList.addItem(activity);
+        }
+
+
         projectIDLabel = new JLabel();
         projectIDLabel.setText("Project ID: " + projectToManage.getId());
-        projectIDLabel.setBounds(15,15,150,30);
+        projectIDLabel.setBounds(15,35,150,30);
 
         timeLabel = new JLabel();
-        timeLabel.setText("Time estimated for project: " + projectToManage.getEstimatedTime() +
-                " hours. Time used " + projectToManage.getUsedTime() + " hours, " +
+        timeLabel.setText("Estimated time: " + projectToManage.getEstimatedTime() +
+                " hours - Time used " + projectToManage.getUsedTime() + " hours - " +
                 (projectToManage.getUsedTime()/ (double) projectToManage.getEstimatedTime())*100 + "% used");
-        timeLabel.setBounds(15,40,400,30);
+        timeLabel.setBounds(15,60,400,30);
+
+        //Rounding decimals in double
+        DecimalFormat rounding = new DecimalFormat("###.##");
 
         budgetLabel = new JLabel();
-        budgetLabel.setText("Budget estimated for project: " + projectToManage.getBudget() +
-                "kr. Budget used "+ projectToManage.getBudgetUsed() + "kr, " +
-                (projectToManage.getBudgetUsed()/ (double) projectToManage.getBudget())*100 + "% used");
-        budgetLabel.setBounds(15,60,400,30);
+        budgetLabel.setText("Estimated budget: " + projectToManage.getBudget() +
+                "kr - Budget used "+ projectToManage.getBudgetUsed() + "kr - " +
+                rounding.format((projectToManage.getBudgetUsed()/ (double) projectToManage.getBudget())*100) + "% used");
+        budgetLabel.setBounds(15,80,400,30);
         getReportPanel.add(projectIDLabel);
         getReportPanel.add(timeLabel);
         getReportPanel.add(budgetLabel);
+
+
     }
 
     private void addLabelsToScreen(){
@@ -85,11 +104,11 @@ public class getReportPage {
 
         actListLabel = new JLabel();
         actListLabel.setText("Activities");
-        actListLabel.setBounds(175,130,80,30);
+        actListLabel.setBounds(195,130,80,30);
 
         doneActListLabel = new JLabel();
         doneActListLabel.setText("Done activities");
-        doneActListLabel.setBounds(310,130,95,30);
+        doneActListLabel.setBounds(330,130,95,30);
 
 
         getReportPanel.add(devListLabel);
@@ -100,7 +119,22 @@ public class getReportPage {
 
     private void addTextFieldsToScreen(){
 
+        //ComboBox for list of developers
+        developerList = new JComboBox<Object>();
+        developerList.setBounds(35, 170, 100, 29);
+
+        developerList.setBounds(35, 170, 100, 29);
+        getReportPanel.add(developerList);
+
+        //ComboBox for list of activities
+        activityList = new JComboBox<Object>();
+        activityList.setBounds(165, 170, 100, 29);
+
+        activityList.setBounds(165, 170, 125, 29);
+        getReportPanel.add(activityList);
+
     }
+
     private void createPage() {
         getReportPanel = new JPanel();
         parentWindow.addPanel(getReportPanel);

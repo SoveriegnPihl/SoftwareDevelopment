@@ -27,7 +27,7 @@ public class ProjectManagerPage {
         createPage();
 
         JButton addDevBtn = makeLeftButton("Add developer");
-        JButton viewAvailableDevBtn = makeLeftButton("View *available* developers");
+        JButton viewAvailableDevBtn = makeLeftButton("Available developers");
         JButton addDevToProjBtn = makeLeftButton("Add developer to project");
         JButton addActivityBtn = makeLeftButton("Add activity to project");
         JButton getReportBtn = makeLeftButton("Get project report");
