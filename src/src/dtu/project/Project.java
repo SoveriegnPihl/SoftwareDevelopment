@@ -91,13 +91,7 @@ public class Project {
         }
         return developerList;
     }
-    public double getReportedTimeForActivity (Activity activity){
-        double reportedTime = 0;
-        for (TimeRegistration t : activity.getTimeRegistrations()) {
-            reportedTime += t.getAmountOfTime();
-        }
-        return reportedTime;
-    }
+
 
 
    /* public boolean findActivity(String activityName){

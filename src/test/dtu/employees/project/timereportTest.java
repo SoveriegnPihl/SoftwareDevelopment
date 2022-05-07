@@ -1,22 +1,13 @@
 package dtu.employees.project;
 import dtu.Helper.ErrorMessageHolder;
-import dtu.dto.developerInfo;
 import dtu.employees.Developer;
 import dtu.project.Activity;
-import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.hu.De;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static org.hamcrest.core.IsEqual.equalTo;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
@@ -26,7 +17,6 @@ public class timereportTest {
     SoftwareHuset softwareHuset;
 
     Developer developer,developer2;
-    Project project;
     Activity activity;
     int addedHours;
     boolean isStarted = false;
@@ -84,17 +74,16 @@ public class timereportTest {
     public void thatThereIsnTADeveloperWithInitials(String name) {
         assertFalse(softwareHuset.developers.containsKey(name));
     }
-
     @Then("the error message {string} is given")
     public void theErrorMessageIsGiven(String arg0) {
     }
-
     @When("the non-developer requests reported worked hours for today")
     public void theNonDeveloperRequestsReportedWorkedHoursForToday() {
-    }
 
+    }
     @When("the other developer requests reported worked hours for today")
     public void theOtherDeveloperRequestsReportedWorkedHoursForToday() {
         developer2.getRegisteredHoursToday();
     }
+
 }
