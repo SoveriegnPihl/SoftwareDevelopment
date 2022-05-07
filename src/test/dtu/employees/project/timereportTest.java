@@ -23,7 +23,7 @@ import static org.junit.Assert.*;
 public class timereportTest {
     private ErrorMessageHolder errorMessage;
     ;
-    SoftwareHuset softwareHuset = new SoftwareHuset();
+    SoftwareHuset softwareHuset;
 
     Developer developer,developer2;
     Project project;
@@ -31,13 +31,12 @@ public class timereportTest {
     int addedHours;
     boolean isStarted = false;
 
-    public timereportTest() {
-        softwareHuset.startProgram();
+    public timereportTest(SoftwareHuset sf) {
+        softwareHuset = sf;
     }
 
     @Given("that there is a developer with initials {string}")
     public void thatThereIsADeveloperWithInitials(String string) {
-
         assertTrue(softwareHuset.developers.containsKey(string));
     }
 
