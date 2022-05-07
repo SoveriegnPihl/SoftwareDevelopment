@@ -4,6 +4,7 @@ import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
+import io.cucumber.java.hu.De;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -19,7 +20,7 @@ public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
     static HashMap<Integer,String> projectManagers;
-    static ArrayList<Developer> availableDevelopers;
+    public static ArrayList<Developer> availableDevelopers;
     public static HashMap<Integer, Project> projects;
     public static HashMap<String, Activity> allActivities;
     private DateServer dateServer;
@@ -149,7 +150,13 @@ public class SoftwareHuset {
 
     public static void assignPM(String dev, int projectID){
 
+        if(!isDeveloper(dev)){
+            Developer newDev = new Developer(dev);
+
+        }
+
         projectManagers.put(projectID,dev);
+        projects.get(projectID).assignManagerToProject(developers.get(dev));
     }
 
     public void listProjects(){
@@ -325,5 +332,15 @@ public class SoftwareHuset {
         }
         return escapedData;
     }
+
+    public  List<Developer> listDevs() {
+        List<Developer> devs = new ArrayList<>();
+        for (Developer dev : developers.values()){
+            devs.add(dev);
+        }
+        return devs;
+    }
+
+
 
 }

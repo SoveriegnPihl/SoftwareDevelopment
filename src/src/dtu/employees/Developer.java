@@ -54,6 +54,7 @@ public class Developer {
             }
         }
     }
+
     public void addHoursToday(double hours){
         registeredHoursToday+=hours;
     }
