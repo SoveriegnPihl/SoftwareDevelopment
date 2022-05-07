@@ -1,41 +1,45 @@
 package dtu.employees.project;
-
 import dtu.softwarehus.SoftwareHuset;
+import dtu.project.Project;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import io.cucumber.java.en.When;
+
+import static org.junit.Assert.assertTrue;
 
 public class checkForEmployeesTest {
-
+    int id = 22001;
     SoftwareHuset sf;
 
     public checkForEmployeesTest(SoftwareHuset softwareHuset){
-
         sf = softwareHuset;
         sf.startProgram();
-
     }
 
     @And("There is a project manager")
-    public void there_is_a_project_manager() {
-        // Write code here that turns the phrase above into concrete actions
+    public void there_is_project_manager(){
+        Project p = sf.getProject(String.valueOf(id));
+        assertTrue("Project has project manager", !(p.getManager().initials.equals("NULL")));
+    }
+    @And ("There is a list of employees")
+    public void there_is_list_of_employees(){
+        assertTrue(sf.listDevs().size() > 0);
+    }
 
-    }
-    @And("There is a list of employees")
-    public void there_is_a_list_of_employees() {
-        // Write code here that turns the phrase above into concrete actions
 
+    @Then ("A list of available employees is made")
+    public void a_list_of_available_employees(){
+       assertTrue(!(sf.listAvailableDevelopers().isEmpty()));
     }
-    @Then("A list of available employees is made")
-    public void a_list_of_available_employees_is_made() {
-        // Write code here that turns the phrase above into concrete actions
 
+    @And ("There is a list with available employees")
+    public void there_is_list_of_available_employees(){
+        //ændret noget kode jakob igang.
+        assertTrue(true);
     }
-    @And("There is a list with available employees")
-    public void there_is_a_list_with_available_employees() {
-        // Write code here that turns the phrase above into concrete actions
-    }
+
+
+
 
 
 }

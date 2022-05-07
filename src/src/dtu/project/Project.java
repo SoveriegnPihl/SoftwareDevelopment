@@ -28,6 +28,7 @@ public class Project {
         this.budget = budget;
         budgetUsed = 0;
         id = (Project.nextId++) + 22000;
+        pm = new Manager("NULL");
     }
 
     public int getId() {
@@ -148,6 +149,14 @@ public class Project {
         endDate = new GregorianCalendar(newEndDate[2], newEndDate[1], newEndDate[0]);
         budget = newBudget - budgetUsed;
         SoftwareHuset.writeToCSV("projects");
+    }
+
+    public void assignManagerToProject(Developer dev){
+        pm = new Manager(dev);
+    }
+
+    public Manager getManager(){
+        return pm;
     }
 }
 

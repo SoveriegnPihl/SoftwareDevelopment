@@ -2,6 +2,8 @@
 #Marcus Pihl
 
 
+
+
 Feature: Creating a new project
 
   Scenario: Creating a project with a name, start and end date and a budget.
@@ -16,6 +18,7 @@ Feature: Creating a new project
     Given: Given That there is a project name "Test"
     And That there is a start date "26/2-22"
     Then The date is not valid
+    And the error "Date not valid" is given
 
 
   Scenario: Creating a project with a start date that's not valid
@@ -23,3 +26,4 @@ Feature: Creating a new project
     And That there is a start date "26/3-22"
     And There is an end date "1/3-22"
     Then The date is not valid
+    And the error "Date not valid" is given
