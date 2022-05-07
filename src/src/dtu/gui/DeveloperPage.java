@@ -1,8 +1,7 @@
 package dtu.gui;
-import dtu.employees.Developer;
+import dtu.project.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
-import java.awt.*;
 
 // lavet af Victor Larsen-Saldeen
 

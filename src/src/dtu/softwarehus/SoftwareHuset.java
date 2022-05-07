@@ -1,6 +1,6 @@
 package dtu.softwarehus;
 
-import dtu.employees.Developer;
+import dtu.project.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
@@ -104,29 +104,28 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String[] readData) {
-        Developer newDeveloper = new Developer(readData[0]);
-        newDeveloper.setHolidayDates(readData);
-        newDeveloper.setSickDates(readData);
-        developers.put(readData[0],newDeveloper);
+        if(readData[0].length() == 4 && !isDeveloper(readData[0])) {
+            Developer newDeveloper = new Developer(readData[0]);
+            newDeveloper.setHolidayDates(readData);
+            newDeveloper.setSickDates(readData);
+            developers.put(readData[0], newDeveloper);
 
-        if (!newDeveloper.hasOccupation && !newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc", "noSick"});
-        }
-        else if(!newDeveloper.hasOccupation && newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc", readData[2],readData[3],readData[4],
-                    readData[5],readData[6],readData[7],});
-        }
-        else if(newDeveloper.hasOccupation && !newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], readData[1],readData[2],readData[3],readData[4],
-                    readData[5],readData[6], "noSick"});
-        }
-        else{
-            csvDeveloperData.add(readData);
-        }
-        writeToCSV("developers");
+            if (!newDeveloper.hasOccupation && !newDeveloper.isSick) {
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", "noSick"});
+            } else if (!newDeveloper.hasOccupation && newDeveloper.isSick) {
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", readData[2], readData[3], readData[4],
+                        readData[5], readData[6], readData[7],});
+            } else if (newDeveloper.hasOccupation && !newDeveloper.isSick) {
+                csvDeveloperData.add(new String[]{readData[0], readData[1], readData[2], readData[3], readData[4],
+                        readData[5], readData[6], "noSick"});
+            } else {
+                csvDeveloperData.add(readData);
+            }
+            writeToCSV("developers");
 
-        if(developers.containsKey(readData[0])){
-            System.out.println("Success");
+            if (developers.containsKey(readData[0])) {
+                System.out.println("Success");
+            }
         }
     }
 

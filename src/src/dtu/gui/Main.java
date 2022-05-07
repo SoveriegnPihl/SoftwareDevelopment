@@ -1,13 +1,11 @@
 package dtu.gui;
 
-import dtu.employees.Developer;
+import dtu.project.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 // lavet af Victor Larsen-Saldeen
 public class Main {
     SoftwareHuset softwareHuset;

@@ -1,12 +1,12 @@
 package dtu.project;
 
 import dtu.employees.*;
+import dtu.project.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
 import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
-import java.util.List;
 
 public class Activity {
     int estimatedTime, projectAssignedTo;

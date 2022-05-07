@@ -1,4 +1,4 @@
-package dtu.employees;
+package dtu.project.employees;
 
 public class Manager extends Developer {
 

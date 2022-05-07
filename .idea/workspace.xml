@@ -6,7 +6,28 @@
   <component name="ChangeListManager">
     <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="add medarbejder og medarvejder sygdom/ferie">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SoftwareHuset.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/medarbejder-ferie-sygdom.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/medarbejder-ferie-sygdom.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/features/medarbejder.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/medarbejder.feature" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/data/developers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/data/developers.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/employees/Developer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/employees/Developer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/employees/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/employees/Manager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/ChangeHours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/ChangeHours.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/DeveloperPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/DeveloperPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/OptionPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/OptionPane.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/RegisterHoliday.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/RegisterHoliday.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/RegisterHours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/RegisterHours.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/Activity.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/Project.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/Report.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/softwarehus/SoftwareHuset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/softwarehus/SoftwareHuset.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/addDevSickHolidayTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/addDevSickHolidayTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/addDeveloperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/addDeveloperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/assignPmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/assignPmTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/timereportTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/timereportTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/dtu/project/ActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/project/ActivityTest.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -1,12 +1,9 @@
 package dtu.project;
 
-import dtu.employees.Developer;
+import dtu.project.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.bs.A;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ActivityTest {
 

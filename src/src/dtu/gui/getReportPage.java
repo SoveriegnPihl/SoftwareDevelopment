@@ -1,8 +1,7 @@
 package dtu.gui;
-import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
-import java.math.RoundingMode;
+
 import java.text.DecimalFormat;
 
 import javax.swing.*;

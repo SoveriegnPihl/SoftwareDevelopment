@@ -1,5 +1,5 @@
 package dtu.gui;
-import dtu.employees.Developer;
+import dtu.project.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 
@@ -77,7 +77,13 @@ class OptionPane extends JFrame {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
             String developerToCreate = JOptionPane.showInputDialog(alertFrame, method);
-            SoftwareHuset.addDeveloper(new String[]{developerToCreate, "noOcc", "noSick"});
+            if(developerToCreate.length() != 4){
+                JFrame errorFrame = new JFrame();
+                errorFrame.setLocationRelativeTo(null);
+                JOptionPane.showMessageDialog(null,"Please use 4 initials!");
+            } else{
+                SoftwareHuset.addDeveloper(new String[]{developerToCreate, "noOcc", "noSick"});
+            }
         }
     }
 

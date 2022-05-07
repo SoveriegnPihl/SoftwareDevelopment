@@ -1,6 +1,6 @@
 package dtu.gui;
 
-import dtu.employees.Developer;
+import dtu.project.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
