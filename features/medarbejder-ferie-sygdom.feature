@@ -2,7 +2,7 @@ Feature: An employee  registers sick-day or holiday
   Description: An employee registers that they have a sick-day or that they leave on holiday
   Actors: User
   Scenario: User registers a sick-day
-    Given there is an employee "JEJE"
+    Given that there is a developer with initials "vic7"
     And the employee "JEJE" exists in the system
     When the employee "JEJE" registers a sick-day
     Then employee "JEJE" is not available for any projects for the next 24 hours
