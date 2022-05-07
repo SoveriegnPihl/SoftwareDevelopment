@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 		plugin = { "summary", "html:target/cucumber/wikipedia.html"},
 		monochrome=true,
 		snippets = SnippetType.CAMELCASE,
-		glue = {"dtu.project"})
+		glue = {"dtu.employees.project"})
 public class AcceptanceTest {
 
 }
