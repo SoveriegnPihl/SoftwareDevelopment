@@ -9,12 +9,15 @@ import static org.junit.Assert.assertTrue;
 
 public class checkForEmployeesTest {
     int id = 22001;
-    SoftwareHuset sf = new SoftwareHuset();
+    SoftwareHuset sf;
 
+    public checkForEmployeesTest(SoftwareHuset softwareHuset){
+        sf = softwareHuset;
+        sf.startProgram();
+    }
 
     @And("There is a project manager")
     public void there_is_project_manager(){
-        sf.startProgram();
         Project p = sf.getProject(String.valueOf(id));
         assertTrue("Project has project manager", !(p.getManager().initials.equals("NULL")));
     }
