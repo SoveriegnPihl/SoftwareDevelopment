@@ -11,9 +11,8 @@ import java.util.GregorianCalendar;
 import java.util.Vector;
 
 
-//create CreateLoginForm class to create login form
-//class extends JFrame to create a window where our component add
-//class implements ActionListener to perform an action on button click
+// lavet af Victor Larsen-Saldeen
+
 public class CreateProjectPage {
     //initialize button, panel, label, and text field
     JFrame frame;

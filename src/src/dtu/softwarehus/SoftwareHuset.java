@@ -18,13 +18,14 @@ import java.util.Arrays;
 public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
-    static HashMap<Integer,String> projectManagers;
+    public static HashMap<Integer,String> projectManagers;
     static ArrayList<Developer> availableDevelopers;
     public static HashMap<Integer, Project> projects;
     public static HashMap<String, Activity> allActivities;
     private DateServer dateServer;
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
+    static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
     public SoftwareHuset() {
     }
 
@@ -39,6 +40,7 @@ public class SoftwareHuset {
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
+
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
@@ -148,8 +150,11 @@ public class SoftwareHuset {
     }
 
     public static void assignPM(String dev, int projectID){
-
-        projectManagers.put(projectID,dev);
+       if(!isManager(dev)){
+        if(projects.containsKey(projectID) && developers.containsKey(dev)) {
+            projectManagers.put(projectID, dev);
+        }
+       }
     }
 
     public void listProjects(){

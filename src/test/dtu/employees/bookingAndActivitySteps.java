@@ -1,4 +1,4 @@
-package dtu.employees;
+/*package dtu.employees;
 
 import dtu.project.Activity;
 import dtu.project.Project;
@@ -52,7 +52,7 @@ public class bookingAndActivitySteps {
     public void there_is_a_project_with_id(String projectId) throws Exception{
         project = new Project(projectId, 1, 2, 4);
     }*/
-
+/*
     @Given("the developer is available for the project")
     public void the_developer_is_available_for_the_project() {
         developer.setSick();
@@ -118,3 +118,4 @@ public class bookingAndActivitySteps {
     }
 
 }
+*/

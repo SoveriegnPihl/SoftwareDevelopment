@@ -14,7 +14,6 @@ public class Activity {
     public String name;
     GregorianCalendar startDate, endDate;
     int budget;
-    List<TimeRegistration> timeRegistrations = new ArrayList<>();
     public HashMap<Developer, Double> registeredHours = new HashMap<>();
     double totalRegisteredHours = 0;
 
@@ -40,14 +39,14 @@ public class Activity {
         endDate = end;
     }
     public void registerHours(Developer developer, double hours){
-        developer.addHoursToday(hours);
-        totalRegisteredHours+=hours;
-        if(registeredHours.containsKey(developer)){
-            registeredHours.put(developer, registeredHours.get(developer) + hours);
+        developer.addHoursToday(hours);                                                 //1
+        totalRegisteredHours+=hours;                                                    //2
+        if(registeredHours.containsKey(developer)){                                     //3
+            registeredHours.put(developer, registeredHours.get(developer) + hours);     //4
         } else {
-            registeredHours.put(developer,hours);
+            registeredHours.put(developer,hours);                                       //5
         }
-        SoftwareHuset.updateCSVFile("activities");
+        SoftwareHuset.updateCSVFile("activities");                                      //6
     }
     public double getTotalRegisteredHours(){
         return totalRegisteredHours;
@@ -86,21 +85,7 @@ public class Activity {
 
     public int getEstimatedTime(){return estimatedTime;}
 
-    public void registerTime(TimeRegistration timeRegistration) {
-        timeRegistrations.add(timeRegistration);
-    }
 
-    public List<TimeRegistration> getTimeRegistrations() {
-        return timeRegistrations;
-    }
 
-    public TimeRegistration getTimeRegistrationForEmployeeOnDate(Developer developer, GregorianCalendar date) {
-        for (TimeRegistration t : this.timeRegistrations) {
-            if (t.match(developer, date)) {
-                return t;
-            }
-        }
-        return null;
-    }
 
 }
