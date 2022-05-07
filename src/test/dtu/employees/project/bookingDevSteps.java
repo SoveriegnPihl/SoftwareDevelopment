@@ -33,9 +33,9 @@ public class bookingDevSteps {
 
     @Given("that there is a manager and a Developer with initials {string} and {string}")
     public void that_there_is_a_manager_and_a_developer_with_initials(String manageInitials, String devInitials) throws Exception {
-       softwareHuset.developers.get(manageInitials);
-       softwareHuset.developers.get(devInitials);
-        System.out.println(developer.isProjectManager());
+       manager = softwareHuset.developers.get(manageInitials);
+       developer = softwareHuset.developers.get(devInitials);
+        //System.out.println(developer.isProjectManager());
     }
 
     @Given("that the developer is a project manager")
@@ -71,8 +71,9 @@ public class bookingDevSteps {
 
     @Given("the developer is not available")
     public void the_developer_is_not_available() throws Exception {
-        developer.setSick();
-        assertFalse(developer.getAvailability());
+        assertTrue(developer.getAvailability());
+        developer.isSick = false;
+        softwareHuset.updateCSVFile("developers");
     }
 
     @Given("that the developer is not a project manager")
