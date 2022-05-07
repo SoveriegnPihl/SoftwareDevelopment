@@ -1,4 +1,4 @@
-package dtu.project;
+package dtu.employees.project;
 
 /**
  * A test class to check which tests are run with which framework.

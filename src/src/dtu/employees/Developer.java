@@ -18,6 +18,7 @@ public class Developer {
     public GregorianCalendar occupiedUntilThisDate, occupiedFromThisDate, sickFromThisDate, sickUntilThisDate;
     public GregorianCalendar today = new GregorianCalendar();
     public boolean hasOccupation;
+    public boolean occupationRunout;
     double registeredHoursToday = 0;
 
     public Developer(String ini){
@@ -26,38 +27,43 @@ public class Developer {
         isSick = false;
         isProjectManager = false;
         hasOccupation = false;
+        occupationRunout = false;
     }
 
     public String getInitials(){
         return initials;
     }
 
-    public String getAvailability(){
-        String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";
-        String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";
+    public boolean getAvailability(){
+        //String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";                        //1
+        //String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";                         //2
 
-        if(!hasOccupation){
-            return isAvailable;
+        if(!hasOccupation && !isSick){                                                                          //3
+            return true;                                                                                 //4
         }
-        else if(!isSick){
-            return isAvailable;
-        }
-        else{
-            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){
-                return isNotAvailable;
-            }
-            else if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){
-                return isNotAvailable;
+        else if (!hasOccupation && isSick){
+            if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){        //7
+                return false;                                                                          //8
             }
             else{
-                return isAvailable;
+                return true;                                                                             //9
             }
         }
+        else if (hasOccupation && isSick){
+            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){    //5
+                return false;                                                                          //6
+            }
+            else{
+                return true;                                                                             //9
+            }
+        }
+        return true;
     }
 
     public void addHoursToday(double hours){
         registeredHoursToday+=hours;
     }
+
     public double getRegisteredHoursToday(){
         return registeredHoursToday;
     }
@@ -162,9 +168,11 @@ public class Developer {
             if(occupiedUntilThisDate.compareTo(today) == -1){
                 occupiedFromThisDate = new GregorianCalendar();
                 occupiedUntilThisDate = new GregorianCalendar();
+                occupationRunout = true;
                 hasOccupation = false;
             }
             else {
+                occupationRunout = false;
                 hasOccupation = true;
             }
         }
@@ -179,6 +187,11 @@ public class Developer {
             sickFromThisDate = new GregorianCalendar();
             sickUntilThisDate = new GregorianCalendar();
         }
+        else if (occupationRunout && dateInterval[7].equals("noSick")){
+            sickFromThisDate = new GregorianCalendar();
+            sickUntilThisDate = new GregorianCalendar();
+            occupationRunout = false;
+        }
         else {
             if(hasOccupation){
                 sickFromThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[7]), Integer.parseInt(dateInterval[8]),
@@ -188,11 +201,11 @@ public class Developer {
                         Integer.parseInt(dateInterval[12]));
             }
             else{
-                sickFromThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[3]), Integer.parseInt(dateInterval[4]),
-                        Integer.parseInt(dateInterval[5]));
+                sickFromThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[2]), Integer.parseInt(dateInterval[3]),
+                        Integer.parseInt(dateInterval[4]));
 
-                sickUntilThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[6]), Integer.parseInt(dateInterval[7]),
-                        Integer.parseInt(dateInterval[8]));
+                sickUntilThisDate = new GregorianCalendar(Integer.parseInt(dateInterval[5]), Integer.parseInt(dateInterval[6]),
+                        Integer.parseInt(dateInterval[7]));
             }
 
             if (sickUntilThisDate.compareTo(today) == -1) {
