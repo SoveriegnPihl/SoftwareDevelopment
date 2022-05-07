@@ -1,4 +1,4 @@
-package dtu.project;
+package dtu.employees.project;
 import dtu.softwarehus.SoftwareHuset;
 import dtu.project.Project;
 import io.cucumber.java.en.And;
@@ -10,8 +10,6 @@ import static org.junit.Assert.assertTrue;
 public class checkForEmployeesTest {
     int id = 22001;
     SoftwareHuset sf = new SoftwareHuset();
-
-
 
 
     @And("There is a project manager")
