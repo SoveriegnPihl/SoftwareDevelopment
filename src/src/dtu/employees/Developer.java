@@ -35,29 +35,21 @@ public class Developer {
     }
 
     public boolean getAvailability(){
-        //String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";                        //1
-        //String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";                         //2
-
-        if(!hasOccupation && !isSick){                                                                          //3
-            return true;                                                                                 //4
+        if (!hasOccupation && isSick){                                                                              //1
+            return !(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1);           //2
         }
-        else if (!hasOccupation && isSick){
-            if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){        //7
-                return false;                                                                          //8
-            }
-            else{
-                return true;                                                                             //9
-            }
+        else if (hasOccupation && !isSick){                                                                         //3
+            return !(occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1);   //4
         }
-        else if (hasOccupation && isSick){
-            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){    //5
-                return false;                                                                          //6
+        else if (hasOccupation && isSick){                                                                          //5
+            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1) {       //6
+                return false;                                                                                       //7
             }
-            else{
-                return true;                                                                             //9
+            else if (sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){           //8
+                return false;                                                                                       //9
             }
         }
-        return true;
+        return true;                                                                                                //10
     }
 
     public void addHoursToday(double hours){

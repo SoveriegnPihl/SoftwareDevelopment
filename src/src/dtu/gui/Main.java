@@ -4,10 +4,7 @@ import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class Main {
     SoftwareHuset softwareHuset;
