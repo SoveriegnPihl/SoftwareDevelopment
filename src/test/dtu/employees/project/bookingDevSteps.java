@@ -1,6 +1,7 @@
 package dtu.employees.project;
 
 import dtu.employees.Developer;
+import dtu.employees.Manager;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
@@ -32,11 +33,9 @@ public class bookingDevSteps {
 
     @Given("that there is a manager and a Developer with initials {string} and {string}")
     public void that_there_is_a_manager_and_a_developer_with_initials(String manageInitials, String devInitials) throws Exception {
-       manager = new Developer(manageInitials);
-       developer = new Developer(devInitials);
-
-       developers.put(manageInitials, manager);
-       developers.put(devInitials, developer);
+       softwareHuset.developers.get(manageInitials);
+       softwareHuset.developers.get(devInitials);
+        System.out.println(developer.isProjectManager());
     }
 
     @Given("that the developer is a project manager")
@@ -52,9 +51,7 @@ public class bookingDevSteps {
 
     @Given("there is a project with id {string}")
     public void there_is_a_project_with_id(String projectId) throws Exception{
-        GregorianCalendar calS = new GregorianCalendar(2022,0,1);
-        GregorianCalendar calF = new GregorianCalendar(2023,0,14);
-        project = new Project(calS, calF, 700);
+        project = softwareHuset.projects.get(Integer.parseInt(projectId));
     }
 
     @Given("the developer is available for the project")
