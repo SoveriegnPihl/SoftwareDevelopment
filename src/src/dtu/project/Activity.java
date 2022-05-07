@@ -47,7 +47,7 @@ public class Activity {
         } else {
             registeredHours.put(developer,hours);                                       //5
         }
-       // SoftwareHuset.updateCSVFile("activities");                                      //6
+        SoftwareHuset.updateCSVFile("activities");                                      //6
     }
     public double getTotalRegisteredHours(){
         return totalRegisteredHours;

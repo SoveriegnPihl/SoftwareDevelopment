@@ -1,6 +1,7 @@
 package dtu.project;
 
 import dtu.employees.Developer;
+import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.bs.A;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
@@ -8,22 +9,26 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ActivityTest {
-    Activity activity = new Activity("testActivity",50);
-    Developer developer1 = new Developer("ekki");
-
-    Developer developer2 = new Developer("hans");
 
 
     @Test
     void registerHoursA() {
-        double hoursBefore = developer1.getRegisteredHoursToday();
-        activity.registerHours(developer1,5);
-        Assert.assertEquals(developer1.getRegisteredHoursToday(), hoursBefore +5,0.1 );
+        SoftwareHuset.startProgram();
+        Activity activity = SoftwareHuset.allActivities.get("Test solutions");
+        Developer vic7 = SoftwareHuset.developers.get("vic7");
+        activity.registerHours(vic7,5);
+        double hoursBefore = vic7.getRegisteredHoursToday();
+        activity.registerHours(vic7,5);
+        Assert.assertEquals(vic7.getRegisteredHoursToday(), hoursBefore +5,0.1 );
     }
+
     @Test
     void registerHoursB() {
-        double hoursBefore = developer1.getRegisteredHoursToday();
-        activity.registerHours(developer1,5);
-        Assert.assertEquals(developer1.getRegisteredHoursToday(), hoursBefore +5,0.1 );
+        Activity activity = SoftwareHuset.allActivities.get("Lave damer");
+        Developer ekki = SoftwareHuset.developers.get("ekki");
+        double hoursAdded=5;
+        activity.registerHours(ekki,hoursAdded);
+        Assert.assertEquals(ekki.getRegisteredHoursToday(), hoursAdded,0.1 );
     }
+
 }
