@@ -78,12 +78,6 @@ public class bookingDevSteps {
         assertFalse(developer.getAvailability());
     }
 
-    /*
-    @And("the error message {string} is given")
-    public void the_error_message_is_given(String errorMsg) {
-        System.out.println(errorMsg);
-    }*/
-
     @Given("that the developer is not a project manager")
     public void that_the_developer_is_not_a_project_manager() {
         assertThat(manager.isProjectManager(),is(false));
