@@ -4,12 +4,14 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
+import static org.junit.Assert.assertTrue;
+
 public class addProjectTest {
 
 
     @Given("That there is a project name {string}")
     public void that_there_is_a_project_name(String name) {
-        // Write code here that turns the phrase above into concrete actions
+        assertTrue(!(name.isEmpty()));
     }
     @And("That there is a start date {string}")
     public void that_there_is_a_start_date(String Sdate) {
