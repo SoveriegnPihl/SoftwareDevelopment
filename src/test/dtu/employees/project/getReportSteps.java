@@ -1,7 +1,8 @@
-package dtu.project;
+package dtu.employees.project;
 
 import dtu.employees.Developer;
 import dtu.employees.Manager;
+import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

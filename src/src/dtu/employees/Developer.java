@@ -35,24 +35,21 @@ public class Developer {
     }
 
     public String getAvailability(){
-        String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";
-        String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";
+        String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";                        //1
+        String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";                         //2
 
-        if(!hasOccupation){
-            return isAvailable;
-        }
-        else if(!isSick){
-            return isAvailable;
+        if(!hasOccupation || !isSick){                                                                          //3
+            return isAvailable;                                                                                 //4
         }
         else{
-            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){
-                return isNotAvailable;
+            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){    //5
+                return isNotAvailable;                                                                          //6
             }
-            else if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){
-                return isNotAvailable;
+            else if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){        //7
+                return isNotAvailable;                                                                          //8
             }
             else{
-                return isAvailable;
+                return isAvailable;                                                                             //9
             }
         }
     }

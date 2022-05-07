@@ -1,8 +1,9 @@
-package dtu.project;
+package dtu.employees.project;
 
 import dtu.Helper.ErrorMessageHolder;
 import dtu.dto.developerInfo;
 import dtu.employees.Developer;
+import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
