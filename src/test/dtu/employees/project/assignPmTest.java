@@ -1,4 +1,4 @@
-package dtu.employees.project;
+/*package dtu.employees.project;
 
 import dtu.Helper.ErrorMessageHolder;
 import dtu.dto.developerInfo;
@@ -46,7 +46,7 @@ public class assignPmTest {
         project = new Project(1,1,1);
         assertThat(project.name,is(equalTo((name))));
     }*/
-
+/*
     @When("the developer assigns the project manager with initials {string}")
     public void theDeveloperAssignsTheProjectManagerWithInitials(String arg0) {
 
@@ -69,37 +69,7 @@ public class assignPmTest {
 
     }
 
-    @And("there is registered hours")
-    public void thereIsRegisteredHours() {
-
-        //assertThat(developer.getHours(),is(true));
-    }
-
-    @When("the developer requests reported worked hours for today")
-    public void theDeveloperRequestsReportedWorkedHoursForToday() {
-        developer.getHours();
-    }
-
-    @Then("daily worked hours is given for {string}")
-    public void dailyWorkedHoursIsGivenFor(String name) {
-
-        assertThat(developer.getHours()>0,is(true));
-    }
-
-
-    @And("there is no registered time")
-    public void thereIsNoRegisteredTime() {
-    }
-
-
-    @And("the hours registered is zero")
-    public void theHoursRegisteredIsZero() {
-
-    }
-
-    @Then("Then the error message {string} is given")
-    public void thenTheErrorMessageIsGiven(String arg0) {
-    }
 
 
 }
+*/
