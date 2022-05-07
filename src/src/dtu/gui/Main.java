@@ -8,7 +8,7 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+// lavet af Victor Larsen-Saldeen
 public class Main {
     SoftwareHuset softwareHuset;
     DeveloperPage developerPage;

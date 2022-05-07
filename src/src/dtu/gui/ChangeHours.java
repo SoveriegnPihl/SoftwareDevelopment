@@ -9,6 +9,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+// lavet af Victor Larsen-Saldeen
+
 public class ChangeHours {
     private static Project project12;
     JFrame frame;

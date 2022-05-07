@@ -8,6 +8,8 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.Vector;
 
+// lavet af Victor Larsen-Saldeen
+
 public class manageProjectPage {
     JFrame frame;
     Project projectToManage;
