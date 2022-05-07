@@ -18,7 +18,7 @@ import java.util.Arrays;
 public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
-    static HashMap<Integer,String> projectManagers;
+    public static HashMap<Integer,String> projectManagers;
     static ArrayList<Developer> availableDevelopers;
     public static HashMap<Integer, Project> projects;
     public static HashMap<String, Activity> allActivities;
@@ -150,8 +150,10 @@ public class SoftwareHuset {
     }
 
     public static void assignPM(String dev, int projectID){
-       if(projects.containsKey(projectID)){
-        projectManagers.put(projectID,dev);
+       if(!isManager(dev)){
+        if(projects.containsKey(projectID) && developers.containsKey(dev)) {
+            projectManagers.put(projectID, dev);
+        }
        }
     }
 

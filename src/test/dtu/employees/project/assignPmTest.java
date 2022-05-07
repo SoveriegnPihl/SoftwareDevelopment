@@ -17,9 +17,8 @@ import java.util.HashMap;
 
 import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class assignPmTest {
 
@@ -39,14 +38,15 @@ public class assignPmTest {
     public void theDeveloperAssignsTheProjectManagerWithInitials(String name) {
         softwareHuset.assignPM(name,22001);
     }
-
-
     @Then("the project manager {string} is assigned to the project")
     public void theProjectManagerIsAssignedToTheProject(String name) {
-    assertTrue(softwareHuset.isManager(name));
+        assertTrue(softwareHuset.isManager(name));
     }
 
-
+    @Then("{string} is not assigned as project manager to the project")
+    public void isNotAssignedAsProjectManagerToTheProject(String name) {
+        assertFalse(softwareHuset.isManager(name));
+    }
 
     @And("There is not a project with id {string}")
     public void thereIsNotAProjectWithId(String projectID) {
@@ -55,17 +55,16 @@ public class assignPmTest {
 
     @When("the developer tries to assigns the project manager with initials {string}")
     public void theDeveloperTriesToAssignsTheProjectManagerWithInitials(String name) {
-        try {
-            softwareHuset.assignPM(name, notAProject);
-        }
-        catch (NullPointerException e) {
-            errorMessageHolder.setErrorMessage(e.getMessage());
-
-        }
-        System.out.println(errorMessageHolder.getErrorMessage());
+        softwareHuset.assignPM(name, notAProject);
     }
-    @And("the error message {string}")
-    public void theErrorMessage(String name) {
 
+    @Then("no project manager assigned to the project")
+    public void noProjectManagerAssignedToTheProject() {
+        assertFalse(softwareHuset.projectManagers.containsKey(notAProject));
+    }
+
+    @Then("{string} is still project manager")
+    public void isStillProjectManager(String name) {
+        assertTrue(softwareHuset.isManager(name));
     }
 }
