@@ -2,19 +2,12 @@ package dtu.gui;
 
 import dtu.employees.Developer;
 import dtu.project.Activity;
-import dtu.project.OperationNotAllowedException;
 import dtu.project.Project;
-import dtu.project.TimeRegistration;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
+
 // lavet af Victor Larsen-Saldeen
 public class RegisterHours {
     private static Project project12;

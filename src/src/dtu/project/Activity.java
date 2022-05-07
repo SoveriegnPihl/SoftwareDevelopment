@@ -14,7 +14,6 @@ public class Activity {
     public String name;
     GregorianCalendar startDate, endDate;
     int budget;
-    List<TimeRegistration> timeRegistrations = new ArrayList<>();
     public HashMap<Developer, Double> registeredHours = new HashMap<>();
     double totalRegisteredHours = 0;
 
@@ -87,17 +86,6 @@ public class Activity {
     public int getEstimatedTime(){return estimatedTime;}
 
 
-    public List<TimeRegistration> getTimeRegistrations() {
-        return timeRegistrations;
-    }
 
-    public TimeRegistration getTimeRegistrationForEmployeeOnDate(Developer developer, GregorianCalendar date) {
-        for (TimeRegistration t : this.timeRegistrations) {
-            if (t.match(developer, date)) {
-                return t;
-            }
-        }
-        return null;
-    }
 
 }

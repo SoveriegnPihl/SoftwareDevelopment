@@ -1,7 +1,6 @@
-/*package dtu.employees.project;
+package dtu.employees.project;
 
 import dtu.Helper.ErrorMessageHolder;
-import dtu.dto.developerInfo;
 import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
@@ -16,60 +15,57 @@ import org.hamcrest.Matchers;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import static org.hamcrest.CoreMatchers.not;
 import static org.hamcrest.core.IsEqual.equalTo;
 import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertTrue;
 
 public class assignPmTest {
 
-    private ErrorMessageHolder errorMessage;;
+    private ErrorMessageHolder errorMessageHolder;
     SoftwareHuset softwareHuset;
     HashMap<String, Developer> developers;
     Developer developer,manager;
+    int notAProject;
 
-    Project project;
 
-
-    public assignPmTest(SoftwareHuset softwareHuset, HashMap<String, Developer> developers){
-            this.softwareHuset = softwareHuset;
-            this.developers = developers;
+    public assignPmTest(SoftwareHuset sf,ErrorMessageHolder errorMessageHolder){
+            this.softwareHuset = sf;
+            this.errorMessageHolder = errorMessageHolder;
 
         }
-    @Given("that there is a developer with initials {string}")
-    public void that_there_is_a_developer_with_initials(String name) throws Exception {
-       developer = new Developer(name);
-        assertThat(developer.getInitials(), is(equalTo(name)));
-    }
-
-    /*@And("there is a project named {string}")
-    public void thereIsAProjectNamed(String name) {
-        project = new Project(1,1,1);
-        assertThat(project.name,is(equalTo((name))));
-    }*/
-/*
     @When("the developer assigns the project manager with initials {string}")
-    public void theDeveloperAssignsTheProjectManagerWithInitials(String arg0) {
-
+    public void theDeveloperAssignsTheProjectManagerWithInitials(String name) {
+        softwareHuset.assignPM(name,22001);
     }
+
 
     @Then("the project manager {string} is assigned to the project")
     public void theProjectManagerIsAssignedToTheProject(String name) {
-        manager = new Developer(name);
-        manager.setToProjectManager();
-
-    }
-
-    @Given("that there isn't a developer with initials {string}")
-    public void thatThereIsnTADeveloperWithInitials(String anotherName) {
-
-    }
-
-    @And("there is a project manager with initials {string}")
-    public void thereIsAProjectManagerWithInitials(String arg0) {
-
+    assertTrue(softwareHuset.isManager(name));
     }
 
 
 
+    @And("There is not a project with id {string}")
+    public void thereIsNotAProjectWithId(String projectID) {
+        notAProject = Integer.parseInt(projectID);
+    }
+
+    @When("the developer tries to assigns the project manager with initials {string}")
+    public void theDeveloperTriesToAssignsTheProjectManagerWithInitials(String name) {
+        try {
+            softwareHuset.assignPM(name, notAProject);
+        }
+        catch (NullPointerException e) {
+            errorMessageHolder.setErrorMessage(e.getMessage());
+
+        }
+        System.out.println(errorMessageHolder.getErrorMessage());
+    }
+    @And("the error message {string}")
+    public void theErrorMessage(String name) {
+
+    }
 }
-*/

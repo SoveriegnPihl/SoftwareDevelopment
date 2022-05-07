@@ -3,7 +3,7 @@ Feature: Check number of worked hours today
     Actors: Developer
 ## Author: Victor Larsen-Saldeen
 Scenario: Developer requests number of worked hours today
-    Given that there is a developer with initials "ekki"
+    Given that there is a developer with initials "vic7"
     And there is registered hours
     When the developer requests reported worked hours for today
     Then daily worked hours is given for "vic7"

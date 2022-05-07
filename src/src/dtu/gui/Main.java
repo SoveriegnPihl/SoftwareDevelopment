@@ -51,6 +51,7 @@ public class Main {
     public Main() throws Exception {
     softwareHuset = new SoftwareHuset();
     initialize();
+
     }
 
     private void initialize() throws Exception {

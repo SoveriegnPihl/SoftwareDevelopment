@@ -25,6 +25,7 @@ public class SoftwareHuset {
     private DateServer dateServer;
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
+    static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
     public SoftwareHuset() {
     }
 
@@ -39,6 +40,7 @@ public class SoftwareHuset {
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
+
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
@@ -148,8 +150,9 @@ public class SoftwareHuset {
     }
 
     public static void assignPM(String dev, int projectID){
-
+       if(projects.containsKey(projectID)){
         projectManagers.put(projectID,dev);
+       }
     }
 
     public void listProjects(){
