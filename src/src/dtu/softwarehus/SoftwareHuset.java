@@ -196,7 +196,11 @@ public class SoftwareHuset {
         StringBuilder str = new StringBuilder();
 
         for (Developer dev : developers.values()){
-            str.append(dev.getAvailability());
+            if(dev.getAvailability()){
+                str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
+            } else {
+                str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
+            }
         }
         return str.toString();
     }
