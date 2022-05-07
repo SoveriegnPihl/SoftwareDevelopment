@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
+// lavet af Victor Larsen-Saldeen
 public class RegisterHours {
     private static Project project12;
     JFrame frame;

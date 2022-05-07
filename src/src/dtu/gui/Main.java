@@ -5,6 +5,9 @@ import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+// lavet af Victor Larsen-Saldeen
 
 public class Main {
     SoftwareHuset softwareHuset;

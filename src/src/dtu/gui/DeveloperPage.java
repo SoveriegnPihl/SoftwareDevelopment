@@ -1,10 +1,11 @@
-package dtu.gui;//import required classes and packages
+package dtu.gui;
 import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
 import java.awt.*;
 
-//create NewPage class to create a new page on which user will navigate  
+// lavet af Victor Larsen-Saldeen
+
 public class DeveloperPage {
     static Developer loggedInUser;
     static JPanel developerPage;

@@ -4,6 +4,8 @@ import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
 
+// lavet af Victor Larsen-Saldeen
+
 public class ProjectManagerPage {
     static Developer loggedInUser;
     manageProjectPage manageProjectPage;
