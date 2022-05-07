@@ -8,11 +8,7 @@ import java.time.Month;
 import java.util.Calendar;
 import java.util.Vector;
 
-//create CreateLoginForm class to create login form
-//class extends JFrame to create a window where our component add
-//class implements ActionListener to perform an action on button click
 public class manageProjectPage {
-    //initialize button, panel, label, and text field
     JFrame frame;
     Project projectToManage;
     JButton saveBtn;
@@ -57,43 +53,31 @@ public class manageProjectPage {
 
 
         saveBtn.addActionListener(e -> {
-           // projectToManage.startWeek = Integer.parseInt(startDateTxtField.getText());
-            //projectToManage.endWeek = Integer.parseInt(endDateTxtField.getText());
-           // projectToManage.budget = Integer.parseInt(budgetTxtField.getText());
+            int[] newStartDate = {Integer.parseInt(startDateTxtField.getText()), monthSelStart.getSelectedIndex(), yearSelStart.getItemAt(yearSelStart.getSelectedIndex())};
+            int[] newEndDate = {Integer.parseInt(endDateTxtField.getText()), monthSelFin.getSelectedIndex(), yearSelFin.getItemAt(yearSelStart.getSelectedIndex())};
+            int newBudget = Integer.parseInt(budgetTxtField.getText());
+
+            projectToManage.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
+            SoftwareHuset.updateCSVFile("projects");
 
             setVisible(false);
-            clear();
             ProjectManagerPage.setVisible(true);
-
         });
 
     }
     public void setVisible(boolean visi){
         createProjectPanel.setVisible(visi);
     }
-    public void clear() {
-        startDateTxtField.setText("");
-        endDateTxtField.setText("");
-        projectManagerTxtField.setText("");
-        budgetTxtField.setText("");
-        monthSelStart.setSelectedItem("January");
-        monthSelFin.setSelectedItem("January");
-        yearSelStart.setSelectedItem(year);
-        yearSelFin.setSelectedItem(year);
 
-    }
     public void setLabels(String project ){
-
         projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 
-        System.out.println(projectToManage.getDateDay("start"));
-
         startDateTxtField.setText(String.valueOf(projectToManage.getDateDay("start")));
-        monthSelStart.setSelectedItem(projectToManage.getDateMonth("start"));
+        monthSelStart.setSelectedIndex(Integer.parseInt(projectToManage.getDateMonth("start")));
         yearSelStart.setSelectedItem(projectToManage.getDateYear("start"));
 
         endDateTxtField.setText(String.valueOf(projectToManage.getDateDay("end")));
-        monthSelFin.setSelectedItem(projectToManage.getDateMonth("end"));
+        monthSelFin.setSelectedIndex(Integer.parseInt(projectToManage.getDateMonth("end")));
         yearSelFin.setSelectedItem(projectToManage.getDateYear("end"));
         budgetTxtField.setText(String.valueOf(projectToManage.budget));
     }
@@ -160,15 +144,22 @@ public class manageProjectPage {
         createProjectPanel.add(monthSelFin);
     }
     private void createPage() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         createProjectPanel = new JPanel();
-        frame.getContentPane().add(createProjectPanel);
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
         createProjectPanel.setBorder(BorderFactory.createTitledBorder("Manage project page"));
+    }
+
+    public void clear() {
+        startDateTxtField.setText("");
+        endDateTxtField.setText("");
+        projectManagerTxtField.setText("");
+        budgetTxtField.setText("");
+        monthSelStart.setSelectedItem("January");
+        monthSelFin.setSelectedItem("January");
+        yearSelStart.setSelectedItem(year);
+        yearSelFin.setSelectedItem(year);
+
     }
 
     private Vector getYears() {

@@ -3,12 +3,12 @@ import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
-import java.awt.*;
 
 public class ProjectManagerPage {
     static Developer loggedInUser;
     manageProjectPage manageProjectPage;
     CreateActivityPage createActivityPage;
+    getReportPage getReportPage;
     static JPanel projectManagerPage;
     SoftwareHuset softwareHuset;
     Main parentWindow;
@@ -26,61 +26,66 @@ public class ProjectManagerPage {
     public void initialize(){
         createPage();
 
-        JButton addDev = makeLeftButton("Add developer");
-        JButton viewDev = makeLeftButton("View *available* developers");
-        JButton addDevToProj = makeLeftButton("Add developer to project");
-        JButton addActivityBut = makeLeftButton("Add activity to project");
-        JButton getReport = makeLeftButton("Get project report");
-        JButton backB = makeLeftButton("Back");
-        JButton changeProjBut = makeRightButton("Change selected project");
+        JButton addDevBtn = makeLeftButton("Add developer");
+        JButton viewAvailableDevBtn = makeLeftButton("View *available* developers");
+        JButton addDevToProjBtn = makeLeftButton("Add developer to project");
+        JButton addActivityBtn = makeLeftButton("Add activity to project");
+        JButton getReportBtn = makeLeftButton("Get project report");
+        JButton backBtn = makeLeftButton("Back");
+        JButton changeProjBtn = makeRightButton("Change selected project");
 
         JLabel selectLabel = new JLabel();
         selectLabel.setText("Select project");
         selectLabel.setBounds(100, 25, 193, 29);
         projectManagerPage.add(selectLabel);
 
-        viewDev.addActionListener(e -> {
-            OptionPane OP = new OptionPane(loggedInUser,"View available developers");
+        viewAvailableDevBtn.addActionListener(e -> {
+            new OptionPane(loggedInUser,"View available developers");
         });
 
-        changeProjBut.addActionListener(e -> {
+        changeProjBtn.addActionListener(e -> {
             setVisible(false);
             manageProjectPage.setLabels(projectList.getItemAt(projectList.getSelectedIndex()));
             manageProjectPage.setVisible(true);
         });
-        backB.addActionListener(e -> {
+
+        getReportBtn.addActionListener(e -> {
+            setVisible(false);
+            getReportPage.setProject(projectList.getItemAt(projectList.getSelectedIndex()));
+            getReportPage.setVisible(true);
+        });
+
+        backBtn.addActionListener(e -> {
             setVisible(false);
             removeList();
+            Main.setFrameSize(600,400);
             parentWindow.setVisible(true);
         });
 
-        addActivityBut.addActionListener(e -> {
+        addActivityBtn.addActionListener(e -> {
             setVisible(false);
+            createActivityPage.setOriginWindow("ProjectManagerPage");
             createActivityPage.setVisible(true);
         });
 
-        addDevToProj.addActionListener(e -> {
+        addDevToProjBtn.addActionListener(e -> {
           //  OptionPane OP = new OptionPane(loggedInUser,"Add developer to project");
            createAddDev();
 
         });
 
-        addDev.addActionListener(e -> {
-            OptionPane OP = new OptionPane(loggedInUser,"Add developer");
+        addDevBtn.addActionListener(e -> {
+            new OptionPane(loggedInUser,"Add developer");
         });
 
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);
         createActivityPage = new CreateActivityPage(softwareHuset, parentWindow);
+        getReportPage = new getReportPage(softwareHuset, parentWindow);
 
 
     }
     private void createPage() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         projectManagerPage = new JPanel();
-        frame.getContentPane().add(projectManagerPage);
         parentWindow.addPanel(projectManagerPage);
         projectManagerPage.setLayout(null);
         projectManagerPage.setBorder(BorderFactory.createTitledBorder("Project manager page"));
@@ -136,7 +141,7 @@ public class ProjectManagerPage {
     public static void setVisible(boolean visi){
         projectManagerPage.setVisible(visi);
     }
-   public static void createList(Developer user){
+    public static void createList(Developer user){
        String[] list = SoftwareHuset.projectListManagers(user).toArray(new String[0]);
 
        projectList = new JComboBox<>(list);

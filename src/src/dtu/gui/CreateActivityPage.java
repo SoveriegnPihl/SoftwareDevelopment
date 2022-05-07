@@ -22,6 +22,7 @@ public class CreateActivityPage {
     Main parentWindow;
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
+    String originWindow;
     int year;
     private JFrame frame;
 
@@ -38,7 +39,12 @@ public class CreateActivityPage {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 clear();
-                DeveloperPage.setVisible(true);
+                if (originWindow.equals("ProjectManagerPage")){
+                    ProjectManagerPage.setVisible(true);
+                }else{
+                    DeveloperPage.setVisible(true);
+                }
+
             }
         });
         btnBack.setBounds(21, 350, 59, 29);
@@ -56,6 +62,7 @@ public class CreateActivityPage {
         createProjectPanel.add(saveBtn);
 
         saveBtn.addActionListener(e -> {
+            /* gamle
             //date intervals
             GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
                     monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
@@ -70,7 +77,28 @@ public class CreateActivityPage {
 
             //adding to project
             Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
-            projectToAddTo.addActivity(newActivity);
+            projectToAddTo.addActivity(newActivity);*/
+            String projectID = projectTxtField.getText();
+            String actName = nameTxtField.getText();
+            String budget = budgetTxtField.getText();
+            String estimatedTime = estTimeTxtField.getText();
+            String timeUsed = "0.0";
+
+            String startYear = String.valueOf(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()));
+            String startMonth = String.valueOf(monthSelStart.getSelectedIndex());
+            String startDay = startDateTxtField.getText();
+
+            String endYear = String.valueOf(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()));
+            String endMonth = String.valueOf(monthSelFin.getSelectedIndex());
+            String endDay = endDateTxtField.getText();
+
+
+            String[] activityValues = new String[] {projectID, actName, startYear, startMonth, startDay,
+                endYear,endMonth, endDay, estimatedTime, timeUsed, budget};
+
+            Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
+
+            SoftwareHuset.addProjectActivities(projectToAddTo, activityValues);
 
         setVisible(false);
         clear();
@@ -80,12 +108,7 @@ public class CreateActivityPage {
 
     }
     private void createPage() {
-        frame = new JFrame();
-        frame.setBounds(100, 100, 500,500);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.getContentPane().setLayout(new CardLayout(0, 0));
         createProjectPanel = new JPanel();
-        frame.getContentPane().add(createProjectPanel);
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel .setLayout(null);
         createProjectPanel .setBorder(BorderFactory.createTitledBorder("Create activity page"));
@@ -95,6 +118,10 @@ public class CreateActivityPage {
         createProjectPanel.setVisible(visi);
     }
 
+    public void setOriginWindow(String window){
+        originWindow = window;
+    }
+
     private void clear() {
         nameTxtField.setText("");
         startDateTxtField.setText("");
@@ -102,8 +129,8 @@ public class CreateActivityPage {
         projectTxtField.setText("");
         estTimeTxtField.setText("");
         budgetTxtField.setText("");
-        monthSelStart.setSelectedItem("January");
-        monthSelFin.setSelectedItem("January");
+        monthSelStart.setSelectedIndex(0);
+        monthSelFin.setSelectedIndex(0);
         yearSelStart.setSelectedItem(year);
         yearSelFin.setSelectedItem(year);
     }
