@@ -1,4 +1,4 @@
-package dtu.project;
+package dtu.employees.project;
 
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;

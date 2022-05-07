@@ -60,6 +60,7 @@ public class ProjectManagerPage {
         backBtn.addActionListener(e -> {
             setVisible(false);
             removeList();
+            Main.setFrameSize(600,400);
             parentWindow.setVisible(true);
         });
 
