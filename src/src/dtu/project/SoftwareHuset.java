@@ -109,27 +109,27 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String[] readData) {
-        if(readData[0].length() == 4 && !isDeveloper(readData[0])) {
-            Developer newDeveloper = new Developer(readData[0]);
-            newDeveloper.setHolidayDates(readData);
-            newDeveloper.setSickDates(readData);
-            developers.put(readData[0], newDeveloper);
+        if(readData[0].length() == 4 && !isDeveloper(readData[0])) {                                                //1
+            Developer newDeveloper = new Developer(readData[0]);                                                    //2
+            newDeveloper.setHolidayDates(readData);                                                                 //3
+            newDeveloper.setSickDates(readData);                                                                    //4
+            developers.put(readData[0], newDeveloper);                                                              //5
 
-            if (!newDeveloper.hasOccupation && !newDeveloper.isSick) {
-                csvDeveloperData.add(new String[]{readData[0], "noOcc", "noSick"});
-            } else if (!newDeveloper.hasOccupation && newDeveloper.isSick) {
-                csvDeveloperData.add(new String[]{readData[0], "noOcc", readData[2], readData[3], readData[4],
-                        readData[5], readData[6], readData[7],});
-            } else if (newDeveloper.hasOccupation && !newDeveloper.isSick) {
-                csvDeveloperData.add(new String[]{readData[0], readData[1], readData[2], readData[3], readData[4],
-                        readData[5], readData[6], "noSick"});
+            if (!newDeveloper.hasOccupation && !newDeveloper.isSick) {                                              //6
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", "noSick"});                                 //7
+            } else if (!newDeveloper.hasOccupation && newDeveloper.isSick) {                                        //8
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", readData[2], readData[3], readData[4],      //9
+                        readData[5], readData[6], readData[7],});                                                   //10
+            } else if (newDeveloper.hasOccupation && !newDeveloper.isSick) {                                        //11
+                csvDeveloperData.add(new String[]{readData[0], readData[1], readData[2], readData[3], readData[4],  //12
+                        readData[5], readData[6], "noSick"});                                                       //13
             } else {
-                csvDeveloperData.add(readData);
+                csvDeveloperData.add(readData);                                                                     //14
             }
-            writeToCSV("developers");
+            writeToCSV("developers");                                                                           //15
 
-            if (developers.containsKey(readData[0])) {
-                System.out.println("Success");
+            if (developers.containsKey(readData[0])) {                                                              //16
+                System.out.println("Success");                                                                      //17
             }
         }
     }
@@ -205,14 +205,14 @@ public class SoftwareHuset {
         return projectManagers.containsValue(ini);
     }
 
-    public boolean findProject(int projectId){
-        for (int id : projects.keySet()){
-            System.out.println(id);
-            if(id == projectId){
-                return true;
+    public static boolean findProject(int projectId){
+        for (int id : projects.keySet()){               //1
+            System.out.println(id);                     //2
+            if(id == projectId){                        //3
+                return true;                            //4
             }
         }
-        return false;
+        return false;                                   //5
     }
     public static Project getProject(String id){
         return projects.get(Integer.valueOf(id));
