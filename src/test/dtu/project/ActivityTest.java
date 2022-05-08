@@ -21,7 +21,7 @@ class ActivityTest {
 
     @Test
     void registerHoursB() {
-        Activity activity = SoftwareHuset.allActivities.get("Lave damer");
+        Activity activity = SoftwareHuset.allActivities.get("Prepare project");
         Developer ekki = SoftwareHuset.developers.get("ekki");
         double hoursAdded=5;
         activity.registerHours(ekki,hoursAdded);

@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 
 // lavet af Victor Larsen-Saldeen
+
 public class Main {
     SoftwareHuset softwareHuset;
     DeveloperPage developerPage;
