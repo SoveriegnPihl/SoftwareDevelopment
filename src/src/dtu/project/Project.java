@@ -86,9 +86,6 @@ public class Project {
         return developers.contains(dev);
     }
 
-    public List<Developer> developerList () {
-        return developers;
-    }
     public String getDateDay (String time){
         if (time.equals("start")) {
             return String.valueOf(startDate.get(Calendar.DAY_OF_MONTH));

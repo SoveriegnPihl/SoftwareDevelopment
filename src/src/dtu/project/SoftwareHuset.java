@@ -155,27 +155,7 @@ public class SoftwareHuset {
             projectManagers.put(projectID, dev);
         }
        }
-    }/*
-    public static void assignPM(String dev, int projectID){
-
-        if(!isDeveloper(dev)){
-            Developer newDev = new Developer(dev);
-
-        }
-
-        projectManagers.put(projectID,dev);
-        projects.get(projectID).assignManagerToProject(developers.get(dev));
-    }*/
-
-   /* public void listProjects(){
-        for (Project var : projects.values()){
-            var.printProject();
-            System.out.println("");
-        }
     }
-
-    */
-
 
     public static Developer getDeveloper(String name){
         return developers.get(name);

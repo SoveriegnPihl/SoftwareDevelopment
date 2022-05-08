@@ -59,10 +59,6 @@ public class Developer {
         return registeredHoursToday;
     }
 
-    public void addHours(int hours){
-        hoursWorked+=hours;
-    }
-
     public int getHours(){ return hoursWorked; }
 
     /*

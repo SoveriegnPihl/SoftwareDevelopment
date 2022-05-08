@@ -8,30 +8,13 @@ import javax.swing.*;
 class OptionPane extends JFrame {
 
     OptionPane(Developer user, String method) {
-        if (method.equals("Register hours worked")) {
-            JFrame alertFrame = new JFrame();
-            alertFrame.setLocationRelativeTo(null);
-            String hours = JOptionPane.showInputDialog(alertFrame, method);
-            user.addHours(Integer.parseInt(hours));
 
-        }
-        if (method.equals("View hours worked")) {
-            JFrame alertFrame = new JFrame();
-            alertFrame.setLocationRelativeTo(null);
-            int hours = user.getHours();
-            JOptionPane.showMessageDialog(alertFrame, "You have worked " + hours + " today");
-        }
         if (method.equals("View available developers")) {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
             JOptionPane.showMessageDialog(alertFrame, SoftwareHuset.listAvailableDevelopers());
         }
-        if (method.equals("Add developer")) {
-            JFrame alertFrame = new JFrame();
-            alertFrame.setLocationRelativeTo(null);
-            String developerToCreate = JOptionPane.showInputDialog(alertFrame, method);
-            SoftwareHuset.addDeveloper(new String[]{developerToCreate,"noOcc","noSick"});
-        }
+
         if (method.equals("Add developer to project")) {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
@@ -77,12 +60,14 @@ class OptionPane extends JFrame {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
             String developerToCreate = JOptionPane.showInputDialog(alertFrame, method);
-            if(developerToCreate.length() != 4){
-                JFrame errorFrame = new JFrame();
-                errorFrame.setLocationRelativeTo(null);
-                JOptionPane.showMessageDialog(null,"Please use 4 initials!");
-            } else{
-                SoftwareHuset.addDeveloper(new String[]{developerToCreate, "noOcc", "noSick"});
+            if (!(developerToCreate == null)) {
+                if (developerToCreate.length() != 4) {
+                    JFrame errorFrame = new JFrame();
+                    errorFrame.setLocationRelativeTo(null);
+                    JOptionPane.showMessageDialog(null, "Please use 4 initials!");
+                } else {
+                    SoftwareHuset.addDeveloper(new String[]{developerToCreate, "noOcc", "noSick"});
+                }
             }
         }
     }

@@ -60,7 +60,7 @@ public class DeveloperPage {
         });
 
         createDevBtn.addActionListener(e -> {
-            OptionPane OP = new OptionPane(loggedInUser,"Add developer");
+            OptionPane OP = new OptionPane("Add developer");
         });
 
         backBtn.addActionListener(e -> {

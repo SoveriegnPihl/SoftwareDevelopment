@@ -78,7 +78,7 @@ public class ProjectManagerPage {
         });
 
         addDevBtn.addActionListener(e -> {
-            new OptionPane(loggedInUser,"Add developer");
+            new OptionPane("Add developer");
         });
 
         manageProjectPage = new manageProjectPage(softwareHuset,parentWindow);
