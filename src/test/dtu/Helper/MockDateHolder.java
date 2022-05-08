@@ -7,7 +7,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 
 import dtu.softwarehus.DateServer;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 public class MockDateHolder {
 

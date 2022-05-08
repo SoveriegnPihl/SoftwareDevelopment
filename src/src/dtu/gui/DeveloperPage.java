@@ -1,7 +1,9 @@
 package dtu.gui;
-import dtu.employees.Developer;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.Developer;
+import dtu.project.Project;
+import dtu.project.SoftwareHuset;
 import javax.swing.*;
+import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
 
@@ -122,7 +124,7 @@ public class DeveloperPage {
             developerCombo.setBounds(250, 50, 193, 29);
             developerPage2.add(developerCombo);
 
-            String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
+            String[] list = fullProjectList().toArray(new String[0]);
             JComboBox<String> projectCombo = new JComboBox<>(list);
             projectCombo.setBounds(250, 100, 193, 29);
             developerPage2.add(projectCombo);
@@ -176,4 +178,11 @@ public class DeveloperPage {
         frame.getContentPane().add(panel);
     }
 
+    public static ArrayList<String> fullProjectList(){
+        ArrayList<String> projectlist = new ArrayList<>();
+        for (Project project : SoftwareHuset.projects.values()){
+            projectlist.add(String.valueOf(project.getId()));
+        }
+        return projectlist;
+    }
 }  

@@ -1,10 +1,9 @@
-package dtu.employees.project;
+package dtu.stepDefinitions;
 
 
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
-import dtu.softwarehus.SoftwareHuset;
 
 /* Important: 
 for Cucumber tests to be recognized by Maven, the class name has to have

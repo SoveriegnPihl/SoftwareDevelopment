@@ -1,6 +1,6 @@
 package dtu.gui;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import java.text.DecimalFormat;
 

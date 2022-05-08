@@ -1,8 +1,7 @@
-package dtu.employees;
+package dtu.project;
 
 import dtu.project.Activity;
-import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,7 +13,7 @@ public class Developer {
     int hoursWorked;
     List<Activity> activities = new ArrayList<>();
     public boolean isSick;
-    boolean isProjectManager;
+    protected boolean isProjectManager;
     public GregorianCalendar occupiedUntilThisDate, occupiedFromThisDate, sickFromThisDate, sickUntilThisDate;
     public GregorianCalendar today = new GregorianCalendar();
     public boolean hasOccupation;
