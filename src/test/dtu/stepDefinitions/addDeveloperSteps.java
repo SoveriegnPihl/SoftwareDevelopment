@@ -1,14 +1,27 @@
 package dtu.stepDefinitions;
 
 import dtu.project.SoftwareHuset;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.jupiter.api.BeforeEach;
+
 import static org.junit.Assert.*;
 
 public class addDeveloperSteps {
     SoftwareHuset softwareHuset;
     String newDeveloperName;
+
+    @BeforeAll
+    public static void checkInit() {
+        if (!AAcheckForEmployeesTest.programStarted) {
+            AAcheckForEmployeesTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     public addDeveloperSteps(SoftwareHuset softwareHuset){
         this.softwareHuset = softwareHuset;

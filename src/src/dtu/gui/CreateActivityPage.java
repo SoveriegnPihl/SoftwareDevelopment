@@ -45,7 +45,7 @@ public class CreateActivityPage {
 
             }
         });
-        btnBack.setBounds(21, 350, 59, 29);
+        btnBack.setBounds(21, 350, 70, 29);
         createProjectPanel.add(btnBack);
 
         //adding labels to screen

@@ -1,5 +1,6 @@
 package dtu.project;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.GregorianCalendar;
@@ -7,11 +8,20 @@ import java.util.GregorianCalendar;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AvailabilityTest {
+    static boolean programStarted = false;
     public GregorianCalendar today = new GregorianCalendar();
+
+    @BeforeEach
+    void checkInit() {
+        if (!programStarted) {
+            programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     @Test
     void getAvailabilityA() {
-        SoftwareHuset.startProgram();
+        programStarted = true;
         Developer developer = SoftwareHuset.getDeveloper("ekki");
         assertTrue(developer.getAvailability(today));
     }

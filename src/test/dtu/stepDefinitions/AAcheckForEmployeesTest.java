@@ -1,20 +1,32 @@
 package dtu.stepDefinitions;
 import dtu.project.SoftwareHuset;
+import io.cucumber.java.Before;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.Given;
+import org.junit.BeforeClass;
 
 import static org.junit.Assert.assertTrue;
 
 public class AAcheckForEmployeesTest {
     int id = 22001;
-    SoftwareHuset sf;
+    static SoftwareHuset sf;
+    static boolean programStarted = false;
 
     public AAcheckForEmployeesTest(SoftwareHuset softwareHuset){
         sf = softwareHuset;
-        sf.startProgram();
-    }
 
+    }
+    @BeforeAll
+     public static void checkInit() {
+        System.out.println("checked");
+        if (!programStarted) {
+            programStarted = true;
+            sf.startProgram();
+        }
+    }
 
     @And("There is a project manager")
     public void there_is_project_manager(){

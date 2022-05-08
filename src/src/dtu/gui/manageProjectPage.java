@@ -38,7 +38,7 @@ public class manageProjectPage {
             clear();
             ProjectManagerPage.setVisible(true);
         });
-        btnBack.setBounds(21, 300, 59, 29);
+        btnBack.setBounds(21, 300, 70, 29);
         createProjectPanel.add(btnBack);
 
         //adding labels to screen

@@ -124,7 +124,7 @@ public class Main {
 
 
         createProjectBtn.addActionListener(e -> {
-            setFrameSize(500,500);
+            setFrameSize(520,450);
             setVisible(false);
             newProjectPage.setVisible(true);
             Main.setLocation();

@@ -3,10 +3,13 @@ package dtu.stepDefinitions;
 import dtu.Helper.ErrorMessageHolder;
 import dtu.project.Developer;
 import dtu.project.SoftwareHuset;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.HashMap;
 
@@ -15,6 +18,14 @@ import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class assignPmTest {
+
+    @BeforeAll
+    public static void checkInit() {
+        if (!AAcheckForEmployeesTest.programStarted) {
+            AAcheckForEmployeesTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     SoftwareHuset softwareHuset;
     int notAProject;

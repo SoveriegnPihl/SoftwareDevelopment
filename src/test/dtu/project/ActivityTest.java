@@ -1,11 +1,19 @@
 package dtu.project;
 
+import io.cucumber.java.BeforeAll;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 class ActivityTest {
 
-
+    @BeforeEach
+    void checkInit(){
+    if(!AvailabilityTest.programStarted){
+        AvailabilityTest.programStarted = true;
+        SoftwareHuset.startProgram();
+    }
+    }
     @Test
     void registerHoursA() {
         Activity activity = SoftwareHuset.allActivities.get("Test solutions");
@@ -14,6 +22,7 @@ class ActivityTest {
         double hoursBefore = vic7.getRegisteredHoursToday();
         activity.registerHours(vic7,5);
         Assert.assertEquals(vic7.getRegisteredHoursToday(), hoursBefore +5,0.1 );
+        activity.registerHours(vic7,-10);
     }
 
     @Test
@@ -23,6 +32,7 @@ class ActivityTest {
         double hoursAdded=5;
         activity.registerHours(ekki,hoursAdded);
         Assert.assertEquals(ekki.getRegisteredHoursToday(), hoursAdded,0.1 );
+        activity.registerHours(ekki,-5);
     }
 
 }
