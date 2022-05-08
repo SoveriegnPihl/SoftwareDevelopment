@@ -19,6 +19,7 @@ public class RegisterHours {
     private static JComboBox<Object> activeBox;
     private static Developer loggedInUser;
     private JLabel selectLabel,userLabel5;
+    private static JPanel topPanel;
     private boolean checked = false;
     JCheckBox checkBox1;
     private JComboBox<Integer> hoursCB;
@@ -39,13 +40,32 @@ public class RegisterHours {
             btnBack.addActionListener(e -> {
                 setVisible(false);
                 clear();
+                Main.setFrameSize(500,500);
                 DeveloperPage.setVisible(true);
             });
-            btnBack.setBounds(21, 300, 59, 29);
+            btnBack.setBounds(51, 300, 70, 29);
             registerHours.add(btnBack);
-
+/*
             checkBox1 = new JCheckBox("Not assigned to project");
             checkBox1.setBounds(150, 25, 193, 29);
+*/
+            JLabel assignedOrNot = new JLabel();
+            assignedOrNot.setText("Are you assigned to the project?");
+            assignedOrNot.setBounds(20, 20, 250, 29);
+
+
+            JRadioButton r1=new JRadioButton("Yes");
+            JRadioButton r2=new JRadioButton("No");
+            r1.setBounds(275,20,75,30);
+            r2.setBounds(375,20,75,30);
+            r1.setSelected(true);
+            ButtonGroup bg=new ButtonGroup();
+
+            bg.add(r1);bg.add(r2);
+
+
+
+
 
             selectLabel = new JLabel();
             selectLabel.setText("Select project");
@@ -92,22 +112,41 @@ public class RegisterHours {
             JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
             minCB.setBounds(400, 155, 70, 30);
             registerHours.add(minCB);
-
+/*
             checkBox1.addActionListener(e -> {
                 checked = !checked;
                 createProjectList();
                 setLabelVisible(checked);
+            });*/
+            r2.addActionListener(e -> {
+                if(r2.isSelected()){
+                    checked = !checked;
+                    createProjectList();
+                    setLabelVisible(checked);
+                }
+            });
+            r1.addActionListener(e -> {
+                if(r1.isSelected()){
+                    checked = !checked;
+                    createProjectList();
+                    setLabelVisible(checked);
+                }
             });
 
+
+
             JButton submitButton = new JButton("Submit"); //set label to button
-            submitButton.setBounds(150, 300, 193, 29);
+            submitButton.setBounds(180, 300, 193, 29);
 
             registerHours.setLayout(null);
             registerHours.add(selectActivity);
             registerHours.add(userLabel);
             registerHours.add(selectLabel);
             registerHours.add(submitButton);
-            registerHours.add(checkBox1);
+            //registerHours.add(checkBox1);
+            registerHours.add(assignedOrNot);
+            registerHours.add(r1);
+            registerHours.add(r2);
             registerHours.add(userLabel5);
             registerHours.add(writeProject);
              userLabel5.setVisible(false);
@@ -157,6 +196,9 @@ public class RegisterHours {
     }
 
     public static void createProjectList(){
+
+
+
         String[] list = DeveloperPage.fullProjectList().toArray(new String[0]);
         projectComboNotAssigned = new JComboBox<>(list);
         projectComboNotAssigned.setBounds(250, 75, 193, 29);

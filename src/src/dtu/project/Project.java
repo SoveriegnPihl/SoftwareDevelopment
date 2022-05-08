@@ -60,12 +60,12 @@ public class Project {
     }
 
     public void addActivity(Activity activity){
-        if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){
-            budgetUsed -= activity.getBudget();
-            activities.put(activity.getName(), activity);
-            System.out.println("Activity added");
+        if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){    //1
+            budgetUsed -= activity.getBudget();                                                                     //2
+            activities.put(activity.getName(), activity);                                                           //3
+            System.out.println("Activity added");                                                                   //4
         } else {
-            System.out.println("ikke inden for datoen af projektet");
+            System.out.println("ikke inden for datoen af projektet");                                               //5
         }
     }
 
