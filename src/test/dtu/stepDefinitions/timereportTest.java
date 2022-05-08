@@ -45,7 +45,7 @@ public class timereportTest {
 
     @Then("daily worked hours is given for {string}")
     public void dailyWorkedHoursIsGivenFor(String name) {
-    assertEquals(softwareHuset.developers.get(name).getRegisteredHoursToday(),addedHours,0.1);
+    assertEquals(softwareHuset.getDeveloper(name).getRegisteredHoursToday(),addedHours,0.1);
     }
 
 

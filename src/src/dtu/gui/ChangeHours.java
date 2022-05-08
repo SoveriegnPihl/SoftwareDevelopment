@@ -156,7 +156,7 @@ public class ChangeHours {
     }
 
     public static void createProjectList(){
-        String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
+        String[] list = DeveloperPage.fullProjectList().toArray(new String[0]);
         projectComboNotAssigned = new JComboBox<>(list);
         projectComboNotAssigned.setBounds(250, 50, 193, 29);
         topPanel.add(projectComboNotAssigned);
@@ -181,7 +181,7 @@ public class ChangeHours {
 
 
     public static void createList(Developer user){
-        ArrayList<Project> list = SoftwareHuset.projectListDeveloper(user);
+        ArrayList<Project> list = projectListDeveloper(user);
         projectsComboBox = new JComboBox<>();
         projectsComboBox.setBounds(250, 50, 193, 29);
         topPanel.add(projectsComboBox);
@@ -231,6 +231,16 @@ public class ChangeHours {
         bottomPanel.setBorder(BorderFactory.createTitledBorder("Change hours"));
 
     }
+    public static ArrayList<Project> projectListDeveloper(Developer developer){
+        ArrayList<Project> projectlist2 = new ArrayList<>();
 
+        for (Project var : SoftwareHuset.projects.values()){
+
+            if (var.developerIsInProject(developer)){
+                projectlist2.add(var);
+            }
+        }
+        return projectlist2;
+    }
 
 }

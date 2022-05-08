@@ -3,6 +3,7 @@ import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import javax.swing.*;
+import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
 
@@ -144,7 +145,7 @@ public class ProjectManagerPage {
         projectManagerPage.setVisible(visi);
     }
     public static void createList(Developer user){
-       String[] list = SoftwareHuset.projectListManagers(user).toArray(new String[0]);
+       String[] list = projectListManagers(user).toArray(new String[0]);
 
        projectList = new JComboBox<>(list);
        projectList.setBounds(250, 25, 193, 29);
@@ -173,6 +174,16 @@ public class ProjectManagerPage {
         projectManagerPage.add(b1);
         yCountR+=50;
         return b1;
+    }
+    public static ArrayList<String> projectListManagers(Developer developer){
+        ArrayList<String> projectlist = new ArrayList<>();
+        String name = developer.getInitials();
+        for (Integer var : SoftwareHuset.projectManagers.keySet()){
+            if (SoftwareHuset.projectManagers.get(var).equals(name)){
+                projectlist.add(var.toString());
+            }
+        }
+        return projectlist;
     }
 
 }

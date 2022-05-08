@@ -167,41 +167,15 @@ public class SoftwareHuset {
         projects.get(projectID).assignManagerToProject(developers.get(dev));
     }*/
 
-    public void listProjects(){
+   /* public void listProjects(){
         for (Project var : projects.values()){
             var.printProject();
             System.out.println("");
         }
     }
-    public static ArrayList<String> projectListManagers(Developer developer){
-        ArrayList<String> projectlist = new ArrayList<>();
-        String name = developer.getInitials();
-        for (Integer var : projectManagers.keySet()){
-            if (projectManagers.get(var).equals(name)){
-                projectlist.add(var.toString());
-            }
-        }
-        return projectlist;
-    }
-    public static ArrayList<Project> projectListDeveloper(Developer developer){
-        ArrayList<Project> projectlist2 = new ArrayList<>();
 
-        for (Project var : projects.values()){
+    */
 
-            if (var.developerIsInProject(developer)){
-                projectlist2.add(var);
-            }
-        }
-        return projectlist2;
-    }
-
-    public static ArrayList<String> fullProjectList(){
-        ArrayList<String> projectlist = new ArrayList<>();
-        for (Project project : projects.values()){
-                projectlist.add(String.valueOf(project.getId()));
-        }
-        return projectlist;
-    }
 
     public static Developer getDeveloper(String name){
         return developers.get(name);

@@ -17,7 +17,7 @@ import static org.junit.Assert.*;
 public class bookingDevAndActivitySteps {
     SoftwareHuset softwareHuset;
     Developer developer, manager;
-    Project project;
+    Project project,project2;
     Activity activity;
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
@@ -47,6 +47,7 @@ public class bookingDevAndActivitySteps {
     @Given("there is a project with id {string}")
     public void there_is_a_project_with_id(String projectId) throws Exception{
         project = softwareHuset.projects.get(Integer.parseInt(projectId));
+        project2 = softwareHuset.getProject(projectId);
     }
 
     @Given("the developer is available for the project")
