@@ -35,21 +35,21 @@ public class Developer {
     }
 
     public boolean getAvailability(GregorianCalendar date){
-        if (!hasOccupation && isSick){                                                                              //1
+        if (!hasOccupation && isSick){                                                                            //1
             return !(sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1);           //2
         }
-        else if (hasOccupation && !isSick){                                                                         //3
+        else if (hasOccupation && !isSick){                                                                       //3
             return !(occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1);   //4
         }
-        else if (hasOccupation && isSick){                                                                          //5
+        else if (hasOccupation && isSick){                                                                        //5
             if (occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1) {       //6
-                return false;                                                                                       //7
+                return false;                                                                                     //7
             }
             else if (sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1){           //8
-                return false;                                                                                       //9
+                return false;                                                                                     //9
             }
         }
-        return true;                                                                                                //10
+        return true;                                                                                              //10
     }
 
     public void addHoursToday(double hours){
@@ -211,3 +211,5 @@ public class Developer {
         SoftwareHuset.updateCSVFile("developers");
     }
 }
+
+
