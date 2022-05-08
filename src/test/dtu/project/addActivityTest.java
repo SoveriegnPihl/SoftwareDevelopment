@@ -1,5 +1,6 @@
 package dtu.project;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import java.util.GregorianCalendar;
 
@@ -7,9 +8,15 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class addActivityTest {
 
+    @BeforeEach
+    void checkInit(){
+        if(!AvailabilityTest.programStarted){
+            AvailabilityTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
     @Test
     void addActivityA() {
-        SoftwareHuset.startProgram();
         Activity activity = new Activity("clean up", 5);
         activity.setBudget(100);
         GregorianCalendar calS = new GregorianCalendar(2022,0,3);
