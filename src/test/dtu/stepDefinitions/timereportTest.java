@@ -3,10 +3,13 @@ import dtu.Helper.ErrorMessageHolder;
 import dtu.project.Activity;
 import dtu.project.Developer;
 import dtu.project.SoftwareHuset;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
@@ -17,6 +20,14 @@ public class timereportTest {
     Developer developer,developer2;
     Activity activity;
     int addedHours;
+
+    @BeforeAll
+    public static void checkInit() {
+        if (!AAcheckForEmployeesTest.programStarted) {
+            AAcheckForEmployeesTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     public timereportTest(SoftwareHuset sf) {
         softwareHuset = sf;

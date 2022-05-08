@@ -2,9 +2,12 @@ package dtu.stepDefinitions;
 
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.jupiter.api.BeforeEach;
 
 
 import java.util.GregorianCalendar;
@@ -18,6 +21,13 @@ public class addProjectTest {
     GregorianCalendar startDate, endDate;
     int budget;
 
+    @BeforeAll
+    public static void checkInit() {
+        if (!AAcheckForEmployeesTest.programStarted) {
+            AAcheckForEmployeesTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
     public addProjectTest(SoftwareHuset softwareHuset){
         sf = softwareHuset;
     }
