@@ -1,6 +1,6 @@
 package dtu.employees.project;
 import dtu.Helper.ErrorMessageHolder;
-import dtu.project.employees.Developer;
+import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
