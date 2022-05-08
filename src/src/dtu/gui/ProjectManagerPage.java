@@ -157,6 +157,7 @@ public class ProjectManagerPage {
     public static void setVisible(boolean visi){
         projectManagerPage.setVisible(visi);
     }
+
     public static void createList(Developer user){
        String[] list = projectListManagers(user).toArray(new String[0]);
 

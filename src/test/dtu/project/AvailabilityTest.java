@@ -34,7 +34,6 @@ class AvailabilityTest {
         GregorianCalendar calF = new GregorianCalendar(2023,0,1);
         developer.setHoliday(calS,calF);
         assertFalse(developer.getAvailability(today));
-
     }
 
     @Test
@@ -53,5 +52,20 @@ class AvailabilityTest {
         SoftwareHuset.updateCSVFile("developers");
     }
 
-}
+    @Test
+    void preCondition() {
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
+        assertFalse(developer.isSick);
+        assertFalse(developer.hasOccupation);
+        assertFalse(developer.sickFromThisDate == null);
+        assertFalse(developer.occupiedFromThisDate == null);
+    }
 
+    @Test
+    void postCondition() {
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
+        assertTrue(developer.getAvailability(today));
+    }
+
+
+}
