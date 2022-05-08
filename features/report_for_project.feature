@@ -5,15 +5,13 @@ Feature: Get report for a project
   Actors: Procject manager
 
   Scenario: Get project report
-    Given that there is a Developer with initials "ekki"
-    And that the developer is a procject manager
+    Given that there is a manager with initials "ekki"
+    And that the developer is a project manager
     And there is a project with id "22001"
-    When the procject manager requests a report for the project
-    Then the procject manager get's the project report
+    Then the project manager is able to get time and budget used
 
-  Scenario: Can't get report on project
-    Given that there is a Developer with initials "ekki"
-    And that the developer is a procject manager
-    And there is not a project with id "22001"
-    When the procject manager requests a report for the project
+  Scenario: project is not found
+    Given that there is a manager with initials "ekki"
+    And that the developer is a project manager
+    And there is not a project named "22000"
     Then the error message "Project not found" is given
