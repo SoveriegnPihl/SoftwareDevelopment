@@ -1,5 +1,5 @@
 package dtu.project;
-/*
+
 import org.junit.jupiter.api.Test;
 
 import java.util.GregorianCalendar;
@@ -40,4 +40,4 @@ class AvailabilityTest {
         developer.hasOccupation = false;
         SoftwareHuset.updateCSVFile("developers");
     }
-} */
+}
