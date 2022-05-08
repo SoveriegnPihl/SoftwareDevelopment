@@ -9,9 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class listAvailableDevelopers {
-
     public GregorianCalendar today = new GregorianCalendar();
-    Developer developer;
 
     @BeforeEach
     void checkInit(){
@@ -23,21 +21,16 @@ public class listAvailableDevelopers {
 
     @Test
     void listAvailableDevelopersA() {
-        developer = SoftwareHuset.getDeveloper("vicc");
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
         assertTrue(developer.getAvailability(today));
-
-
     }
 
     @Test
     void listAvailableDevelopersB() {
-        developer = SoftwareHuset.getDeveloper("vicc");
-        System.out.println(developer.getInitials());
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
         developer.setSick();
         assertFalse(developer.getAvailability(today));
-        /*developer.isSick = false;
+        developer.isSick = false;
         SoftwareHuset.updateCSVFile("developers");
-
-         */
     }
 }
