@@ -18,9 +18,6 @@ public class Activity {
         this.estimatedTime = time;
         developers = new HashMap<>();
     }
-    public ArrayList<Developer> getDevelopers(){
-        return new ArrayList<>(developers.keySet());
-    }
 
     public String getName(){
         return name;
@@ -49,13 +46,6 @@ public class Activity {
             totalRegisteredHours = hours;
         }
     }
-    /*public double getRegisteredHours(){
-        double amountOfRegisteredHours = 0;
-        for (double i : registeredHours.values()) {
-            amountOfRegisteredHours += i;
-        }
-    return amountOfRegisteredHours;
-    }*/
 
     public void setProjectAssignedTo(int projectID){this.projectAssignedTo = projectID;}
 
@@ -70,10 +60,6 @@ public class Activity {
     public GregorianCalendar getEndDate(){return endDate;}
 
     public int getBudget() {return budget;}
-
-   // public void setEstimatedTime(int time){
-       // estimatedTime = time;
-   // }
 
     public int getEstimatedTime(){return estimatedTime;}
 

@@ -59,16 +59,7 @@ public class Developer {
         return registeredHoursToday;
     }
 
-    public int getHours(){ return hoursWorked; }
 
-    /*
-    public void setOccupied(boolean occupation){
-        isOccupied = occupation;
-    }
-
-    public boolean isOccupied(){
-        return isOccupied;
-    }*/
 
     public void setToProjectManager(){isProjectManager = true;}
 
