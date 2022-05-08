@@ -43,6 +43,7 @@ public class DeveloperPage {
         regHoursBtn.addActionListener(e -> {
         RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
         setVisible(false);
+        Main.setFrameSize(500,400);
         RegisterHours.createList(loggedInUser);
         registerHours.setVisible(true);
         });
@@ -56,6 +57,7 @@ public class DeveloperPage {
 
         addPmBtn.addActionListener(e -> {
             //OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
+            Main.setFrameSize(500,300);
             createAssignPM();
         });
 
@@ -78,6 +80,7 @@ public class DeveloperPage {
 
         regHoliBtn.addActionListener(e -> {
             setVisible(false);
+            Main.setFrameSize(450,400);
             registerHoliday.setVisible(true);
         });
 
@@ -110,7 +113,7 @@ public class DeveloperPage {
             developerPage2 = new JPanel();
             parentWindow.addPanel(developerPage2);
             developerPage2.setLayout(null);
-            developerPage2.setBorder(BorderFactory.createTitledBorder("Developer Page 2"));
+            developerPage2.setBorder(BorderFactory.createTitledBorder("Assign A Project Manager"));
             JLabel selDev = new JLabel();
             selDev.setText("Select developer to assign");      //set label value for textField1
             selDev.setBounds(25, 50, 193, 29);
@@ -131,11 +134,11 @@ public class DeveloperPage {
 
             JLabel selProject = new JLabel();
             selProject.setText("Select project");
-            selProject.setBounds(25, 100, 193, 29);
+            selProject.setBounds(65, 100, 193, 29);
             developerPage2.add(selProject);
 
             JButton b1 = new JButton("Save");
-            b1.setBounds(140,200, 250, 50);
+            b1.setBounds(190,200, 193, 29);
             developerPage2.add(b1);
             b1.addActionListener(e -> {
                 Main.setFrameSize(500,500);
@@ -145,11 +148,12 @@ public class DeveloperPage {
             });
 
             JButton b2 = new JButton("Back");
-            b2.setBounds(140,250, 250, 50);
+            b2.setBounds(45,200, 70, 29);
             developerPage2.add(b2);
             b2.addActionListener(e -> {
                             Main.setFrameSize(500,500);
                             developerPage2.setVisible(false);
+                            Main.setFrameSize(500,500);
                             developerPage.setVisible(true);
                         });
 
