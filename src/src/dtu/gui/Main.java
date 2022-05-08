@@ -160,7 +160,7 @@ public class Main {
         rightPanel.setLayout(null);
         leftPanel = new JPanel();
         mainPanel.add(leftPanel);
-        leftPanel.setBounds(325,25,250,300);
+        leftPanel.setBounds(312,25,250,300);
         leftPanel.setLayout(null);
         leftPanel .setBorder(BorderFactory.createTitledBorder("Functions"));
 
