@@ -48,9 +48,6 @@ public class ChangeHours {
             });
             btnBack.setBounds(30, 40, 80, 29);
             bottomPanel.add(btnBack);
-/*
-            checkBox1 = new JCheckBox("Not assigned to project");
-            checkBox1.setBounds(150, 25, 193, 29);*/
 
             JLabel assignedOrNot = new JLabel();
             assignedOrNot.setText("Are you assigned to the project?");
@@ -104,8 +101,13 @@ public class ChangeHours {
             searchButton.addActionListener(e -> {
             activity = project12.activities.get(activityCombo.getSelectedItem());
                 System.out.println(activity.getTotalRegisteredHours());
-            userLabel.setText("Registered hours for selected activity = "+ activity.registeredHours.get(loggedInUser) + "\n" + " out of "+loggedInUser.getRegisteredHoursToday()+" today");      //set label value for textField1
-            userLabel.setVisible(true);
+                if(activity.registeredHours.get(loggedInUser) == null) {
+                    userLabel.setText("Registered hours for selected activity = " + "0.0" + "\n" + " out of " + loggedInUser.getRegisteredHoursToday() + " today");
+                } else {
+                    userLabel.setText("Registered hours for selected activity = " + activity.registeredHours.get(loggedInUser) + "\n" + " out of " + loggedInUser.getRegisteredHoursToday() + " today");
+
+                }
+                    userLabel.setVisible(true);
             });
             userLabel = new JLabel();
             userLabel.setBounds(25, 160, 500, 29);
@@ -114,10 +116,10 @@ public class ChangeHours {
 
             JLabel changeHours = new JLabel();
             changeHours.setText("Add or remove hours (-)");
-            changeHours.setBounds(25 ,180,300,29);
+            changeHours.setBounds(25 ,190,300,29);
             topPanel.add(changeHours);
             changeHoursField = new JTextField(15);
-            changeHoursField.setBounds(250, 180, 193, 29);
+            changeHoursField.setBounds(250, 190, 193, 29);
             topPanel.add(changeHoursField);
 
 
@@ -136,11 +138,23 @@ public class ChangeHours {
 
             submitButton.addActionListener(e -> {
 
-                activity.registerHours(loggedInUser,Double.parseDouble(changeHoursField.getText()));
-                setVisible(false);
-                removeList();
-                clear();
-                DeveloperPage.setVisible(true);
+            try{
+                double hourChange = Double.parseDouble(changeHoursField.getText());
+                if(activity.registeredHours.containsKey(loggedInUser)) {
+                    if (activity.registeredHours.get(loggedInUser) + hourChange >= 0) {
+                        activity.registerHours(loggedInUser, Double.parseDouble(changeHoursField.getText()));
+                        setVisible(false);
+                        removeList();
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You can't remove more hours than registered!");
+                    }
+                }
+            } catch (NumberFormatException ea) {
+                JOptionPane.showMessageDialog(null, "Please only use numbers");
+            }
+
 
 
             });
