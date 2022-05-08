@@ -1,6 +1,6 @@
 package dtu.gui;
 
-import dtu.project.employees.Developer;
+import dtu.employees.Developer;
 import dtu.softwarehus.SoftwareHuset;
 
 import javax.swing.*;

@@ -1,10 +1,9 @@
 package dtu.softwarehus;
 
-import dtu.project.employees.Developer;
+import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
-import io.cucumber.java.hu.De;
 
 import java.io.File;
 import java.io.PrintWriter;

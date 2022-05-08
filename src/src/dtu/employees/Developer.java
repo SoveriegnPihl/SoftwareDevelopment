@@ -1,4 +1,4 @@
-package dtu.project.employees;
+package dtu.employees;
 
 import dtu.project.Activity;
 import dtu.project.Project;

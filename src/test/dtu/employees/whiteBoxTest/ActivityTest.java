@@ -1,6 +1,7 @@
-package dtu.project;
+package dtu.employees.whiteBoxTest;
 
-import dtu.project.employees.Developer;
+import dtu.employees.Developer;
+import dtu.project.Activity;
 import dtu.softwarehus.SoftwareHuset;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;

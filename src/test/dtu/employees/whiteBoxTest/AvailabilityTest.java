@@ -1,5 +1,6 @@
-package dtu.employees;
+package dtu.employees.whiteBoxTest;
 
+import dtu.employees.Developer;
 import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.hu.De;
