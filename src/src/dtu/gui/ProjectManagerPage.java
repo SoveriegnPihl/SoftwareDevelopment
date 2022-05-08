@@ -53,6 +53,7 @@ public class ProjectManagerPage {
 
         getReportBtn.addActionListener(e -> {
             setVisible(false);
+            Main.setFrameSize(400,400);
             getReportPage.setProject(projectList.getItemAt(projectList.getSelectedIndex()));
             getReportPage.setVisible(true);
         });
@@ -95,12 +96,13 @@ public class ProjectManagerPage {
     public void createAddDev(){
         setVisible(false);
         pmPage2 = new JPanel();
+        Main.setFrameSize(400,250);
         parentWindow.addPanel(pmPage2);
         pmPage2.setLayout(null);
         pmPage2.setBorder(BorderFactory.createTitledBorder("Add developer to project"));
         JLabel selDev = new JLabel();
-        selDev.setText("Select developer to add");      //set label value for textField1
-        selDev.setBounds(25, 50, 193, 29);
+        selDev.setText("Select developer to add:");      //set label value for textField1
+        selDev.setBounds(15, 50, 193, 29);
         pmPage2.add(selDev);
 
         JComboBox<Object> developerCombo = new JComboBox<>();
@@ -108,12 +110,12 @@ public class ProjectManagerPage {
             developerCombo.addItem(developer);
         }
 
-        developerCombo.setBounds(250, 50, 193, 29);
+        developerCombo.setBounds(180, 50, 193, 29);
         pmPage2.add(developerCombo);
 
 
         JButton b1 = new JButton("Save");
-        b1.setBounds(140,200, 250, 50);
+        b1.setBounds(150,150, 193, 29);
         pmPage2.add(b1);
         b1.addActionListener(e -> {
 
@@ -126,10 +128,10 @@ public class ProjectManagerPage {
         });
 
         JButton b2 = new JButton("Back");
-        b2.setBounds(140,250, 250, 50);
+        b2.setBounds(47,150, 70, 29);
         pmPage2.add(b2);
         b2.addActionListener(e -> {
-
+            Main.setFrameSize(500,500);
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });

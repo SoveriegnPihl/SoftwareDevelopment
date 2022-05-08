@@ -6,28 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="5328b788-4b79-48b0-aa39-7b4b5ab516f8" name="Changes" comment="feature assign pm steps">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/features/addDeveloper.feature" beforeDir="false" afterPath="$PROJECT_DIR$/features/addDeveloper.feature" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/data/activities.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/data/activities.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/data/developers.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/data/developers.csv" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/dtu/data/projects.csv" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/data/projects.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/ChangeHours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/ChangeHours.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/DeveloperPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/DeveloperPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/OptionPane.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/OptionPane.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/ProjectManagerPage.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/RegisterHours.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/RegisterHours.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/Activity.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/Activity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/Project.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/Project.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/Report.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/project/Report.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/employees/Developer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/employees/Developer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/project/employees/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/employees/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/src/dtu/softwarehus/SoftwareHuset.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/softwarehus/SoftwareHuset.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/AvailabilityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/whiteBoxTest/AvailabilityTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/addDevSickHolidayTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/addDevSickHolidayTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/addDeveloperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/addDeveloperTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/assignPmTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/assignPmTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/dtu/employees/project/timeReportTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/project/timeReportTest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/dtu/project/ActivityTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/dtu/employees/whiteBoxTest/ActivityTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/getReportPage.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/src/dtu/gui/manageProjectPage.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/src/dtu/gui/manageProjectPage.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,9 +35,6 @@
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="jar://$PROJECT_DIR$/../../../../../Program Files/Java/jdk-16.0.1/lib/src.zip!/java.base/java/lang/AssertionError.java" root0="FORCE_HIGHLIGHTING" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -74,8 +54,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
-  <component name="RunManager" selected="JUnit.dtu.employees in SoftwareHuset">
+  <component name="RunManager" selected="Application.Main (1)">
     <configuration name="Main (1)" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="dtu.gui.Main" />
       <module name="SoftwareHuset" />
@@ -157,10 +138,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.Main (1)" />
         <item itemvalue="JUnit.dtu.employees in SoftwareHuset" />
         <item itemvalue="JUnit.dtu.softwarehus in SoftwareHuset" />
         <item itemvalue="JUnit.dtu.project in SoftwareHuset" />
-        <item itemvalue="Application.Main (1)" />
         <item itemvalue="Application.Main" />
       </list>
     </recent_temporary>
@@ -229,37 +210,38 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add medarbejder" />
     <MESSAGE value="add medarbejder og medarvejder sygdom/ferie" />
-    <option name="LAST_COMMIT_MESSAGE" value="add medarbejder og medarvejder sygdom/ferie" />
+    <MESSAGE value="developer steps" />
+    <option name="LAST_COMMIT_MESSAGE" value="developer steps" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_project_in_SoftwareHuset.ic" NAME="dtu.project in SoftwareHuset Coverage Results" MODIFIED="1651998147532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dtu.project.*</FILTER>
+    </SUITE>
     <SUITE FILE_PATH="coverage/SoftwareDevelopment$CucumberTest.ic" NAME="CucumberTest Coverage Results" MODIFIED="1651936615400" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>dtu.employees.project.*</FILTER>
     </SUITE>
-    <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_project_in_SoftwareHuset.ic" NAME="dtu.project in SoftwareHuset Coverage Results" MODIFIED="1651998147532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/Softwarehuset$dtu_softwarehus_in_SoftwareHuset.ic" NAME="dtu.softwarehus in SoftwareHuset Coverage Results" MODIFIED="1651952027184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dtu.softwarehus.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Softwarehuset$dtu_gui_in_SoftwareHuset.ic" NAME="dtu.gui in SoftwareHuset Coverage Results" MODIFIED="1651918859282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dtu.gui.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Softwarehuset$Main.ic" NAME="Main Coverage Results" MODIFIED="1651913993780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dtu.gui.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/Softwarehuset$dtu_project_in_SoftwareHuset.ic" NAME="dtu.project in SoftwareHuset Coverage Results" MODIFIED="1651954153995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>dtu.project.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_employees_in_SoftwareHuset.ic" NAME="dtu.employees in SoftwareHuset Coverage Results" MODIFIED="1651998216584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dtu.employees.*</FILTER>
+    </SUITE>
+    <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_softwarehus_in_SoftwareHuset.ic" NAME="dtu.softwarehus in SoftwareHuset Coverage Results" MODIFIED="1651998195331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>dtu.softwarehus.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_employees_project_in_SoftwareHuset.ic" NAME="dtu.employees.project in SoftwareHuset Coverage Results" MODIFIED="1651938138528" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>dtu.employees.project.*</FILTER>
     </SUITE>
     <SUITE FILE_PATH="coverage/SoftwareDevelopment$Main__1_.ic" NAME="Main (1) Coverage Results" MODIFIED="1651924250447" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>dtu.gui.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_employees_in_SoftwareHuset.ic" NAME="dtu.employees in SoftwareHuset Coverage Results" MODIFIED="1651998216584" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>dtu.employees.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Softwarehuset$Main.ic" NAME="Main Coverage Results" MODIFIED="1651913993780" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>dtu.gui.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Softwarehuset$dtu_softwarehus_in_SoftwareHuset.ic" NAME="dtu.softwarehus in SoftwareHuset Coverage Results" MODIFIED="1651952027184" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>dtu.softwarehus.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/SoftwareDevelopment$dtu_softwarehus_in_SoftwareHuset.ic" NAME="dtu.softwarehus in SoftwareHuset Coverage Results" MODIFIED="1651998195331" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>dtu.softwarehus.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Softwarehuset$dtu_project_in_SoftwareHuset.ic" NAME="dtu.project in SoftwareHuset Coverage Results" MODIFIED="1651954153995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
-      <FILTER>dtu.project.*</FILTER>
-    </SUITE>
-    <SUITE FILE_PATH="coverage/Softwarehuset$dtu_gui_in_SoftwareHuset.ic" NAME="dtu.gui in SoftwareHuset Coverage Results" MODIFIED="1651918859282" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>dtu.gui.*</FILTER>
     </SUITE>
   </component>

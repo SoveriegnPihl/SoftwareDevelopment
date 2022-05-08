@@ -76,7 +76,7 @@ class OptionPane extends JFrame {
         if (method.equals("Add developer")) {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);
-            String developerToCreate = JOptionPane.showInputDialog(alertFrame, method);
+            String developerToCreate = JOptionPane.showInputDialog(alertFrame, method, "Create a developer with 4 intials");
             if(developerToCreate.length() != 4){
                 JFrame errorFrame = new JFrame();
                 errorFrame.setLocationRelativeTo(null);
