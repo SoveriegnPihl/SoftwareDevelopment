@@ -9,10 +9,10 @@ class ActivityTest {
 
     @BeforeEach
     void checkInit(){
-    if(!AvailabilityTest.programStarted){
-        AvailabilityTest.programStarted = true;
-        SoftwareHuset.startProgram();
-    }
+        if(!AvailabilityTest.programStarted){
+            AvailabilityTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
     }
     @Test
     void registerHoursA() {

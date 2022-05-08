@@ -35,9 +35,5 @@ public class listAvailableDevelopers {
         System.out.println(developer.getInitials());
         developer.setSick();
         assertFalse(developer.getAvailability(today));
-        /*developer.isSick = false;
-        SoftwareHuset.updateCSVFile("developers");
-
-         */
     }
 }

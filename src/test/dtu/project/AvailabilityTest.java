@@ -1,5 +1,6 @@
 package dtu.project;
 
+import org.junit.Assert;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -33,6 +34,7 @@ class AvailabilityTest {
         GregorianCalendar calF = new GregorianCalendar(2023,0,1);
         developer.setHoliday(calS,calF);
         assertFalse(developer.getAvailability(today));
+
     }
 
     @Test
@@ -50,4 +52,6 @@ class AvailabilityTest {
         developer.hasOccupation = false;
         SoftwareHuset.updateCSVFile("developers");
     }
+
 }
+
