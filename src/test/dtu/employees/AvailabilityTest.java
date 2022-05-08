@@ -1,39 +1,49 @@
 package dtu.employees;
 
+import dtu.project.Project;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.hu.De;
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class AvailabilityTest {
+    public GregorianCalendar today = new GregorianCalendar();
 
     @Test
     void getAvailabilityA() {
         SoftwareHuset.startProgram();
         Developer developer = SoftwareHuset.getDeveloper("ekki");
-        assertEquals(developer.getAvailability(), "Developer: " + developer.getInitials() + " is NOT occupied today" + "\n");
+        assertTrue(developer.getAvailability(today));
     }
 
     @Test
     void getAvailabilityB() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
-        developer = SoftwareHuset.getDeveloper("ekki");
-        developer.getAvailability();
+        GregorianCalendar calS = new GregorianCalendar(2022,0,1);
+        GregorianCalendar calF = new GregorianCalendar(2023,0,1);
+        developer.setHoliday(calS,calF);
+        assertFalse(developer.getAvailability(today));
     }
 
     @Test
     void getAvailabilityC() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
         developer.setSick();
-        assertEquals(developer.getAvailability(), "Developer: " + developer.getInitials() + " is occupied today" + "\n");
+        assertFalse(developer.getAvailability(today));
     }
 
     @Test
     void getAvailabilityD() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
-        developer = SoftwareHuset.getDeveloper("ekki");
-        developer.getAvailability();
+        assertFalse(developer.getAvailability(today));
+        developer.isSick = false;
+        developer.hasOccupation = false;
+        SoftwareHuset.updateCSVFile("developers");
     }
 }

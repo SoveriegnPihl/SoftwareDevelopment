@@ -12,6 +12,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
+// lavet af Victor Larsen-Saldeen
 
 public class CreateActivityPage {
     JButton saveBtn;

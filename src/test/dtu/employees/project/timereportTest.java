@@ -1,71 +1,89 @@
-/*package dtu.project;
+package dtu.employees.project;
 import dtu.Helper.ErrorMessageHolder;
-import dtu.dto.developerInfo;
 import dtu.employees.Developer;
+import dtu.project.Activity;
 import dtu.softwarehus.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import io.cucumber.java.hu.De;
-import org.hamcrest.MatcherAssert;
-import org.hamcrest.Matchers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
-import static org.hamcrest.core.IsEqual.equalTo;
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 public class timereportTest {
     private ErrorMessageHolder errorMessage;
     ;
     SoftwareHuset softwareHuset;
-    HashMap<String, Developer> developers;
-    Developer developer, manager;
 
-    Project project;
-    Developer user;
+    Developer developer,developer2;
+    Activity activity;
+    int addedHours;
+    boolean isStarted = false;
 
-
-    public timereportTest(SoftwareHuset softwareHuset, HashMap<String, Developer> developers) {
-        softwareHuset.startProgram();
-        this.softwareHuset = softwareHuset;
-        this.developers = developers;
+    public timereportTest(SoftwareHuset sf) {
+        softwareHuset = sf;
     }
+
+    @Given("that there is a developer with initials {string}")
+    public void thatThereIsADeveloperWithInitials(String string) {
+        assertTrue(softwareHuset.developers.containsKey(string));
+    }
+
 
     @And("there is registered hours")
     public void thereIsRegisteredHours() {
-        user = softwareHuset.getDeveloper(name);
-       assertThat(user.getHours()!=0,is(true));
+        activity = SoftwareHuset.allActivities.get("Test solutions");
+        developer = SoftwareHuset.developers.get("vic7");
+        addedHours = 5;
+        activity.registerHours(developer,addedHours);
+       assertThat(developer.getRegisteredHoursToday()!=0,is(true));
     }
 
     @When("the developer requests reported worked hours for today")
-    public void theDeveloperRequestsReportedWorkedHoursForToday() {
-        user.getHours();
+    public void theDeveloperRequestsReportedWorkedHoursForToday(){
+        developer.getRegisteredHoursToday();
     }
 
     @Then("daily worked hours is given for {string}")
     public void dailyWorkedHoursIsGivenFor(String name) {
-
-      assertThat(user.getHours()>0,is(true));
+    assertEquals(softwareHuset.developers.get(name).getRegisteredHoursToday(),addedHours,0.1);
     }
 
 
     @And("there is no registered time")
     public void thereIsNoRegisteredTime() {
+        developer2 = softwareHuset.developers.get("ekki");
+        assertEquals(developer2.getRegisteredHoursToday(),0,0.1);
     }
 
 
-    @And("the hours registered is zero")
-    public void theHoursRegisteredIsZero() {
-
-    }
 
     @Then("Then the error message {string} is given")
     public void thenTheErrorMessageIsGiven(String arg0) {
+        System.out.println("No hours registered today");
     }
 
 
-}*/
+    @And("there is registered hours for the date {string}")
+    public void thereIsRegisteredHoursForTheDate(String arg0) {
+        assertTrue(activity.registeredHours.containsKey(developer.getInitials()));
+    }
+
+    @Given("that there isn't a developer with initials {string}")
+    public void thatThereIsnTADeveloperWithInitials(String name) {
+        assertFalse(softwareHuset.developers.containsKey(name));
+    }
+    @Then("the error message {string} is given")
+    public void theErrorMessageIsGiven(String arg0) {
+    }
+    @When("the non-developer requests reported worked hours for today")
+    public void theNonDeveloperRequestsReportedWorkedHoursForToday() {
+
+    }
+    @When("the other developer requests reported worked hours for today")
+    public void theOtherDeveloperRequestsReportedWorkedHoursForToday() {
+        developer2.getRegisteredHoursToday();
+    }
+
+}

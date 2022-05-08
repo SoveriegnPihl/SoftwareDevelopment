@@ -18,10 +18,9 @@ Feature: Book a developer to a project
     And that the developer is a project manager
     And there is a project with id "22001"
     And the developer is not available
-    Then the developer is not available for the project
     And the error message "Developer is not available for this projects time frame" is given
 
   Scenario: Developer is not a project manager
-    Given that there is a manager and a Developer with initials "ekki" and "vic7"
+    Given that there is a manager and a Developer with initials "jako" and "vic7"
     And that the developer is not a project manager
     Then the error message "Developer is not a project manager" is given

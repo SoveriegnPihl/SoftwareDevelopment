@@ -19,13 +19,14 @@ import java.util.Arrays;
 public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
-    static HashMap<Integer,String> projectManagers;
     public static ArrayList<Developer> availableDevelopers;
+    public static HashMap<Integer,String> projectManagers;
     public static HashMap<Integer, Project> projects;
     public static HashMap<String, Activity> allActivities;
-    private DateServer dateServer;
+    public static GregorianCalendar today = new GregorianCalendar();
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
+    static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
     public SoftwareHuset() {
     }
 
@@ -40,6 +41,7 @@ public class SoftwareHuset {
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
+
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
@@ -102,6 +104,15 @@ public class SoftwareHuset {
         writeToCSV("activities");
     }
 
+    public boolean findActivity(String activityName){
+        for (String actName : allActivities.keySet()){
+            if (actName.equals(activityName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void addDeveloper(String[] readData) {
         Developer newDeveloper = new Developer(readData[0]);
         newDeveloper.setHolidayDates(readData);
@@ -129,10 +140,6 @@ public class SoftwareHuset {
         }
     }
 
-    public void setDateServer(DateServer dateServer) {
-        this.dateServer = dateServer;
-    }
-
     public static int createProject(GregorianCalendar start, GregorianCalendar end, int budget){
         Project newProject = new Project(start,end, budget);
         newProject.printProject();
@@ -148,6 +155,13 @@ public class SoftwareHuset {
 
     }
 
+   public static void assignPM(String dev, int projectID){
+       if(!isManager(dev)){
+        if(projects.containsKey(projectID) && developers.containsKey(dev)) {
+            projectManagers.put(projectID, dev);
+        }
+       }
+    }/*
     public static void assignPM(String dev, int projectID){
 
         if(!isDeveloper(dev)){
@@ -157,7 +171,7 @@ public class SoftwareHuset {
 
         projectManagers.put(projectID,dev);
         projects.get(projectID).assignManagerToProject(developers.get(dev));
-    }
+    }*/
 
     public void listProjects(){
         for (Project var : projects.values()){
@@ -180,7 +194,7 @@ public class SoftwareHuset {
 
         for (Project var : projects.values()){
 
-            if (var.developerIsInProject(developer)){ //true hver gang
+            if (var.developerIsInProject(developer)){
                 projectlist2.add(var);
             }
         }
@@ -203,7 +217,7 @@ public class SoftwareHuset {
         StringBuilder str = new StringBuilder();
 
         for (Developer dev : developers.values()){
-            if(dev.getAvailability()){
+            if(dev.getAvailability(today)){
                 str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
             } else {
                 str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
@@ -220,10 +234,10 @@ public class SoftwareHuset {
         return projectManagers.containsValue(ini);
     }
 
-    public boolean findProject(String projectId){
-        for (Project proj : projects.values()){
-            System.out.println(proj.name);
-            if(proj.name.equals(projectId)){
+    public boolean findProject(int projectId){
+        for (int id : projects.keySet()){
+            System.out.println(id);
+            if(id == projectId){
                 return true;
             }
         }

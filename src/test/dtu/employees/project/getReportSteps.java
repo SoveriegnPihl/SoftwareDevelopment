@@ -1,5 +1,5 @@
 package dtu.employees.project;
-
+/*
 import dtu.employees.Developer;
 import dtu.employees.Manager;
 import dtu.project.Project;
@@ -50,3 +50,4 @@ public class getReportSteps {
         assertThat(softwareHuset.findProject(projectId),is(false));
     }
 }
+*/
