@@ -1,7 +1,7 @@
 package dtu.gui;
-import dtu.employees.Developer;
+import dtu.project.Developer;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 import javax.swing.*;
 
 // lavet af Victor Larsen-Saldeen
@@ -29,7 +29,7 @@ public class ProjectManagerPage {
         createPage();
 
         JButton addDevBtn = makeLeftButton("Add developer");
-        JButton viewAvailableDevBtn = makeLeftButton("View *available* developers");
+        JButton viewAvailableDevBtn = makeLeftButton("Available developers");
         JButton addDevToProjBtn = makeLeftButton("Add developer to project");
         JButton addActivityBtn = makeLeftButton("Add activity to project");
         JButton getReportBtn = makeLeftButton("Get project report");

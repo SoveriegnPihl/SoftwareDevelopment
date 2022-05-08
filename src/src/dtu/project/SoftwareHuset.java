@@ -1,10 +1,6 @@
-package dtu.softwarehus;
+package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.project.Activity;
-import dtu.project.Project;
-import dtu.project.Report;
-import io.cucumber.java.hu.De;
+import dtu.softwarehus.ErrorMessageHolder;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -26,7 +22,6 @@ public class SoftwareHuset {
     public static GregorianCalendar today = new GregorianCalendar();
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
-    static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
     public SoftwareHuset() {
     }
 
@@ -114,29 +109,28 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String[] readData) {
-        Developer newDeveloper = new Developer(readData[0]);
-        newDeveloper.setHolidayDates(readData);
-        newDeveloper.setSickDates(readData);
-        developers.put(readData[0],newDeveloper);
+        if(readData[0].length() == 4 && !isDeveloper(readData[0])) {
+            Developer newDeveloper = new Developer(readData[0]);
+            newDeveloper.setHolidayDates(readData);
+            newDeveloper.setSickDates(readData);
+            developers.put(readData[0], newDeveloper);
 
-        if (!newDeveloper.hasOccupation && !newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc", "noSick"});
-        }
-        else if(!newDeveloper.hasOccupation && newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc", readData[2],readData[3],readData[4],
-                    readData[5],readData[6],readData[7],});
-        }
-        else if(newDeveloper.hasOccupation && !newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], readData[1],readData[2],readData[3],readData[4],
-                    readData[5],readData[6], "noSick"});
-        }
-        else{
-            csvDeveloperData.add(readData);
-        }
-        writeToCSV("developers");
+            if (!newDeveloper.hasOccupation && !newDeveloper.isSick) {
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", "noSick"});
+            } else if (!newDeveloper.hasOccupation && newDeveloper.isSick) {
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", readData[2], readData[3], readData[4],
+                        readData[5], readData[6], readData[7],});
+            } else if (newDeveloper.hasOccupation && !newDeveloper.isSick) {
+                csvDeveloperData.add(new String[]{readData[0], readData[1], readData[2], readData[3], readData[4],
+                        readData[5], readData[6], "noSick"});
+            } else {
+                csvDeveloperData.add(readData);
+            }
+            writeToCSV("developers");
 
-        if(developers.containsKey(readData[0])){
-            System.out.println("Success");
+            if (developers.containsKey(readData[0])) {
+                System.out.println("Success");
+            }
         }
     }
 

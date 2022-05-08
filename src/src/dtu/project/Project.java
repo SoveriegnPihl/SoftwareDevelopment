@@ -1,9 +1,5 @@
 package dtu.project;
 
-import dtu.employees.*;
-import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.en_old.Ac;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;

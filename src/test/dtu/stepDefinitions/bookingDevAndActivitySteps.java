@@ -1,16 +1,14 @@
-package dtu.employees.project;
+package dtu.stepDefinitions;
 
-import dtu.Helper.MockDateHolder;
-import dtu.employees.Developer;
 import dtu.project.Activity;
+import dtu.project.Developer;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -182,5 +180,10 @@ public class bookingDevAndActivitySteps {
     public void notAssignedToSelectedProject() {
         assertFalse(project.developerIsInProject(developer));
 
+    }
+
+    @And("the error message {string} is given")
+    public void theErrorMessageIsGiven(String name) {
+        System.out.println(name);
     }
 }

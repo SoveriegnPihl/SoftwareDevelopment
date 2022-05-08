@@ -1,8 +1,5 @@
 package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.softwarehus.SoftwareHuset;
-
 public class Report {
     Project project;
     String name;

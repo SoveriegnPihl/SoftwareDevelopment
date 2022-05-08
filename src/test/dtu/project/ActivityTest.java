@@ -1,19 +1,13 @@
 package dtu.project;
-
-import dtu.employees.Developer;
-import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.bs.A;
+/*
 import org.junit.Assert;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ActivityTest {
 
 
     @Test
     void registerHoursA() {
-        SoftwareHuset.startProgram();
         Activity activity = SoftwareHuset.allActivities.get("Test solutions");
         Developer vic7 = SoftwareHuset.developers.get("vic7");
         activity.registerHours(vic7,5);
@@ -32,3 +26,4 @@ class ActivityTest {
     }
 
 }
+*/

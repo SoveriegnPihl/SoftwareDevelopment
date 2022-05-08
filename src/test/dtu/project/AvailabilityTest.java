@@ -1,14 +1,8 @@
-package dtu.employees;
-
-import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.hu.De;
-import org.junit.Assert;
+package dtu.project;
+/*
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -46,4 +40,4 @@ class AvailabilityTest {
         developer.hasOccupation = false;
         SoftwareHuset.updateCSVFile("developers");
     }
-}
+} */
