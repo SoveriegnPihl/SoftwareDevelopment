@@ -13,12 +13,13 @@ import java.util.HashMap;
 import static org.junit.jupiter.api.Assertions.*;
 
 class AvailabilityTest {
+    public GregorianCalendar today = new GregorianCalendar();
 
     @Test
     void getAvailabilityA() {
         SoftwareHuset.startProgram();
         Developer developer = SoftwareHuset.getDeveloper("ekki");
-        assertTrue(developer.getAvailability());
+        assertTrue(developer.getAvailability(today));
     }
 
     @Test
@@ -27,20 +28,20 @@ class AvailabilityTest {
         GregorianCalendar calS = new GregorianCalendar(2022,0,1);
         GregorianCalendar calF = new GregorianCalendar(2023,0,1);
         developer.setHoliday(calS,calF);
-        assertFalse(developer.getAvailability());
+        assertFalse(developer.getAvailability(today));
     }
 
     @Test
     void getAvailabilityC() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
         developer.setSick();
-        assertFalse(developer.getAvailability());
+        assertFalse(developer.getAvailability(today));
     }
 
     @Test
     void getAvailabilityD() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
-        assertFalse(developer.getAvailability());
+        assertFalse(developer.getAvailability(today));
         developer.isSick = false;
         developer.hasOccupation = false;
         SoftwareHuset.updateCSVFile("developers");

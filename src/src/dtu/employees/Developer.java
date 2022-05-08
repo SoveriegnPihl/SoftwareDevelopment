@@ -34,18 +34,18 @@ public class Developer {
         return initials;
     }
 
-    public boolean getAvailability(){
+    public boolean getAvailability(GregorianCalendar date){
         if (!hasOccupation && isSick){                                                                              //1
-            return !(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1);           //2
+            return !(sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1);           //2
         }
         else if (hasOccupation && !isSick){                                                                         //3
-            return !(occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1);   //4
+            return !(occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1);   //4
         }
         else if (hasOccupation && isSick){                                                                          //5
-            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1) {       //6
+            if (occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1) {       //6
                 return false;                                                                                       //7
             }
-            else if (sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){           //8
+            else if (sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1){           //8
                 return false;                                                                                       //9
             }
         }
@@ -66,21 +66,6 @@ public class Developer {
 
     public int getHours(){ return hoursWorked; }
 
-    public void requestDailyHours(){
-
-    }
-
-    public void registerActivity(Project project, Activity activity, String time){
-
-    }
-
-    public void registerPersonalActivity(String time, String time2){
-
-    }
-
-    public void requestAssistance(Activity activity){
-
-    }
     /*
     public void setOccupied(boolean occupation){
         isOccupied = occupation;
