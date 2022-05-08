@@ -77,7 +77,6 @@ public class ProjectManagerPage {
         });
 
         addDevToProjBtn.addActionListener(e -> {
-          //  OptionPane OP = new OptionPane(loggedInUser,"Add developer to project");
            createAddDev();
 
         });
@@ -116,7 +115,7 @@ public class ProjectManagerPage {
         pmPage2.setLayout(null);
         pmPage2.setBorder(BorderFactory.createTitledBorder("Add developer to project"));
         JLabel selDev = new JLabel();
-        selDev.setText("Select developer to add:");      //set label value for textField1
+        selDev.setText("Select developer to add:");
         selDev.setBounds(15, 50, 193, 29);
         pmPage2.add(selDev);
 
@@ -150,8 +149,6 @@ public class ProjectManagerPage {
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });
-
-
 
         pmPage2.setVisible(true);
 
