@@ -5,13 +5,13 @@ Feature: Adding an employee to the system
   Scenario: User creates a non-existent employee
     Given that "marc" is not a developer
     And that the initials isn't greater than 4
-    Then the new devloper get's registered
+    Then the new developer gets registered
 
   Scenario: User creates an employee with more than 4 initials
     Given that "marcus" is not a developer
     And that the initials is greater than 4
-    Then the error message "Too many characters in the initials" is given
+    Then "marcus" is not created
 
   Scenario: User creates an existing employee
     Given that "ekki" is a developer
-    Then the error message "Developer is already registered" is given
+    Then "ekki" is still an employee

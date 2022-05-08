@@ -1,25 +1,33 @@
-package dtu.employees.project;
+package dtu.stepDefinitions;
 import dtu.Helper.ErrorMessageHolder;
-import dtu.employees.Developer;
 import dtu.project.Activity;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.Developer;
+import dtu.project.SoftwareHuset;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.BeforeEach;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class timereportTest {
-    private ErrorMessageHolder errorMessage;
-    ;
     SoftwareHuset softwareHuset;
 
     Developer developer,developer2;
     Activity activity;
     int addedHours;
-    boolean isStarted = false;
+
+    @BeforeAll
+    public static void checkInit() {
+        if (!AAcheckForEmployeesTest.programStarted) {
+            AAcheckForEmployeesTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     public timereportTest(SoftwareHuset sf) {
         softwareHuset = sf;
@@ -42,12 +50,13 @@ public class timereportTest {
 
     @When("the developer requests reported worked hours for today")
     public void theDeveloperRequestsReportedWorkedHoursForToday(){
+
         developer.getRegisteredHoursToday();
     }
 
     @Then("daily worked hours is given for {string}")
     public void dailyWorkedHoursIsGivenFor(String name) {
-    assertEquals(softwareHuset.developers.get(name).getRegisteredHoursToday(),addedHours,0.1);
+    assertEquals(softwareHuset.getDeveloper(name).getRegisteredHoursToday(),addedHours,0.1);
     }
 
 
@@ -57,33 +66,28 @@ public class timereportTest {
         assertEquals(developer2.getRegisteredHoursToday(),0,0.1);
     }
 
-
-
-    @Then("Then the error message {string} is given")
-    public void thenTheErrorMessageIsGiven(String arg0) {
-        System.out.println("No hours registered today");
-    }
-
-
-    @And("there is registered hours for the date {string}")
-    public void thereIsRegisteredHoursForTheDate(String arg0) {
-        assertTrue(activity.registeredHours.containsKey(developer.getInitials()));
-    }
-
     @Given("that there isn't a developer with initials {string}")
     public void thatThereIsnTADeveloperWithInitials(String name) {
         assertFalse(softwareHuset.developers.containsKey(name));
     }
-    @Then("the error message {string} is given")
-    public void theErrorMessageIsGiven(String arg0) {
-    }
-    @When("the non-developer requests reported worked hours for today")
-    public void theNonDeveloperRequestsReportedWorkedHoursForToday() {
 
+    @When("{string} requests reported worked hours for today")
+    public void requestsReportedWorkedHoursForToday(String name) {
+        assertFalse(softwareHuset.isDeveloper(name));
     }
+
     @When("the other developer requests reported worked hours for today")
     public void theOtherDeveloperRequestsReportedWorkedHoursForToday() {
         developer2.getRegisteredHoursToday();
     }
 
+    @Then("hours is not reported for {string}")
+    public void hoursIsNotReportedFor(String name) {
+        assertFalse(softwareHuset.isDeveloper(name));
+    }
+
+    @Then("zero hours is given for {string}")
+    public void zeroHoursIsGivenFor(String name) {
+        assertEquals(softwareHuset.developers.get(name).getRegisteredHoursToday(),0,0.1);
+    }
 }

@@ -1,9 +1,5 @@
 package dtu.project;
 
-import dtu.employees.*;
-import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.en_old.Ac;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -17,7 +13,6 @@ public class Project {
     public GregorianCalendar startDate;
     public GregorianCalendar endDate;
     public int budget, budgetUsed;
-    Manager pm;
 
     public List<Developer> developers = new ArrayList<>();
     public HashMap<String, Activity> activities = new HashMap<>();
@@ -28,7 +23,6 @@ public class Project {
         this.budget = budget;
         budgetUsed = 0;
         id = (Project.nextId++) + 22000;
-        pm = new Manager("NULL");
     }
 
     public int getId() {
@@ -66,31 +60,13 @@ public class Project {
     }
 
     public void addActivity(Activity activity){
-        if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){
-            budgetUsed -= activity.getBudget();
-            activities.put(activity.getName(), activity);
-            System.out.println("Activity added");
+        if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){    //1
+            budgetUsed -= activity.getBudget();                                                                     //2
+            activities.put(activity.getName(), activity);                                                           //3
+            System.out.println("Activity added");                                                                   //4
         } else {
-            System.out.println("ikke inden for datoen af projektet");
+            System.out.println("ikke inden for datoen af projektet");                                               //5
         }
-    }
-
-    public ArrayList<Activity> userActivities (Developer user){
-        System.out.println(user.getInitials());
-        ArrayList<Activity> developerList = new ArrayList<>();
-        System.out.println(developerIsInProject(user)+" bruger i projekt");
-
-        if (developerIsInProject(user)) {
-            for (Activity activity : activities.values()) {
-                System.out.println(activity.name+ " act navn");
-                System.out.println(activity.getDevelopers().toString());
-                if (activity.developers.containsKey(user)) {
-                    System.out.println("YEEES contains key");
-                    developerList.add(activity);
-                }
-            }
-        }
-        return developerList;
     }
 
    public boolean findActivity(String activityName){
@@ -110,9 +86,6 @@ public class Project {
         return developers.contains(dev);
     }
 
-    public List<Developer> developerList () {
-        return developers;
-    }
     public String getDateDay (String time){
         if (time.equals("start")) {
             return String.valueOf(startDate.get(Calendar.DAY_OF_MONTH));
@@ -149,12 +122,5 @@ public class Project {
         SoftwareHuset.writeToCSV("projects");
     }
 
-    public void assignManagerToProject(Developer dev){
-        pm = new Manager(dev);
-    }
-
-    public Manager getManager(){
-        return pm;
-    }
 }
 

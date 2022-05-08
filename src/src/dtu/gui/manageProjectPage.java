@@ -1,9 +1,8 @@
 package dtu.gui;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.Vector;
@@ -39,7 +38,7 @@ public class manageProjectPage {
             clear();
             ProjectManagerPage.setVisible(true);
         });
-        btnBack.setBounds(21, 300, 59, 29);
+        btnBack.setBounds(21, 300, 70, 29);
         createProjectPanel.add(btnBack);
 
         //adding labels to screen

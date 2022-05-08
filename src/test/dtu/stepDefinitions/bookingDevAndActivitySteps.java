@@ -1,16 +1,17 @@
-package dtu.employees.project;
+package dtu.stepDefinitions;
 
-import dtu.Helper.MockDateHolder;
-import dtu.employees.Developer;
 import dtu.project.Activity;
+import dtu.project.Developer;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
+import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.BeforeEach;
 
-import java.util.Date;
 import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -19,11 +20,19 @@ import static org.junit.Assert.*;
 public class bookingDevAndActivitySteps {
     SoftwareHuset softwareHuset;
     Developer developer, manager;
-    Project project;
+    Project project,project2;
     Activity activity;
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
     GregorianCalendar today = new GregorianCalendar();
+
+    @BeforeAll
+    public static void checkInit() {
+        if (!AAcheckForEmployeesTest.programStarted) {
+            AAcheckForEmployeesTest.programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     public bookingDevAndActivitySteps(SoftwareHuset softwareHuset){
         this.softwareHuset = softwareHuset;
@@ -49,6 +58,7 @@ public class bookingDevAndActivitySteps {
     @Given("there is a project with id {string}")
     public void there_is_a_project_with_id(String projectId) throws Exception{
         project = softwareHuset.projects.get(Integer.parseInt(projectId));
+        project2 = softwareHuset.getProject(projectId);
     }
 
     @Given("the developer is available for the project")
@@ -182,5 +192,10 @@ public class bookingDevAndActivitySteps {
     public void notAssignedToSelectedProject() {
         assertFalse(project.developerIsInProject(developer));
 
+    }
+
+    @And("the error message {string} is given")
+    public void theErrorMessageIsGiven(String name) {
+        System.out.println(name);
     }
 }
