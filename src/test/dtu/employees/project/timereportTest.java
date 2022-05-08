@@ -11,7 +11,7 @@ import io.cucumber.java.en.When;
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class timeReportTest {
+public class timereportTest {
     private ErrorMessageHolder errorMessage;
     ;
     SoftwareHuset softwareHuset;
@@ -21,7 +21,7 @@ public class timeReportTest {
     int addedHours;
     boolean isStarted = false;
 
-    public timeReportTest(SoftwareHuset sf) {
+    public timereportTest(SoftwareHuset sf) {
         softwareHuset = sf;
     }
 
