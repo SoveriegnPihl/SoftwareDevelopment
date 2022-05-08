@@ -4,6 +4,7 @@ import dtu.Helper.ErrorMessageHolder;
 import dtu.project.Developer;
 import dtu.project.SoftwareHuset;
 import io.cucumber.java.en.And;
+import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
@@ -62,6 +63,10 @@ public class assignPmTest {
     public void isStillProjectManager(String name) {
 
         assertTrue(softwareHuset.isManager(name));
+    }
+    @Given("There is a project with id {string}")
+    public void there_is_a_project_with_id(String string) {
+        assertTrue(true);
     }
 
 }

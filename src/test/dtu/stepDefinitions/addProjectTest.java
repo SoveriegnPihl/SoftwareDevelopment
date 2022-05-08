@@ -1,54 +1,53 @@
 package dtu.stepDefinitions;
 
+import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 
-import static org.junit.Assert.assertTrue;
+import java.util.GregorianCalendar;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.*;
 
 public class addProjectTest {
     SoftwareHuset sf;
+    Project project;
+    GregorianCalendar startDate, endDate;
+    int budget;
+
     public addProjectTest(SoftwareHuset softwareHuset){
         sf = softwareHuset;
     }
 
+    @Given("you want to add a new project starting {int} - {int} - {int} and ending {int} - {int} - {int} with {int} kr budget")
+    public void youWantToAddANewProjectStartingAndEndingWithKrBudget(int startD, int startM, int startY, int endD, int endM, int endY, int budget) {
+        startDate = new GregorianCalendar(startY, startM, startD);
+        endDate = new GregorianCalendar(endY, endM,endD);
+        this.budget = budget;
 
-    @Given("That there is a project name {string}")
-    public void that_there_is_a_project_name(String name) {
-        assertTrue(!(name.isEmpty()));
-    }
-    @And("That there is a start date {string}")
-    public void that_there_is_a_start_date(String Sdate) {
-        assertTrue(true);
-    }
-    @And("There is an end date {string}")
-    public void there_is_an_end_date(String Edate) {
-        // Write code here that turns the phrase above into concrete actions
-    }
-    @And("There is a budget \"{int}\" kr")
-    public void there_is_a_budget(int budget) {
-        assertTrue( budget > 0);
-    }
-    @Then("A new project with name {string} with start date {string} and end date {string} with a budget of \"{int}\"kr and id \"{int}\" is made")
-    public void a_new_project_with_name_with_start_date_and_end_date_with_a_budget_of_kr_is_made(String string, String string2, String string3,
-                                                                                                 Integer int1 , Integer int2) {
-        // Write code here that turns the phrase above into concrete actions
-    }
-    @And("There is a project with id \"{int}\"")
-    public void there_is_a_project_with_name_with_start_date_and_end_date_with_a_budget_of_kr(Integer int1) {
-        // Write code here that turns the phrase above into concrete actions
     }
 
-    @Then("the error {string} is given")
-    public void the_error_is_given(String string) {
+    @And("the end date is before the start date")
+    public void theEndDateIsBeforeTheStartDate() {
+        assertFalse(endDate.compareTo(startDate) == -1);
     }
 
-    @Then("The date is not valid")
-    public void the_date_is_not_valid() {
-        // Write code here that turns the phrase above into concrete actions
+    @Given("the end date is after the start date")
+    public void the_end_date_is_after_the_start_date() {
+        assertTrue(endDate.compareTo(startDate) == 1);
     }
 
+    @Then("the new project is added")
+    public void the_new_project_is_added() {
+        sf.createProject(startDate,endDate,budget);
+    }
+
+    @And("the new project is an existing project")
+    public void theNewProjectIsAnExistingProject() {
+
+    }
 
 }
