@@ -10,13 +10,13 @@ Scenario: Developer requests number of worked hours today
 
 Scenario: Non-existing developer requests number of worked hours today
     Given that there isn't a developer with initials "hans"
-    When the non-developer requests reported worked hours for today
-    Then the error message "No developer with such name found" is given
+    When "hans" requests reported worked hours for today
+    Then hours is not reported for "hans"
 
 Scenario: Developer requests number of worked hours today when no time is registered
-    Given that there is a developer with initials "ekki"
+    Given that there is a developer with initials "vicc"
     And there is no registered time
     When the other developer requests reported worked hours for today
-    Then the error message "No hours registered for today" is given
+    Then zero hours is given for "vicc"
 
 

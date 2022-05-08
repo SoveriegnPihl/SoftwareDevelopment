@@ -1,9 +1,6 @@
-package dtu.softwarehus;
+package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.project.Activity;
-import dtu.project.Project;
-import dtu.project.Report;
+import dtu.softwarehus.ErrorMessageHolder;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -25,7 +22,6 @@ public class SoftwareHuset {
     public static GregorianCalendar today = new GregorianCalendar();
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
-    static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
     public SoftwareHuset() {
     }
 

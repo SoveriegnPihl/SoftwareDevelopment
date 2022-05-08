@@ -1,4 +1,4 @@
-package dtu.project;
+package dtu.softwarehus;
 
 public class OperationNotAllowedException extends Exception {
 

@@ -1,11 +1,9 @@
 package dtu.gui;
 
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.Month;
-import java.time.Year;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;

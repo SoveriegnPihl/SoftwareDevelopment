@@ -1,9 +1,5 @@
 package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.employees.Manager;
-import dtu.softwarehus.SoftwareHuset;
-
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;

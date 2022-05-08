@@ -1,6 +1,6 @@
-package dtu.employees.project;
+package dtu.stepDefinitions;
 
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;

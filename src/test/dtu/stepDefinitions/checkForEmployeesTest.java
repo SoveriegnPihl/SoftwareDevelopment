@@ -1,8 +1,7 @@
-package dtu.employees.project;
-import dtu.softwarehus.SoftwareHuset;
+package dtu.stepDefinitions;
 import dtu.project.Project;
+import dtu.project.SoftwareHuset;
 import io.cucumber.java.en.And;
-import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 
 import static org.junit.Assert.assertTrue;
@@ -18,8 +17,7 @@ public class checkForEmployeesTest {
 
     @And("There is a project manager")
     public void there_is_project_manager(){
-        Project p = sf.getProject(String.valueOf(id));
-        assertTrue("Project has project manager", !(p.getManager().initials.equals("NULL")));
+        assertTrue(sf.projectManagers.containsKey(22001));
     }
     @And ("There is a list of employees")
     public void there_is_list_of_employees(){
