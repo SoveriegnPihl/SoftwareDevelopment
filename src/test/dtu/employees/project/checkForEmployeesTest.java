@@ -16,6 +16,11 @@ public class checkForEmployeesTest {
         sf.startProgram();
     }
 
+    @Given("There is a project with id {string}")
+    public void there_is_a_project_with_id(String string) {
+        assertTrue(true);
+    }
+
     @And("There is a project manager")
     public void there_is_project_manager(){
         Project p = sf.getProject(String.valueOf(id));
