@@ -1,7 +1,7 @@
 package dtu.project;
 
 public class Report {
-    Project project;
+    public Project project;
     String name;
     int startWeek;
     int endWeek;
@@ -10,10 +10,15 @@ public class Report {
 
     public Report(Project project){
         this.project = project;
+
     }
 
-    public void getReport(){
-        System.out.println();
+    public void printReport(){
+        System.out.println("Budget used: " + project.getBudgetUsed() +
+                            "Budget estimate: " + project.getEstimatedBudget() +
+                            "Time used:" + project.getUsedTime() +
+                            "Time estimate: " + project.getEstimatedTime()
+        );
     }
 
 

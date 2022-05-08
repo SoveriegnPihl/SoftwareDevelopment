@@ -1,9 +1,6 @@
 package dtu.stepDefinitions;
 
-import dtu.project.Activity;
-import dtu.project.Developer;
-import dtu.project.Project;
-import dtu.project.SoftwareHuset;
+import dtu.project.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -21,6 +18,7 @@ public class bookingDevAndActivitySteps {
     Activity activity;
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
+    Report rep;
     GregorianCalendar today = new GregorianCalendar();
 
     public bookingDevAndActivitySteps(SoftwareHuset softwareHuset){
@@ -111,6 +109,19 @@ public class bookingDevAndActivitySteps {
         project.getUsedTime();
         project.getBudgetUsed();
     }
+    @Then("a report is created for the project")
+    public void aReportIsCreatedForTheProject() {
+        rep = new Report(project);
+    }
+
+    @Then("the report contains all relevant information")
+    public void theReportContainsAllRelevantInformation() {
+        rep.printReport();
+        assertTrue(rep.project == project);
+    }
+
+
+
 
     @Given("that there is a manager with initials {string}")
     public void thatThereIsAManagerWithInitials(String managerInitials) {
