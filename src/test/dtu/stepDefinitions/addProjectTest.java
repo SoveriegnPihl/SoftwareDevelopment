@@ -1,7 +1,7 @@
-package dtu.employees.project;
+package dtu.stepDefinitions;
 
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -9,9 +9,8 @@ import io.cucumber.java.en.Then;
 
 import java.util.GregorianCalendar;
 
-import static org.junit.Assert.assertThat;
 import static org.hamcrest.CoreMatchers.is;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class addProjectTest {
     SoftwareHuset sf;
@@ -33,7 +32,7 @@ public class addProjectTest {
 
     @And("the end date is before the start date")
     public void theEndDateIsBeforeTheStartDate() {
-        assertTrue(endDate.compareTo(startDate) == -1);
+        assertFalse(endDate.compareTo(startDate) == -1);
     }
 
     @Given("the end date is after the start date")

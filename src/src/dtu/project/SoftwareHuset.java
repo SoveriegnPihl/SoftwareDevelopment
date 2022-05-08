@@ -213,12 +213,15 @@ public class SoftwareHuset {
         for (Developer dev : developers.values()){
             if(dev.getAvailability(today)){
                 str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
+                availableDevelopers.add(dev);
             } else {
                 str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
             }
         }
         return str.toString();
     }
+
+
 
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
