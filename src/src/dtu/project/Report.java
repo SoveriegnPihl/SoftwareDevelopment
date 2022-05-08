@@ -1,6 +1,6 @@
 package dtu.project;
 
-import dtu.project.employees.Developer;
+import dtu.employees.Developer;
 
 public class Report {
     Project project;

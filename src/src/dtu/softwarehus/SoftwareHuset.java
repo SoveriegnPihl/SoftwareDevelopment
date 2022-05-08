@@ -1,6 +1,6 @@
 package dtu.softwarehus;
 
-import dtu.project.employees.Developer;
+import dtu.employees.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
 import dtu.project.Report;
@@ -18,11 +18,11 @@ import java.util.Arrays;
 public class SoftwareHuset {
     static ArrayList<Report> reports;
     public static HashMap<String, Developer> developers;
+    public static ArrayList<Developer> availableDevelopers;
     public static HashMap<Integer,String> projectManagers;
-    static ArrayList<Developer> availableDevelopers;
     public static HashMap<Integer, Project> projects;
     public static HashMap<String, Activity> allActivities;
-    private DateServer dateServer;
+    public static GregorianCalendar today = new GregorianCalendar();
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
     static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
@@ -103,6 +103,15 @@ public class SoftwareHuset {
         writeToCSV("activities");
     }
 
+    public boolean findActivity(String activityName){
+        for (String actName : allActivities.keySet()){
+            if (actName.equals(activityName)){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void addDeveloper(String[] readData) {
         if(readData[0].length() == 4 && !isDeveloper(readData[0])) {
             Developer newDeveloper = new Developer(readData[0]);
@@ -129,10 +138,6 @@ public class SoftwareHuset {
         }
     }
 
-    public void setDateServer(DateServer dateServer) {
-        this.dateServer = dateServer;
-    }
-
     public static int createProject(GregorianCalendar start, GregorianCalendar end, int budget){
         Project newProject = new Project(start,end, budget);
         newProject.printProject();
@@ -148,13 +153,23 @@ public class SoftwareHuset {
 
     }
 
-    public static void assignPM(String dev, int projectID){
+   public static void assignPM(String dev, int projectID){
        if(!isManager(dev)){
         if(projects.containsKey(projectID) && developers.containsKey(dev)) {
             projectManagers.put(projectID, dev);
         }
        }
-    }
+    }/*
+    public static void assignPM(String dev, int projectID){
+
+        if(!isDeveloper(dev)){
+            Developer newDev = new Developer(dev);
+
+        }
+
+        projectManagers.put(projectID,dev);
+        projects.get(projectID).assignManagerToProject(developers.get(dev));
+    }*/
 
     public void listProjects(){
         for (Project var : projects.values()){
@@ -177,7 +192,7 @@ public class SoftwareHuset {
 
         for (Project var : projects.values()){
 
-            if (var.developerIsInProject(developer)){ //true hver gang
+            if (var.developerIsInProject(developer)){
                 projectlist2.add(var);
             }
         }
@@ -200,7 +215,11 @@ public class SoftwareHuset {
         StringBuilder str = new StringBuilder();
 
         for (Developer dev : developers.values()){
-            str.append(dev.getAvailability());
+            if(dev.getAvailability(today)){
+                str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
+            } else {
+                str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
+            }
         }
         return str.toString();
     }
@@ -213,10 +232,10 @@ public class SoftwareHuset {
         return projectManagers.containsValue(ini);
     }
 
-    public boolean findProject(String projectId){
-        for (Project proj : projects.values()){
-            System.out.println(proj.name);
-            if(proj.name.equals(projectId)){
+    public boolean findProject(int projectId){
+        for (int id : projects.keySet()){
+            System.out.println(id);
+            if(id == projectId){
                 return true;
             }
         }
@@ -329,5 +348,15 @@ public class SoftwareHuset {
         }
         return escapedData;
     }
+
+    public  List<Developer> listDevs() {
+        List<Developer> devs = new ArrayList<>();
+        for (Developer dev : developers.values()){
+            devs.add(dev);
+        }
+        return devs;
+    }
+
+
 
 }

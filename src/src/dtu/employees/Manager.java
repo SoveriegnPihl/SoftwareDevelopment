@@ -1,4 +1,4 @@
-package dtu.project.employees;
+package dtu.employees;
 
 public class Manager extends Developer {
 
@@ -6,4 +6,13 @@ public class Manager extends Developer {
         super(ini);
         super.isProjectManager = true;
     }
+
+
+    public Manager(Developer dev) {
+        super(dev.initials);
+        super.isProjectManager = true;
+    }
+
+
+
 }

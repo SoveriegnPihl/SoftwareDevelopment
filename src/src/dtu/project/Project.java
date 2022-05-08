@@ -1,8 +1,7 @@
 package dtu.project;
 
-import dtu.employees.*;
-import dtu.project.employees.Developer;
-import dtu.project.employees.Manager;
+import dtu.employees.Developer;
+import dtu.employees.Manager;
 import dtu.softwarehus.SoftwareHuset;
 
 import java.util.ArrayList;
@@ -20,7 +19,7 @@ public class Project {
     public int budget, budgetUsed;
     Manager pm;
 
-    private List<Developer> developers = new ArrayList<>();
+    public List<Developer> developers = new ArrayList<>();
     public HashMap<String, Activity> activities = new HashMap<>();
 
     public Project(GregorianCalendar start, GregorianCalendar end, int budget) {
@@ -29,6 +28,7 @@ public class Project {
         this.budget = budget;
         budgetUsed = 0;
         id = (Project.nextId++) + 22000;
+        pm = new Manager("NULL");
     }
 
     public int getId() {
@@ -74,35 +74,33 @@ public class Project {
             System.out.println("ikke inden for datoen af projektet");
         }
     }
-            public ArrayList<Activity> userActivities (Developer user){
-                System.out.println(user.getInitials());
-                ArrayList<Activity> developerList = new ArrayList<>();
-                System.out.println(developerIsInProject(user)+" bruger i projekt");
 
-                if (developerIsInProject(user)) {
-                    for (Activity activity : activities.values()) {
-                        System.out.println(activity.name+ " act navn");
-                        System.out.println(activity.getDevelopers().toString());
-                        if (activity.developers.containsKey(user)) {
-                            System.out.println("YEEES contains key");
-                            developerList.add(activity);
-                        }
-                    }
+    public ArrayList<Activity> userActivities (Developer user){
+        System.out.println(user.getInitials());
+        ArrayList<Activity> developerList = new ArrayList<>();
+        System.out.println(developerIsInProject(user)+" bruger i projekt");
 
+        if (developerIsInProject(user)) {
+            for (Activity activity : activities.values()) {
+                System.out.println(activity.name+ " act navn");
+                System.out.println(activity.getDevelopers().toString());
+                if (activity.developers.containsKey(user)) {
+                    System.out.println("YEEES contains key");
+                    developerList.add(activity);
+                }
+            }
         }
         return developerList;
     }
 
-
-
-   /* public boolean findActivity(String activityName){
-        for (Activity a : activities){
-            if(a.name.equals(activityName)){
+   public boolean findActivity(String activityName){
+        for (String actName : activities.keySet()){
+            if(actName.equals(activityName)){
                 return true;
             }
         }
         return false;
-    }*/
+    }
 
     public void addDeveloper (Developer dev){
         developers.add(dev);
@@ -149,6 +147,14 @@ public class Project {
         endDate = new GregorianCalendar(newEndDate[2], newEndDate[1], newEndDate[0]);
         budget = newBudget - budgetUsed;
         SoftwareHuset.writeToCSV("projects");
+    }
+
+    public void assignManagerToProject(Developer dev){
+        pm = new Manager(dev);
+    }
+
+    public Manager getManager(){
+        return pm;
     }
 }
 

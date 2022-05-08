@@ -1,4 +1,4 @@
-package dtu.project.employees;
+package dtu.employees;
 
 import dtu.project.Activity;
 import dtu.project.Project;
@@ -34,24 +34,22 @@ public class Developer {
         return initials;
     }
 
-    public String getAvailability(){
-        String isAvailable = "Developer: " + initials + " is NOT occupied today" + "\n";                        //1
-        String isNotAvailable = "Developer: " + initials + " is occupied today" + "\n";                         //2
-
-        if(!hasOccupation || !isSick){                                                                          //3
-            return isAvailable;                                                                                 //4
+    public boolean getAvailability(GregorianCalendar date){
+        if (!hasOccupation && isSick){                                                                              //1
+            return !(sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1);           //2
         }
-        else{
-            if (occupiedFromThisDate.compareTo(today) == -1 && occupiedUntilThisDate.compareTo(today) == 1){    //5
-                return isNotAvailable;                                                                          //6
+        else if (hasOccupation && !isSick){                                                                         //3
+            return !(occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1);   //4
+        }
+        else if (hasOccupation && isSick){                                                                          //5
+            if (occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1) {       //6
+                return false;                                                                                       //7
             }
-            else if(sickFromThisDate.compareTo(today) == -1 && sickUntilThisDate.compareTo(today) == 1){        //7
-                return isNotAvailable;                                                                          //8
-            }
-            else{
-                return isAvailable;                                                                             //9
+            else if (sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1){           //8
+                return false;                                                                                       //9
             }
         }
+        return true;                                                                                                //10
     }
 
     public void addHoursToday(double hours){
@@ -68,21 +66,6 @@ public class Developer {
 
     public int getHours(){ return hoursWorked; }
 
-    public void requestDailyHours(){
-
-    }
-
-    public void registerActivity(Project project, Activity activity, String time){
-
-    }
-
-    public void registerPersonalActivity(String time, String time2){
-
-    }
-
-    public void requestAssistance(Activity activity){
-
-    }
     /*
     public void setOccupied(boolean occupation){
         isOccupied = occupation;
