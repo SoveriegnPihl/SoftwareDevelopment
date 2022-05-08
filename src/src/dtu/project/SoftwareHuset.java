@@ -31,12 +31,13 @@ public class SoftwareHuset {
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        assignPM("vic7",projects.get(22002).getId());
-        assignPM("ekki",projects.get(22001).getId());
+        assignPM("vic7",22001);
+        assignPM("vic7",22002);
+        assignPM("ekki",22003);
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
-
+        projects.get(22003).addDeveloper(developers.get("ekki"));
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
@@ -150,11 +151,10 @@ public class SoftwareHuset {
     }
 
    public static void assignPM(String dev, int projectID){
-       if(!isManager(dev)){
+
         if(projects.containsKey(projectID) && developers.containsKey(dev)) {
             projectManagers.put(projectID, dev);
         }
-       }
     }
 
     public static Developer getDeveloper(String name){

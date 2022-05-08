@@ -3,6 +3,7 @@ import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
@@ -16,9 +17,11 @@ public class ProjectManagerPage {
     SoftwareHuset softwareHuset;
     Main parentWindow;
     static JComboBox<String> projectList;
-    int yCountR=100,yCountL=100;
+    int yCountR=30,yCountL=30;
     private JFrame frame;
     private JPanel pmPage2;
+    static JPanel topPanel;
+    private JPanel bottomPanel;
 
     //constructor
     ProjectManagerPage(SoftwareHuset softwareHuset, Main parentWindow) {
@@ -30,17 +33,18 @@ public class ProjectManagerPage {
         createPage();
 
         JButton addDevBtn = makeLeftButton("Add developer");
-        JButton viewAvailableDevBtn = makeLeftButton("Available developers");
         JButton addDevToProjBtn = makeLeftButton("Add developer to project");
         JButton addActivityBtn = makeLeftButton("Add activity to project");
         JButton getReportBtn = makeLeftButton("Get project report");
-        JButton backBtn = makeLeftButton("Back");
+        JButton viewAvailableDevBtn = makeRightButton("Available developers");
         JButton changeProjBtn = makeRightButton("Change selected project");
+        JButton backBtn = makeRightButton("Back");
 
         JLabel selectLabel = new JLabel();
-        selectLabel.setText("Select project");
-        selectLabel.setBounds(100, 25, 193, 29);
-        projectManagerPage.add(selectLabel);
+        selectLabel.setText("Select project to manage");
+        selectLabel.setBounds(25, 25, 193, 30);
+        selectLabel.setFont(new Font("Calibri",Font.BOLD,15));
+        topPanel.add(selectLabel);
 
         viewAvailableDevBtn.addActionListener(e -> {
             new OptionPane(loggedInUser,"View available developers");
@@ -93,6 +97,16 @@ public class ProjectManagerPage {
         parentWindow.addPanel(projectManagerPage);
         projectManagerPage.setLayout(null);
         projectManagerPage.setBorder(BorderFactory.createTitledBorder("Project manager page"));
+        topPanel = new JPanel();
+        topPanel.setBounds(15,25,450,75);
+        projectManagerPage.add(topPanel);
+        topPanel .setBorder(BorderFactory.createTitledBorder("Manage project"));
+        topPanel.setLayout(null);
+        bottomPanel = new JPanel();
+        projectManagerPage.add(bottomPanel);
+        bottomPanel.setBounds(15,125,450,325);
+        bottomPanel.setLayout(null);
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Use functionality"));
     }
     public void createAddDev(){
         setVisible(false);
@@ -151,11 +165,11 @@ public class ProjectManagerPage {
 
        projectList = new JComboBox<>(list);
        projectList.setBounds(250, 25, 193, 29);
-       projectManagerPage.add(projectList);
+       topPanel.add(projectList);
 
     }
     public static void removeList(){
-        projectManagerPage.remove(projectList);
+        topPanel.remove(projectList);
 
     }
 
@@ -165,15 +179,15 @@ public class ProjectManagerPage {
 
     public JButton makeLeftButton(String name){
         JButton b1 = new JButton(name);
-        b1.setBounds(25, yCountL, 193, 29);
-        projectManagerPage.add(b1);
+        b1.setBounds(15, yCountL, 193, 29);
+        bottomPanel.add(b1);
         yCountL+=50;
         return b1;
     }
     public JButton makeRightButton(String name){
         JButton b1 = new JButton(name);
-        b1.setBounds(285, yCountR, 193, 29);
-        projectManagerPage.add(b1);
+        b1.setBounds(245, yCountR, 193, 29);
+        bottomPanel.add(b1);
         yCountR+=50;
         return b1;
     }
