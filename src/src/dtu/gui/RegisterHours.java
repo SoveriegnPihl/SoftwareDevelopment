@@ -157,7 +157,7 @@ public class RegisterHours {
     }
 
     public static void createProjectList(){
-        String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
+        String[] list = DeveloperPage.fullProjectList().toArray(new String[0]);
         projectComboNotAssigned = new JComboBox<>(list);
         projectComboNotAssigned.setBounds(250, 75, 193, 29);
         registerHours.add(projectComboNotAssigned);
@@ -182,7 +182,7 @@ public class RegisterHours {
 
 
      public static void createList(Developer user){
-        ArrayList<Project> list = SoftwareHuset.projectListDeveloper(user);
+        ArrayList<Project> list = ChangeHours.projectListDeveloper(user);
         projectsComboBox = new JComboBox<>();
         projectsComboBox.setBounds(250, 75, 193, 29);
         registerHours.add(projectsComboBox);
