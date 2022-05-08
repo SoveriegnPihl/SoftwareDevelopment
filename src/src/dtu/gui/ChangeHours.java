@@ -168,6 +168,7 @@ public class ChangeHours {
 
         for (Activity activity : project11.activities.values()) {
             activeBox.addItem(activity.name);
+
         }
         projectComboNotAssigned.addActionListener(e -> {
             project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(projectComboNotAssigned.getSelectedIndex()));

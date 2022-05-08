@@ -9,7 +9,7 @@ import javax.swing.*;
 import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
-public class RegisterHours {
+public class    RegisterHours {
     private static Project project12;
     JFrame frame;
     private static JPanel registerHours;

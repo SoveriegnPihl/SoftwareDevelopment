@@ -84,6 +84,7 @@ class OptionPane extends JFrame {
             } else{
                 SoftwareHuset.addDeveloper(new String[]{developerToCreate, "noOcc", "noSick"});
             }
+
         }
     }
 

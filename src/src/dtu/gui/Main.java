@@ -135,7 +135,6 @@ public class Main {
             OptionPane OP = new OptionPane("Add developer");
 
 
-
         });
         newProjectPage = new CreateProjectPage(softwareHuset,this);
         developerPage = new DeveloperPage(softwareHuset, this);
