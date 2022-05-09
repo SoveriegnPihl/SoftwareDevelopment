@@ -1,5 +1,7 @@
 package dtu.project;
 
+import org.junit.Assert;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.*;
@@ -93,7 +95,10 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String[] readData) {
-        if (readData[0].length() == 4 && !isDeveloper(readData[0])) {                                                //1
+
+        String ini = readData[0];
+        Assert.assertFalse(developers.containsKey(ini));
+        if(readData[0].length() == 4 && !isDeveloper(readData[0])) {                                                //1
             Developer newDeveloper = new Developer(readData[0]);                                                    //2
             newDeveloper.setHolidayDates(readData);                                                                 //3
             newDeveloper.setSickDates(readData);                                                                    //4
@@ -112,9 +117,7 @@ public class SoftwareHuset {
             }
             writeToCSV("developers");                                                                           //15
 
-            if (developers.containsKey(readData[0])) {                                                              //16
-                System.out.println("Success");                                                                      //17
-            }
+            Assert.assertTrue(developers.containsKey(ini));
         }
     }
 
