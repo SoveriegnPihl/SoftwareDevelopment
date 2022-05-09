@@ -155,7 +155,6 @@ public class bookingDevAndActivitySteps {
     @Then("the developer is not available for a day")
     public void theDeveloperIsNotAvailableForADay() {
         assertTrue(developer.getAvailability(today));
-
         developer.isSick = false;
         softwareHuset.updateCSVFile("developers");
     }
