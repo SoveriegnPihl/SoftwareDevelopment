@@ -22,6 +22,7 @@ public class ProjectManagerPage {
     private JPanel pmPage2;
     static JPanel topPanel;
     private JPanel bottomPanel;
+    private JPanel developerPage2;
 
     //constructor
     ProjectManagerPage(SoftwareHuset softwareHuset, Main parentWindow) {
@@ -38,6 +39,7 @@ public class ProjectManagerPage {
         JButton getReportBtn = makeLeftButton("Get project report");
         JButton viewAvailableDevBtn = makeRightButton("Available developers");
         JButton changeProjBtn = makeRightButton("Change selected project");
+        JButton assignProjectManagerBtn = makeRightButton("Assign project manager");
         JButton backBtn = makeRightButton("Back");
 
         JLabel selectLabel = new JLabel();
@@ -53,6 +55,7 @@ public class ProjectManagerPage {
         changeProjBtn.addActionListener(e -> {
             setVisible(false);
             manageProjectPage.setLabels(projectList.getItemAt(projectList.getSelectedIndex()));
+            manageProjectPage.setDevs();
             manageProjectPage.setVisible(true);
         });
 
@@ -78,7 +81,13 @@ public class ProjectManagerPage {
 
         addDevToProjBtn.addActionListener(e -> {
            createAddDev();
+           Main.setLocation();
 
+        });
+
+        assignProjectManagerBtn.addActionListener(e -> {
+            Main.setFrameSize(500,300);
+            createAssignPM();
         });
 
         addDevBtn.addActionListener(e -> {
@@ -89,6 +98,60 @@ public class ProjectManagerPage {
         createActivityPage = new CreateActivityPage(softwareHuset, parentWindow);
         getReportPage = new getReportPage(softwareHuset, parentWindow);
 
+
+    }
+    public void createAssignPM(){
+        setVisible(false);
+        developerPage2 = new JPanel();
+        parentWindow.addPanel(developerPage2);
+        developerPage2.setLayout(null);
+        developerPage2.setBorder(BorderFactory.createTitledBorder("Assign A Project Manager"));
+        JLabel selDev = new JLabel();
+        selDev.setText("Select developer to assign");      //set label value for textField1
+        selDev.setBounds(25, 50, 193, 29);
+        developerPage2.add(selDev);
+
+        JComboBox<Object> developerCombo = new JComboBox<>();
+        for (String developer : SoftwareHuset.developers.keySet()) {
+            developerCombo.addItem(developer);
+        }
+
+        developerCombo.setBounds(250, 50, 193, 29);
+        developerPage2.add(developerCombo);
+
+        String[] list = fullProjectList().toArray(new String[0]);
+        JComboBox<String> projectCombo = new JComboBox<>(list);
+        projectCombo.setBounds(250, 100, 193, 29);
+        developerPage2.add(projectCombo);
+
+        JLabel selProject = new JLabel();
+        selProject.setText("Select project");
+        selProject.setBounds(65, 100, 193, 29);
+        developerPage2.add(selProject);
+
+        JButton b1 = new JButton("Save");
+        b1.setBounds(190,200, 193, 29);
+        developerPage2.add(b1);
+        b1.addActionListener(e -> {
+            Main.setFrameSize(500,500);
+            SoftwareHuset.assignPM((String) developerCombo.getSelectedItem(), Integer.parseInt((String) projectCombo.getSelectedItem()));
+            developerPage2.setVisible(false);
+            projectManagerPage.setVisible(true);
+        });
+
+        JButton b2 = new JButton("Back");
+        b2.setBounds(45,200, 70, 29);
+        developerPage2.add(b2);
+        b2.addActionListener(e -> {
+            Main.setFrameSize(500,500);
+            developerPage2.setVisible(false);
+            Main.setFrameSize(500,500);
+            projectManagerPage.setVisible(true);
+        });
+
+
+
+        developerPage2.setVisible(true);
 
     }
     private void createPage() {
@@ -136,7 +199,8 @@ public class ProjectManagerPage {
             Developer developer = SoftwareHuset.developers.get((String) developerCombo.getSelectedItem());
             Project project = SoftwareHuset.projects.get(Integer.parseInt((String) projectList.getSelectedItem()));
             project.addDeveloper(developer);
-
+            Main.setFrameSize(500,500);
+            Main.setLocation();
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });
@@ -146,12 +210,20 @@ public class ProjectManagerPage {
         pmPage2.add(b2);
         b2.addActionListener(e -> {
             Main.setFrameSize(500,500);
+            Main.setLocation();
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });
 
         pmPage2.setVisible(true);
 
+    }
+    public static ArrayList<String> fullProjectList(){
+        ArrayList<String> projectlist = new ArrayList<>();
+        for (Project project : SoftwareHuset.projects.values()){
+            projectlist.add(String.valueOf(project.getId()));
+        }
+        return projectlist;
     }
 
     public static void setVisible(boolean visi){

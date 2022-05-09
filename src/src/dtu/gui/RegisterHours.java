@@ -45,7 +45,10 @@ public class RegisterHours {
             });
             btnBack.setBounds(51, 300, 70, 29);
             registerHours.add(btnBack);
-
+/*
+            checkBox1 = new JCheckBox("Not assigned to project");
+            checkBox1.setBounds(150, 25, 193, 29);
+*/
             JLabel assignedOrNot = new JLabel();
             assignedOrNot.setText("Are you assigned to the project?");
             assignedOrNot.setBounds(20, 20, 250, 29);
@@ -109,7 +112,12 @@ public class RegisterHours {
             JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
             minCB.setBounds(400, 155, 70, 30);
             registerHours.add(minCB);
-
+/*
+            checkBox1.addActionListener(e -> {
+                checked = !checked;
+                createProjectList();
+                setLabelVisible(checked);
+            });*/
             r2.addActionListener(e -> {
                 if(r2.isSelected()){
                     checked = !checked;
@@ -150,19 +158,29 @@ public class RegisterHours {
                     hours+=0.5;
                 }
                 if(!checked) {
-                   Activity activity = project12.activities.get(activityCombo.getSelectedItem());
-                   activity.registerHours(loggedInUser,hours);
-
-               } else {
-                    int i = activeBox.getSelectedIndex();
-                   Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
-                    activity2.registerHours(loggedInUser,hours);
-               }
-
-                setVisible(false);
-                removeList();
-                clear();
-                DeveloperPage.setVisible(true);
+                    if (activityCombo.getItemAt(0) == null || hours == 0 || projectsComboBox.getItemAt(0)==null) {
+                        JOptionPane.showMessageDialog(null, "Please select proper values");
+                    }
+                    else {
+                        Activity activity = project12.activities.get(activityCombo.getSelectedItem());
+                        activity.registerHours(loggedInUser, hours);
+                        setVisible(false);
+                        removeList();
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    } }else {
+                    if (activeBox.getItemAt(0) == null || hours == 0 || projectComboNotAssigned.getItemAt(0) == null) {
+                        JOptionPane.showMessageDialog(null, "Please select proper values");
+                    } else {
+                        int i = activeBox.getSelectedIndex();
+                        Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
+                        activity2.registerHours(loggedInUser, hours);
+                        setVisible(false);
+                        removeList();
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    }
+                }
             });
 
         }
@@ -230,9 +248,12 @@ public class RegisterHours {
         System.out.println(project.toString()+" hej");
 
 
+        //activityList = SoftwareHuset.getProject(project).userActivities(user).toArray(new Activity[0]);
+        if(projectsComboBox.getItemAt(0) != null) {
+            project12 = SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
+            project12.activities.values().forEach(activity -> {activityCombo.addItem(activity.name);});
+        }
 
-         project12 =  SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
-         project12.activities.values().forEach(activity -> {activityCombo.addItem(activity.name);});
 
         projectsComboBox.addActionListener(e -> {
             project12 =  SoftwareHuset.getProject((String) projectsComboBox.getSelectedItem());
