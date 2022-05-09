@@ -119,7 +119,7 @@ public class SoftwareHuset {
                 csvDeveloperData.add(new String[]{readData[0], "noOcc", "noSick"});
             } else if (!newDeveloper.hasOccupation && newDeveloper.isSick) {
                 csvDeveloperData.add(new String[]{readData[0], "noOcc", readData[2], readData[3], readData[4],
-                        readData[5], readData[6], readData[7],});
+                        readData[5], readData[6], readData[7]});
             } else if (newDeveloper.hasOccupation && !newDeveloper.isSick) {
                 csvDeveloperData.add(new String[]{readData[0], readData[1], readData[2], readData[3], readData[4],
                         readData[5], readData[6], "noSick"});

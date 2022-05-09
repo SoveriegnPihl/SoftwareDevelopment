@@ -28,8 +28,9 @@ public class listAvailableDevelopers {
     @Test
     void listAvailableDevelopersB() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
+        developer.isSick = true;
         developer.setSick();
-        assertFalse(developer.getAvailability(today));
+        assertTrue(developer.getAvailability(today));
         developer.isSick = false;
         SoftwareHuset.updateCSVFile("developers");
     }

@@ -5,12 +5,10 @@ import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.GregorianCalendar;
 
@@ -25,6 +23,7 @@ public class bookingDevAndActivitySteps {
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
     GregorianCalendar today = new GregorianCalendar();
+    String[] devString;
 
     @BeforeAll
     public static void checkInit() {
@@ -140,8 +139,6 @@ public class bookingDevAndActivitySteps {
 
     @Then("the developer is not available for a day")
     public void theDeveloperIsNotAvailableForADay() {
-        //System.out.println(developer.isSick +" - "+ developer.hasOccupation);
-        //noget lort med availability igen
         assertTrue(developer.getAvailability(today));
 
         developer.isSick = false;
@@ -157,13 +154,12 @@ public class bookingDevAndActivitySteps {
 
     @Then("the developer has a occupation in the system")
     public void theDeveloperHasAOccupationInTheSystem() {
+
         assertTrue(developer.hasOccupation);
     }
 
     @And("the developer will not be available between first and last day of holiday")
     public void theDeveloperWillNotBeAvailableBetweenFirstAndLastDayOfHoliday() {
-        //System.out.println(developer.isSick +" - "+ developer.hasOccupation);
-        //noget lort med availability igen
         assertTrue(developer.getAvailability(startHoli));
 
         developer.hasOccupation = false;
@@ -198,4 +194,5 @@ public class bookingDevAndActivitySteps {
     public void theErrorMessageIsGiven(String name) {
         System.out.println(name);
     }
+
 }
