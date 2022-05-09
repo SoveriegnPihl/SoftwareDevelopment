@@ -1,11 +1,10 @@
 package dtu.project;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class listAvailableDevelopers {
@@ -13,8 +12,8 @@ public class listAvailableDevelopers {
     Developer developer;
 
     @BeforeEach
-    void checkInit(){
-        if(!AvailabilityTest.programStarted){
+    void checkInit() {
+        if (!AvailabilityTest.programStarted) {
             AvailabilityTest.programStarted = true;
             SoftwareHuset.startProgram();
         }

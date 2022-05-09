@@ -1,21 +1,21 @@
 package dtu.stepDefinitions;
 
 import dtu.project.SoftwareHuset;
-import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.BeforeEach;
 
-import java.util.GregorianCalendar;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class addDeveloperSteps {
     SoftwareHuset softwareHuset;
     String newDeveloperName;
+
+    public addDeveloperSteps(SoftwareHuset softwareHuset) {
+        this.softwareHuset = softwareHuset;
+    }
 
     @BeforeAll
     public static void checkInit() {
@@ -25,14 +25,10 @@ public class addDeveloperSteps {
         }
     }
 
-    public addDeveloperSteps(SoftwareHuset softwareHuset){
-        this.softwareHuset = softwareHuset;
-    }
-
     @Given("that {string} is not a developer")
     public void that_is_not_a_developer(String devName) {
         newDeveloperName = devName;
-        assertFalse(softwareHuset.isDeveloper(devName));
+        assertFalse(SoftwareHuset.isDeveloper(devName));
     }
 
     @Given("that the initials isn't greater than {int}")
@@ -42,11 +38,11 @@ public class addDeveloperSteps {
 
     @Then("the new developer gets registered")
     public void the_new_developer_gets_registered() {
-        softwareHuset.addDeveloper(new String[]{newDeveloperName, "noOcc", "noSick"});
-        assertTrue(softwareHuset.isDeveloper(newDeveloperName));
+        SoftwareHuset.addDeveloper(new String[]{newDeveloperName, "noOcc", "noSick"});
+        assertTrue(SoftwareHuset.isDeveloper(newDeveloperName));
 
-        softwareHuset.developers.remove(newDeveloperName);
-        softwareHuset.updateCSVFile("developers");
+        SoftwareHuset.developers.remove(newDeveloperName);
+        SoftwareHuset.updateCSVFile("developers");
     }
 
     @And("that the initials is greater than {int}")
@@ -57,7 +53,7 @@ public class addDeveloperSteps {
     @Given("that {string} is a developer")
     public void thatIsADeveloper(String devName) {
         newDeveloperName = devName;
-        assertTrue(softwareHuset.isDeveloper(devName));
+        assertTrue(SoftwareHuset.isDeveloper(devName));
     }
 
     @Then("{string} is not created")
@@ -72,20 +68,20 @@ public class addDeveloperSteps {
 
     @And("the developer has a holiday starting {int} - {int} - {int} and finishing {int} - {int} - {int}")
     public void theDeveloperHasAHolidayStartingAndFinishing(int startD, int startM, int startY, int endD, int endM, int endY) {
-        softwareHuset.addDeveloper(new String[]{newDeveloperName, String.valueOf(startY), String.valueOf(startM), String.valueOf(startD),String.valueOf(endY),String.valueOf(endM),String.valueOf(endD), "noSick"});
+        SoftwareHuset.addDeveloper(new String[]{newDeveloperName, String.valueOf(startY), String.valueOf(startM), String.valueOf(startD), String.valueOf(endY), String.valueOf(endM), String.valueOf(endD), "noSick"});
     }
 
     @Then("the developer dont have a occupation")
     public void theDeveloperDontHaveAOccupation() {
-        assertFalse(softwareHuset.developers.get(newDeveloperName).hasOccupation);
-        softwareHuset.developers.remove("thom");
-        softwareHuset.updateCSVFile("developers");
+        assertFalse(SoftwareHuset.developers.get(newDeveloperName).hasOccupation);
+        SoftwareHuset.developers.remove("thom");
+        SoftwareHuset.updateCSVFile("developers");
     }
 
     @Then("the developer has a occupation")
     public void theDeveloperHasAOccupation() {
-        assertTrue(softwareHuset.developers.get(newDeveloperName).hasOccupation);
-        softwareHuset.developers.remove("thom");
-        softwareHuset.updateCSVFile("developers");
+        assertTrue(SoftwareHuset.developers.get(newDeveloperName).hasOccupation);
+        SoftwareHuset.developers.remove("thom");
+        SoftwareHuset.updateCSVFile("developers");
     }
 }

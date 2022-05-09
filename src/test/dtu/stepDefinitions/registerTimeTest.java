@@ -1,4 +1,5 @@
 package dtu.stepDefinitions;
+
 import dtu.project.Activity;
 import dtu.project.Developer;
 import dtu.project.SoftwareHuset;
@@ -7,7 +8,6 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.AfterClass;
 import org.junit.Assert;
 
 import static org.hamcrest.CoreMatchers.is;
@@ -16,11 +16,16 @@ import static org.junit.Assert.*;
 public class registerTimeTest {
     SoftwareHuset softwareHuset;
 
-    Developer developer,developer2;
+    Developer developer, developer2;
     int addedHours;
     Activity activity;
     Developer vic7;
     double hoursBefore;
+
+    public registerTimeTest(SoftwareHuset sf) {
+        softwareHuset = sf;
+    }
+
     @BeforeAll
     public static void checkInit() {
         if (!AAcheckForEmployeesTest.programStarted) {
@@ -29,13 +34,9 @@ public class registerTimeTest {
         }
     }
 
-    public registerTimeTest(SoftwareHuset sf) {
-        softwareHuset = sf;
-    }
-
     @Given("that there is a developer with initials {string}")
     public void thatThereIsADeveloperWithInitials(String string) {
-        assertTrue(softwareHuset.developers.containsKey(string));
+        assertTrue(SoftwareHuset.developers.containsKey(string));
     }
 
 
@@ -44,37 +45,37 @@ public class registerTimeTest {
         activity = SoftwareHuset.allActivities.get("Test solutions");
         developer = SoftwareHuset.developers.get("vic7");
         addedHours = 5;
-        activity.registerHours(developer,addedHours);
-       assertThat(developer.getRegisteredHoursToday()!=0,is(true));
+        activity.registerHours(developer, addedHours);
+        assertThat(developer.getRegisteredHoursToday() != 0, is(true));
     }
 
     @When("the developer requests reported worked hours for today")
-    public void theDeveloperRequestsReportedWorkedHoursForToday(){
+    public void theDeveloperRequestsReportedWorkedHoursForToday() {
 
         developer.getRegisteredHoursToday();
     }
 
     @Then("daily worked hours is given for {string}")
     public void dailyWorkedHoursIsGivenFor(String name) {
-    assertEquals(softwareHuset.getDeveloper(name).getRegisteredHoursToday(),addedHours,0.1);
-    activity.registerHours(developer,-5);
+        assertEquals(SoftwareHuset.getDeveloper(name).getRegisteredHoursToday(), addedHours, 0.1);
+        activity.registerHours(developer, -5);
     }
 
 
     @And("there is no registered time")
     public void thereIsNoRegisteredTime() {
-        developer2 = softwareHuset.developers.get("ekki");
-        assertEquals(developer2.getRegisteredHoursToday(),0,0.1);
+        developer2 = SoftwareHuset.developers.get("ekki");
+        assertEquals(developer2.getRegisteredHoursToday(), 0, 0.1);
     }
 
     @Given("that there isn't a developer with initials {string}")
     public void thatThereIsnTADeveloperWithInitials(String name) {
-        assertFalse(softwareHuset.developers.containsKey(name));
+        assertFalse(SoftwareHuset.developers.containsKey(name));
     }
 
     @When("{string} requests reported worked hours for today")
     public void requestsReportedWorkedHoursForToday(String name) {
-        assertFalse(softwareHuset.isDeveloper(name));
+        assertFalse(SoftwareHuset.isDeveloper(name));
     }
 
     @When("the other developer requests reported worked hours for today")
@@ -84,12 +85,12 @@ public class registerTimeTest {
 
     @Then("hours is not reported for {string}")
     public void hoursIsNotReportedFor(String name) {
-        assertFalse(softwareHuset.isDeveloper(name));
+        assertFalse(SoftwareHuset.isDeveloper(name));
     }
 
     @Then("zero hours is given for {string}")
     public void zeroHoursIsGivenFor(String name) {
-        assertEquals(softwareHuset.developers.get(name).getRegisteredHoursToday(),0,0.1);
+        assertEquals(SoftwareHuset.developers.get(name).getRegisteredHoursToday(), 0, 0.1);
     }
 
     @And("there is already registered hours")
@@ -105,13 +106,13 @@ public class registerTimeTest {
     public void theDeveloperRegistersHours() {
         activity = SoftwareHuset.allActivities.get("Test solutions");
         vic7 = SoftwareHuset.developers.get("vic7");
-        activity.registerHours(vic7,5);
+        activity.registerHours(vic7, 5);
 
     }
 
     @Then("total hours is hours before plus registered hours")
     public void totalHoursIsHoursBeforePlusRegisteredHours() {
-        Assert.assertEquals(vic7.getRegisteredHoursToday(), hoursBefore +5,0.1 );
-        activity.registerHours(vic7,-10);
+        Assert.assertEquals(vic7.getRegisteredHoursToday(), hoursBefore + 5, 0.1);
+        activity.registerHours(vic7, -10);
     }
 }

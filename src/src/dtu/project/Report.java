@@ -8,21 +8,18 @@ public class Report {
     int budget;
     Developer projectManager;
 
-    public Report(Project project){
+    public Report(Project project) {
         this.project = project;
 
     }
 
-    public void printReport(){
+    public void printReport() {
         System.out.println("Budget used: " + project.getBudgetUsed() +
-                            "Budget estimate: " + project.getEstimatedBudget() +
-                            "Time used:" + project.getUsedTime() +
-                            "Time estimate: " + project.getEstimatedTime()
+                "Budget estimate: " + project.getEstimatedBudget() +
+                "Time used:" + project.getUsedTime() +
+                "Time estimate: " + project.getEstimatedTime()
         );
     }
-
-
-
 
 
 }

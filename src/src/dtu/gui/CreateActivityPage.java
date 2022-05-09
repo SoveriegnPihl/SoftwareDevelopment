@@ -1,4 +1,5 @@
 package dtu.gui;
+
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 
@@ -29,17 +30,18 @@ public class CreateActivityPage {
         this.parentWindow = parentWindow;
         initialize();
     }
-    public void initialize(){
-     createPage();
+
+    public void initialize() {
+        createPage();
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 clear();
-                if (originWindow.equals("ProjectManagerPage")){
+                if (originWindow.equals("ProjectManagerPage")) {
                     ProjectManagerPage.setVisible(true);
-                }else{
+                } else {
                     DeveloperPage.setVisible(true);
                 }
 
@@ -91,32 +93,33 @@ public class CreateActivityPage {
             String endDay = endDateTxtField.getText();
 
 
-            String[] activityValues = new String[] {projectID, actName, startYear, startMonth, startDay,
-                endYear,endMonth, endDay, estimatedTime, timeUsed, budget};
+            String[] activityValues = new String[]{projectID, actName, startYear, startMonth, startDay,
+                    endYear, endMonth, endDay, estimatedTime, timeUsed, budget};
 
             Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
 
             SoftwareHuset.addProjectActivities(projectToAddTo, activityValues);
 
-        setVisible(false);
-        clear();
-        DeveloperPage.setVisible(true);
+            setVisible(false);
+            clear();
+            DeveloperPage.setVisible(true);
 
         });
 
     }
+
     private void createPage() {
         createProjectPanel = new JPanel();
         parentWindow.addPanel(createProjectPanel);
-        createProjectPanel .setLayout(null);
-        createProjectPanel .setBorder(BorderFactory.createTitledBorder("Create activity page"));
+        createProjectPanel.setLayout(null);
+        createProjectPanel.setBorder(BorderFactory.createTitledBorder("Create activity page"));
     }
-    
-    public void setVisible(boolean visi){
+
+    public void setVisible(boolean visi) {
         createProjectPanel.setVisible(visi);
     }
 
-    public void setOriginWindow(String window){
+    public void setOriginWindow(String window) {
         originWindow = window;
     }
 
@@ -133,7 +136,7 @@ public class CreateActivityPage {
         yearSelFin.setSelectedItem(year);
     }
 
-    private void addLabelsToScreen(){
+    private void addLabelsToScreen() {
         activityNameLabel = new JLabel();
         activityNameLabel.setText("Activity name");
         activityNameLabel.setBounds(25, 50, 193, 29);
@@ -166,7 +169,7 @@ public class CreateActivityPage {
         createProjectPanel.add(estTimeLabel);
     }
 
-    private void addTextFieldsToScreen(){
+    private void addTextFieldsToScreen() {
         Vector v = getYears();
 
         nameTxtField = new JTextField(15);
@@ -176,21 +179,21 @@ public class CreateActivityPage {
         startDateTxtField.setBounds(225, 100, 45, 29);
 
         monthSelStart = new JComboBox<>(Month.values());
-        monthSelStart.setBounds(280,100,95,29);
+        monthSelStart.setBounds(280, 100, 95, 29);
 
         yearSelStart = new JComboBox<Integer>(v);
         yearSelStart.setSelectedItem(year);
-        yearSelStart.setBounds(385,100,60,29);
+        yearSelStart.setBounds(385, 100, 60, 29);
 
         endDateTxtField = new JTextField(15);
         endDateTxtField.setBounds(225, 150, 45, 29);
 
         monthSelFin = new JComboBox<>(Month.values());
-        monthSelFin.setBounds(280,150,95,29);
+        monthSelFin.setBounds(280, 150, 95, 29);
 
         yearSelFin = new JComboBox<Integer>(v);
         yearSelFin.setSelectedItem(year);
-        yearSelFin.setBounds(385,150,60,29);
+        yearSelFin.setBounds(385, 150, 60, 29);
 
         estTimeTxtField = new JTextField(15);
         estTimeTxtField.setBounds(250, 200, 193, 29);
