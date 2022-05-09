@@ -1,10 +1,12 @@
 package dtu.gui;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
+import dtu.softwarehus.Utility;
 
 import javax.swing.*;
 import java.time.Month;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.Vector;
 
 // lavet af Victor Larsen-Saldeen
@@ -54,15 +56,49 @@ public class manageProjectPage {
 
 
         saveBtn.addActionListener(e -> {
-            int[] newStartDate = {Integer.parseInt(startDateTxtField.getText()), monthSelStart.getSelectedIndex(), yearSelStart.getItemAt(yearSelStart.getSelectedIndex())};
-            int[] newEndDate = {Integer.parseInt(endDateTxtField.getText()), monthSelFin.getSelectedIndex(), yearSelFin.getItemAt(yearSelStart.getSelectedIndex())};
-            int newBudget = Integer.parseInt(budgetTxtField.getText());
 
-            projectToManage.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
-            SoftwareHuset.updateCSVFile("projects");
+            if (!(Utility.isInt(startDateTxtField.getText()) && Utility.isInt(endDateTxtField.getText()))) {
+                if (!Utility.isInt(startDateTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame, "Start date isn't an int!");
+                }
+                if (!Utility.isInt(endDateTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame, "End date isn't an int!");
+                }
+            }
+            else {
+                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(endDateTxtField.getText()) > 0) &&
+                        Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(endDateTxtField.getText()) < 31) {
 
-            setVisible(false);
-            ProjectManagerPage.setVisible(true);
+                    GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                            monthSelStart.getSelectedIndex(), Integer.parseInt(startDateTxtField.getText()));
+
+                    GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                            monthSelFin.getSelectedIndex(), Integer.parseInt(endDateTxtField.getText()));
+
+                    if (startDate.compareTo(endDate) == -1 && endDate.compareTo(startDate) == 1) {
+                        DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
+
+                        int[] newStartDate = {Integer.parseInt(startDateTxtField.getText()), monthSelStart.getSelectedIndex(), yearSelStart.getItemAt(yearSelStart.getSelectedIndex())};
+                        int[] newEndDate = {Integer.parseInt(endDateTxtField.getText()), monthSelFin.getSelectedIndex(), yearSelFin.getItemAt(yearSelStart.getSelectedIndex())};
+                        int newBudget = Integer.parseInt(budgetTxtField.getText());
+
+                        projectToManage.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
+                        SoftwareHuset.updateCSVFile("projects");
+
+                        setVisible(false);
+                        ProjectManagerPage.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Date intervals does not match");
+                    }
+
+
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Set a proper day");
+                }
+
+
+
+            }
         });
 
     }

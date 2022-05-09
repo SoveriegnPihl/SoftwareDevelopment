@@ -1,6 +1,7 @@
 package dtu.gui;
 
 import dtu.project.SoftwareHuset;
+import dtu.softwarehus.Utility;
 import org.junit.Assert;
 
 import javax.swing.*;
@@ -54,32 +55,40 @@ public class RegisterHoliday {
         createProjectPanel.add(saveBtn);
 
         saveBtn.addActionListener(e -> {
-            if((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
-            Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31){
 
-                GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                        monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
-
-                GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                        monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
-
-                if(startDate.compareTo(endDate)== -1 && endDate.compareTo(startDate) == 1){
-                    DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
-
-                    setVisible(false);
-                    clear();
-                    DeveloperPage.setVisible(true);
+            if (!(Utility.isInt(startDateTxtField.getText()) && Utility.isInt(endDateTxtField.getText()))) {
+                if (!Utility.isInt(startDateTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame1, "Start date isn't an int!");
                 }
-                else{
-                    JOptionPane.showMessageDialog(frame1, "Date intervals does not match");
+                if (!Utility.isInt(endDateTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame1, "End date isn't an int!");
                 }
-
-
             }
-            else{
-                JOptionPane.showMessageDialog(frame1, "Set a proper day");
-            }
+            else {
+                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(endDateTxtField.getText()) > 0) &&
+                        Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(endDateTxtField.getText()) < 31) {
 
+                    GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                            monthSelStart.getSelectedIndex(), Integer.parseInt(startDateTxtField.getText()));
+
+                    GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                            monthSelFin.getSelectedIndex(), Integer.parseInt(endDateTxtField.getText()));
+
+                    if (startDate.compareTo(endDate) == -1 || endDate.compareTo(startDate) == 1) {
+                        DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
+
+                        setVisible(false);
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(frame1, "Date intervals does not match");
+                    }
+
+
+                } else {
+                    JOptionPane.showMessageDialog(frame1, "Set a proper day");
+                }
+            }
         });
     }
     private void clear() {
