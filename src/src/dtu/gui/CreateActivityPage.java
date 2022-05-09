@@ -71,9 +71,6 @@ public class CreateActivityPage {
         saveBtn.addActionListener(e -> {
 
 
-
-
-
             String projectID = projectCombo.getSelectedItem().toString();
             String actName = nameTxtField.getText();
             String budget = budgetTxtField.getText();
@@ -87,36 +84,54 @@ public class CreateActivityPage {
             String endMonth = String.valueOf(monthSelFin.getSelectedIndex());
             String endDay = endDateTxtField.getText();
 
-            if((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
-                    Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31){
-
-
-                GregorianCalendar startDate = new GregorianCalendar(Integer.parseInt(startYear), Integer.parseInt(startMonth),Integer.parseInt(startDay));
-                GregorianCalendar endDate = new GregorianCalendar(Integer.parseInt(endYear), Integer.parseInt(endMonth),Integer.parseInt(endDay));
-
-                if(startDate.compareTo(endDate)== -1){
-                    DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
-                    String[] activityValues = new String[] {projectID, actName, startYear, startMonth, startDay,
-                            endYear,endMonth, endDay, estimatedTime, timeUsed, budget};
-
-
-                    Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectTxtField.getText()));
-
-                    SoftwareHuset.addProjectActivities(projectToAddTo, activityValues);
-
-                    setVisible(false);
-                    clear();
-                    DeveloperPage.setVisible(true);
+            if (!(isInt(startDay) && isInt(endDay) && isInt(budget) && isInt(estimatedTime))) {
+                if (!isInt(startDay)) {
+                    JOptionPane.showMessageDialog(frame, "Start date isn't an int!");
                 }
-                else{
-                    JOptionPane.showMessageDialog(frame, "End date is before start date");
+                if (!isInt(endDay)) {
+                    JOptionPane.showMessageDialog(frame, "End date isn't an int!");
+                }
+                if (!isInt(estimatedTime)) {
+                    JOptionPane.showMessageDialog(frame, "Estimated time date isn't an int!");
                 }
 
-            }
-            else {
-                JOptionPane.showMessageDialog(frame, "Set a proper day");
-            }
+                if (!isInt(budget)) {
+                    JOptionPane.showMessageDialog(frame, "Budget date isn't an int!");
+                }
 
+
+
+            }
+            else{
+
+                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
+                        Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31) {
+
+
+                    GregorianCalendar startDate = new GregorianCalendar(Integer.parseInt(startYear), Integer.parseInt(startMonth), Integer.parseInt(startDay));
+                    GregorianCalendar endDate = new GregorianCalendar(Integer.parseInt(endYear), Integer.parseInt(endMonth), Integer.parseInt(endDay));
+
+                    if (startDate.compareTo(endDate) == -1 && endDate.compareTo(startDate) == 1) {
+                        DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
+                        String[] activityValues = new String[]{projectID, actName, startYear, startMonth, startDay,
+                                endYear, endMonth, endDay, estimatedTime, timeUsed, budget};
+
+
+                        Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectID));
+
+                        SoftwareHuset.addProjectActivities(projectToAddTo, activityValues);
+
+                        setVisible(false);
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(frame, "Date interval does not match");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Set a proper day");
+                }
+            }
 
         });
 
@@ -124,8 +139,8 @@ public class CreateActivityPage {
     private void createPage() {
         createProjectPanel = new JPanel();
         parentWindow.addPanel(createProjectPanel);
-        createProjectPanel .setLayout(null);
-        createProjectPanel .setBorder(BorderFactory.createTitledBorder("Create activity page"));
+        createProjectPanel.setLayout(null);
+        createProjectPanel.setBorder(BorderFactory.createTitledBorder("Create activity page"));
     }
     
     public void setVisible(boolean visi){
@@ -140,7 +155,6 @@ public class CreateActivityPage {
         nameTxtField.setText("");
         startDateTxtField.setText("");
         endDateTxtField.setText("");
-        projectTxtField.setText("");
         estTimeTxtField.setText("");
         budgetTxtField.setText("");
         monthSelStart.setSelectedIndex(0);
@@ -258,5 +272,15 @@ public class CreateActivityPage {
         createProjectPanel.add(projectCombo);
     }
 
+    public boolean isInt(String message) {
+        try {
+            int intForTest = Integer.parseInt(message);
+            return true;
 
+        }catch(NumberFormatException e) {
+
+        }
+
+        return false;
+    }
 }
