@@ -62,7 +62,6 @@ public class DeveloperPage {
        });
 
         addPmBtn.addActionListener(e -> {
-            //OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
             Main.setFrameSize(500,300);
             createAssignPM();
         });

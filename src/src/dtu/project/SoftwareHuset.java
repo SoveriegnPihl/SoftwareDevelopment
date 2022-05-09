@@ -167,7 +167,7 @@ public class SoftwareHuset {
         assert getDeveloper("ekki").getAvailability(today) == true: "precondition";
 
         for (Developer dev : developers.values()){
-            if(dev.getAvailability(today)){
+            if(!dev.isSick){
                 str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
                 availableDevelopers.add(dev);
             } else {

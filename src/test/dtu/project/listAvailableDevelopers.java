@@ -10,6 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class listAvailableDevelopers {
     public GregorianCalendar today = new GregorianCalendar();
+    Developer developer;
 
     @BeforeEach
     void checkInit(){
@@ -23,6 +24,8 @@ public class listAvailableDevelopers {
     void listAvailableDevelopersA() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
         assertTrue(developer.getAvailability(today));
+
+
     }
 
     @Test
