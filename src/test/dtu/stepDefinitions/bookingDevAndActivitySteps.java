@@ -1,12 +1,8 @@
 package dtu.stepDefinitions;
 
-import dtu.project.Activity;
-import dtu.project.Developer;
-import dtu.project.Project;
-import dtu.project.SoftwareHuset;
+import dtu.project.*;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.BeforeStep;
-import dtu.project.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
