@@ -170,7 +170,10 @@ public class RegisterHours {
                     clear();
                     DeveloperPage.setVisible(true);
                 } }else {
-                    if ((activeBox.getItemAt(0) == null ) || hours == 0 || projectComboNotAssigned.getItemAt(0) == null) {
+                    System.out.println("det er rigtigtititititititititi");
+                    if (activeBox.getItemAt(0) == null || hours == 0 || projectComboNotAssigned.getItemAt(0) == null) {
+                        JOptionPane.showMessageDialog(null, "Please select proper values");
+                    } else {
                         int i = activeBox.getSelectedIndex();
                         Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
                         activity2.registerHours(loggedInUser, hours);
@@ -178,8 +181,6 @@ public class RegisterHours {
                         removeList();
                         clear();
                         DeveloperPage.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Please select proper values");
                     }
                 }
 
