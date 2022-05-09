@@ -1,16 +1,12 @@
 package dtu.project;
 
+//Lavet af Marcus
+
 public class Report {
     public Project project;
-    String name;
-    int startWeek;
-    int endWeek;
-    int budget;
-    Developer projectManager;
 
     public Report(Project project){
         this.project = project;
-
     }
 
     public void printReport(){
@@ -20,9 +16,4 @@ public class Report {
                             "Time estimate: " + project.getEstimatedTime()
         );
     }
-
-
-
-
-
 }

@@ -1,5 +1,3 @@
-
-
 #Marcus Pihl
 
 Feature: Check for Developers

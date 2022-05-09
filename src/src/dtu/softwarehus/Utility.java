@@ -1,5 +1,7 @@
 package dtu.softwarehus;
 
+//Lavet af Marcus
+
 public class Utility {
 
     public static boolean isInt(String message) {
@@ -7,7 +9,7 @@ public class Utility {
             int intForTest = Integer.parseInt(message);
             return true;
 
-        }catch(NumberFormatException e) {
+        } catch (NumberFormatException e) {
 
         }
 

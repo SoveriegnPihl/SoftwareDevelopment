@@ -1,4 +1,3 @@
-
 #Marcus Pihl
 
 Feature: Creating a new project

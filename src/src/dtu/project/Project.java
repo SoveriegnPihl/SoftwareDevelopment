@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
+//Lavet af Jakob Kildegaard
+
 public class Project {
     static int nextId = 1;
     public String name;
@@ -81,11 +83,12 @@ public class Project {
     public void addDeveloper (Developer dev){
         boolean exists = false;
         for (Developer d : developers){
-            if (d.getInitials().equals(dev.getInitials())){
+            if (d.getInitials().equals(dev.getInitials())) {
                 exists = true;
+                break;
             }
         }
-        System.out.println(exists);
+
         if (!exists){
             developers.add(dev);
         }

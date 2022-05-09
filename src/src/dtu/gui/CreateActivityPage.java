@@ -1,5 +1,5 @@
 package dtu.gui;
-import dtu.project.Developer;
+
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import dtu.softwarehus.Utility;
@@ -12,47 +12,41 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
 
-// lavet af Victor Larsen-Saldeen
+// lavet af Victor Larsen-Saldeen testet Marcus
 
 public class CreateActivityPage {
     JButton saveBtn;
     JPanel createProjectPanel;
     JLabel startDateLabel, endDateLabel, budgetLabel, projectLabel, activityNameLabel, estTimeLabel, projectDateLabel;
-    JTextField startDateTxtField, endDateTxtField, estTimeTxtField, projectTxtField, nameTxtField, budgetTxtField;
+    JTextField startDateTxtField, endDateTxtField, estTimeTxtField, nameTxtField, budgetTxtField;
     SoftwareHuset softwareHuset;
     Main parentWindow;
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
-    JComboBox<Integer> allProjects;
     String originWindow;
     int year;
-    private JFrame frame;
     JComboBox<Object> projectCombo;
+    private JFrame frame;
 
     public CreateActivityPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
         this.parentWindow = parentWindow;
         initialize();
     }
-    public void initialize(){
+
+    public void initialize() {
         createPage();
-
-
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 setVisible(false);
                 clear();
-                if (originWindow.equals("ProjectManagerPage")){
+                if (originWindow.equals("ProjectManagerPage")) {
                     ProjectManagerPage.setVisible(true);
-                }else{
+                } else {
                     DeveloperPage.setVisible(true);
                 }
-
-
-
-
             }
         });
         btnBack.setBounds(21, 350, 70, 29);
@@ -98,10 +92,7 @@ public class CreateActivityPage {
                     JOptionPane.showMessageDialog(frame, "Budget date isn't an int!");
                 }
 
-
-
-            }
-            else{
+            } else {
 
                 if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
                         Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31) {
@@ -134,18 +125,19 @@ public class CreateActivityPage {
         });
 
     }
+
     private void createPage() {
         createProjectPanel = new JPanel();
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
         createProjectPanel.setBorder(BorderFactory.createTitledBorder("Create activity page"));
     }
-    
-    public void setVisible(boolean visi){
+
+    public void setVisible(boolean visi) {
         createProjectPanel.setVisible(visi);
     }
 
-    public void setOriginWindow(String window){
+    public void setOriginWindow(String window) {
         originWindow = window;
     }
 
@@ -161,7 +153,7 @@ public class CreateActivityPage {
         yearSelFin.setSelectedItem(year);
     }
 
-    private void addLabelsToScreen(){
+    private void addLabelsToScreen() {
         activityNameLabel = new JLabel();
         activityNameLabel.setText("Activity name");
         activityNameLabel.setBounds(25, 50, 193, 29);
@@ -186,16 +178,7 @@ public class CreateActivityPage {
         projectLabel.setText("Which project to assign activity to");
         projectLabel.setBounds(25, 300, 193, 29);
 
-
         projectDateLabel = new JLabel();
-
-
-        //String projectID = projectCombo.getSelectedItem().toString();
-
-        //projectDateLabel.setText(SoftwareHuset.projects.get(Integer.parseInt(projectID)).startDate.toString() + " " + SoftwareHuset.projects.get(Integer.parseInt(projectID)).endDate.toString());
-
-        //projectDateLabel.setBounds(25,350,193,29);
-
 
         createProjectPanel.add(startDateLabel);
         createProjectPanel.add(endDateLabel);
@@ -205,7 +188,7 @@ public class CreateActivityPage {
         createProjectPanel.add(estTimeLabel);
     }
 
-    private void addTextFieldsToScreen(){
+    private void addTextFieldsToScreen() {
         Vector v = getYears();
 
         nameTxtField = new JTextField(15);
@@ -215,29 +198,27 @@ public class CreateActivityPage {
         startDateTxtField.setBounds(225, 100, 45, 29);
 
         monthSelStart = new JComboBox<>(Month.values());
-        monthSelStart.setBounds(280,100,95,29);
+        monthSelStart.setBounds(280, 100, 95, 29);
 
         yearSelStart = new JComboBox<Integer>(v);
         yearSelStart.setSelectedItem(year);
-        yearSelStart.setBounds(385,100,60,29);
+        yearSelStart.setBounds(385, 100, 60, 29);
 
         endDateTxtField = new JTextField(15);
         endDateTxtField.setBounds(225, 150, 45, 29);
 
         monthSelFin = new JComboBox<>(Month.values());
-        monthSelFin.setBounds(280,150,95,29);
+        monthSelFin.setBounds(280, 150, 95, 29);
 
         yearSelFin = new JComboBox<Integer>(v);
         yearSelFin.setSelectedItem(year);
-        yearSelFin.setBounds(385,150,60,29);
+        yearSelFin.setBounds(385, 150, 60, 29);
 
         estTimeTxtField = new JTextField(15);
         estTimeTxtField.setBounds(250, 200, 193, 29);
 
         budgetTxtField = new JTextField(15);
         budgetTxtField.setBounds(250, 250, 193, 29);
-
-
 
         createProjectPanel.add(startDateTxtField);
         createProjectPanel.add(endDateTxtField);
@@ -260,7 +241,7 @@ public class CreateActivityPage {
         return v;
     }
 
-    public void setProjs(){
+    public void setProjs() {
         projectCombo = new JComboBox<>();
         for (int projID : SoftwareHuset.projects.keySet()) {
             projectCombo.addItem(projID);

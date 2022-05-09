@@ -2,28 +2,27 @@ package dtu.stepDefinitions;
 
 import dtu.project.*;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.GregorianCalendar;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
+//Lavet af Marcus
+
 public class bookingDevAndActivitySteps {
     SoftwareHuset softwareHuset;
     Developer developer, manager;
-    Project project,project2;
+    Project project, project2;
     Activity activity;
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
     Report rep;
     GregorianCalendar today = new GregorianCalendar();
-    String[] devString;
 
     @BeforeAll
     public static void checkInit() {
@@ -33,14 +32,14 @@ public class bookingDevAndActivitySteps {
         }
     }
 
-    public bookingDevAndActivitySteps(SoftwareHuset softwareHuset){
+    public bookingDevAndActivitySteps(SoftwareHuset softwareHuset) {
         this.softwareHuset = softwareHuset;
     }
 
     @Given("that there is a manager and a Developer with initials {string} and {string}")
     public void that_there_is_a_manager_and_a_developer_with_initials(String manageInitials, String devInitials) throws Exception {
-       manager = softwareHuset.developers.get(manageInitials);
-       developer = softwareHuset.developers.get(devInitials);
+        manager = softwareHuset.developers.get(manageInitials);
+        developer = softwareHuset.developers.get(devInitials);
     }
 
     @Given("that the developer is a project manager")
@@ -51,11 +50,11 @@ public class bookingDevAndActivitySteps {
 
     @Then("The developer is a project manager")
     public void the_developer_is_a_project_manager() throws Exception {
-        assertThat(manager.isProjectManager(),is(true));
+        assertThat(manager.isProjectManager(), is(true));
     }
 
     @Given("there is a project with id {string}")
-    public void there_is_a_project_with_id(String projectId) throws Exception{
+    public void there_is_a_project_with_id(String projectId) throws Exception {
         project = softwareHuset.projects.get(Integer.parseInt(projectId));
         project2 = softwareHuset.getProject(projectId);
     }
@@ -71,8 +70,8 @@ public class bookingDevAndActivitySteps {
     }
 
     @Then("the developer is added to the project")
-    public void the_developer_is_added_to_the_project()  throws Exception {
-        assertThat(project.developerIsInProject(developer),is(true));
+    public void the_developer_is_added_to_the_project() throws Exception {
+        assertThat(project.developerIsInProject(developer), is(true));
     }
 
     @Given("the developer is not available")
@@ -84,37 +83,38 @@ public class bookingDevAndActivitySteps {
 
     @Given("that the developer is not a project manager")
     public void that_the_developer_is_not_a_project_manager() {
-        assertThat(manager.isProjectManager(),is(false));
+        assertThat(manager.isProjectManager(), is(false));
     }
 
     @When("the developer wants to add an activity {string} with {int} hours estimated starting the {int} - {int} - {int}, finishing the {int} - {int} - {int}")
     public void theDeveloperWantsToAddAnActivityWithHoursEstimatedStartingTheFinishingThe(String activityName, int estTime, int startD, int startM, int startY, int finD, int finM, int finY) {
-        GregorianCalendar start = new GregorianCalendar(startY,startM-1,startD);
-        GregorianCalendar finish = new GregorianCalendar(finY,finM-1,finD);
-        activity = new Activity(activityName,estTime);
+        GregorianCalendar start = new GregorianCalendar(startY, startM - 1, startD);
+        GregorianCalendar finish = new GregorianCalendar(finY, finM - 1, finD);
+        activity = new Activity(activityName, estTime);
         activity.setDateInterval(start, finish);
         project.addActivity(activity);
     }
 
     @And("the activity is not already in the project")
     public void the_activity_is_not_already_in_the_project() {
-        assertThat(softwareHuset.findActivity(activity.getName()),is(false));
+        assertThat(softwareHuset.findActivity(activity.getName()), is(false));
+        project.findActivity("Jump");
     }
 
     @And("the activity is already in the project")
     public void the_activity_is_already_in_the_project() {
-        assertThat(softwareHuset.findActivity(activity.getName()),is(true));
+        assertThat(softwareHuset.findActivity(activity.getName()), is(true));
     }
 
     @Then("the activity is added to the given project")
     public void the_activity_is_added_to_the_given_project() {
         project.addActivity(activity);
-        assertThat(project.findActivity(activity.name),is(true));
+        assertThat(project.findActivity(activity.name), is(true));
     }
 
     @Given("there is not a project named {string}")
     public void there_is_not_a_project_named(String projectName) {
-        assertThat(softwareHuset.findProject(Integer.parseInt(projectName)),is(false));
+        assertThat(softwareHuset.findProject(Integer.parseInt(projectName)), is(false));
     }
 
     @Then("the project manager is able to get time and budget used")
@@ -122,6 +122,7 @@ public class bookingDevAndActivitySteps {
         project.getUsedTime();
         project.getBudgetUsed();
     }
+
     @Then("a report is created for the project")
     public void aReportIsCreatedForTheProject() {
         rep = new Report(project);
@@ -158,8 +159,8 @@ public class bookingDevAndActivitySteps {
 
     @When("the developer registers a holiday from {int} - {int} - {int} to {int} - {int} - {int}")
     public void theDeveloperRegistersAHolidayFromTo(int startD, int startM, int startY, int finD, int finM, int finY) {
-        startHoli = new GregorianCalendar(startY,startM-1,startD);
-        finHoli = new GregorianCalendar(finY,finM-1,finD);
+        startHoli = new GregorianCalendar(startY, startM - 1, startD);
+        finHoli = new GregorianCalendar(finY, finM - 1, finD);
         developer.setHoliday(startHoli, finHoli);
     }
 
@@ -191,7 +192,7 @@ public class bookingDevAndActivitySteps {
 
     @Then("the developers hours is added to the total hours worked on the activity")
     public void theDevelopersHoursIsAddedToTheTotalHoursWorkedOnTheActivity() {
-        assertEquals(activityHours + hoursWorked, activity.getTotalRegisteredHours(),0.1);
+        assertEquals(activityHours + hoursWorked, activity.getTotalRegisteredHours(), 0.1);
     }
 
     @And("not assigned to selected project")

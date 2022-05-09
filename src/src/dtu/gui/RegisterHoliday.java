@@ -2,14 +2,14 @@ package dtu.gui;
 
 import dtu.project.SoftwareHuset;
 import dtu.softwarehus.Utility;
-import org.junit.Assert;
 
 import javax.swing.*;
-import java.awt.*;
 import java.time.Month;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Vector;
+
+//Lavet af Victor Winther testet af Marcus
 
 public class RegisterHoliday {
     JButton saveBtn;
@@ -30,14 +30,13 @@ public class RegisterHoliday {
     }
 
     public void initialize() {
-
         createPage();
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(e -> {
             setVisible(false);
             clear();
-            Main.setFrameSize(500,500);
+            Main.setFrameSize(500, 500);
             DeveloperPage.setVisible(true);
         });
         btnBack.setBounds(31, 225, 70, 29);
@@ -63,8 +62,7 @@ public class RegisterHoliday {
                 if (!Utility.isInt(endDateTxtField.getText())) {
                     JOptionPane.showMessageDialog(frame1, "End date isn't an int!");
                 }
-            }
-            else {
+            } else {
                 if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(endDateTxtField.getText()) > 0) &&
                         Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(endDateTxtField.getText()) < 31) {
 
@@ -91,6 +89,7 @@ public class RegisterHoliday {
             }
         });
     }
+
     private void clear() {
         startDateTxtField.setText("");
         endDateTxtField.setText("");
@@ -100,11 +99,11 @@ public class RegisterHoliday {
         yearSelFin.setSelectedItem(year);
     }
 
-    public void setVisible(boolean visi){
+    public void setVisible(boolean visi) {
         createProjectPanel.setVisible(visi);
     }
 
-    private void addLabelsToScreen(){
+    private void addLabelsToScreen() {
         startDateLabel = new JLabel();
         startDateLabel.setText("Activity start date");
         startDateLabel.setBounds(25, 75, 193, 29);
@@ -118,7 +117,7 @@ public class RegisterHoliday {
         createProjectPanel.add(endDateLabel);
     }
 
-    private void addTextFieldsToScreen(){
+    private void addTextFieldsToScreen() {
         Vector v = getYears();
 
         startDateTxtField = new JTextField(15);
@@ -126,21 +125,21 @@ public class RegisterHoliday {
         //startDateTxtField.setFont(Font.getFont("Helvetica",Font.BOLD));
 
         monthSelStart = new JComboBox<>(Month.values());
-        monthSelStart.setBounds(260,75,95,29);
+        monthSelStart.setBounds(260, 75, 95, 29);
 
         yearSelStart = new JComboBox<Integer>(v);
         yearSelStart.setSelectedItem(year);
-        yearSelStart.setBounds(365,75,60,29);
+        yearSelStart.setBounds(365, 75, 60, 29);
 
         endDateTxtField = new JTextField(15);
         endDateTxtField.setBounds(205, 125, 45, 29);
 
         monthSelFin = new JComboBox<>(Month.values());
-        monthSelFin.setBounds(260,125,95,29);
+        monthSelFin.setBounds(260, 125, 95, 29);
 
         yearSelFin = new JComboBox<Integer>(v);
         yearSelFin.setSelectedItem(year);
-        yearSelFin.setBounds(365,125,60,29);
+        yearSelFin.setBounds(365, 125, 60, 29);
 
         createProjectPanel.add(startDateTxtField);
         createProjectPanel.add(endDateTxtField);

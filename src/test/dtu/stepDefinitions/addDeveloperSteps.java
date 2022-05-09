@@ -1,17 +1,14 @@
 package dtu.stepDefinitions;
 
 import dtu.project.SoftwareHuset;
-import io.cucumber.java.Before;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import java.util.GregorianCalendar;
-
-import static org.junit.Assert.*;
+//Lavet af Thomas
 
 public class addDeveloperSteps {
     SoftwareHuset softwareHuset;
@@ -25,7 +22,7 @@ public class addDeveloperSteps {
         }
     }
 
-    public addDeveloperSteps(SoftwareHuset softwareHuset){
+    public addDeveloperSteps(SoftwareHuset softwareHuset) {
         this.softwareHuset = softwareHuset;
     }
 
@@ -72,7 +69,7 @@ public class addDeveloperSteps {
 
     @And("the developer has a holiday starting {int} - {int} - {int} and finishing {int} - {int} - {int}")
     public void theDeveloperHasAHolidayStartingAndFinishing(int startD, int startM, int startY, int endD, int endM, int endY) {
-        softwareHuset.addDeveloper(new String[]{newDeveloperName, String.valueOf(startY), String.valueOf(startM), String.valueOf(startD),String.valueOf(endY),String.valueOf(endM),String.valueOf(endD), "noSick"});
+        softwareHuset.addDeveloper(new String[]{newDeveloperName, String.valueOf(startY), String.valueOf(startM), String.valueOf(startD), String.valueOf(endY), String.valueOf(endM), String.valueOf(endD), "noSick"});
     }
 
     @Then("the developer dont have a occupation")

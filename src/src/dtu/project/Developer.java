@@ -1,19 +1,13 @@
 package dtu.project;
 
-import dtu.project.Activity;
-import dtu.project.SoftwareHuset;
-
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-import java.util.List;
 
-import static org.junit.Assert.assertTrue;
+//Lavet af Jakob Kildegaard
 
 public class Developer {
     public String initials;
     int hoursWorked;
-    List<Activity> activities = new ArrayList<>();
     public boolean isSick;
     protected boolean isProjectManager;
     public GregorianCalendar occupiedUntilThisDate, occupiedFromThisDate, sickFromThisDate, sickUntilThisDate;

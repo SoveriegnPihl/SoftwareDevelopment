@@ -1,7 +1,5 @@
 package dtu.project;
 
-import dtu.softwarehus.ErrorMessageHolder;
-
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -11,6 +9,8 @@ import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 import java.util.Arrays;
+
+//Lavet af Jakob Kildegaard
 
 public class SoftwareHuset {
     static ArrayList<Report> reports;
@@ -151,7 +151,6 @@ public class SoftwareHuset {
     }
 
    public static void assignPM(String dev, int projectID){
-
         if(projects.containsKey(projectID) && developers.containsKey(dev)) {
             projectManagers.put(projectID, dev);
         }
@@ -168,19 +167,17 @@ public class SoftwareHuset {
 
         for (Developer dev : developers.values()){
             if(!dev.isSick){
-                str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
+                str.append("Developer: ").append(dev.getInitials()).append(" is NOT occupied today").append("\n");
                 availableDevelopers.add(dev);
             } else {
-                str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
+                str.append("Developer: ").append(dev.getInitials()).append(" is occupied today").append("\n");
             }
         }
 
-        assert availableDevelopers.contains(getDeveloper("ekki")) == true: "postcondition";
+        assert availableDevelopers.contains(getDeveloper("ekki")): "postcondition";
 
         return str.toString();
     }
-
-
 
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
@@ -199,6 +196,7 @@ public class SoftwareHuset {
         }
         return false;                                   //5
     }
+
     public static Project getProject(String id){
         return projects.get(Integer.valueOf(id));
     }
@@ -259,7 +257,6 @@ public class SoftwareHuset {
         else{
             System.out.println("forkert filnavn angivet");
         }
-
     }
 
     public static void writeToCSV(String file){
@@ -291,7 +288,6 @@ public class SoftwareHuset {
         else{
             System.out.println("ikke en eksisterende csv fil");
         }
-
     }
 
     public static String convertToCSV(String[] data) {
@@ -314,7 +310,4 @@ public class SoftwareHuset {
         }
         return devs;
     }
-
-
-
 }

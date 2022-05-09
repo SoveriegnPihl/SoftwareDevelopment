@@ -1,8 +1,9 @@
 package dtu.project;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
+
+//Lavet af Jakob Kildegaard
 
 public class Activity {
     int estimatedTime, projectAssignedTo;
@@ -41,6 +42,7 @@ public class Activity {
         assert totalRegisteredHours == hoursAtPre + hours;
         SoftwareHuset.updateCSVFile("activities");                                      //6
     }
+
     public double getTotalRegisteredHours(){
         return totalRegisteredHours;
     }
