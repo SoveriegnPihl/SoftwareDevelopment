@@ -70,8 +70,6 @@ public class CreateActivityPage {
         createProjectPanel.add(saveBtn);
 
         saveBtn.addActionListener(e -> {
-
-
             String projectID = projectCombo.getSelectedItem().toString();
             String actName = nameTxtField.getText();
             String budget = budgetTxtField.getText();
@@ -107,7 +105,6 @@ public class CreateActivityPage {
 
                 if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
                         Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31) {
-
 
                     GregorianCalendar startDate = new GregorianCalendar(Integer.parseInt(startYear), Integer.parseInt(startMonth), Integer.parseInt(startDay));
                     GregorianCalendar endDate = new GregorianCalendar(Integer.parseInt(endYear), Integer.parseInt(endMonth), Integer.parseInt(endDay));

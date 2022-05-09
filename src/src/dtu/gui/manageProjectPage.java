@@ -59,12 +59,15 @@ public class manageProjectPage {
 
         saveBtn.addActionListener(e -> {
 
-            if (!(Utility.isInt(startDateTxtField.getText()) && Utility.isInt(endDateTxtField.getText()))) {
+            if (!(Utility.isInt(startDateTxtField.getText()) && Utility.isInt(endDateTxtField.getText())&& Utility.isInt(budgetTxtField.getText()))) {
                 if (!Utility.isInt(startDateTxtField.getText())) {
                     JOptionPane.showMessageDialog(frame, "Start date isn't an int!");
                 }
                 if (!Utility.isInt(endDateTxtField.getText())) {
                     JOptionPane.showMessageDialog(frame, "End date isn't an int!");
+                }
+                if (!Utility.isInt(budgetTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame, "Budget isn't an int!");
                 }
             }
             else {
@@ -219,4 +222,6 @@ public class manageProjectPage {
         }
         return v;
     }
+
+
 }
