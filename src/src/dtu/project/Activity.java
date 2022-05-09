@@ -18,9 +18,6 @@ public class Activity {
         this.estimatedTime = time;
         developers = new HashMap<>();
     }
-    public ArrayList<Developer> getDevelopers(){
-        return new ArrayList<>(developers.keySet());
-    }
 
     public String getName(){
         return name;
@@ -75,13 +72,6 @@ public class Activity {
 
     public int getBudget() {return budget;}
 
-   // public void setEstimatedTime(int time){
-       // estimatedTime = time;
-   // }
-
     public int getEstimatedTime(){return estimatedTime;}
-
-
-
 
 }

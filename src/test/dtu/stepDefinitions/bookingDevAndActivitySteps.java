@@ -95,6 +95,7 @@ public class bookingDevAndActivitySteps {
         GregorianCalendar finish = new GregorianCalendar(finY,finM-1,finD);
         activity = new Activity(activityName,estTime);
         activity.setDateInterval(start, finish);
+        project.addActivity(activity);
     }
 
     @And("the activity is not already in the project")
@@ -133,8 +134,6 @@ public class bookingDevAndActivitySteps {
         rep.printReport();
         assertTrue(rep.project == project);
     }
-
-
 
 
     @Given("that there is a manager with initials {string}")

@@ -18,6 +18,7 @@ import static org.junit.Assert.*;
 public class addProjectTest {
     SoftwareHuset sf;
     Project project;
+    int projectID;
     GregorianCalendar startDate, endDate;
     int budget;
 
@@ -52,12 +53,12 @@ public class addProjectTest {
 
     @Then("the new project is added")
     public void the_new_project_is_added() {
-        sf.createProject(startDate,endDate,budget);
+        projectID = sf.createProject(startDate,endDate,budget);
     }
 
-    @And("the new project is an existing project")
+    @And("the new project is an existing project with a budget")
     public void theNewProjectIsAnExistingProject() {
-
+    sf.projects.get(projectID).getBudget();
     }
 
 }

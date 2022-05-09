@@ -7,7 +7,7 @@ Feature: Creating a new project
     Given you want to add a new project starting 26 - 3 - 22 and ending 1 - 5 - 22 with 10 kr budget
     And the end date is after the start date
     Then the new project is added
-    And the new project is an existing project
+    And the new project is an existing project with a budget
 
   Scenario: Creating a project with a start date that's not valid
     Given you want to add a new project starting 26 - 3 - 22 and ending 1 - 5 - 22 with 10 kr budget
