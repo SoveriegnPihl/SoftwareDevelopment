@@ -80,6 +80,7 @@ public class DeveloperPage {
         addActBtn.addActionListener(e -> {
             setVisible(false);
             createActivityPage.setOriginWindow("DeveloperPage");
+            createActivityPage.setProjs();
             createActivityPage.setVisible(true);
         });
 

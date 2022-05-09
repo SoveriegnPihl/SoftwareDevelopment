@@ -76,6 +76,7 @@ public class ProjectManagerPage {
         addActivityBtn.addActionListener(e -> {
             setVisible(false);
             createActivityPage.setOriginWindow("ProjectManagerPage");
+            createActivityPage.setProjs();
             createActivityPage.setVisible(true);
         });
 

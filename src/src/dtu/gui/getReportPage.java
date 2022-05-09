@@ -108,8 +108,6 @@ public class getReportPage {
         //ComboBox for list of developers
         developerList = new JComboBox<Object>();
         developerList.setBounds(60, 160, 100, 29);
-
-        developerList.setBounds(60, 160, 100, 29);
         getReportPanel.add(developerList);
 
         //ComboBox for list of activities

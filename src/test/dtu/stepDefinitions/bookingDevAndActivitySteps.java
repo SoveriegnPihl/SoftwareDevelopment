@@ -7,6 +7,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.junit.jupiter.api.BeforeEach;
 
 import java.util.GregorianCalendar;
 
@@ -165,7 +166,6 @@ public class bookingDevAndActivitySteps {
 
     @Then("the developer has a occupation in the system")
     public void theDeveloperHasAOccupationInTheSystem() {
-
         assertTrue(developer.hasOccupation);
     }
 
@@ -193,7 +193,6 @@ public class bookingDevAndActivitySteps {
     @Then("the developers hours is added to the total hours worked on the activity")
     public void theDevelopersHoursIsAddedToTheTotalHoursWorkedOnTheActivity() {
         assertEquals(activityHours + hoursWorked, activity.getTotalRegisteredHours(),0.1);
-        activity.registerHours(developer, -hoursWorked);
     }
 
     @And("not assigned to selected project")
@@ -206,5 +205,4 @@ public class bookingDevAndActivitySteps {
     public void theErrorMessageIsGiven(String name) {
         System.out.println(name);
     }
-
 }
