@@ -1,6 +1,7 @@
 package dtu.gui;
 
 import dtu.project.SoftwareHuset;
+import dtu.softwarehus.Utility;
 
 import javax.swing.*;
 import java.time.Month;
@@ -61,29 +62,40 @@ public class CreateProjectPage {
             GregorianCalendar startDate = null;
             GregorianCalendar endDate = null;
             //getting date intervals
-            try {
-            startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                    monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
 
-            endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                    monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
-            } catch (NumberFormatException b) {
-                Main.createMessage("Error. " + b.getMessage());
-            }
+            if (!(Utility.isInt(startDateTxtField.getText()) && Utility.isInt(endDateTxtField.getText()))) {
+                if (!Utility.isInt(startDateTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame, "Start date isn't an int!");
+                }
+                if (!Utility.isInt(endDateTxtField.getText())) {
+                    JOptionPane.showMessageDialog(frame, "End date isn't an int!");
+                }
+            }else{
+                try {
 
-            int project = 0;
-            if (startDate != null) {
-                if (startDate.compareTo(endDate) < 0 && projectManagerTxt.isEmpty() ) {
-                    try {
-                        project = SoftwareHuset.createProject(startDate, endDate, Integer.parseInt(budgetTxt));
-                        Main.setFrameSize(600,400);
-                        Main.setLocation();
-                        clear();
-                        setVisible(false);
-                        parentWindow.setVisible(true);
-                        Main.createMessage("Success");
-                    } catch (NumberFormatException b) {
-                        Main.createMessage("Error. " + b.getMessage());}
+
+                    startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                            monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
+
+                    endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                            monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
+                } catch (NumberFormatException b) {
+                    Main.createMessage("Error. " + b.getMessage());
+                }
+
+                int project = 0;
+                if (startDate != null) {
+                    if (startDate.compareTo(endDate) < 0 && projectManagerTxt.isEmpty() ) {
+                        try {
+                            project = SoftwareHuset.createProject(startDate, endDate, Integer.parseInt(budgetTxt));
+                            Main.setFrameSize(600,400);
+                            Main.setLocation();
+                            clear();
+                            setVisible(false);
+                            parentWindow.setVisible(true);
+                            Main.createMessage("Success");
+                        } catch (NumberFormatException b) {
+                            Main.createMessage("Error. " + b.getMessage());}
 
                     }
                     else if (!projectManagerTxt.isEmpty()) {
@@ -102,11 +114,13 @@ public class CreateProjectPage {
                         } else {Main.createMessage("No developer found");}
 
 
-                } else {
-                    Main.createMessage("Select new date");
+                    } else {
+                        Main.createMessage("Select new date");
+                    }
                 }
-            }
 
+
+            }
 
         });
 
@@ -131,7 +145,7 @@ public class CreateProjectPage {
 
         yearSelStart = new JComboBox<Integer>(v);
         yearSelStart.setSelectedItem(year);
-        yearSelStart.setBounds(385,50,100,29);
+        yearSelStart.setBounds(395,50,100,29);
 
         endDateTxtField = new JTextField(15);
         endDateTxtField.setBounds(225, 100, 45, 29);
@@ -141,7 +155,7 @@ public class CreateProjectPage {
 
         yearSelFin = new JComboBox<Integer>(v);
         yearSelFin.setSelectedItem(year);
-        yearSelFin.setBounds(385,100,100,29);
+        yearSelFin.setBounds(395,100,100,29);
 
         budgetTxtField = new JTextField(15);
         budgetTxtField.setBounds(250, 150, 193, 29);
@@ -197,6 +211,17 @@ public class CreateProjectPage {
         yearSelFin.setSelectedItem(year);
 
     }
+
+    public void setDevs(){
+        JComboBox<Object> developerCombo = new JComboBox<>();
+        for (String developer : SoftwareHuset.developers.keySet()) {
+            developerCombo.addItem(developer);
+        }
+
+        developerCombo.setBounds(250, 200, 193, 29);
+        createProjectPanel.add(developerCombo);
+    }
+
 
     private Vector getYears() {
         Calendar now = Calendar.getInstance();
