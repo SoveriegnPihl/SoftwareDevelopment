@@ -6,6 +6,8 @@ import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 
+import static javax.swing.UIManager.put;
+
 public class Project {
     static int nextId = 1;
     public String name;
@@ -61,13 +63,17 @@ public class Project {
 
     public void addActivity(Activity activity){
         if(activity.getStartDate().compareTo(startDate) == 1 && activity.getEndDate().compareTo(endDate) == -1){    //1
+            assert startDate != null && endDate != null && activity.getName() != null;                              //"Precondition";
             budgetUsed -= activity.getBudget();                                                                     //2
             activities.put(activity.getName(), activity);                                                           //3
             System.out.println("Activity added");                                                                   //4
+            assert activities.containsKey(activity.getName());                                                      //"Postcondition";
         } else {
             System.out.println("ikke inden for datoen af projektet");                                               //5
         }
+        //assert activities.containsKey(activity.getName());
     }
+
 
    public boolean findActivity(String activityName){
         for (String actName : activities.keySet()){

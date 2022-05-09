@@ -39,9 +39,5 @@ public class addActivityTest {
         project.addActivity(activity);
         assertFalse(project.findActivity(activity.getName()));
     }
-    @Test
-    public void preCond(){
-
-    }
 
 }

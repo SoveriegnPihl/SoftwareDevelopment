@@ -1,3 +1,4 @@
+## Author: Thomas Schiøler Hansen
 Feature: Adding an employee to the system
   Description: An employee, with up to 4 initials, is added and registered in the system.
   Actors: Developer/Manager

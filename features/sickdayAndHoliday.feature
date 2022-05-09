@@ -1,3 +1,4 @@
+## Author: Thomas Schiøler Hansen
 Feature: An employee  registers sick-day or holiday
   Description: An employee registers that they have a sick-day or that they leave on holiday
   Actors: Developer
