@@ -17,9 +17,10 @@ import static org.junit.Assert.*;
 
 public class addProjectTest {
     SoftwareHuset sf;
-    Project project;
+    Project thisProject;
+    int projectID;
     GregorianCalendar startDate, endDate;
-    int budget;
+    int budget, budgetBefore,budgetToAdd;
 
     @BeforeAll
     public static void checkInit() {
@@ -52,12 +53,38 @@ public class addProjectTest {
 
     @Then("the new project is added")
     public void the_new_project_is_added() {
-        sf.createProject(startDate,endDate,budget);
+        projectID = sf.createProject(startDate,endDate,budget);
     }
 
-    @And("the new project is an existing project")
+    @And("the new project is an existing project with a budget")
     public void theNewProjectIsAnExistingProject() {
+    sf.projects.get(projectID).getBudget();
+    }
+
+    @Given("that a project with id {string} exits")
+    public void thatAProjectWithIdExits(String name) {
+        assertTrue(SoftwareHuset.projects.containsKey(Integer.parseInt(name)));
+        thisProject = SoftwareHuset.projects.get(Integer.parseInt(name));
+        System.out.println(thisProject.getId()+" id for projektet");
+    }
+    @And("a project manager want to set new date and budget for the project")
+    public void aProjectManagerWantToSetNewDateAndBudgetForTheProject() {
+        budgetBefore = thisProject.getBudget();
+        System.out.println(thisProject.getBudget() + " før");
+        budgetToAdd = 500;
+        int[] newStartDate = {Integer.parseInt(thisProject.getDateYear("start")), Integer.parseInt(thisProject.getDateMonth("start")), Integer.parseInt(thisProject.getDateDay("start"))+1};
+        int[] newEndDate = {Integer.parseInt(thisProject.getDateYear("end")), Integer.parseInt(thisProject.getDateMonth("end")), Integer.parseInt(thisProject.getDateDay("end")+1)};
+        int newBudget = budgetBefore + budgetToAdd;
+
+        thisProject.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
+        System.out.println(thisProject.getBudget() + "efter");
+    }
+
+    @Then("date and budget is updated for the project")
+    public void dateAndBudgetIsUpdatedForTheProject() {
+        assertEquals(budgetBefore + budgetToAdd + thisProject.budgetUsed, thisProject.getBudget());
 
     }
+
 
 }

@@ -3,6 +3,7 @@ import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
@@ -16,8 +17,10 @@ public class DeveloperPage {
     CreateActivityPage createActivityPage;
     CreateProjectPage createProjectPage;
     RegisterHoliday registerHoliday;
-    int yCountL =50, yCountR = 50;
+    int yCountL =30, yCountR = 30;
     private JPanel developerPage2;
+    static JPanel topPanel;
+    private JPanel bottomPanel;
 
     DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -33,12 +36,11 @@ public class DeveloperPage {
         JButton viewHoursBtn = makeLeftButton("View hours worked");
         JButton regSickBtn = makeLeftButton("Register sick day");
         JButton regHoliBtn = makeLeftButton("Register holiday");
-        JButton addActBtn = makeLeftButton("Add activity to project");
-        JButton backBtn = makeLeftButton("Back");
 
+        JButton addActBtn = makeRightButton("Add activity to project");
         JButton addPmBtn = makeRightButton("Assign project manager");
         JButton createDevBtn = makeRightButton("Create developer");
-
+        JButton backBtn = makeRightButton("Back");
 
         regHoursBtn.addActionListener(e -> {
         RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
@@ -48,6 +50,10 @@ public class DeveloperPage {
         registerHours.setVisible(true);
         });
 
+        JLabel welcomeLabel = new JLabel("Developer page");
+        welcomeLabel.setFont(new Font("cambria",Font.PLAIN,30));
+        welcomeLabel.setBounds(130,5,400,70);
+        topPanel.add(welcomeLabel);
        viewHoursBtn.addActionListener(e -> {
            ChangeHours changeHours = new ChangeHours(loggedInUser,parentWindow);
            setVisible(false);
@@ -98,6 +104,16 @@ public class DeveloperPage {
         parentWindow.addPanel(developerPage);
         developerPage.setLayout(null);
         developerPage.setBorder(BorderFactory.createTitledBorder("Developer Page"));
+        topPanel = new JPanel();
+        topPanel.setBounds(15,25,450,75);
+        developerPage.add(topPanel);
+        topPanel .setBorder(BorderFactory.createTitledBorder("Welcome"));
+        topPanel.setLayout(null);
+        bottomPanel = new JPanel();
+        developerPage.add(bottomPanel);
+        bottomPanel.setBounds(15,125,450,325);
+        bottomPanel.setLayout(null);
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Use functionality"));
     }
 
     public static void setVisible(boolean visi){
@@ -165,15 +181,15 @@ public class DeveloperPage {
 
     public JButton makeLeftButton(String name){
         JButton b1 = new JButton(name);
-        b1.setBounds(25, yCountL, 193, 29);
-        developerPage.add(b1);
+        b1.setBounds(15, yCountL, 193, 29);
+        bottomPanel.add(b1);
         yCountL+=50;
         return b1;
     }
     public JButton makeRightButton(String name){
         JButton b1 = new JButton(name);
-        b1.setBounds(285, yCountR, 193, 29);
-        developerPage.add(b1);
+        b1.setBounds(245, yCountR, 193, 29);
+        bottomPanel.add(b1);
         yCountR+=50;
         return b1;
     }

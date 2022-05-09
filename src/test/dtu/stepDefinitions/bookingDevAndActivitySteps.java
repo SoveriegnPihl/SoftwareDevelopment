@@ -5,6 +5,8 @@ import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import io.cucumber.java.BeforeAll;
+import io.cucumber.java.BeforeStep;
+import dtu.project.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -22,6 +24,7 @@ public class bookingDevAndActivitySteps {
     Activity activity;
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
+    Report rep;
     GregorianCalendar today = new GregorianCalendar();
     String[] devString;
 
@@ -93,6 +96,7 @@ public class bookingDevAndActivitySteps {
         GregorianCalendar finish = new GregorianCalendar(finY,finM-1,finD);
         activity = new Activity(activityName,estTime);
         activity.setDateInterval(start, finish);
+        project.addActivity(activity);
     }
 
     @And("the activity is not already in the project")
@@ -121,6 +125,17 @@ public class bookingDevAndActivitySteps {
         project.getUsedTime();
         project.getBudgetUsed();
     }
+    @Then("a report is created for the project")
+    public void aReportIsCreatedForTheProject() {
+        rep = new Report(project);
+    }
+
+    @Then("the report contains all relevant information")
+    public void theReportContainsAllRelevantInformation() {
+        rep.printReport();
+        assertTrue(rep.project == project);
+    }
+
 
     @Given("that there is a manager with initials {string}")
     public void thatThereIsAManagerWithInitials(String managerInitials) {
@@ -182,6 +197,7 @@ public class bookingDevAndActivitySteps {
     @Then("the developers hours is added to the total hours worked on the activity")
     public void theDevelopersHoursIsAddedToTheTotalHoursWorkedOnTheActivity() {
         assertEquals(activityHours + hoursWorked, activity.getTotalRegisteredHours(),0.1);
+        activity.registerHours(developer, -hoursWorked);
     }
 
     @And("not assigned to selected project")

@@ -18,9 +18,6 @@ public class Activity {
         this.estimatedTime = time;
         developers = new HashMap<>();
     }
-    public ArrayList<Developer> getDevelopers(){
-        return new ArrayList<>(developers.keySet());
-    }
 
     public String getName(){
         return name;
@@ -31,6 +28,9 @@ public class Activity {
         endDate = end;
     }
     public void registerHours(Developer developer, double hours){
+        double hoursAtPre = totalRegisteredHours;
+        assert (totalRegisteredHours+hours >= 0);                                      // "Precondition", since user can
+                                                                                        // remove hours. Double cannot be checked as null
         developer.addHoursToday(hours);                                                 //1
         totalRegisteredHours+=hours;                                                    //2
         if(registeredHours.containsKey(developer)){                                     //3
@@ -38,6 +38,7 @@ public class Activity {
         } else {
             registeredHours.put(developer,hours);                                       //5
         }
+        assert totalRegisteredHours == hoursAtPre + hours;
         SoftwareHuset.updateCSVFile("activities");                                      //6
     }
     public double getTotalRegisteredHours(){
@@ -71,13 +72,6 @@ public class Activity {
 
     public int getBudget() {return budget;}
 
-   // public void setEstimatedTime(int time){
-       // estimatedTime = time;
-   // }
-
     public int getEstimatedTime(){return estimatedTime;}
-
-
-
 
 }

@@ -22,3 +22,12 @@ Feature: Create activity
     And there is not a project named "22000"
     Then the error message "Activity is already in this project" is given
 
+  Scenario: End date before start date
+    Given that there is a developer with initials "ekki"
+    And there is a project with id "22001"
+    When the developer wants to add an activity "Distribute tasks" with 5 hours estimated starting the 15 - 6 - 2022, finishing the 10 - 6 - 2022
+    And the activity is already in the project
+    Then the error message "End date before start date" is given
+
+
+
