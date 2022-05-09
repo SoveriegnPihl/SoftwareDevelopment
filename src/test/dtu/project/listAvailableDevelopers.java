@@ -1,5 +1,7 @@
-package dtu.project;
-import org.junit.jupiter.api.BeforeEach;
+package dtu.employees.whiteBoxTest;
+
+import dtu.employees.Developer;
+import dtu.softwarehus.SoftwareHuset;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -9,33 +11,25 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class listAvailableDevelopers {
-    public GregorianCalendar today = new GregorianCalendar();
-    Developer developer;
 
-    @BeforeEach
-    void checkInit(){
-        if(!AvailabilityTest.programStarted){
-            AvailabilityTest.programStarted = true;
-            SoftwareHuset.startProgram();
-        }
-    }
+    public GregorianCalendar today = new GregorianCalendar();
+
+    ArrayList<Developer> Developer = new ArrayList<Developer>();
 
     @Test
     void listAvailableDevelopersA() {
+        SoftwareHuset.startProgram();
         Developer developer = SoftwareHuset.getDeveloper("ekki");
         assertTrue(developer.getAvailability(today));
-
+       Developer.add(developer);
 
     }
 
     @Test
     void listAvailableDevelopersB() {
         Developer developer = SoftwareHuset.getDeveloper("ekki");
-        developer.setSick();
         assertFalse(developer.getAvailability(today));
-        /*developer.isSick = false;
-        SoftwareHuset.updateCSVFile("developers");
+        Developer.remove(developer);
 
-         */
     }
 }
