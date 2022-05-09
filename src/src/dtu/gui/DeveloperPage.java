@@ -1,99 +1,180 @@
-package dtu.gui;//import required classes and packages
+package dtu.gui;
 import dtu.employees.Developer;
-import dtu.gui.CreateLoginForm;
-
+import dtu.softwarehus.SoftwareHuset;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-//create NewPage class to create a new page on which user will navigate  
-public class DeveloperPage extends JFrame
-{
-    Developer user;
-    JButton b1,b2,b3,b4,b5,b6,b7;
-    JPanel newPanel;
-    JLabel userLabel;
-    JTextField textField1;
-    private JPanel panel1;
-    private JCheckBox checkBox1;
-    boolean managerCheckBox = false;
-    //constructor  
-    DeveloperPage(Developer user)
-    {
-        this.user = user;
+// lavet af Victor Larsen-Saldeen
 
-        //create a welcome label and set it to the new page
-        //create submit button
+public class DeveloperPage {
+    static Developer loggedInUser;
+    static JPanel developerPage;
+    JFrame frame;
+    SoftwareHuset softwareHuset;
+    Main parentWindow;
+    CreateActivityPage createActivityPage;
+    CreateProjectPage createProjectPage;
+    RegisterHoliday registerHoliday;
+    int yCountL =50, yCountR = 50;
+    private JPanel developerPage2;
 
-        b1 = new JButton("Register hours worked"); //set label to button
-        b2 = new JButton("View hours worked"); //set label to button
-        b3 = new JButton("Register sick day"); //set label to button
-        b4 = new JButton("Register holiday"); //set label to button
-        b5 = new JButton("Assign project manager"); //set label to button
-        b6 = new JButton("Add project activity"); //set label to button
-        b7 = new JButton("Create project");
-
-        //create panel to put form elements
-        newPanel = new JPanel();
-        newPanel.setLayout(null);
-        newPanel.setBorder(BorderFactory.createTitledBorder(
-                "Developer page"));
-        b1.setBounds(50, 50, 193, 29);
-        newPanel.add(b1);
-        b2.setBounds(50, 100, 193, 29);
-        newPanel.add(b2);
-        b3.setBounds(50, 150, 193, 29);
-        newPanel.add(b3);
-        b4.setBounds(50, 200, 193, 29);
-        newPanel.add(b4);
-        b6.setBounds(50, 250, 193, 29);
-        newPanel.add(b6);
-
-        b5.setBounds(325, 100, 193, 29);
-        newPanel.add(b5);
-        b7.setBounds(325, 50, 193, 29);
-        newPanel.add(b7);
-
-        add(newPanel);
-
-
-        b1.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-               OptionPane OP = new OptionPane(user,"Register hours worked");
-            }
-        });
-        b2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user,"View hours worked");
-            }
-        });
-
-        b5.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                OptionPane OP = new OptionPane(user,"Assign project manager");
-            }
-        });
-
-        b6.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                setVisible(false);
-                CreateProjectPage OP = new CreateProjectPage();
-                OP.setSize(500,500);  //set size of the frame
-                OP.setLocationRelativeTo(null);
-                OP.setVisible(true);
-
-
-            }
-        });
-
-        setDefaultCloseOperation(javax.swing.
-                WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Welcome");
-        setSize(600, 600);
+    DeveloperPage(SoftwareHuset softwareHuset, Main parentWindow) {
+        this.softwareHuset = softwareHuset;
+        this.parentWindow = parentWindow;
+        initialize();
     }
+
+    public void initialize()  {
+
+        createPage();
+
+        JButton regHoursBtn = makeLeftButton("Register hours worked");
+        JButton viewHoursBtn = makeLeftButton("View hours worked");
+        JButton regSickBtn = makeLeftButton("Register sick day");
+        JButton regHoliBtn = makeLeftButton("Register holiday");
+        JButton addActBtn = makeLeftButton("Add activity to project");
+        JButton backBtn = makeLeftButton("Back");
+
+        JButton addPmBtn = makeRightButton("Assign project manager");
+        JButton createDevBtn = makeRightButton("Create developer");
+
+
+        regHoursBtn.addActionListener(e -> {
+        RegisterHours registerHours = new RegisterHours(loggedInUser,parentWindow);
+        setVisible(false);
+        RegisterHours.createList(loggedInUser);
+        registerHours.setVisible(true);
+        });
+
+       viewHoursBtn.addActionListener(e -> {
+           ChangeHours changeHours = new ChangeHours(loggedInUser,parentWindow);
+           setVisible(false);
+           changeHours.createList(loggedInUser);
+           changeHours.setVisible(true);
+       });
+
+        addPmBtn.addActionListener(e -> {
+            //OptionPane OP = new OptionPane(loggedInUser, "Assign project manager");
+            createAssignPM();
+        });
+
+        createDevBtn.addActionListener(e -> {
+            OptionPane OP = new OptionPane(loggedInUser,"Add developer");
+        });
+
+        backBtn.addActionListener(e -> {
+            Main.setFrameSize(600,400);
+            Main.setLocation();
+            setVisible(false);
+            parentWindow.setVisible(true);
+        });
+
+        addActBtn.addActionListener(e -> {
+            setVisible(false);
+            createActivityPage.setOriginWindow("DeveloperPage");
+            createActivityPage.setVisible(true);
+        });
+
+        regHoliBtn.addActionListener(e -> {
+            setVisible(false);
+            registerHoliday.setVisible(true);
+        });
+
+        regSickBtn.addActionListener(e -> {
+            new OptionPane(loggedInUser,"Register sick day");
+        });
+
+        createActivityPage = new CreateActivityPage(softwareHuset, parentWindow);
+        createProjectPage = new CreateProjectPage(softwareHuset, parentWindow);
+        registerHoliday = new RegisterHoliday(softwareHuset, parentWindow);
+    }
+
+    private void createPage() {
+        developerPage = new JPanel();
+        parentWindow.addPanel(developerPage);
+        developerPage.setLayout(null);
+        developerPage.setBorder(BorderFactory.createTitledBorder("Developer Page"));
+    }
+
+    public static void setVisible(boolean visi){
+            developerPage.setVisible(visi);
+        }
+
+        public static void setUser(Developer user){
+        loggedInUser = user;
+        }
+
+        public void createAssignPM(){
+            setVisible(false);
+            developerPage2 = new JPanel();
+            parentWindow.addPanel(developerPage2);
+            developerPage2.setLayout(null);
+            developerPage2.setBorder(BorderFactory.createTitledBorder("Developer Page 2"));
+            JLabel selDev = new JLabel();
+            selDev.setText("Select developer to assign");      //set label value for textField1
+            selDev.setBounds(25, 50, 193, 29);
+            developerPage2.add(selDev);
+
+            JComboBox<Object> developerCombo = new JComboBox<>();
+            for (String developer : SoftwareHuset.developers.keySet()) {
+                developerCombo.addItem(developer);
+            }
+
+            developerCombo.setBounds(250, 50, 193, 29);
+            developerPage2.add(developerCombo);
+
+            String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
+            JComboBox<String> projectCombo = new JComboBox<>(list);
+            projectCombo.setBounds(250, 100, 193, 29);
+            developerPage2.add(projectCombo);
+
+            JLabel selProject = new JLabel();
+            selProject.setText("Select project");
+            selProject.setBounds(25, 100, 193, 29);
+            developerPage2.add(selProject);
+
+            JButton b1 = new JButton("Save");
+            b1.setBounds(140,200, 250, 50);
+            developerPage2.add(b1);
+            b1.addActionListener(e -> {
+                Main.setFrameSize(500,500);
+                SoftwareHuset.assignPM((String) developerCombo.getSelectedItem(), Integer.parseInt((String) projectCombo.getSelectedItem()));
+                developerPage2.setVisible(false);
+                developerPage.setVisible(true);
+            });
+
+            JButton b2 = new JButton("Back");
+            b2.setBounds(140,250, 250, 50);
+            developerPage2.add(b2);
+            b2.addActionListener(e -> {
+                            Main.setFrameSize(500,500);
+                            developerPage2.setVisible(false);
+                            developerPage.setVisible(true);
+                        });
+
+
+
+            developerPage2.setVisible(true);
+
+        }
+
+    public JButton makeLeftButton(String name){
+        JButton b1 = new JButton(name);
+        b1.setBounds(25, yCountL, 193, 29);
+        developerPage.add(b1);
+        yCountL+=50;
+        return b1;
+    }
+    public JButton makeRightButton(String name){
+        JButton b1 = new JButton(name);
+        b1.setBounds(285, yCountR, 193, 29);
+        developerPage.add(b1);
+        yCountR+=50;
+        return b1;
+    }
+
+    public void addPanel (JPanel panel ){
+        frame.getContentPane().add(panel);
+    }
+
 }  

@@ -1,12 +1,11 @@
 package dtu.gui;
 
-import dtu.employees.Developer;
+import dtu.project.Developer;
 import dtu.project.Activity;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.*;
 import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
@@ -30,6 +29,7 @@ public class ChangeHours {
     JLabel userLabel;
     private static JPanel topPanel;
     private JPanel bottomPanel;
+    JTextField changeHoursField;
 
     public ChangeHours(Developer loggedInUser, Main parentWindow) {
         this.loggedInUser = loggedInUser;
@@ -46,11 +46,8 @@ public class ChangeHours {
                 clear();
                 DeveloperPage.setVisible(true);
             });
-            btnBack.setBounds(21, 21, 59, 29);
+            btnBack.setBounds(30, 40, 80, 29);
             bottomPanel.add(btnBack);
-/*
-            checkBox1 = new JCheckBox("Not assigned to project");
-            checkBox1.setBounds(150, 25, 193, 29);*/
 
             JLabel assignedOrNot = new JLabel();
             assignedOrNot.setText("Are you assigned to the project?");
@@ -84,7 +81,7 @@ public class ChangeHours {
             writeProject.setBounds(250, 90, 193, 29);
 
             JButton searchButton = new JButton("Search registered hours"); //set label to button
-            searchButton.setBounds(248,125 , 193, 29);
+            searchButton.setBounds(249,130 , 193, 29);
 
             r2.addActionListener(e -> {
                 if(r2.isSelected()){
@@ -104,15 +101,30 @@ public class ChangeHours {
             searchButton.addActionListener(e -> {
             activity = project12.activities.get(activityCombo.getSelectedItem());
                 System.out.println(activity.getTotalRegisteredHours());
-            userLabel.setText("Registered hours for selected activity = "+ activity.registeredHours.get(loggedInUser) + "\n" + " out of "+loggedInUser.getRegisteredHoursToday()+" today");      //set label value for textField1
-            userLabel.setVisible(true);
+                if(activity.registeredHours.get(loggedInUser) == null) {
+                    userLabel.setText("Registered hours for selected activity = " + "0.0" + "\n" + " out of " + loggedInUser.getRegisteredHoursToday() + " today");
+                } else {
+                    userLabel.setText("Registered hours for selected activity = " + activity.registeredHours.get(loggedInUser) + "\n" + " out of " + loggedInUser.getRegisteredHoursToday() + " today");
+
+                }
+                    userLabel.setVisible(true);
             });
             userLabel = new JLabel();
             userLabel.setBounds(25, 160, 500, 29);
             topPanel.add(userLabel);
             userLabel.setVisible(false);
+
+            JLabel changeHours = new JLabel();
+            changeHours.setText("Add or remove hours (-)");
+            changeHours.setBounds(25 ,190,300,29);
+            topPanel.add(changeHours);
+            changeHoursField = new JTextField(15);
+            changeHoursField.setBounds(250, 190, 193, 29);
+            topPanel.add(changeHoursField);
+
+
             JButton submitButton = new JButton("Submit"); //set label to button
-            submitButton.setBounds(150, 100, 193, 29);
+            submitButton.setBounds(174, 40, 193, 29);
 
             topPanel.setLayout(null);
             topPanel.add(selectActivity);
@@ -126,10 +138,23 @@ public class ChangeHours {
 
             submitButton.addActionListener(e -> {
 
-                setVisible(false);
-                removeList();
-                clear();
-                DeveloperPage.setVisible(true);
+            try{
+                double hourChange = Double.parseDouble(changeHoursField.getText());
+                if(activity.registeredHours.containsKey(loggedInUser)) {
+                    if (activity.registeredHours.get(loggedInUser) + hourChange >= 0) {
+                        activity.registerHours(loggedInUser, Double.parseDouble(changeHoursField.getText()));
+                        setVisible(false);
+                        removeList();
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    } else {
+                        JOptionPane.showMessageDialog(null, "You can't remove more hours than registered!");
+                    }
+                }
+            } catch (NumberFormatException ea) {
+                JOptionPane.showMessageDialog(null, "Please only use numbers");
+            }
+
 
 
             });
@@ -157,7 +182,7 @@ public class ChangeHours {
     }
 
     public static void createProjectList(){
-        String[] list = SoftwareHuset.fullProjectList().toArray(new String[0]);
+        String[] list = DeveloperPage.fullProjectList().toArray(new String[0]);
         projectComboNotAssigned = new JComboBox<>(list);
         projectComboNotAssigned.setBounds(250, 50, 193, 29);
         topPanel.add(projectComboNotAssigned);
@@ -182,7 +207,7 @@ public class ChangeHours {
 
 
     public static void createList(Developer user){
-        ArrayList<Project> list = SoftwareHuset.projectListDeveloper(user);
+        ArrayList<Project> list = projectListDeveloper(user);
         projectsComboBox = new JComboBox<>();
         projectsComboBox.setBounds(250, 50, 193, 29);
         topPanel.add(projectsComboBox);
@@ -221,17 +246,27 @@ public class ChangeHours {
         changeHours.setLayout(null);
         changeHours.setBorder(BorderFactory.createTitledBorder("Register hours page"));
         topPanel = new JPanel();
-        topPanel.setBounds(25,25,450,200);
+        topPanel.setBounds(25,25,450,250);
         changeHours.add(topPanel);
         topPanel .setBorder(BorderFactory.createTitledBorder("View hours"));
         topPanel.setLayout(null);
         bottomPanel = new JPanel();
         changeHours.add(bottomPanel);
-        bottomPanel.setBounds(25,250,450,200);
+        bottomPanel.setBounds(25,300,450,100);
         bottomPanel.setLayout(null);
         bottomPanel.setBorder(BorderFactory.createTitledBorder("Change hours"));
 
     }
+    public static ArrayList<Project> projectListDeveloper(Developer developer){
+        ArrayList<Project> projectlist2 = new ArrayList<>();
 
+        for (Project var : SoftwareHuset.projects.values()){
+
+            if (var.developerIsInProject(developer)){
+                projectlist2.add(var);
+            }
+        }
+        return projectlist2;
+    }
 
 }

@@ -1,10 +1,6 @@
-package dtu.softwarehus;
+package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.project.Activity;
-import dtu.project.Project;
-import dtu.project.Report;
-import io.cucumber.java.hu.De;
+import dtu.softwarehus.ErrorMessageHolder;
 
 import java.io.File;
 import java.io.PrintWriter;
@@ -26,7 +22,6 @@ public class SoftwareHuset {
     public static GregorianCalendar today = new GregorianCalendar();
     public static ArrayList<String[]> csvProjectData,csvDeveloperData, csvActivityData;
 
-    static ErrorMessageHolder errorMessageHolder = new ErrorMessageHolder();
     public SoftwareHuset() {
     }
 
@@ -36,12 +31,13 @@ public class SoftwareHuset {
         reports = new ArrayList<>();
         projectManagers = new HashMap<>();
         availableDevelopers = new ArrayList<>();
-        assignPM("vic7",projects.get(22002).getId());
-        assignPM("ekki",projects.get(22001).getId());
+        assignPM("vic7",22001);
+        assignPM("vic7",22002);
+        assignPM("ekki",22003);
 
         projects.get(22001).addDeveloper(developers.get("vic7"));
         projects.get(22002).addDeveloper(developers.get("ekki"));
-
+        projects.get(22003).addDeveloper(developers.get("ekki"));
     }
 
     public static void readFromCSV(String filePathProj, String filePathDevs, String filePathAktivities){
@@ -114,29 +110,28 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String[] readData) {
-        Developer newDeveloper = new Developer(readData[0]);
-        newDeveloper.setHolidayDates(readData);
-        newDeveloper.setSickDates(readData);
-        developers.put(readData[0],newDeveloper);
+        if(readData[0].length() == 4 && !isDeveloper(readData[0])) {                                                //1
+            Developer newDeveloper = new Developer(readData[0]);                                                    //2
+            newDeveloper.setHolidayDates(readData);                                                                 //3
+            newDeveloper.setSickDates(readData);                                                                    //4
+            developers.put(readData[0], newDeveloper);                                                              //5
 
-        if (!newDeveloper.hasOccupation && !newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc", "noSick"});
-        }
-        else if(!newDeveloper.hasOccupation && newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], "noOcc", readData[2],readData[3],readData[4],
-                    readData[5],readData[6],readData[7],});
-        }
-        else if(newDeveloper.hasOccupation && !newDeveloper.isSick){
-            csvDeveloperData.add(new String[] {readData[0], readData[1],readData[2],readData[3],readData[4],
-                    readData[5],readData[6], "noSick"});
-        }
-        else{
-            csvDeveloperData.add(readData);
-        }
-        writeToCSV("developers");
+            if (!newDeveloper.hasOccupation && !newDeveloper.isSick) {                                              //6
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", "noSick"});                                 //7
+            } else if (!newDeveloper.hasOccupation && newDeveloper.isSick) {                                        //8
+                csvDeveloperData.add(new String[]{readData[0], "noOcc", readData[2], readData[3], readData[4],      //9
+                        readData[5], readData[6], readData[7],});                                                   //10
+            } else if (newDeveloper.hasOccupation && !newDeveloper.isSick) {                                        //11
+                csvDeveloperData.add(new String[]{readData[0], readData[1], readData[2], readData[3], readData[4],  //12
+                        readData[5], readData[6], "noSick"});                                                       //13
+            } else {
+                csvDeveloperData.add(readData);                                                                     //14
+            }
+            writeToCSV("developers");                                                                           //15
 
-        if(developers.containsKey(readData[0])){
-            System.out.println("Success");
+            if (developers.containsKey(readData[0])) {                                                              //16
+                System.out.println("Success");                                                                      //17
+            }
         }
     }
 
@@ -156,57 +151,10 @@ public class SoftwareHuset {
     }
 
    public static void assignPM(String dev, int projectID){
-       if(!isManager(dev)){
+
         if(projects.containsKey(projectID) && developers.containsKey(dev)) {
             projectManagers.put(projectID, dev);
         }
-       }
-    }/*
-    public static void assignPM(String dev, int projectID){
-
-        if(!isDeveloper(dev)){
-            Developer newDev = new Developer(dev);
-
-        }
-
-        projectManagers.put(projectID,dev);
-        projects.get(projectID).assignManagerToProject(developers.get(dev));
-    }*/
-
-    public void listProjects(){
-        for (Project var : projects.values()){
-            var.printProject();
-            System.out.println("");
-        }
-    }
-    public static ArrayList<String> projectListManagers(Developer developer){
-        ArrayList<String> projectlist = new ArrayList<>();
-        String name = developer.getInitials();
-        for (Integer var : projectManagers.keySet()){
-            if (projectManagers.get(var).equals(name)){
-                projectlist.add(var.toString());
-            }
-        }
-        return projectlist;
-    }
-    public static ArrayList<Project> projectListDeveloper(Developer developer){
-        ArrayList<Project> projectlist2 = new ArrayList<>();
-
-        for (Project var : projects.values()){
-
-            if (var.developerIsInProject(developer)){
-                projectlist2.add(var);
-            }
-        }
-        return projectlist2;
-    }
-
-    public static ArrayList<String> fullProjectList(){
-        ArrayList<String> projectlist = new ArrayList<>();
-        for (Project project : projects.values()){
-                projectlist.add(String.valueOf(project.getId()));
-        }
-        return projectlist;
     }
 
     public static Developer getDeveloper(String name){
@@ -219,12 +167,15 @@ public class SoftwareHuset {
         for (Developer dev : developers.values()){
             if(dev.getAvailability(today)){
                 str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
+                availableDevelopers.add(dev);
             } else {
                 str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
             }
         }
         return str.toString();
     }
+
+
 
     public static boolean isDeveloper(String ini){
         return developers.containsKey(ini);
@@ -234,14 +185,14 @@ public class SoftwareHuset {
         return projectManagers.containsValue(ini);
     }
 
-    public boolean findProject(int projectId){
-        for (int id : projects.keySet()){
-            System.out.println(id);
-            if(id == projectId){
-                return true;
+    public static boolean findProject(int projectId){
+        for (int id : projects.keySet()){               //1
+            System.out.println(id);                     //2
+            if(id == projectId){                        //3
+                return true;                            //4
             }
         }
-        return false;
+        return false;                                   //5
     }
     public static Project getProject(String id){
         return projects.get(Integer.valueOf(id));

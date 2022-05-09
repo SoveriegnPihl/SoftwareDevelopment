@@ -21,18 +21,6 @@ class OptionPane extends JFrame {
             int hours = user.getHours();
             JOptionPane.showMessageDialog(alertFrame, "You have worked " + hours + " today");
         }
-
-        if (method.equals("Register sick day")) {
-            f = new JFrame();
-            f.setLocationRelativeTo(null);
-            int a = JOptionPane.showConfirmDialog(f,"Are you sick today?");
-            if(a==JOptionPane.YES_OPTION){
-                String name =JOptionPane.showInputDialog(f,"Comment");
-                f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            }
-
-
-        }
         if (method.equals("View available developers")) {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);

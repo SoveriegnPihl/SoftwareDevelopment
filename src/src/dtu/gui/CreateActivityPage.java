@@ -1,15 +1,12 @@
 package dtu.gui;
-import dtu.project.Activity;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.time.Month;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.Vector;
 
 // lavet af Victor Larsen-Saldeen
@@ -48,7 +45,7 @@ public class CreateActivityPage {
 
             }
         });
-        btnBack.setBounds(21, 350, 59, 29);
+        btnBack.setBounds(21, 350, 70, 29);
         createProjectPanel.add(btnBack);
 
         //adding labels to screen

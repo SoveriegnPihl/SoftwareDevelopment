@@ -1,23 +1,28 @@
-package dtu.employees;
+package dtu.project;
 
-import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
-import io.cucumber.java.hu.De;
 import org.junit.Assert;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.GregorianCalendar;
-import java.util.HashMap;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 class AvailabilityTest {
+    static boolean programStarted = false;
     public GregorianCalendar today = new GregorianCalendar();
+
+    @BeforeEach
+    void checkInit() {
+        if (!programStarted) {
+            programStarted = true;
+            SoftwareHuset.startProgram();
+        }
+    }
 
     @Test
     void getAvailabilityA() {
-        SoftwareHuset.startProgram();
+        programStarted = true;
         Developer developer = SoftwareHuset.getDeveloper("ekki");
         assertTrue(developer.getAvailability(today));
     }
@@ -46,4 +51,21 @@ class AvailabilityTest {
         developer.hasOccupation = false;
         SoftwareHuset.updateCSVFile("developers");
     }
+
+    @Test
+    void preCondition() {
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
+        assertFalse(developer.isSick);
+        assertFalse(developer.hasOccupation);
+        assertFalse(developer.sickFromThisDate == null);
+        assertFalse(developer.occupiedFromThisDate == null);
+    }
+
+    @Test
+    void postCondition() {
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
+        assertTrue(developer.getAvailability(today));
+    }
+
+
 }

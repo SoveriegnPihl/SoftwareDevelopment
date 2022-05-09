@@ -1,8 +1,7 @@
-package dtu.employees;
+package dtu.project;
 
 import dtu.project.Activity;
-import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -14,7 +13,7 @@ public class Developer {
     int hoursWorked;
     List<Activity> activities = new ArrayList<>();
     public boolean isSick;
-    boolean isProjectManager;
+    protected boolean isProjectManager;
     public GregorianCalendar occupiedUntilThisDate, occupiedFromThisDate, sickFromThisDate, sickUntilThisDate;
     public GregorianCalendar today = new GregorianCalendar();
     public boolean hasOccupation;
@@ -35,21 +34,21 @@ public class Developer {
     }
 
     public boolean getAvailability(GregorianCalendar date){
-        if (!hasOccupation && isSick){                                                                              //1
+        if (!hasOccupation && isSick){                                                                            //1
             return !(sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1);           //2
         }
-        else if (hasOccupation && !isSick){                                                                         //3
+        else if (hasOccupation && !isSick){                                                                       //3
             return !(occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1);   //4
         }
-        else if (hasOccupation && isSick){                                                                          //5
+        else if (hasOccupation && isSick){                                                                        //5
             if (occupiedFromThisDate.compareTo(date) == -1 && occupiedUntilThisDate.compareTo(date) == 1) {       //6
-                return false;                                                                                       //7
+                return false;                                                                                     //7
             }
             else if (sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1){           //8
-                return false;                                                                                       //9
+                return false;                                                                                     //9
             }
         }
-        return true;                                                                                                //10
+        return true;                                                                                              //10
     }
 
     public void addHoursToday(double hours){
@@ -60,20 +59,7 @@ public class Developer {
         return registeredHoursToday;
     }
 
-    public void addHours(int hours){
-        hoursWorked+=hours;
-    }
 
-    public int getHours(){ return hoursWorked; }
-
-    /*
-    public void setOccupied(boolean occupation){
-        isOccupied = occupation;
-    }
-
-    public boolean isOccupied(){
-        return isOccupied;
-    }*/
 
     public void setToProjectManager(){isProjectManager = true;}
 
@@ -211,3 +197,5 @@ public class Developer {
         SoftwareHuset.updateCSVFile("developers");
     }
 }
+
+

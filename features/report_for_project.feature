@@ -9,6 +9,8 @@ Feature: Get report for a project
     And that the developer is a project manager
     And there is a project with id "22001"
     Then the project manager is able to get time and budget used
+    And a report is created for the project
+    And the report contains all relevant information
 
   Scenario: project is not found
     Given that there is a manager with initials "ekki"

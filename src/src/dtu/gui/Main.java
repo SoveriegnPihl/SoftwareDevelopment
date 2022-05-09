@@ -1,13 +1,12 @@
 package dtu.gui;
 
-import dtu.employees.Developer;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.Developer;
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-// lavet af Victor Larsen-Saldeen
+
+
 
 public class Main {
     SoftwareHuset softwareHuset;
@@ -125,7 +124,7 @@ public class Main {
 
 
         createProjectBtn.addActionListener(e -> {
-            setFrameSize(500,500);
+            setFrameSize(520,450);
             setVisible(false);
             newProjectPage.setVisible(true);
             Main.setLocation();
@@ -161,7 +160,7 @@ public class Main {
         rightPanel.setLayout(null);
         leftPanel = new JPanel();
         mainPanel.add(leftPanel);
-        leftPanel.setBounds(325,25,250,300);
+        leftPanel.setBounds(312,25,250,300);
         leftPanel.setLayout(null);
         leftPanel .setBorder(BorderFactory.createTitledBorder("Functions"));
 
