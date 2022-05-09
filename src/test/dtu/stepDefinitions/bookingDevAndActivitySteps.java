@@ -186,6 +186,7 @@ public class bookingDevAndActivitySteps {
     @Then("the developers hours is added to the total hours worked on the activity")
     public void theDevelopersHoursIsAddedToTheTotalHoursWorkedOnTheActivity() {
         assertEquals(activityHours + hoursWorked, activity.getTotalRegisteredHours(),0.1);
+        activity.registerHours(developer, -hoursWorked);
     }
 
     @And("not assigned to selected project")
