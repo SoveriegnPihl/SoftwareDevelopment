@@ -1,7 +1,7 @@
 package dtu.gui;
 
 
-import dtu.softwarehus.SoftwareHuset;
+
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
