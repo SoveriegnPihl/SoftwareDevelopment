@@ -37,6 +37,7 @@ public class CreateProjectPage {
 
         JButton btnBack = new JButton("Back");
         btnBack.addActionListener(e -> {
+            clear();
             Main.setFrameSize(600,400);
             Main.setLocation();
             setVisible(false);

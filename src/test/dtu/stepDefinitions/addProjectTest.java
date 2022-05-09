@@ -2,11 +2,13 @@ package dtu.stepDefinitions;
 
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
+import io.cucumber.java.AfterAll;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
+import org.junit.AfterClass;
 import org.junit.jupiter.api.BeforeEach;
 
 
@@ -18,7 +20,7 @@ import static org.junit.Assert.*;
 public class addProjectTest {
     SoftwareHuset sf;
     Project thisProject;
-    int projectID;
+    static int projectID;
     GregorianCalendar startDate, endDate;
     int budget, budgetBefore,budgetToAdd;
 
@@ -29,6 +31,12 @@ public class addProjectTest {
             SoftwareHuset.startProgram();
         }
     }
+    @AfterAll
+    public static void deleteProject() {
+        SoftwareHuset.projects.remove(projectID);
+        SoftwareHuset.updateCSVFile("projects");
+    }
+
     public addProjectTest(SoftwareHuset softwareHuset){
         sf = softwareHuset;
     }
@@ -65,25 +73,24 @@ public class addProjectTest {
     public void thatAProjectWithIdExits(String name) {
         assertTrue(SoftwareHuset.projects.containsKey(Integer.parseInt(name)));
         thisProject = SoftwareHuset.projects.get(Integer.parseInt(name));
-        System.out.println(thisProject.getId()+" id for projektet");
     }
     @And("a project manager want to set new date and budget for the project")
     public void aProjectManagerWantToSetNewDateAndBudgetForTheProject() {
         budgetBefore = thisProject.getBudget();
-        System.out.println(thisProject.getBudget() + " før");
         budgetToAdd = 500;
-        int[] newStartDate = {Integer.parseInt(thisProject.getDateYear("start")), Integer.parseInt(thisProject.getDateMonth("start")), Integer.parseInt(thisProject.getDateDay("start"))+1};
-        int[] newEndDate = {Integer.parseInt(thisProject.getDateYear("end")), Integer.parseInt(thisProject.getDateMonth("end")), Integer.parseInt(thisProject.getDateDay("end")+1)};
+        int[] newStartDate = {Integer.parseInt(thisProject.getDateDay("start")), Integer.parseInt(thisProject.getDateMonth("start")), Integer.parseInt(thisProject.getDateYear("start"))};
+        int[] newEndDate = {Integer.parseInt(thisProject.getDateDay("end")), Integer.parseInt(thisProject.getDateMonth("end")), Integer.parseInt(thisProject.getDateYear("end"))};
         int newBudget = budgetBefore + budgetToAdd;
-
         thisProject.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
-        System.out.println(thisProject.getBudget() + "efter");
+        SoftwareHuset.updateCSVFile("projects");
+
     }
 
     @Then("date and budget is updated for the project")
     public void dateAndBudgetIsUpdatedForTheProject() {
         assertEquals(budgetBefore + budgetToAdd + thisProject.budgetUsed, thisProject.getBudget());
-
+        thisProject.budget = budgetBefore;
+        SoftwareHuset.updateCSVFile("projects");
     }
 
 

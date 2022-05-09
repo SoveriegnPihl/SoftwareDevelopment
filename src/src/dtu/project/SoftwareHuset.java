@@ -164,6 +164,8 @@ public class SoftwareHuset {
     public static String listAvailableDevelopers(){
         StringBuilder str = new StringBuilder();
 
+        assert getDeveloper("ekki").getAvailability(today) == true: "precondition";
+
         for (Developer dev : developers.values()){
             if(!dev.isSick){
                 str.append("Developer: " + dev.getInitials() + " is NOT occupied today" + "\n");
@@ -172,6 +174,9 @@ public class SoftwareHuset {
                 str.append("Developer: " + dev.getInitials() + " is occupied today" + "\n");
             }
         }
+
+        assert availableDevelopers.contains(getDeveloper("ekki")) == true: "postcondition";
+
         return str.toString();
     }
 

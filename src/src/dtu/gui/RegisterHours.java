@@ -112,17 +112,17 @@ public class RegisterHours {
 
             r2.addActionListener(e -> {
                 if(r2.isSelected()){
-                    checked = !checked;
+                    checked = true;
                     createProjectList();
                     setLabelVisible(checked);
                 }
             });
             r1.addActionListener(e -> {
                 if(r1.isSelected()){
-                    checked = !checked;
+                    checked = false;
                     createProjectList();
                     setLabelVisible(checked);
-                }
+               }
             });
 
 
@@ -150,19 +150,30 @@ public class RegisterHours {
                     hours+=0.5;
                 }
                 if(!checked) {
-                   Activity activity = project12.activities.get(activityCombo.getSelectedItem());
-                   activity.registerHours(loggedInUser,hours);
-
-               } else {
-                    int i = activeBox.getSelectedIndex();
-                   Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
-                    activity2.registerHours(loggedInUser,hours);
-               }
-
-                setVisible(false);
-                removeList();
-                clear();
-                DeveloperPage.setVisible(true);
+                    if (activityCombo.getItemAt(0) == null || hours == 0 || projectsComboBox.getItemAt(0)==null) {
+                        JOptionPane.showMessageDialog(null, "Please select proper values");
+                    }
+                    else {
+                        Activity activity = project12.activities.get(activityCombo.getSelectedItem());
+                        activity.registerHours(loggedInUser, hours);
+                        setVisible(false);
+                        removeList();
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    } }else {
+                    if (activeBox.getItemAt(0) == null || hours == 0 || projectComboNotAssigned.getItemAt(0) == null) {
+                        JOptionPane.showMessageDialog(null, "Please select proper values");
+                    } else {
+                        String i = (String) activeBox.getSelectedItem();
+                        System.out.println(i+"i er self");
+                        Activity activity2 = SoftwareHuset.allActivities.get(i);
+                        activity2.registerHours(loggedInUser, hours);
+                        setVisible(false);
+                        removeList();
+                        clear();
+                        DeveloperPage.setVisible(true);
+                    }
+                }
             });
 
         }
@@ -227,12 +238,14 @@ public class RegisterHours {
         registerHours.add(activityCombo);
 
         String project = projectsComboBox.getItemAt(0);
-        System.out.println(project.toString()+" hej");
 
 
+        //activityList = SoftwareHuset.getProject(project).userActivities(user).toArray(new Activity[0]);
+        if(projectsComboBox.getItemAt(0) != null) {
+            project12 = SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
+            project12.activities.values().forEach(activity -> {activityCombo.addItem(activity.name);});
+        }
 
-         project12 =  SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
-         project12.activities.values().forEach(activity -> {activityCombo.addItem(activity.name);});
 
         projectsComboBox.addActionListener(e -> {
             project12 =  SoftwareHuset.getProject((String) projectsComboBox.getSelectedItem());
