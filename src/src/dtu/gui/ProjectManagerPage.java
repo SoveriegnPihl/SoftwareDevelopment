@@ -137,6 +137,8 @@ public class ProjectManagerPage {
             Project project = SoftwareHuset.projects.get(Integer.parseInt((String) projectList.getSelectedItem()));
             project.addDeveloper(developer);
 
+
+
             pmPage2.setVisible(false);
             projectManagerPage.setVisible(true);
         });
