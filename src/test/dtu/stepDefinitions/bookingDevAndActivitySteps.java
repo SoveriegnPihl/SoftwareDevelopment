@@ -6,11 +6,11 @@ import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 import io.cucumber.java.BeforeAll;
 import io.cucumber.java.BeforeStep;
+import dtu.project.*;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.BeforeEach;
 
 import java.util.GregorianCalendar;
 
@@ -24,6 +24,7 @@ public class bookingDevAndActivitySteps {
     Activity activity;
     GregorianCalendar startHoli, finHoli;
     double activityHours, hoursWorked;
+    Report rep;
     GregorianCalendar today = new GregorianCalendar();
 
     @BeforeAll
@@ -122,6 +123,19 @@ public class bookingDevAndActivitySteps {
         project.getUsedTime();
         project.getBudgetUsed();
     }
+    @Then("a report is created for the project")
+    public void aReportIsCreatedForTheProject() {
+        rep = new Report(project);
+    }
+
+    @Then("the report contains all relevant information")
+    public void theReportContainsAllRelevantInformation() {
+        rep.printReport();
+        assertTrue(rep.project == project);
+    }
+
+
+
 
     @Given("that there is a manager with initials {string}")
     public void thatThereIsAManagerWithInitials(String managerInitials) {
