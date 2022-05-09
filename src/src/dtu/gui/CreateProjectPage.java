@@ -75,11 +75,9 @@ public class CreateProjectPage {
                 try {
 
 
-                    startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                            monthSelStart.getSelectedIndex(), Integer.parseInt(startDateTxtField.getText()));
+                    startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()), monthSelStart.getSelectedIndex(), Integer.parseInt(startDateTxtField.getText()));
 
-                    endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                            monthSelFin.getSelectedIndex(), Integer.parseInt(endDateTxtField.getText()));
+                    endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()), monthSelFin.getSelectedIndex(), Integer.parseInt(endDateTxtField.getText()));
                 } catch (NumberFormatException b) {
                     Main.createMessage("Error. " + b.getMessage());
                 }

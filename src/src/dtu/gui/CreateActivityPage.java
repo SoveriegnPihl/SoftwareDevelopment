@@ -94,16 +94,14 @@ public class CreateActivityPage {
 
             } else {
 
-                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
-                        Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31) {
+                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) && Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31) {
 
                     GregorianCalendar startDate = new GregorianCalendar(Integer.parseInt(startYear), Integer.parseInt(startMonth), Integer.parseInt(startDay));
                     GregorianCalendar endDate = new GregorianCalendar(Integer.parseInt(endYear), Integer.parseInt(endMonth), Integer.parseInt(endDay));
 
                     if (startDate.compareTo(endDate) == -1 && endDate.compareTo(startDate) == 1) {
                         DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
-                        String[] activityValues = new String[]{projectID, actName, startYear, startMonth, startDay,
-                                endYear, endMonth, endDay, estimatedTime, timeUsed, budget};
+                        String[] activityValues = new String[]{projectID, actName, startYear, startMonth, startDay, endYear, endMonth, endDay, estimatedTime, timeUsed, budget};
 
 
                         Project projectToAddTo = SoftwareHuset.projects.get(Integer.parseInt(projectID));

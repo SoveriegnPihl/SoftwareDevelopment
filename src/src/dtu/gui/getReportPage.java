@@ -3,6 +3,7 @@ package dtu.gui;
 import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
+
 import javax.swing.*;
 import java.text.DecimalFormat;
 

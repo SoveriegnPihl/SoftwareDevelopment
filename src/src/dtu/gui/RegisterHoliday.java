@@ -63,14 +63,11 @@ public class RegisterHoliday {
                     JOptionPane.showMessageDialog(frame1, "End date isn't an int!");
                 }
             } else {
-                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(endDateTxtField.getText()) > 0) &&
-                        Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(endDateTxtField.getText()) < 31) {
+                if ((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(endDateTxtField.getText()) > 0) && Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(endDateTxtField.getText()) < 31) {
 
-                    GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                            monthSelStart.getSelectedIndex(), Integer.parseInt(startDateTxtField.getText()));
+                    GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()), monthSelStart.getSelectedIndex(), Integer.parseInt(startDateTxtField.getText()));
 
-                    GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                            monthSelFin.getSelectedIndex(), Integer.parseInt(endDateTxtField.getText()));
+                    GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()), monthSelFin.getSelectedIndex(), Integer.parseInt(endDateTxtField.getText()));
 
                     if (startDate.compareTo(endDate) == -1 || endDate.compareTo(startDate) == 1) {
                         DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
