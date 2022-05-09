@@ -1,6 +1,7 @@
 package dtu.gui;
 
 import dtu.project.SoftwareHuset;
+import org.junit.Assert;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,6 +20,7 @@ public class RegisterHoliday {
     JComboBox<Month> monthSelStart, monthSelFin;
     JComboBox<Integer> yearSelStart, yearSelFin;
     int year;
+    JFrame frame1;
 
     public RegisterHoliday(SoftwareHuset softwareHuset, Main parentWindow) {
         this.softwareHuset = softwareHuset;
@@ -52,18 +54,32 @@ public class RegisterHoliday {
         createProjectPanel.add(saveBtn);
 
         saveBtn.addActionListener(e -> {
-            //date intervals
-            GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
-                    monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
+            if((Integer.parseInt(startDateTxtField.getText()) > 0 && Integer.parseInt(startDateTxtField.getText()) > 0) &&
+            Integer.parseInt(startDateTxtField.getText()) < 31 && Integer.parseInt(startDateTxtField.getText()) < 31){
 
-            GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
-                    monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
+                GregorianCalendar startDate = new GregorianCalendar(yearSelStart.getItemAt(yearSelStart.getSelectedIndex()),
+                        monthSelStart.getSelectedIndex(),Integer.parseInt(startDateTxtField.getText()));
 
-            DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
+                GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
+                        monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
 
-            setVisible(false);
-            clear();
-            DeveloperPage.setVisible(true);
+                if(startDate.compareTo(endDate)== -1){
+                    DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
+
+                    setVisible(false);
+                    clear();
+                    DeveloperPage.setVisible(true);
+                }
+                else{
+                    JOptionPane.showMessageDialog(frame1, "End date is before start date");
+                }
+
+
+            }
+            else{
+                JOptionPane.showMessageDialog(frame1, "Set a proper day");
+            }
+
         });
     }
     private void clear() {
