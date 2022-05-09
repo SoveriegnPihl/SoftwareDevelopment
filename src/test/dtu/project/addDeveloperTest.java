@@ -43,19 +43,5 @@ public class addDeveloperTest {
                 "10", "10", "2022", "11", "11", "2022", "10", "10", "2022", "11", "11"});
     }
 
-    @Test
-    public void preCondition() {
-        String ini = "rofl";
-        Assert.assertTrue(ini.length() == 4);
-        Assertions.assertFalse(SoftwareHuset.developers.containsKey(ini));
-    }
-
-    @Test
-    public void postCondition() {
-        Developer rofl = new Developer("rofl");
-        SoftwareHuset.developers.put(rofl.getInitials(), rofl);
-        Assert.assertTrue(SoftwareHuset.developers.containsKey(rofl.getInitials()));
-        SoftwareHuset.developers.remove(rofl.getInitials());
-    }
 
 }

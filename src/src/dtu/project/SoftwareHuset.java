@@ -1,5 +1,7 @@
 package dtu.project;
 
+import org.junit.Assert;
+
 import java.io.File;
 import java.io.PrintWriter;
 import java.util.ArrayList;
@@ -110,6 +112,11 @@ public class SoftwareHuset {
     }
 
     public static void addDeveloper(String[] readData) {
+        //PRE
+        String ini = readData[0];
+        Assert.assertTrue(ini.length() == 4);
+        Assert.assertFalse(SoftwareHuset.developers.containsKey(ini));
+
         if(readData[0].length() == 4 && !isDeveloper(readData[0])) {                                                //1
             Developer newDeveloper = new Developer(readData[0]);                                                    //2
             newDeveloper.setHolidayDates(readData);                                                                 //3
@@ -127,12 +134,11 @@ public class SoftwareHuset {
             } else {
                 csvDeveloperData.add(readData);                                                                     //14
             }
-            writeToCSV("developers");                                                                           //15
-
-            if (developers.containsKey(readData[0])) {                                                              //16
-                System.out.println("Success");                                                                      //17
-            }
+            writeToCSV("developers");                                                                               //15
+            //POST
+            Assert.assertTrue((developers.containsKey(readData[0])));
         }
+
     }
 
     public static int createProject(GregorianCalendar start, GregorianCalendar end, int budget){
