@@ -2,6 +2,7 @@ package dtu.gui;
 import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
+import dtu.softwarehus.Utility;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -84,18 +85,18 @@ public class CreateActivityPage {
             String endMonth = String.valueOf(monthSelFin.getSelectedIndex());
             String endDay = endDateTxtField.getText();
 
-            if (!(isInt(startDay) && isInt(endDay) && isInt(budget) && isInt(estimatedTime))) {
-                if (!isInt(startDay)) {
+            if (!(Utility.isInt(startDay) && Utility.isInt(endDay) && Utility.isInt(budget) && Utility.isInt(estimatedTime))) {
+                if (!Utility.isInt(startDay)) {
                     JOptionPane.showMessageDialog(frame, "Start date isn't an int!");
                 }
-                if (!isInt(endDay)) {
+                if (!Utility.isInt(endDay)) {
                     JOptionPane.showMessageDialog(frame, "End date isn't an int!");
                 }
-                if (!isInt(estimatedTime)) {
+                if (!Utility.isInt(estimatedTime)) {
                     JOptionPane.showMessageDialog(frame, "Estimated time date isn't an int!");
                 }
 
-                if (!isInt(budget)) {
+                if (!Utility.isInt(budget)) {
                     JOptionPane.showMessageDialog(frame, "Budget date isn't an int!");
                 }
 
@@ -272,15 +273,5 @@ public class CreateActivityPage {
         createProjectPanel.add(projectCombo);
     }
 
-    public boolean isInt(String message) {
-        try {
-            int intForTest = Integer.parseInt(message);
-            return true;
 
-        }catch(NumberFormatException e) {
-
-        }
-
-        return false;
-    }
 }
