@@ -79,7 +79,16 @@ public class Project {
     }
 
     public void addDeveloper (Developer dev){
-        developers.add(dev);
+        boolean exists = false;
+        for (Developer d : developers){
+            if (d.getInitials().equals(dev.getInitials())){
+                exists = true;
+            }
+        }
+        System.out.println(exists);
+        if (!exists){
+            developers.add(dev);
+        }
     }
 
     public boolean developerIsInProject (Developer dev){
