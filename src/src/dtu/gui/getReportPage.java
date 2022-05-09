@@ -1,4 +1,5 @@
 package dtu.gui;
+import dtu.project.Developer;
 import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 
@@ -42,16 +43,6 @@ public class getReportPage {
         //adding textfields to screen
         addTextFieldsToScreen();
 
-        //adding save button
-        saveBtn = new JButton("Save"); //set label to button
-        saveBtn.setBounds(165, 300, 193, 29);
-        getReportPanel.add(saveBtn);
-
-        saveBtn.addActionListener(e -> {
-            setVisible(false);
-            clear();
-            ProjectManagerPage.setVisible(true);
-        });
 
     }
     public void setVisible(boolean visi){
@@ -62,12 +53,12 @@ public class getReportPage {
         projectToManage = SoftwareHuset.projects.get(Integer.parseInt(project));
 
         //Update combobox with developers
-        for (String developer : SoftwareHuset.developers.keySet()) {
-            developerList.addItem(developer);
+        for (Developer developer : projectToManage.developers) {
+            developerList.addItem(developer.getInitials());
         }
 
         //Update combobox with activities
-        for (String activity : SoftwareHuset.allActivities.keySet()) {
+        for (String activity : projectToManage.activities.keySet()) {
             activityList.addItem(activity);
         }
 
@@ -116,8 +107,6 @@ public class getReportPage {
 
         //ComboBox for list of developers
         developerList = new JComboBox<Object>();
-        developerList.setBounds(60, 160, 100, 29);
-
         developerList.setBounds(60, 160, 100, 29);
         getReportPanel.add(developerList);
 

@@ -9,6 +9,8 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import org.junit.jupiter.api.BeforeEach;
 
+import java.util.GregorianCalendar;
+
 import static org.junit.Assert.*;
 
 public class addDeveloperSteps {
@@ -54,6 +56,7 @@ public class addDeveloperSteps {
 
     @Given("that {string} is a developer")
     public void thatIsADeveloper(String devName) {
+        newDeveloperName = devName;
         assertTrue(softwareHuset.isDeveloper(devName));
     }
 
@@ -65,5 +68,24 @@ public class addDeveloperSteps {
     @Then("{string} is still an employee")
     public void isStillAnEmployee(String name) {
         assertTrue(SoftwareHuset.isDeveloper(name));
+    }
+
+    @And("the developer has a holiday starting {int} - {int} - {int} and finishing {int} - {int} - {int}")
+    public void theDeveloperHasAHolidayStartingAndFinishing(int startD, int startM, int startY, int endD, int endM, int endY) {
+        softwareHuset.addDeveloper(new String[]{newDeveloperName, String.valueOf(startY), String.valueOf(startM), String.valueOf(startD),String.valueOf(endY),String.valueOf(endM),String.valueOf(endD), "noSick"});
+    }
+
+    @Then("the developer dont have a occupation")
+    public void theDeveloperDontHaveAOccupation() {
+        assertFalse(softwareHuset.developers.get(newDeveloperName).hasOccupation);
+        softwareHuset.developers.remove("thom");
+        softwareHuset.updateCSVFile("developers");
+    }
+
+    @Then("the developer has a occupation")
+    public void theDeveloperHasAOccupation() {
+        assertTrue(softwareHuset.developers.get(newDeveloperName).hasOccupation);
+        softwareHuset.developers.remove("thom");
+        softwareHuset.updateCSVFile("developers");
     }
 }

@@ -7,6 +7,12 @@ Feature: Register work hours
     When the developer registers 2 hours worked on "Prepare project"
     Then the developers hours is added to the total hours worked on the activity
 
+  Scenario: Developer wants to register additional hours
+    Given there is a developer with initials "vicc"
+    And there is already registered hours
+    When the developer registers hours
+    Then total hours is hours before plus registered hours
+
   Scenario: A non-existing developer wants to register work hours
     Given that there is not a developer with initials "Tyl4"
     Then the error message "No developer with such name exists" is given

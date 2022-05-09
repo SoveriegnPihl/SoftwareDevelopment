@@ -16,3 +16,15 @@ Feature: Adding an employee to the system
   Scenario: User creates an existing employee
     Given that "ekki" is a developer
     Then "ekki" is still an employee
+
+  Scenario: Adds developer with holiday
+    Given that "thom" is not a developer
+    And that the initials isn't greater than 4
+    And the developer has a holiday starting 1 - 7 - 2022 and finishing 5 - 7 - 2022
+    Then the developer has a occupation
+
+  Scenario: Adds developer with old holiday
+    Given that "thom" is not a developer
+    And that the initials isn't greater than 4
+    And the developer has a holiday starting 1 - 2 - 2022 and finishing 5 - 2 - 2022
+    Then the developer dont have a occupation

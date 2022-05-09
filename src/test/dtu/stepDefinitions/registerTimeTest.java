@@ -1,26 +1,26 @@
 package dtu.stepDefinitions;
-import dtu.Helper.ErrorMessageHolder;
 import dtu.project.Activity;
 import dtu.project.Developer;
 import dtu.project.SoftwareHuset;
 import io.cucumber.java.BeforeAll;
-import io.cucumber.java.BeforeStep;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.AfterClass;
+import org.junit.Assert;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
-public class timereportTest {
+public class registerTimeTest {
     SoftwareHuset softwareHuset;
 
     Developer developer,developer2;
-    Activity activity;
     int addedHours;
-
+    Activity activity;
+    Developer vic7;
+    double hoursBefore;
     @BeforeAll
     public static void checkInit() {
         if (!AAcheckForEmployeesTest.programStarted) {
@@ -29,7 +29,7 @@ public class timereportTest {
         }
     }
 
-    public timereportTest(SoftwareHuset sf) {
+    public registerTimeTest(SoftwareHuset sf) {
         softwareHuset = sf;
     }
 
@@ -57,6 +57,7 @@ public class timereportTest {
     @Then("daily worked hours is given for {string}")
     public void dailyWorkedHoursIsGivenFor(String name) {
     assertEquals(softwareHuset.getDeveloper(name).getRegisteredHoursToday(),addedHours,0.1);
+    activity.registerHours(developer,-5);
     }
 
 
@@ -89,5 +90,28 @@ public class timereportTest {
     @Then("zero hours is given for {string}")
     public void zeroHoursIsGivenFor(String name) {
         assertEquals(softwareHuset.developers.get(name).getRegisteredHoursToday(),0,0.1);
+    }
+
+    @And("there is already registered hours")
+    public void thereIsAlreadyRegisteredHours() {
+        activity = SoftwareHuset.allActivities.get("Test solutions");
+        vic7 = SoftwareHuset.developers.get("vic7");
+        activity.registerHours(vic7, 5);
+        hoursBefore = vic7.getRegisteredHoursToday();
+        assertTrue(activity.registeredHours.containsKey(vic7));
+    }
+
+    @When("the developer registers hours")
+    public void theDeveloperRegistersHours() {
+        activity = SoftwareHuset.allActivities.get("Test solutions");
+        vic7 = SoftwareHuset.developers.get("vic7");
+        activity.registerHours(vic7,5);
+
+    }
+
+    @Then("total hours is hours before plus registered hours")
+    public void totalHoursIsHoursBeforePlusRegisteredHours() {
+        Assert.assertEquals(vic7.getRegisteredHoursToday(), hoursBefore +5,0.1 );
+        activity.registerHours(vic7,-10);
     }
 }

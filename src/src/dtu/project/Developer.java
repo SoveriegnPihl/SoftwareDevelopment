@@ -34,6 +34,7 @@ public class Developer {
     }
 
     public boolean getAvailability(GregorianCalendar date){
+        assert sickFromThisDate != null && sickUntilThisDate != null && occupiedFromThisDate != null && occupiedUntilThisDate != null : "Precondition";
         if (!hasOccupation && isSick){                                                                            //1
             return !(sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1);           //2
         }
@@ -58,7 +59,6 @@ public class Developer {
     public double getRegisteredHoursToday(){
         return registeredHoursToday;
     }
-
 
 
     public void setToProjectManager(){isProjectManager = true;}

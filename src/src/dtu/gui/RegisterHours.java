@@ -45,10 +45,7 @@ public class RegisterHours {
             });
             btnBack.setBounds(51, 300, 70, 29);
             registerHours.add(btnBack);
-/*
-            checkBox1 = new JCheckBox("Not assigned to project");
-            checkBox1.setBounds(150, 25, 193, 29);
-*/
+
             JLabel assignedOrNot = new JLabel();
             assignedOrNot.setText("Are you assigned to the project?");
             assignedOrNot.setBounds(20, 20, 250, 29);
@@ -112,12 +109,7 @@ public class RegisterHours {
             JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
             minCB.setBounds(400, 155, 70, 30);
             registerHours.add(minCB);
-/*
-            checkBox1.addActionListener(e -> {
-                checked = !checked;
-                createProjectList();
-                setLabelVisible(checked);
-            });*/
+
             r2.addActionListener(e -> {
                 if(r2.isSelected()){
                     checked = !checked;
@@ -238,7 +230,6 @@ public class RegisterHours {
         System.out.println(project.toString()+" hej");
 
 
-        //activityList = SoftwareHuset.getProject(project).userActivities(user).toArray(new Activity[0]);
 
          project12 =  SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
          project12.activities.values().forEach(activity -> {activityCombo.addItem(activity.name);});
