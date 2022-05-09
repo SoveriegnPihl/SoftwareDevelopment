@@ -50,4 +50,21 @@ class AvailabilityTest {
         developer.hasOccupation = false;
         SoftwareHuset.updateCSVFile("developers");
     }
+
+    @Test
+    void preCondition() {
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
+        assertFalse(developer.isSick);
+        assertFalse(developer.hasOccupation);
+        assertFalse(developer.sickFromThisDate == null);
+        assertFalse(developer.occupiedFromThisDate == null);
+    }
+
+    @Test
+    void postCondition() {
+        Developer developer = SoftwareHuset.getDeveloper("ekki");
+        assertTrue(developer.getAvailability(today));
+    }
+
+
 }
