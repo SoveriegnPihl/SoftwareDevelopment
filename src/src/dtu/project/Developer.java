@@ -8,6 +8,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
 
+import static org.junit.Assert.assertTrue;
+
 public class Developer {
     public String initials;
     int hoursWorked;
@@ -35,6 +37,7 @@ public class Developer {
 
     public boolean getAvailability(GregorianCalendar date){
         assert sickFromThisDate != null && sickUntilThisDate != null && occupiedFromThisDate != null && occupiedUntilThisDate != null : "Precondition";
+
         if (!hasOccupation && isSick){                                                                            //1
             return !(sickFromThisDate.compareTo(date) == -1 && sickUntilThisDate.compareTo(date) == 1);           //2
         }
@@ -49,6 +52,7 @@ public class Developer {
                 return false;                                                                                     //9
             }
         }
+        assert(true || false) : "Postcondition";
         return true;                                                                                              //10
     }
 
