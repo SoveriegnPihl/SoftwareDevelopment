@@ -229,7 +229,6 @@ public class CreateActivityPage {
 
         createProjectPanel.add(startDateTxtField);
         createProjectPanel.add(endDateTxtField);
-        //createProjectPanel.add(allProjects);
         createProjectPanel.add(estTimeTxtField);
         createProjectPanel.add(nameTxtField);
         createProjectPanel.add(budgetTxtField);

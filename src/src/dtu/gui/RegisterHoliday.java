@@ -63,7 +63,7 @@ public class RegisterHoliday {
                 GregorianCalendar endDate = new GregorianCalendar(yearSelFin.getItemAt(yearSelFin.getSelectedIndex()),
                         monthSelFin.getSelectedIndex(),Integer.parseInt(endDateTxtField.getText()));
 
-                if(startDate.compareTo(endDate)== -1){
+                if(startDate.compareTo(endDate)== -1 && endDate.compareTo(startDate) == 1){
                     DeveloperPage.loggedInUser.setHoliday(startDate, endDate);
 
                     setVisible(false);
@@ -71,7 +71,7 @@ public class RegisterHoliday {
                     DeveloperPage.setVisible(true);
                 }
                 else{
-                    JOptionPane.showMessageDialog(frame1, "End date is before start date");
+                    JOptionPane.showMessageDialog(frame1, "Date intervals does not match");
                 }
 
 
