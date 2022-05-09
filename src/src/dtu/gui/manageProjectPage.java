@@ -53,6 +53,8 @@ public class manageProjectPage {
         createProjectPanel.add(saveBtn);
 
 
+
+
         saveBtn.addActionListener(e -> {
             int[] newStartDate = {Integer.parseInt(startDateTxtField.getText()), monthSelStart.getSelectedIndex(), yearSelStart.getItemAt(yearSelStart.getSelectedIndex())};
             int[] newEndDate = {Integer.parseInt(endDateTxtField.getText()), monthSelFin.getSelectedIndex(), yearSelFin.getItemAt(yearSelStart.getSelectedIndex())};
@@ -137,7 +139,6 @@ public class manageProjectPage {
 
         createProjectPanel.add(startDateTxtField);
         createProjectPanel.add(endDateTxtField);
-        createProjectPanel.add(projectManagerTxtField);
         createProjectPanel.add(budgetTxtField);
         createProjectPanel.add(monthSelStart);
         createProjectPanel.add(yearSelStart);
@@ -149,6 +150,16 @@ public class manageProjectPage {
         parentWindow.addPanel(createProjectPanel);
         createProjectPanel.setLayout(null);
         createProjectPanel.setBorder(BorderFactory.createTitledBorder("Manage project page"));
+    }
+
+    public void setDevs(){
+        JComboBox<Object> developerCombo = new JComboBox<>();
+        for (String developer : SoftwareHuset.developers.keySet()) {
+            developerCombo.addItem(developer);
+        }
+
+        developerCombo.setBounds(250, 200, 193, 29);
+        createProjectPanel.add(developerCombo);
     }
 
     public void clear() {

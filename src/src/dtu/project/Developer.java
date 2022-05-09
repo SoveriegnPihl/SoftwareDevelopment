@@ -65,6 +65,7 @@ public class Developer {
     }
 
 
+
     public void setToProjectManager(){isProjectManager = true;}
 
     public boolean isProjectManager() {return isProjectManager;}

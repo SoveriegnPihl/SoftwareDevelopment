@@ -50,13 +50,6 @@ public class Activity {
             totalRegisteredHours = hours;
         }
     }
-    /*public double getRegisteredHours(){
-        double amountOfRegisteredHours = 0;
-        for (double i : registeredHours.values()) {
-            amountOfRegisteredHours += i;
-        }
-    return amountOfRegisteredHours;
-    }*/
 
     public void setProjectAssignedTo(int projectID){this.projectAssignedTo = projectID;}
 
