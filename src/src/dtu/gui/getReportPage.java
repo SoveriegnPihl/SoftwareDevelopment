@@ -130,7 +130,10 @@ public class getReportPage {
     }
 
     public void clear() {
-
+        timeLabel.setText("");
+        budgetLabel.setText("");
+        developerList.removeAllItems();
+        activityList.removeAllItems();
 
     }
 }
