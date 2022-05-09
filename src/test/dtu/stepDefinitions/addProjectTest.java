@@ -73,17 +73,14 @@ public class addProjectTest {
     public void thatAProjectWithIdExits(String name) {
         assertTrue(SoftwareHuset.projects.containsKey(Integer.parseInt(name)));
         thisProject = SoftwareHuset.projects.get(Integer.parseInt(name));
-        System.out.println(thisProject.getId()+" id for projektet");
     }
     @And("a project manager want to set new date and budget for the project")
     public void aProjectManagerWantToSetNewDateAndBudgetForTheProject() {
         budgetBefore = thisProject.getBudget();
-        System.out.println(thisProject.getBudget() + " før");
         budgetToAdd = 500;
         int[] newStartDate = {Integer.parseInt(thisProject.getDateDay("start")), Integer.parseInt(thisProject.getDateMonth("start")), Integer.parseInt(thisProject.getDateYear("start"))};
         int[] newEndDate = {Integer.parseInt(thisProject.getDateDay("end")), Integer.parseInt(thisProject.getDateMonth("end")), Integer.parseInt(thisProject.getDateYear("end"))};
         int newBudget = budgetBefore + budgetToAdd;
-
         thisProject.setNewDateAndBudget(newStartDate, newEndDate, newBudget);
         SoftwareHuset.updateCSVFile("projects");
 

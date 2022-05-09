@@ -6,6 +6,7 @@ import dtu.project.Project;
 import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
 
 // lavet af Victor Larsen-Saldeen
@@ -20,7 +21,6 @@ public class ChangeHours {
     private static JComboBox<Object> activeBox;
     private static Developer loggedInUser;
     private JLabel selectLabel,userLabel5;
-    private boolean checked = false;
     JCheckBox checkBox1;
     private JComboBox<Integer> hoursCB;
     static Activity[] activityList;
@@ -30,6 +30,7 @@ public class ChangeHours {
     private static JPanel topPanel;
     private JPanel bottomPanel;
     JTextField changeHoursField;
+    boolean checked = false;
 
     public ChangeHours(Developer loggedInUser, Main parentWindow) {
         this.loggedInUser = loggedInUser;
@@ -49,68 +50,43 @@ public class ChangeHours {
             btnBack.setBounds(30, 40, 80, 29);
             bottomPanel.add(btnBack);
 
-            JLabel assignedOrNot = new JLabel();
-            assignedOrNot.setText("Are you assigned to the project?");
-            assignedOrNot.setBounds(10, 10, 250, 29);
-            topPanel.add(assignedOrNot);
-
-            JRadioButton r1=new JRadioButton("Yes");
-            JRadioButton r2=new JRadioButton("No");
-            r1.setBounds(275,10,75,30);
-            r2.setBounds(375,10,75,30);
-            r1.setSelected(true);
-            ButtonGroup bg=new ButtonGroup();
-
-            bg.add(r1);bg.add(r2);
-            topPanel.add(r1);topPanel.add(r2);
-
-
             selectLabel = new JLabel();
             selectLabel.setText("Select project");
-            selectLabel.setBounds(25, 50, 193, 29);
+            selectLabel.setBounds(25, 25, 193, 29);
 
             JLabel selectActivity = new JLabel();
             selectActivity.setText("Select activity");
-            selectActivity.setBounds(25, 90, 193, 29);
+            selectActivity.setBounds(25, 65, 193, 29);
 
             userLabel5 = new JLabel();
             userLabel5.setText("Select project id");
-            userLabel5.setBounds(25, 50, 193, 29);
+            userLabel5.setBounds(25, 25, 193, 29);
 
             JTextField writeProject = new JTextField(15);
-            writeProject.setBounds(250, 90, 193, 29);
+            writeProject.setBounds(250, 65, 193, 29);
 
             JButton searchButton = new JButton("Search registered hours"); //set label to button
-            searchButton.setBounds(249,130 , 193, 29);
+            searchButton.setBounds(249,110 , 193, 29);
 
-            r2.addActionListener(e -> {
-                if(r2.isSelected()){
-                    checked = !checked;
-                    createProjectList();
-                    setLabelVisible(checked);
-                }
-            });
-            r1.addActionListener(e -> {
-                if(r1.isSelected()){
-                    checked = !checked;
-                    createProjectList();
-                    setLabelVisible(checked);
-                }
-            });
 
             searchButton.addActionListener(e -> {
-            activity = project12.activities.get(activityCombo.getSelectedItem());
+            try {
+                checked = true;
+                activity = project12.activities.get(activityCombo.getSelectedItem());
                 System.out.println(activity.getTotalRegisteredHours());
-                if(activity.registeredHours.get(loggedInUser) == null) {
+                if (activity.registeredHours.get(loggedInUser) == null) {
                     userLabel.setText("Registered hours for selected activity = " + "0.0" + "\n" + " out of " + loggedInUser.getRegisteredHoursToday() + " today");
                 } else {
                     userLabel.setText("Registered hours for selected activity = " + activity.registeredHours.get(loggedInUser) + "\n" + " out of " + loggedInUser.getRegisteredHoursToday() + " today");
-
                 }
-                    userLabel.setVisible(true);
+                userLabel.setVisible(true);
+            } catch (Exception ea) {
+                userLabel.setText("Select project and activity");
+            }
             });
             userLabel = new JLabel();
-            userLabel.setBounds(25, 160, 500, 29);
+            userLabel.setBounds(25, 150, 500, 29);
+            userLabel.setFont(new Font("cambria", Font.BOLD,15));
             topPanel.add(userLabel);
             userLabel.setVisible(false);
 
@@ -137,24 +113,27 @@ public class ChangeHours {
             writeProject.setVisible(false);
 
             submitButton.addActionListener(e -> {
-
-            try{
-                double hourChange = Double.parseDouble(changeHoursField.getText());
-                if(activity.registeredHours.containsKey(loggedInUser)) {
-                    if (activity.registeredHours.get(loggedInUser) + hourChange >= 0) {
-                        activity.registerHours(loggedInUser, Double.parseDouble(changeHoursField.getText()));
-                        setVisible(false);
-                        removeList();
-                        clear();
-                        DeveloperPage.setVisible(true);
-                    } else {
-                        JOptionPane.showMessageDialog(null, "You can't remove more hours than registered!");
+            if(checked) {
+                try {
+                    double hourChange = Double.parseDouble(changeHoursField.getText());
+                    if (activity.registeredHours.containsKey(loggedInUser)) {
+                        if (activity.registeredHours.get(loggedInUser) + hourChange >= 0) {
+                            activity.registerHours(loggedInUser, Double.parseDouble(changeHoursField.getText()));
+                            checked = false;
+                            setVisible(false);
+                            removeList();
+                            clear();
+                            DeveloperPage.setVisible(true);
+                        } else {
+                            JOptionPane.showMessageDialog(null, "You can't remove more hours than registered!");
+                        }
                     }
+                } catch (NumberFormatException ea) {
+                    JOptionPane.showMessageDialog(null, "Please only use numbers");
                 }
-            } catch (NumberFormatException ea) {
-                JOptionPane.showMessageDialog(null, "Please only use numbers");
+            } else {
+                JOptionPane.showMessageDialog(null, "Check hours first please");
             }
-
 
 
             });
@@ -184,12 +163,12 @@ public class ChangeHours {
     public static void createProjectList(){
         String[] list = DeveloperPage.fullProjectList().toArray(new String[0]);
         projectComboNotAssigned = new JComboBox<>(list);
-        projectComboNotAssigned.setBounds(250, 50, 193, 29);
+        projectComboNotAssigned.setBounds(250, 25, 193, 29);
         topPanel.add(projectComboNotAssigned);
 
         project11 =  SoftwareHuset.getProject(projectComboNotAssigned.getItemAt(0));
         activeBox = new JComboBox<>();
-        activeBox.setBounds(250, 90, 193, 29);
+        activeBox.setBounds(250, 65, 193, 29);
         topPanel.add(activeBox);
 
         for (Activity activity : project11.activities.values()) {
@@ -209,22 +188,23 @@ public class ChangeHours {
     public static void createList(Developer user){
         ArrayList<Project> list = projectListDeveloper(user);
         projectsComboBox = new JComboBox<>();
-        projectsComboBox.setBounds(250, 50, 193, 29);
+        projectsComboBox.setBounds(250, 25, 193, 29);
         topPanel.add(projectsComboBox);
 
         list.forEach(project -> {projectsComboBox.addItem(String.valueOf(project.getId()));});
         activityCombo = new JComboBox<>();
-        activityCombo.setBounds(250, 90, 193, 29);
+        activityCombo.setBounds(250, 65, 193, 29);
         topPanel.add(activityCombo);
 
         String project = projectsComboBox.getItemAt(0);
-        System.out.println(project.toString()+" hej");
 
 
-        //activityList = SoftwareHuset.getProject(project).userActivities(user).toArray(new Activity[0]);
-
-        project12 =  SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
-        project12.activities.values().forEach(activity -> {activityCombo.addItem(activity.name);});
+        try {
+            project12 = SoftwareHuset.getProject(projectsComboBox.getItemAt(0));
+            project12.activities.values().forEach(activity -> {
+                activityCombo.addItem(activity.name);
+            });
+        } catch (NumberFormatException e){}
 
         projectsComboBox.addActionListener(e -> {
             project12 =  SoftwareHuset.getProject((String) projectsComboBox.getSelectedItem());
@@ -244,7 +224,7 @@ public class ChangeHours {
         changeHours = new JPanel();
         parentWindow.addPanel(changeHours);
         changeHours.setLayout(null);
-        changeHours.setBorder(BorderFactory.createTitledBorder("Register hours page"));
+        changeHours.setBorder(BorderFactory.createTitledBorder("Manage hours"));
         topPanel = new JPanel();
         topPanel.setBounds(25,25,450,250);
         changeHours.add(topPanel);
@@ -254,7 +234,7 @@ public class ChangeHours {
         changeHours.add(bottomPanel);
         bottomPanel.setBounds(25,300,450,100);
         bottomPanel.setLayout(null);
-        bottomPanel.setBorder(BorderFactory.createTitledBorder("Change hours"));
+        bottomPanel.setBorder(BorderFactory.createTitledBorder("Submit"));
 
     }
     public static ArrayList<Project> projectListDeveloper(Developer developer){

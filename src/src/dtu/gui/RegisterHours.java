@@ -112,25 +112,20 @@ public class RegisterHours {
             JComboBox<Integer> minCB = new JComboBox<>(comboBoxItemsMinutes);
             minCB.setBounds(400, 155, 70, 30);
             registerHours.add(minCB);
-/*
-            checkBox1.addActionListener(e -> {
-                checked = !checked;
-                createProjectList();
-                setLabelVisible(checked);
-            });*/
+
             r2.addActionListener(e -> {
                 if(r2.isSelected()){
-                    checked = !checked;
+                    checked = true;
                     createProjectList();
                     setLabelVisible(checked);
                 }
             });
             r1.addActionListener(e -> {
                 if(r1.isSelected()){
-                    checked = !checked;
+                    checked = false;
                     createProjectList();
                     setLabelVisible(checked);
-                }
+               }
             });
 
 
@@ -172,8 +167,9 @@ public class RegisterHours {
                     if (activeBox.getItemAt(0) == null || hours == 0 || projectComboNotAssigned.getItemAt(0) == null) {
                         JOptionPane.showMessageDialog(null, "Please select proper values");
                     } else {
-                        int i = activeBox.getSelectedIndex();
-                        Activity activity2 = (Activity) project11.activities.keySet().toArray()[i];
+                        String i = (String) activeBox.getSelectedItem();
+                        System.out.println(i+"i er self");
+                        Activity activity2 = SoftwareHuset.allActivities.get(i);
                         activity2.registerHours(loggedInUser, hours);
                         setVisible(false);
                         removeList();
@@ -245,7 +241,6 @@ public class RegisterHours {
         registerHours.add(activityCombo);
 
         String project = projectsComboBox.getItemAt(0);
-        System.out.println(project.toString()+" hej");
 
 
         //activityList = SoftwareHuset.getProject(project).userActivities(user).toArray(new Activity[0]);
