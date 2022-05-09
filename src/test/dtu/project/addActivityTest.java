@@ -40,7 +40,11 @@ public class addActivityTest {
         assertFalse(project.findActivity(activity.getName()));
     }
     @Test
-    public void preCond(){
+    public void preCondition(){
+
+    }
+
+    public void postCondition(){
 
     }
 
