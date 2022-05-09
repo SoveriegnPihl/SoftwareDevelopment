@@ -1,7 +1,6 @@
-package dtu.employees.whiteBoxTest;
+package dtu.project;
 
-import dtu.employees.Developer;
-import dtu.softwarehus.SoftwareHuset;
+
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;

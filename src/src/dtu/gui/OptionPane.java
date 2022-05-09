@@ -1,26 +1,14 @@
 package dtu.gui;
-import dtu.employees.Developer;
+import dtu.project.Developer;
 import dtu.project.Project;
-import dtu.softwarehus.SoftwareHuset;
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
 
 class OptionPane extends JFrame {
 
     OptionPane(Developer user, String method) {
-        if (method.equals("Register hours worked")) {
-            JFrame alertFrame = new JFrame();
-            alertFrame.setLocationRelativeTo(null);
-            String hours = JOptionPane.showInputDialog(alertFrame, method);
-            user.addHours(Integer.parseInt(hours));
 
-        }
-        if (method.equals("View hours worked")) {
-            JFrame alertFrame = new JFrame();
-            alertFrame.setLocationRelativeTo(null);
-            int hours = user.getHours();
-            JOptionPane.showMessageDialog(alertFrame, "You have worked " + hours + " today");
-        }
         if (method.equals("View available developers")) {
             JFrame alertFrame = new JFrame();
             alertFrame.setLocationRelativeTo(null);

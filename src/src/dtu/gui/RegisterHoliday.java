@@ -1,6 +1,7 @@
 package dtu.gui;
 
-import dtu.softwarehus.SoftwareHuset;
+
+import dtu.project.SoftwareHuset;
 
 import javax.swing.*;
 import java.time.Month;
